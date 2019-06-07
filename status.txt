@@ -1,4 +1,8 @@
-# see status updates on PDC project
-Status Updates  
+# see status updates on channelization PDC project
 
-06/7/2019 git created 
+
+06/7/2019 
+  meeting with Joe Dufek 
+    discussed topography analysis and expansion of parameter space
+    paper draft to be completed June 13
+  git created 
