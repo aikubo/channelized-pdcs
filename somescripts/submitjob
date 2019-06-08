@@ -1,0 +1,8 @@
+#! bin/bash
+
+subm=$(sbatch submission.sh)
+jobid=${subm:20}
+echo "$datum $subm" > status.txt
+strigger --set --jobid=$jobid --time \
+	--program=/home/somescripts/trigger
+

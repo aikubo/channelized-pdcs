@@ -1,0 +1,7 @@
+/home/akubo/myprojects/sinchannels/sin_20_l400_w50
+/home/akubo/myprojects/sinchannels/l200_short
+/home/akubo/myprojects/sinchannels/sin_20_18_l800_w50
+/home/akubo/myprojects/funnels/funnel_20_18_50
+/home/akubo/myprojects/funnels/nfunnel_20_18_50
+/home/akubo/myprojects/straightchannels/20_0D_proc
+/home/akubo/myprojects/straightchannels/20_18_50

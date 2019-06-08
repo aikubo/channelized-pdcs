@@ -1,0 +1,137 @@
+#!/bin/bash
+#written by AKubo 1/17 
+#this script copies a directory, renames it, copys the corresponding topography file
+# from ~/projects/topo
+# then changes the open line in init_fvars
+# then has the option to recompile mfix
+
+datum=$(date -u)
+echo here is a reminder of your naming conventions
+echo for straight channels: M_D_W
+echo for sinous channels: sin_M_D_l
+echo for funnels: nfunnel_M_D_W and funnel_M_D_W
+  
+echo which directory do you want to copy? 
+echo must be within the run directory
+
+read old
+
+echo new name of directory
+read new
+
+here=$(pwd)
+
+echo copying
+cp -R $old $here/$new
+
+cd $here/$new
+echo remove old files
+rm $here/$new/TOPO*
+rm $here/$new/*.txt
+rm $here/$new/*.out
+rm $here/$new/*.err
+rm $here/$new/mfix.exe
+rm $here/$new/scr*
+rm $here/$new/slurm*
+rm $here/$new/DEP*
+rm $here/$new/topo*
+rm $here/$new/*.tiff
+
+topo="topo_$new"
+
+oldt="topo_$old"
+echo moving $topo
+cp ~/myprojects/topo/$topo $here/$new/
+echo copying submission script
+cp ~/myprojects/submission.sh $here/$new/
+cp ~/myprojects/mfix_model/model/BURCAT.THR $here/$new/
+cp ~/myprojects/mfix_model/model/thermochemical/get_values.f $here/$new/thermochemical
+cp ~/myprojects/mfix_model/model/param1_mod.f $here/$new/
+cp ~/myprojects/mfix_model/model/param_mod.f $here/$new/
+cp ~/myprojects/mfix_model/model/usr1.f $here/$new/
+cp ~/myprojects/mfix_model/model/usr0.f $here/$new/
+cp ~/myprojects/mfix_model/model/cartesian_grid/eval_usr_fct.f $here/$new/
+#cp ~/myprojects/mfix_model/model/cartesian_grid/eval_usr_fct.f $here/$new/cartesian_grid/cartesian_grid2/
+#cp ~/myprojects/mfix_model/model/cartesian_grid/eval_usr_fct.f $here/$new/cartesian_grid/cartesian_grid2/cartesian_grid/
+
+
+
+
+cd $here/$new/
+sed -i "s/0test/$new/" submission.sh
+
+echo editing init_fvar.f
+sed -i.bak "71s|^.*$|OPEN(1010101,FILE='$topo')|" init_fvars.f
+
+declare -a ch
+ch=($(awk '{ print $1 }' $topo ))
+height=${ch[75]}
+
+echo "channel height at $height"
+
+BC1=$( echo "$height" | awk '{BC1 = $1 +10; printf "%.f", BC1}' )
+BC2=$( echo "$BC1" | awk '{BC2 = $1 +10; printf "%.f", BC2}' )
+
+"channel height at $ch"
+echo 'should be equal to thetad(M)*dx*(400-1)-D+20'
+ 
+echo the boundary of the input is
+echo $BC1
+echo $BC2
+
+echo 'please confirm'
+read confirm
+
+if [ "$confirm" == 'Y' ] ;then
+        echo Confirmed
+else
+        echo error with topography
+        exit 1
+fi
+
+
+sed -i.bak "161s|^.*$|  BC_Y_s(2)=$BC1|" mfix.dat
+sed -i.bak "162s|^.*$|  BC_Y_n(2)=$BC2|" mfix.dat
+
+size=$(stat -c%z $topo)
+echo Topography file has this size: $size
+
+cd $here
+chmod -R 775 $new
+dirsize= $(du -hcs $new)
+odirsize=$(du -hcs $old)
+ 
+echo Directory size is $dirsize
+echo compared to the original size of $odirsize
+
+cd $new
+echo would you like to compile now? Y or N
+
+read response
+
+if [ "$response" == 'Y' ];then
+        echo compiling mfix
+#	sed -i '$ a $new' ~/projects/simslist
+        sh ~/myprojects/mfix_model/model/make_mfix
+	
+	echo would you like to submit now? Y or N
+	read answer 
+	if [ "$answer" == 'Y' ];then
+		subm=$(sbatch submission.sh)
+		jobid=${subm:20}
+		echo "$datum $subm" > status.txt
+		strigger --set --jobid=$jobid --time \
+           		--program=/home/somescripts/trigger		
+		
+	else 
+		echo script complete
+		echo "$datum prepared to run" > status.txt
+	fi
+fi
+
+if [ "$response" == 'N' ];then
+	echo script complete
+	echo "$datum prepared to run" > status.txt
+fi
+
+

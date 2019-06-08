@@ -1,0 +1,281 @@
+                                           
+!  PDC Simulator 
+!  Dufek 7/28/05, and updated substantially in 2008-2014
+!  This set of simulations to look at channelized and unconfined flows  
+!                        
+! Run-control section                                                           
+                                                                               
+  RUN_NAME              = 'TOPO'             
+  DESCRIPTION           = 'PDC simulation'          
+  RUN_TYPE              = 'NEW'                    !new or restart simulation 
+  UNITS                 = 'SI'              
+  TIME                  = 0.0                        
+  TSTOP                 = 100.0
+  DT                    = 1e-4	                   !initial time step
+  DT_MAX		= 1e-1
+  DT_MIN		= 1.0e-6
+!  DT_FAC		= 1.0
+!  MAX_NIT		= 200
+                   
+  ENERGY_EQ             = .TRUE.                   !solve energy eq
+  SPECIES_EQ	        = .FALSE.    .FALSE.        !solve species eq, gas
+
+  GRANULAR_ENERGY=.FALSE.
+  FRICTION=.FALSE.
+  SCHAEFFER=.TRUE.
+  L_SCALE0=2.0
+  LES=.TRUE.
+  MU_GMAX=1e0
+
+  CARTESIAN_GRID=.TRUE.
+  STOP_INFLOW_TIME=150.0 
+
+  N_USR_DEF=1
+
+ !Central channel base
+  BC_TYPE(12)='CG_NSW'
+  TOL_F=100.0
+  TOL_SNAP=0.005
+  BC_Tw_g(12)            = 300.0              !constant temp boundary
+  BC_Tw_s(12,1)          = 300.0
+  BC_Tw_s(12,2) =300.0
+  BC_Tw_s(12,3)=300.0
+  BC_Tw_s(12,4)=300.0
+  BC_ScalarW(12,1)       = 0.0                !Constant scalar boundary
+  BC_Thetaw_m(12,1)=20000.0
+  BC_Thetaw_m(12,2)=20000.0
+  BC_Thetaw_m(12,3)=20000.0
+  BC_Theta_m(12,1)=20000.0
+  BC_Theta_m(12,2)=20000.0
+  BC_Theta_m(12,3)=20000.0
+  BC_Uw_s(12,1)=0.0
+  BC_Vw_S(12,1)=0.0
+  BC_Ww_s(12,1)=0.0
+  BC_Uw_s(12,2)=0.0
+  BC_Vw_S(12,2)=0.0
+  BC_Ww_s(12,2)=0.0
+  BC_Uw_s(12,3)=0.0
+  BC_Vw_S(12,3)=0.0
+  BC_Ww_s(12,3)=0.0
+
+  CG_SAFE_MODE=.TRUE.
+
+  DRAG_TYPE='SYAM_OBRIEN'
+  MAX_INLET_VEL_FAC	= 1.0e20
+   
+  CALL_USR=.FALSE.
+  DETECT_STALL=.FALSE.
+  CLOSE_PACKED(1)=.TRUE. 
+  CLOSE_PACKED(2)=.TRUE.
+  
+OPEN(1010101,FILE='')
+  WRITE_LEVEL=1
+  BREAKING=.FALSE.
+  LAGRAN=.FALSE.
+  TOL_RESID=5e-3
+  DISCRETIZE(1)=2   !2 is for superbee discretization
+  DISCRETIZE(2)=2
+  DISCRETIZE(3)=2
+  DISCRETIZE(4)=2
+  DISCRETIZE(5)=2
+  DISCRETIZE(6)=2
+
+                                                                             
+  COORDINATES           = 'cartesian' 
+  XLENGTH               =   800.0                        !width of domain
+  IMAX                  =   400                         !cells in i direction
+  YLENGTH               =   400.0                          !height
+  JMAX                  =   200                         !cells in j direction
+  ZLENGTH = 300.0
+  KMAX=150 
+  NO_K                  = .FALSE.                      !3D
+
+
+  SPECIES_NAME='H2O'
+  NMAX(0)=1
+  MW_g			= 18.0 
+
+
+  MMAX=1
+  NMAX(1)  = 1
+  
+  SPECIES_NAME(2)='Volc Ash' 
+
+ 
+  C_f=.4
+
+  RO_s                  = 1950.                !solids density
+  D_p0                  = 5e-5                 !particle diameter     
+  e                     = .5                   !restitution coefficient
+  Phi                   = 30.0                 !angle of internal friction
+  Phip=.5
+
+  C_e=0.5 
+  EP_star               = 0.6              !void fraction at minimum
+                                             !fluidization; use .5 if using
+                                             !modified power law terms
+  MW_s(1,1) 		= 48.0                                
+  MW_s(1,2) 		= 300.0                                
+
+
+
+  
+    ! 1. bed                                      
+  IC_X_w(1)             =  0.0                          
+  IC_X_e(1)             =  800.                  
+  IC_Y_s(1)             =  0.0
+  IC_Y_n(1)             =  400.0
+  IC_Z_b(1)             =  0.0
+  IC_Z_t(1)             =  300.0
+
+  IC_EP_g(1)            =  1.0                       !void fraction  
+  IC_U_g(1)             =  0.0                        !initial gas velocity
+  IC_V_g(1)             =  0.0                        !initial gas velocity
+  IC_W_g(1)             =  0.0
+  IC_U_s(1,1)           =  0.0                        !initial solids velocity 
+  IC_V_s(1,1)           =  0.0                        !initial solids velocity
+  IC_W_s(1,1)           =  0.0
+  IC_ROP_S(1,1)		=  0.0		      !initial effective density
+  IC_ROP_S(1,2)         =  0.0
+
+  IC_T_G(1)		=  273.0
+  IC_T_S(1,1)		=  273.0
+  IC_T_S(1,2)           =  273.0
+  IC_SCALAR(1,1)	=  0.0
+  IC_X_G(1,1)           =  1.0
+  IC_X_S(1,1,1)         =  1.0
+  IC_X_S(1,2,1)         =  1.0
+  IC_P_G(1)             =  1.0e5
+
+ IC_Theta_m(1,1)=10.0
+! IC_Theta_m(2,1)=10.0
+! IC_Theta_m(3,1)=10.0
+! IC_Theta_m(4,1)=10.0
+! IC_Theta_m(5,1)=10.
+
+
+       ! 2.        INFLOW
+  BC_X_w(2)=0.0
+  BC_X_e(2)=0.0
+  BC_Y_s(2)=261 .0
+  BC_Y_n(2)=271 .0
+  BC_Z_b(2)=142.0
+  BC_Z_t(2)=158.0
+  BC_TYPE(2)= 'MASS_INFLOW'
+  BC_EP_g(2)            = .9                          !void fractio
+  BC_ROP_s(2,1)         = 195.
+  BC_X_g(2,1)           =  1.0                       
+  BC_T_g(2)		= 800.
+  BC_T_s(2,1)		= 800.
+  BC_U_g(2)             =   10.0                        !inlet gas velocity
+  BC_V_g(2)             =   0.0                         
+   BC_W_g(2)            =   0.0
+BC_U_s(2,1)             = 10.0                        
+  BC_V_s(2,1)           =   0.0                          
+BC_W_s(2,1)           =   0.0
+
+	BC_P_g(2)=2.0e5
+	BC_Thetaw_m(2,1)=64.0
+
+          BC_Theta_m(2,1)=64.0
+
+!OUTFLOW
+  BC_X_w(3)=0.0
+  BC_X_e(3)=800.
+  BC_Y_s(3)=400.0
+  BC_Y_n(3)=400.0
+  BC_Z_b(3)=0.0
+  BC_Z_t(3)=100.0
+  BC_TYPE(3)= 'DUMMY' !'P_OUTFLOW'
+  BC_T_g(3)=300.
+ BC_T_s(3,1)=300.
+
+        BC_P_g(3)=1.0e5
+        BC_Thetaw_m(3,1)=20.0
+        BC_Thetaw_m(3,2)=20.0
+         BC_Thetaw_m(3,3)=20.0
+        BC_Thetaw_m(3,4)=10.0
+        BC_thetaw_m(3,5)=10.
+
+          BC_Theta_m(3,1)=20.0
+          BC_Theta_m(3,2)=20.0
+          BC_Theta_m(3,3)=20.0
+          BC_Theta_m(3,4)=20.0
+          BC_Theta_m(3,5)=20.0
+
+
+
+!OUTFLOW
+  BC_X_w(4)=800.0
+  BC_X_e(4)=800.0
+  BC_Y_s(4)=20.0
+  BC_Y_n(4)=400.0
+  BC_Z_b(4)=0.0
+  BC_Z_t(4)=100.0
+  BC_TYPE(4)= 'DUMMY' !'OUTFLOW'
+  BC_T_g(4)=300.
+ BC_T_s(4,1)=300.
+
+        BC_Thetaw_m(4,1)=20.0
+        BC_Thetaw_m(4,2)=20.0
+         BC_Thetaw_m(4,3)=20.0
+        BC_Thetaw_m(4,4)=10.0
+        BC_thetaw_m(4,5)=10.
+
+          BC_Theta_m(4,1)=20.0
+          BC_Theta_m(4,2)=20.0
+          BC_Theta_m(4,3)=20.0
+          BC_Theta_m(4,4)=20.0
+          BC_Theta_m(4,5)=20.0
+
+
+!  Output Control                                                               
+!                  
+  OUT_DT                = 5.0               !write text files in this increm.
+                                                       
+  RES_DT                = 500.0                !write binary restart file
+                                                      
+  NLOG                  = 25                  !write logfile  
+                                              !every 25 time steps
+  FULL_LOG              = .TRUE.              !display residuals on screen
+
+
+! nRR			= 4		      !# of reaction rates written to the file *.SPA
+
+
+!SPX_DT values determine how often SPx files are written.  Here BUB01.SP1, which
+!contains void fraction (EP_g), is written every 0.01 s, BUB01.SP2, which contains
+! gas and solids pressure (P_g, P_star), is written every 0.1 s, and so forth.
+!
+        ! EP_g P_g       U_g  U_s  ROP_s     T_g  X_g
+        !      P_star    V_g  V_s            T_s  X_s     Theta   Scalar  nRR
+        !                W_g  W_s
+  SPX_DT = 100.1 100.1 100.1 100.1 100.1 100.1 100.1 100.1 100.1! 1.1 1.1  ! 10.0    
+                                                                                
+!  The decomposition in I, J, and K directions for a Distributed Memory Parallel machine
+  
+  NODESI = 8  NODESJ = 5  NODESK = 2
+!8,6,3
+!  Sweep Direction
+
+LEQ_SWEEP(1) = 'ISIS' 
+LEQ_SWEEP(2) = 'ISIS'  
+LEQ_SWEEP(3) = 'ISIS' 
+LEQ_SWEEP(4) = 'ISIS'  
+LEQ_SWEEP(5) = 'ISIS'  
+LEQ_SWEEP(6) = 'ISIS'  
+LEQ_SWEEP(7) = 'ISIS' 
+LEQ_SWEEP(8) = 'ISIS'  
+LEQ_SWEEP(9) = 'ISIS'
+
+
+
+THERMO DATA
+  
+
+Volc Ash                   WARNING!       0.S   200.000  6000.000  B  56.00000 1
+ 8.70769880E+00 8.45407650E-03 0.00000000E+00 0.00000000E+00 0.00000000E+00    2
+ 0.00000000E+00 0.00000000E+00 8.70769880E+00 8.45407650E-03 0.00000000E+00    3
+ 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00 0.00000000E+00    4
+                                                                                                              596,2         Bot
+
