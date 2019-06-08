@@ -1,0 +1,10 @@
+file = ./EP_G_t01.txt
+grid =204 x 540 x 54
+series=1
+format = ascii
+interleaving = field
+majority = column
+field = Volume,locations
+structure = scalar,3-vector
+type = float,float
+dependency = positions,positions

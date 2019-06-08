@@ -1,0 +1,12 @@
+file = ./U_G
+grid =104 x 204 x 202
+series=10
+format = ascii
+interleaving = field
+majority = column
+field = Volume
+structure = scalar
+type = float
+dependency = positions
+positions = 0,1000,0,1000,0,1000
+end

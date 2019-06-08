@@ -1,0 +1,12 @@
+file = ./EP_Gglac
+grid =102 x 124 x 122
+series=1
+format = ascii
+interleaving = field
+majority = column
+field = Volume2
+structure = scalar
+type = float
+dependency = positions
+positions = 0,20,0,45,0,45
+end

@@ -1,0 +1,13 @@
+file = ./EP_G
+grid =104 x 504 x 55
+#header=lines 57657600
+series=10
+format = ascii
+interleaving = field
+majority = column
+field = Volume
+structure = scalar
+type = float
+dependency = positions
+positions = 0,6,0,4,0,4
+end

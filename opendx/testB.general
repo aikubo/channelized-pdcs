@@ -1,0 +1,12 @@
+file = /home/dufek/water_ramp/ROP_S_loc
+grid =152 x 72
+series=5
+format = ascii
+interleaving = field
+majority = column
+field = Volume, locations
+structure = scalar, 2-vector
+type = float, float
+dependency = positions, positions
+
+end

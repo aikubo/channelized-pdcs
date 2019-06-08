@@ -1,0 +1,10 @@
+file = ./topography
+grid =204 x 404 x 152
+series=1
+format = ascii
+interleaving = field
+majority = column
+field = Volume,locations
+structure = scalar,3-vector
+type = float,float
+dependency = positions,positions
