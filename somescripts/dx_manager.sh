@@ -76,7 +76,8 @@ echo "4"
 done
 
 echo done
-#mkdir ~/myprojects/graphics/visuals/$sim
-#cp *tif* ~/myprojects/graphics/visuals/$sim
+mkdir ~/myprojects/graphics/visuals/$sim
+cp *tif* ~/myprojects/graphics/visuals/$sim
 
-
+currentdate=$(date +”%m/%d/%Y”)
+echo -e "$currentdate ran kubo_pretty.net \n" > status.txt
