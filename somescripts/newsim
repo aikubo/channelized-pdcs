@@ -1,5 +1,6 @@
 #!/bin/bash
-#written by AKubo 1/17 
+#written by AKubo 1/2019
+# updated 6/2019 
 #this script copies a directory, renames it, copys the corresponding topography file
 # from ~/projects/topo
 # then changes the open line in init_fvars
