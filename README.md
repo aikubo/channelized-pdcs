@@ -1,3 +1,23 @@
+# status updates on channelization PDC project
+06/26/2019
+  adding more widths/sinuosities in matlab topo generation files
+
+06/20/2019
+  running dense flow simulation 
+  set inlet to whole channel width, epg 0.9  
+  
+06/14/2019
+  finished rough draft of GRL paper
+  statistical analysis of channel
+
+06/7/2019 
+  meeting with Joe Dufek 
+    discussed topography analysis and expansion of parameter space
+    paper draft to be completed June 13
+  git created 
+
+
+
 # channelized-pdcs
 
 Research Project Abstract
