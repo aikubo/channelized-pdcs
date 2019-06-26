@@ -1,4 +1,4 @@
-# see status updates on channelization PDC project
+# status updates on channelization PDC project
 06/26/2019
   adding more widths/sinuosities in matlab topo generation files
 
