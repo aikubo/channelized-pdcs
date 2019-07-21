@@ -1,4 +1,14 @@
 # status updates on channelization PDC project
+07/11/2019
+  cleaning out directories to reduce storage
+  run post processing of dense run and large run
+  making visualizations of dense run 
+  updating newsim script
+
+06/5/2019
+  continued statistical analysis of topography data
+  started larger run (400x200x350 IJK)
+
 06/26/2019
   adding more widths/sinuosities in matlab topo generation files
 
