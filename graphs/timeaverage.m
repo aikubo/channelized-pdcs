@@ -5,18 +5,20 @@ close all
 %% takes time average of slice_middle file in the following directories
 path= '/home/akubo/myprojects/straightchannels/20_18_50/';
 M20D18=taverage(path);
-% 
+
 path= '/home/akubo/myprojects/straightchannels/20_0D_proc/';
 M20D0=taverage(path);
+
 % 
 %path= '/home/akubo/myprojects/sinchannels/INFLOW/';
 %l400=taverage(path);
  
 path= '/home/akubo/myprojects/sinchannels/sin_20_18_l800_w50/';
 l800=taverage(path);
+
 % 
 path= '/home/akubo/myprojects/sinchannels/DENSE_l400/';
-Dl400=taverage(path)
+Dl400=taverage(path);
 
 % this function creates vertical profiles of volume fraction
 % velocity & Richardson number
@@ -28,36 +30,36 @@ makegrl(M20D0, M20D18, l800, Dl400);
 function avg = taverage(path)
     tstart=4;
     tstop=8;
-    timesteps=tstop-tstart+1
+    timesteps=tstop-tstart+1;
     fileid='slice_middle0';
     data=cell(1,timesteps);
     
 
-    maxh= 50 
+    maxh= 100; 
     height=[1:1:maxh];
 
-    tmp= zeros(maxh,5,timesteps);	
+    tmp= NaN(maxh,5,timesteps);
+    
     for t=[tstart:1:tstop]
         fid=sprintf('slice_middle0%d.txt', t);
         path2file=strcat(path,fid);
         data=importdata(path2file);
-	[row,column]=size(data);
-   	tmp(1:row ,:,t-3)=data;
-
+        [row,column]=size(data);
+        tmp(1:row ,:,t-3)=data;
     end
     bottom=tmp(1,1,1);     
-    avg=mean(tmp,3);
+    avg=nanmean(tmp,3);
     
     avg(:,1)= bottom+2*height;
-    
-   while size(avg,1) == maxh 
-   for i=[1:1:50];
-   	 if sum(avg(i,:)) == avg(i,1) 
- 		avg=avg(1:i-1,:);
-		break
-    	end 
-    end 
-   end 
+    avg(any(isnan(avg),2), :) = []
+%    while size(avg,1) == maxh 
+%    for i=[1:1:50];
+%    	 if sum(avg(i,:)) == avg(i,1) 
+%  		avg=avg(1:i-1,:);
+% 		break
+%     	end 
+%     end 
+%    end 
 end
 
 function makegrl(M20D0, M20D18,  l800, Dl400)
@@ -113,6 +115,7 @@ function makegrl(M20D0, M20D18,  l800, Dl400)
         height = min(data(:,1));
         Z=data(:,1)-height;
         X = data(:,2);
+        
         plot(X,Z);
         hold on
     end 
