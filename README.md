@@ -1,12 +1,40 @@
 # status updates on channelization PDC project
+07/22/2019
+  Paul helped me set up non-constant mass inflow, testing to see if it works
+  
+  pressure balanced run looked okay, set it to run for 60s
+  
+  edited sbatch submission script immediate do post processing 
+  
+  running non-constant mass inflow stopping at 10s in debug mode
+  
+  draft one of AGU abstract
+  
+07/21/2019
+  started scripts to time average vertical profiles
+  
+  running example run pressure balanced 
+
+07/18/2019
+  meeting with J Dufek
+  added stuff to do 
+  
+  goals: pressure balanced, velocity aligned with channel. Get that + scripts to work then run with other slopes/W/D
+  
+  begin work on AGU abstract
+  
 07/11/2019
   cleaning out directories to reduce storage
+  
   run post processing of dense run and large run
+  
   making visualizations of dense run 
+  
   updating newsim script
 
 06/5/2019
   continued statistical analysis of topography data
+  
   started larger run (400x200x350 IJK)
 
 06/26/2019
