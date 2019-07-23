@@ -1,4 +1,10 @@
 # status updates on channelization PDC project
+
+0/23/2019
+  stopping mass flow at some time didn't work, consulted Ryan and am testing new method 
+  
+  updated timeaveraging to use NaNs for heights the flow doesn't reach, but the Richardson numbers still don't work
+
 07/22/2019
   Paul helped me set up non-constant mass inflow, testing to see if it works
   
