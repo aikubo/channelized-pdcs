@@ -1,6 +1,10 @@
 # status updates on channelization PDC project
+07/24/2019
+  rewriting post.f90 to use subroutines and modules 
+ 
+  updated --tasks-per-node flag in sbatch file, runs faster now
 
-0/23/2019
+07/23/2019
   stopping mass flow at some time didn't work, consulted Ryan and am testing new method 
   
   updated timeaveraging to use NaNs for heights the flow doesn't reach, but the Richardson numbers still don't work
