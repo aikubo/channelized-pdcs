@@ -42,6 +42,7 @@
         ALLOCATE(T_G(length1,4,timesteps))
         ALLOCATE(U_G(length1,6,timesteps))
         ALLOCATE(Richardson(length1,5,timesteps))
+        ALLOCATE(SHUY(length1,4,timesteps))
 
         ALLOCATE(Location_I(length1,timesteps))
 

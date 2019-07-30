@@ -45,5 +45,5 @@ DOUBLE PRECISION::mag_grad,norm_grad(1,3),temp_dot
 !DOUBLE PRECISION:: D, U0, ROP_0, gstar, Hstar, stokest, stokesv
 DOUBLE PRECISION:: avgt, avgt2, avgt3, avgu, avgu2, avgu3, avgv, avgv2,avgv3, avgw, avgw2, avgw3, avgus, avgus2, avgus3, sum_1, sum_2, sum_3
 DOUBLE PRECISION:: avgdpu, avgdpu3, avgdpu2
-
+DOUBLE PRECISION, ALLOCATABLE:: SHUY(:,:,:) 
 end module parampost
