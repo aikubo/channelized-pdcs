@@ -1,14 +1,6 @@
-module convb
-USE CONSTANTS
-USE parampost
-IMPLICIT NONE 
+subroutine convertb()
 
-contains 
-   ____ function convertb(X, fid)
-        DO I=1,timesteps 
-                READ(fid) X(:,I)
-        END DO 
-   END function convertb 
-
-end module convb
+        IMPLICIT NONE 
         
+
+end subroutine convertb

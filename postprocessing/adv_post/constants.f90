@@ -82,11 +82,11 @@ REAL::M  = 20.0
 ! --------- Initial Conditions of Mass Flux --------------!
 
 !-------- Set Size, Timesteps, and write size ------------!
-INTEGER:: timesteps=12
+INTEGER:: timesteps=2
 INTEGER, PARAMETER::RMAX=404
 INTEGER, PARAMETER::ZMAX=152
 INTEGER, PARAMETER::YMAX=204
-INTEGER, PARAMETER::length1 = RMAX*ZMAX*YMAX
+INTEGER::length1 = RMAX*ZMAX*YMAX
 INTEGER::write_size = 4  !Number of timesteps to write out for loc files used in OPENDX
 
 

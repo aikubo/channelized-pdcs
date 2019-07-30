@@ -7,19 +7,17 @@ module parampost
 
 INTEGER :: t1,t2, clock_rate, clock_max
 CHARACTER(LEN=1) :: junk
-CHARACTER(LEN=10) :: str_c
-character(LEN=10) :: x1
 INTEGER:: MAX_REC = 1e9
-INTEGER:: length1,count1,num_open,sum1,sum2
+INTEGER:: count1,num_open,sum1,sum2
 INTEGER:: ios, int_temp,int_check,int_pos1,int_min1,int_pos2,int_min2
 
-INTEGER::yc,YMAX,I,J,K,RMAX,THMAX,rc,zc,tc,t,I_yp1,I_ym1,I_zp1,I_zm1,I_xp1,I_xm1,temp_rc
+INTEGER::yc,I,J,K,THMAX,rc,zc,tc,t,I_yp1,I_ym1,I_zp1,I_zm1,I_xp1,I_xm1,temp_rc
 INTEGER::write_end,loop_open,fid_temp,fid_EP_P,fid_EP_G,fid_U,fid_ISO6,fid_GRAD4pt, fid_GRADsize,fid_GradV,fid_GradE
 INTEGER::fid_EP_G_t,fid_U_t,fid_ISO3,fid_Ri,fid_ROP1,fid_Dot,fid_dpu,fid_dpv
 INTEGER:: fide, fidy, fidw
 INTEGER::Z_minus,Z_plus,X_minus,Y_plus,Z_total,I_local
 
-DOUBLE PRECISION,ALLOCATABLE::EP_P(:,:,:),Iso_6(:,:,:)
+DOUBLE PRECISION,ALLOCATABLE::EP_P(:,:,:),Iso_6(:,:,:), dpu(:,:,:), dpv(:,:,:)
 DOUBLE PRECISION,ALLOCATABLE::Iso_3(:,:,:),four_point_Iso3(:,:,:),four_point(:,:,:)
 DOUBLE PRECISION, ALLOCATABLE :: T_G(:,:,:),U_G(:,:,:),VEL_6(:,:,:),VEL_3(:,:,:),VEL_ALL(:,:,:), VEL_temp(:,:), VEL_temp2(:,:),Richardson(:,:,:)
 DOUBLE PRECISION, ALLOCATABLE :: Ri_Dilute(:,:,:),Ri_Dense(:,:,:),char_dense(:), char_dilute(:),VEL_DENSE(:,:),VEL_DILUTE(:,:)
