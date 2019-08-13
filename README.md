@@ -1,4 +1,15 @@
 # status updates on channelization PDC project
+8/12/2019 
+  determined there is no linear relationship between slope and sinuosity for the volcanic channels
+
+8/4-8/8 gone for GeoGirls 
+
+08/01/2019
+  figured out code to run simulation with variable Z resolution
+
+07/28/2019
+  mostly finished updating post processing modules
+
 07/24/2019
   rewriting post.f90 to use subroutines and modules 
  
