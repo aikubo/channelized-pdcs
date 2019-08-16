@@ -34,8 +34,6 @@ read time
 sed -i.bak "78s|^.*$|OPEN(602, FILE='$topo2')|" post.f90
 sed -i.bak "167s|^.*$|timesteps=$time|" post.f90
 
-
-
 ifort post.f90 -convert big_endian -o post.exe
 
 echo conversion script prepared

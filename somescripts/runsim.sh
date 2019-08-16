@@ -1,4 +1,4 @@
-!/bin/bash 
+#!/bin/bash 
 
 rm *.LOG
 rm *.RES
@@ -10,16 +10,16 @@ echo "$datum $subm" > status.txt
 #strigger --set --jobid=$jobid --time \
 #       --program=/home/akubo/myprojects/channelized-pdcs/somescripts/trigger.sh
 
-sleep 25m
-runlength=$(wc -l run.out)
-length=${runlength:0:3}
+#sleep 25m
+#runlength=$(wc -l run.out)
+#length=${runlength:0:3}
 
 #good=699
-echo $length
+#echo $length
 
-if [ "$length" -lt 699  ]; then
-        scancel $jobid
-        echo "simulation not running correct. Paused at $length" | mail -s "$jobid stalled" akubo@uoregon.edu
+#if [ "$length" -lt 699  ]; then
+#        scancel $jobid
+#        echo "simulation not running correct. Paused at $length" | mail -s "$jobid stalled" akubo@uoregon.edu
 
-fi
+#fi
 

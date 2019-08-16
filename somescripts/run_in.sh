@@ -1,16 +1,17 @@
 #!/bin/bash 
 
 
-filename='finishedsimulations.txt'
+filename='compsim.txt'
 
-cat ~/somescripts/$filename
+
+cat $filename
 echo what script would you like to run in these directories
 read scrpt 
 
 while read line; do 
 	echo $line
 	#cd $line
-	/home/akubo/somescripts/$scrpt "$line" 
+	/home/akubo/myprojects/channelized-pdcs/somescripts/$scrpt "$line" 
 
 done < $filename
 
