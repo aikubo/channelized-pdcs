@@ -1,21 +1,32 @@
 #!/bin/bash 
 
-HOBS="Submitted batch job 3303123"
-
-echo $HOBS
-
-jobid=${HOBS:20}
-
-echo $jobid
-
-trigger.sh
 #C1=$(($ch+5))
 #BC2=$(($BC1+10))
 #oldt="topo_$old"
 #echo moving $topo
 #cp ~/myprojects/topo/$topo $here/$new/
 
- 
+echo simulation name 
+read name 
+
+declare param=($(sh simparam.sh $name))
+
+wave=${param[1]}
+width=${param[2]}
+height=${param[4]}
+
+topo="l$wave"
+topo+="_w"
+topo+="$width"
+echo $topo
+
+(( inflowwidth= $width /2 ))
+(( SIDE1= 450 - $inflowwidth ))
+(( SIDE2= 450 + $inflowwidth ))
+
+echo $SIDE1 $SIDE2
+
+
 #  BC_Y_s(2)=295.0
 #  BC_Y_n(2)=305.0
 
