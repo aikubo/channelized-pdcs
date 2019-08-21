@@ -1,4 +1,9 @@
 # status updates on channelization PDC project
+8/16/2019
+  editing Variable DZ formulaton. Moved code from read_namelist to set_geometry.f in model directory.
+  
+  added True flag to easily turn on and off. set edges of high resolution where resolution decreases by 2% each cell outside
+
 8/12/2019 
   determined there is no linear relationship between slope and sinuosity for the volcanic channels
 
