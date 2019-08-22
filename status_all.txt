@@ -1,1 +1,20 @@
-Tue Aug 20 23:16:48 UTC 2019 AV1 compiled but not submitted
+08/21/19 15:36 AV1 Submitted batch jon 9819963
+08/21/19 16:04 AV4 Submitted batch job 9819976
+08/21/19 16:09 AV7 Submitted batch job 9819977
+08/21/19 16:50 BV1 compiled but not submitted
+08/21/19 17:08 BV7 compiled but not submitted
+08/21/19 17:24 BV4 compiled but not submitted
+08/21/19 17:30 Partial Post processing on AV1, AV4, AV7 to 5 timesteps
+08/21/19 17:41 bug found with handletopo.f90 spatial resolution
+08/21/19 17:43 - AV7 post Submitted batch job 9821594 for timesteps 4 
+08/21/19 18:12 Job id  9821594  COMPLETED COMPLETED COMPLETED
+08/21/19 18:24 implemented reportbug.sh to add bugs/issues to the status_all.txt file
+08/21/19 18:38 working on updating dx files to accomodate larger domain
+08/21/19 18:46 looks like there is an error in var_3d.f90 with writing ep_p etc, writes 6 not 4 columns
+08/21/19 18:47 added deardiary as an alias for reportbug for fun
+08/21/19 19:58 added formatmod.f90 with format strings to keep formating consistent through subroutines, seems to have solved last bug
+08/21/19 20:01 updated var_3d so EP_P, U_G, T_G each have their own subroutine
+08/21/19 20:17 
+08/21/19 20:18 increased srun,xrun requested memory to 10G for postprocessing to avoid killing while testing
+08/21/19 20:43 looking at the visualizations, I made a dumb mistake in the slope of the function using the GRADE rather than the degrees
+08/21/19 21:03 fixed the issue with topogen
