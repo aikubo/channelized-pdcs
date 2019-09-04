@@ -30,7 +30,7 @@ module massdist
         scalemass1=0
 
         DO I=1, length1
-            call edges(width, lambda, XXX(I,1), edge1, egde2, bottom, top)
+            call edges(width, lambda, XXX(I,1), edge1, edge2, bottom, top)
 
             IF (YYY(I,1)>bottom) THEN
                 IF (EPP(I,t) <max_dilute) THEN
