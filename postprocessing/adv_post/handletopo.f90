@@ -115,7 +115,11 @@ subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
 
         bottom= slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep
         top= slope*deltz*(RMAX-(XLOC/deltz)) +clearance 
+<<<<<<< HEAD
       
+=======
+        
+>>>>>>> 0e5c94f1cc3ae5faa60675e55d376c881e0c9b9e
 end subroutine
 
 end module maketopo

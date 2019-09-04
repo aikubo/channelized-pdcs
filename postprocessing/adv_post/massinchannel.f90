@@ -15,9 +15,15 @@ module massdist
 
         print*, 'mass in channel'
         OPEN(666, file='massinchannel.txt')
+<<<<<<< HEAD
         write(666,formatchar) "Time -Total Mass - Elutriated - Medium - Dense - Inchannel- Within Width - scaleheight - scaleheight1 - scaleheight2"
         print *, "Done writing 3D variables"
         DO t= 1,timesteps
+=======
+        !write(666,*) "Total Mass - Elutriated - Medium - Dense - Inchannel- Within Width - scaleheight-scaleheight1 - scaleheight2"
+        print *, "Done writing 3D variables"
+        DO t= 2,timesteps
+>>>>>>> 0e5c94f1cc3ae5faa60675e55d376c881e0c9b9e
         chmass = 0
         tmass = 0
         chmassd = 0
@@ -69,7 +75,10 @@ module massdist
 
                 ! MASS IN THE CHANNEL
                 IF (YYY(I,1)<top) THEN
+<<<<<<< HEAD
                         print*, top
+=======
+>>>>>>> 0e5c94f1cc3ae5faa60675e55d376c881e0c9b9e
                         inchannel = inchannel + (1-EP_G1(I,t))*Volume_Unit*rho_p
                 end if 
 
@@ -86,7 +95,11 @@ module massdist
           END IF
          END DO
         
+<<<<<<< HEAD
          WRITE(666, formatmass) t, tmass, elumass/tmass, medmass/tmass, densemass/tmass, inchannel/tmass, chmass/tmass, scalemass/tmass, scalemass1/tmass, scalemass2/tmass
+=======
+         WRITE(666, formatmass) t, tmass, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, scalemass2
+>>>>>>> 0e5c94f1cc3ae5faa60675e55d376c881e0c9b9e
         END DO
         !! done !!
         print*, 'mass in channel done'
