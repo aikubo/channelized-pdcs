@@ -96,9 +96,9 @@ subroutine egdes(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
        implicit none 
        double precision, intent(INOUT):: width, depth, lambda, XLOC
        double precision, intent(OUT):: edge1, edge2, bottom, top
-       double precision:: dz, centerline, amprat, center, clearance, slope
+       double precision:: deltz, centerline, amprat, center, clearance, slope
         slope=0.18
-        dz=3.0
+        deltz=3.0
         center = (ZMAX-2)*dz/2 
         amprat=0.15
         clearance = 50.
@@ -112,8 +112,8 @@ subroutine egdes(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
         edge1=centerline-width/2
         edge2=centerline+width/2
 
-        bottom= slope*dx*(RMAX-(XLOC/dz)) +clearance -depth
-        top= slope*dx*(RMAX-(XLOC/dz)) +clearance 
+        bottom= slope*deltz*(RMAX-(XLOC/deltz)) +clearance -depth
+        top= slope*deltz*(RMAX-(XLOC/deltz)) +clearance 
         
 end subroutine
 

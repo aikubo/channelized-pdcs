@@ -12,7 +12,8 @@ INTEGER:: count1,num_open,sum1,sum2
 INTEGER:: ios, int_temp,int_check,int_pos1,int_min1,int_pos2,int_min2
 INTEGER:: tstart, tstop
 DOUBLE PRECISION:: depth
-DOUBLE PRECISION, ALLOCATABLE:: EPP
+DOUBLE PRECISION, ALLOCATABLE:: EPP(:,:)
+
 INTEGER::yc,I,J,K,THMAX,rc,zc,tc,t,I_yp1,I_ym1,I_zp1,I_zm1,I_xp1,I_xm1,temp_rc
 INTEGER::write_end,loop_open,fid_temp,fid_EP_P,fid_EP_G,fid_U,fid_ISO6,fid_GRAD4pt, fid_GRADsize,fid_GradV,fid_GradE
 INTEGER::fid_EP_G_t,fid_U_t,fid_ISO3,fid_Ri,fid_ROP1,fid_Dot,fid_dpu,fid_dpv
