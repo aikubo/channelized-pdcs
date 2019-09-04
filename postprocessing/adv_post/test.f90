@@ -10,7 +10,7 @@ use column
 use findhead 
 use find_richardson 
 use entrainment 
-
+use massdist
 implicit none
 integer:: tfind=8
 double precision:: ZLOC=450.0
@@ -36,13 +36,13 @@ call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
 call openbin(100, 'EP_G', EP_G1)
-call openbin(200, 'U_G', U_G1)
-call openbin(300, 'T_G', T_G1)
-call openbin(400, 'V_G', V_G1)
-call openbin(500, 'W_G', W_G1)
+!call openbin(200, 'U_G', U_G1)
+!call openbin(300, 'T_G', T_G1)
+!call openbin(400, 'V_G', V_G1)
+!call openbin(500, 'W_G', W_G1)
 
 call handletopo('l300_W201', XXX, YYY, ZZZ)
-
+call  logvolfrc(EP_G, EPP)
 
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
@@ -54,6 +54,9 @@ call handletopo('l300_W201', XXX, YYY, ZZZ)
 !call gradrich(EP_P, T_G1, U_G, Richardson, SHUY)
 
 !call bulkent(EP_G1) 
+
+call massinchannel(width, lambda, 50.)
+
 
 print*, "end program"
 
