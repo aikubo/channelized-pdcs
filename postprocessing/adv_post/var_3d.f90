@@ -25,7 +25,7 @@ use constants
         implicit none
         logical, intent(IN):: ifwrite
         INTEGER, INTENT(IN):: fid_EPP
-        DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::VOL
+        DOUBLE PRECISION, DIMENSION(:,:,gi:), INTENT(OUT)::VOL
  
         print*, 'writing ep-p' 
         DO t=tstart,tstop

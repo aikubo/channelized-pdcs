@@ -103,11 +103,18 @@ subroutine egdes(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
         amprat=0.15
         clearance = 50.
         
-        centerline = lambda*amprat*sind((360*XLOC)/lambda)+center
+        if (lambda .eq. 0) then 
+        centerline = center
+        else 
+          centerline = lambda*amprat*sind((360*XLOC)/lambda)+center
+        end if 
+
         edge1=centerline-width/2
         edge2=centerline+width/2
+
         bottom= slope*dx*(RMAX-(XLOC/dz)) +clearance -depth
         top= slope*dx*(RMAX-(XLOC/dz)) +clearance 
+        
 end subroutine
 
 end module maketopo
