@@ -11,7 +11,7 @@ module massdist
         IMPLICIT NONE
         double precision, intent(IN):: width, depth, lambda, scaleheight
         double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
-        double precision::edge1, egde2, bottom, top
+        double precision::edge1, edge2, bottom, top
 
         print*, 'mass in channel'
         OPEN(666, file='massinchannel.txt')
