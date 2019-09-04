@@ -99,7 +99,7 @@ subroutine egdes(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
        double precision:: deltz, centerline, amprat, center, clearance, slope
         slope=0.18
         deltz=3.0
-        center = (ZMAX-2)*dz/2 
+        center = (ZMAX-2)*deltz/2 
         amprat=0.15
         clearance = 50.
         
