@@ -103,6 +103,7 @@ subroutine egdes(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
         amprat=0.15
         clearance = 50.
         
+        
         if (lambda .eq. 0) then 
         centerline = center
         else 

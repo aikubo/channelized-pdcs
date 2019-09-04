@@ -1,16 +1,18 @@
 module massdist
         USE maketopo
         USE CONSTANTS 
-        USE PARARMPOST 
+        USE PARAMPOST 
         USE FORMATMOD
         
         contains
 
-        subroutine massinchannel(WIDTH, LAMBDA, SCALEHEIGHT)
+        subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT)
 
         IMPLICIT NONE
+        double precision, intent(IN):: width, depth, lambda, scaleheight
         double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
-        
+        double precision::edge1, egde2, bottom, top
+
         print*, 'mass in channel'
         OPEN(666, file='massinchannel.txt')
         write(666,*) "Total Mass - Elutriated - Medium - Dense - Inchannel- Within Width - scaleheight-scaleheight1 - scaleheight2"

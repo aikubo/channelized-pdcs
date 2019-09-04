@@ -30,7 +30,7 @@ printstatus=.false.
 timesteps=8
 tstart=3
 tstop=timesteps
-depth = 25.1
+depth = 27
 
 call ALLOCATE_ARRAYS
 
@@ -55,7 +55,7 @@ call  logvolfrc(EP_G1, EPP)
 
 !call bulkent(EP_G1) 
 
-call massinchannel(width, lambda, 50.)
+call massinchannel(width, depth, lambda, 50.)
 
 
 print*, "end program"
