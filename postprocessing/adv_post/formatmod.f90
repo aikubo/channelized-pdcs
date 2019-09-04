@@ -8,11 +8,7 @@ character(len=20)::format8col='(I3,7F22.12)'
 CHARACTER(LEN=10)::format6var='(6F22.12)'
 CHARACTER(LEN=10)::formatsum='(i3,F22.12)'
 CHARACTER(LEN=10)::format5var='(5F22.12)'
-<<<<<<< HEAD
 CHARACTER(LEN=20)::formatmass='(i3, F12.2, 8F10.7)'
 character(len=10)::formatchar='(A117)'
-=======
-CHARACTER(LEN=20)::formatmass='(i3, 9F22.12)'
->>>>>>> 0e5c94f1cc3ae5faa60675e55d376c881e0c9b9e
 end module formatmod
 
