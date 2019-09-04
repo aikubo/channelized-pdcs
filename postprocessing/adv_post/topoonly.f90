@@ -35,14 +35,16 @@ depth = 27
 call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
-call openbin(100, 'EP_G', EP_G1)
+!call openbin(100, 'EP_G', EP_G1)
 !call openbin(200, 'U_G', U_G1)
 !call openbin(300, 'T_G', T_G1)
 !call openbin(400, 'V_G', V_G1)
 !call openbin(500, 'W_G', W_G1)
 
-call handletopo('l300_W201', XXX, YYY, ZZZ)
-call  logvolfrc(EP_G1, EPP)
+call handletopo('l0_w201', XXX, YYY, ZZZ)
+
+call writedxtopo
+!call  logvolfrc(EP_G1, EPP)
 
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
@@ -55,7 +57,7 @@ call  logvolfrc(EP_G1, EPP)
 
 !call bulkent(EP_G1) 
 
-call massinchannel(width, depth, lambda, scaleh)
+!call massinchannel(width, depth, lambda, scaleh)
 
 
 print*, "end program"

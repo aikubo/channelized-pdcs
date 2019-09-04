@@ -2,7 +2,6 @@ module maketopo
 
 use parampost 
 use constants
-use formatmod
 
 contains
 subroutine handletopo(filename, OUTX, OUTY, OUTZ)
@@ -18,6 +17,8 @@ subroutine handletopo(filename, OUTX, OUTY, OUTZ)
 
 
         !------------OPEN the topography files-------!
+        OPEN(600,FILE='topo',form='formatted')
+        OPEN(601,FILE='topo2',form='formatted')
         OPEN(602,FILE=filename)
         !------------OPEN the topography files-------!i
 
@@ -28,19 +29,19 @@ subroutine handletopo(filename, OUTX, OUTY, OUTZ)
         !-------------------------------READ TOPOGRAPHY----------------------------------!
         !print*, 'begin spatial deltas'
 
-        DX(1)=3.0
+        DX(1)=2.0
         x(1)=DX(1)
         DO rc=2,RMAX
         DX(rc)=DX(rc-1)
         x(rc)=DX(rc)+x(rc-1)
         END DO
-        DY(1)=3.0!0.375
+        DY(1)=2.0!0.375
         y(1)=DY(1)
         DO zc=2,YMAX
          DY(zc)=DY(zc-1)
           y(zc)=DY(zc)+y(zc-1)
         END DO
-        DZ(1)=3.0
+        DZ(1)=2.0
         !z(1)=2240. !Z is in reverse compared to X & Y
         DO zc=2,ZMAX
        
@@ -82,40 +83,13 @@ end subroutine handletopo
 
 subroutine writedxtopo
        implicit none 
-       open(6000, file='topography')
-       open(6001, file='topo2')
                 print *, "writing topo for dx visuals"
                 DO I = 1,RMAX*ZMAX*YMAX
-                        WRITE(6000,format4var) topography(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
-                        WRITE(6001,format4var) topo2(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
+                        WRITE(600,400) topography(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
+                        WRITE(601,400) topo2(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
                END DO
+        400 FORMAT(4F22.12)
 end subroutine
 
-
-subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
-       implicit none 
-       double precision, intent(IN):: wid, dep, lamb, XLOC
-       double precision, intent(OUT):: edge1, edge2, bottom, top
-       double precision:: deltz, centerline, amprat, center, clearance, slope
-        slope=0.18
-        deltz=3.0
-        center = (ZMAX-2)*deltz/2 
-        amprat=0.15
-        clearance = 50.
-        
-        
-        if (lamb .eq. 0) then 
-        centerline = center
-        else 
-          centerline = lamb*amprat*sind((360*XLOC)/lamb)+center
-        end if 
-
-        edge1=centerline-wid/2
-        edge2=centerline+wid/2
-
-        bottom= slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep
-        top= slope*deltz*(RMAX-(XLOC/deltz)) +clearance 
-      
-end subroutine
 
 end module maketopo

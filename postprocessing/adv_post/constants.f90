@@ -21,7 +21,6 @@ DOUBLE PRECISION, PARAMETER::T_amb    = 273.0 !K
 DOUBLE PRECISION, PARAMETER::rho_dry  = P_const/(R_dryair*T_amb)  !kg/m**3RAMETER
 DOUBLE PRECISION, PARAMETER::char_length = 20.0
 DOUBLE PRECISION, PARAMETER::mu_g        = 2.0e-5 !Pa s
-!DOUBLE PRECISION::rho_p       = 2500.0 !kg/m**3
 !--------------------------- Constants
 !------------------------------------------!
 
@@ -80,14 +79,6 @@ DOUBLE PRECISION::chmassd = 0
 REAL::M  = 20.0
 
 ! --------- Initial Conditions of Mass Flux --------------!
-
-!-------- Set Size, Timesteps, and write size ------------!
-INTEGER:: timesteps=2
-INTEGER, PARAMETER::RMAX=404
-INTEGER, PARAMETER::ZMAX=152
-INTEGER, PARAMETER::YMAX=204
-INTEGER::length1 = RMAX*ZMAX*YMAX
-INTEGER::write_size = 4  !Number of timesteps to write out for loc files used in OPENDX
-
+INTEGER:: timesteps, RMAX, ZMAX, YMAX, length1
 
 end module constants

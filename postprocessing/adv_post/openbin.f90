@@ -13,13 +13,10 @@ module openbinary
        
         OPEN(UNIT=numunit, file=filename, form='unformatted')
         REWIND(numunit)
-
+                print*, "opening bin"
                 DO II=1,timesteps
                         READ(numunit) varname(:,II)
-
-                        print*, II
                 END DO
-        !write(*,*) varname 
     
    end subroutine openbin
 end module openbinary
