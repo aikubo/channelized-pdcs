@@ -86,7 +86,7 @@ use maketopo
                 
                 DO I=1,length1 
                     IF (lambda .ne. 0.0) then
-                    ztrace= lambda*.15*sind(sind(360*(XXX(I,1)/lambda)))+450
+                    ztrace= lambda*.15*(sind(360*(XXX(I,1)/lambda)))+450
                     else
                     ztrace=450 
                     end if 

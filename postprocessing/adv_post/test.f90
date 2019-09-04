@@ -42,16 +42,18 @@ call openbin(400, 'V_G', V_G1)
 call openbin(500, 'W_G', W_G1)
 
 call handletopo('l300_W201', XXX, YYY, ZZZ)
+
+
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
-call makeEP(1100, EP_P, printstatus)
-call makeUG(1200, U_G, printstatus) 
+!call makeEP(1100, EP_P, printstatus)
+!call makeUG(1200, U_G, printstatus) 
 
 !call makeTG(1300, T_G, printstatus)
 !call isosurf(width, lambda)
 !call gradrich(EP_P, T_G1, U_G, Richardson, SHUY)
 
-call bulkent(EP_G1) 
+!call bulkent(EP_G1) 
 
 print*, "end program"
 

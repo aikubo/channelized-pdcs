@@ -4,6 +4,20 @@ use constants
 !use formatmod
 
         contains 
+
+
+        subroutine  logvolfrc(EP_G, EPP)
+        double precision, dimension(:,:), intent(IN):: EP_G
+        double precision, dimension(:,:), intent(INOUT):: EPP
+
+        do t=1,timesteps 
+           do I=1,length1
+                EPP(I,t)=  -LOG10(1-EP_G1(I,t)+1e-14)
+           end do 
+        end do 
+
+        end subroutine
+
 !----------------------------------------------------------------!
         subroutine makeEP(fid_EPP, VOL, ifwrite)
         use formatmod
@@ -11,7 +25,7 @@ use constants
         implicit none
         logical, intent(IN):: ifwrite
         INTEGER, INTENT(IN):: fid_EPP
-        DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::VOL
+        DOUBLE PRECISION, DIMENSION(:,:), INTENT(OUT)::VOL
  
         print*, 'writing ep-p' 
         DO t=tstart,tstop

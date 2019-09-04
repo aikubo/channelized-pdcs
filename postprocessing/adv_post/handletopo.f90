@@ -92,11 +92,22 @@ subroutine writedxtopo
 end subroutine
 
 
-subroutine egdes(width, lamda, edge1, edge2, XXX)
+subroutine egdes(width, lamda, depth, XLOC, edge1, edge2, bottom, top)
        implicit none 
-       double precision 
-
-
+       double precision, intent(INOUT):: width, depth, lambda, XXX
+       double precision, intent(OUT):: edge1, edge2, bottom, top
+       double precision:: dz, centerline, amprat, center 
+        dz=3.0
+        center = ZMAX*dz/2 
+        amprat=0.15
+        clearance = 50.
+        
+        centerline = lambda*amprat*sind((360*XLOX)/lambda)+center
+        edge1=centerline-width/2
+        edge2=centerline+width/2
+        !height=slope*dx*(RMAX-XLOC/dz)) +clearance -depth
+        bottom= slope*dx*(RMAX-XLOC/dz)) +clearance -depth
+        top= slope*dx*(RMAX-XLOC/dz)) +clearance 
 end subroutine
 
 end module maketopo

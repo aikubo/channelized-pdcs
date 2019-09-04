@@ -33,7 +33,7 @@
         ALLOCATE( DY(YMAX))
         ALLOCATE( DZ(ZMAX))
 
-        
+        ALLOCATE( EPP(length1, timesteps)) 
 
 
 !----------------------Allocate the Gradient
