@@ -7,17 +7,17 @@ module massdist
         contains
 
         subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT)
-
+        use maketopo
         IMPLICIT NONE
-        double precision, intent(IN):: width, depth, lambda, scaleheight
+        double precision, intent(INOut):: width, depth, lambda, scaleheight
         double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         double precision::edge1, edge2, bottom, top
 
         print*, 'mass in channel'
         OPEN(666, file='massinchannel.txt')
-        write(666,*) "Total Mass - Elutriated - Medium - Dense - Inchannel- Within Width - scaleheight-scaleheight1 - scaleheight2"
+        !write(666,*) "Total Mass - Elutriated - Medium - Dense - Inchannel- Within Width - scaleheight-scaleheight1 - scaleheight2"
         print *, "Done writing 3D variables"
-        DO t= 1,timesteps
+        DO t= 2,timesteps
         chmass = 0
         tmass = 0
         chmassd = 0
@@ -30,7 +30,7 @@ module massdist
         scalemass1=0
 
         DO I=1, length1
-            call edges(width, lambda, XXX(I,1), edge1, edge2, bottom, top)
+            call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
 
             IF (YYY(I,1)>bottom) THEN
                 IF (EPP(I,t) <max_dilute) THEN

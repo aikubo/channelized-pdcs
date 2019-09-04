@@ -92,9 +92,9 @@ subroutine writedxtopo
 end subroutine
 
 
-subroutine egdes(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
        implicit none 
-       double precision, intent(INOUT):: width, depth, lambda, XLOC
+       double precision, intent(IN):: wid, dep, lamb, XLOC
        double precision, intent(OUT):: edge1, edge2, bottom, top
        double precision:: deltz, centerline, amprat, center, clearance, slope
         slope=0.18
@@ -104,16 +104,16 @@ subroutine egdes(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
         clearance = 50.
         
         
-        if (lambda .eq. 0) then 
+        if (lamb .eq. 0) then 
         centerline = center
         else 
-          centerline = lambda*amprat*sind((360*XLOC)/lambda)+center
+          centerline = lamb*amprat*sind((360*XLOC)/lamb)+center
         end if 
 
-        edge1=centerline-width/2
-        edge2=centerline+width/2
+        edge1=centerline-wid/2
+        edge2=centerline+wid/2
 
-        bottom= slope*deltz*(RMAX-(XLOC/deltz)) +clearance -depth
+        bottom= slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep
         top= slope*deltz*(RMAX-(XLOC/deltz)) +clearance 
         
 end subroutine

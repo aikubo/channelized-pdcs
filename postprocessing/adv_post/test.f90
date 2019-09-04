@@ -18,7 +18,7 @@ logical::printstatus
 double precision:: width, lambda
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
-
+double precision:: scaleh=50.0
 allocate(isosurface(1200,4,15))
 RMAX=404
 YMAX=154
@@ -55,7 +55,7 @@ call  logvolfrc(EP_G1, EPP)
 
 !call bulkent(EP_G1) 
 
-call massinchannel(width, depth, lambda, 50.)
+call massinchannel(width, depth, lambda, scaleh)
 
 
 print*, "end program"
