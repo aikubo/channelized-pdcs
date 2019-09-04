@@ -1,12 +1,13 @@
 module massdist
-        contains
-
-        subroutine massinchannel(WIDTH, LAMBDA, SCALEHEIGHT)
-        USE handletopo
+        USE maketopo
         USE CONSTANTS 
         USE PARARMPOST 
         USE FORMATMOD
         
+        contains
+
+        subroutine massinchannel(WIDTH, LAMBDA, SCALEHEIGHT)
+
         IMPLICIT NONE
         double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         
