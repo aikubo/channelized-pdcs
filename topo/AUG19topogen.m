@@ -13,7 +13,7 @@ lowz= 2;
 edge1 = 100;
 edge2 = 200;
 GRAD = 0.02;
-
+% TEST COMMIT
 % for z=1:ZMAX
 %     if z< edge1 
 %         DZ(z)= lowz+(edge1-z)*GRAD;
