@@ -1,0 +1,3 @@
+/home/akubo/myprojects/sinchannels/example
+/home/akubo/myprojects/sinchannels/INFLOW_NCONSTANT
+/home/akubo/myprojects/sinchannels/initialvchange_l400

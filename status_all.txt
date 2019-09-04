@@ -18,3 +18,22 @@
 08/21/19 20:18 increased srun,xrun requested memory to 10G for postprocessing to avoid killing while testing
 08/21/19 20:43 looking at the visualizations, I made a dumb mistake in the slope of the function using the GRADE rather than the degrees
 08/21/19 21:03 fixed the issue with topogen
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!RECOVERD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   71  04/09/19 03:17:42 deardiary "looking at the visualizations, I made a dumb mistake in the slope of the function using the GRADE rather than the degrees"
+  174  04/09/19 03:17:42 deardiary "looking at visualizations of the topography I realized that 20m of clearance was not enough, much increase it to 40m"
+  219  04/09/19 03:17:42 deardiary "found issue with postprocessing script, ascii output files are quite large (1.6G each) and there needs to be an increase in the requested memory in the submission script, while I am perfecting these scripts I just reduced the number of outputs for now"
+  224  04/09/19 03:17:42 deardiary "added tstart and tstop options to post processing scripts"
+  251  04/09/19 03:17:42 deardiary "fixed that error by using different EP_G file, now I am struggling to get it to write to the ascii file"
+  257  04/09/19 03:17:42 deardiary "fixed Write problem, wasn't using time iterative fid"
+  272  04/09/19 03:17:42 deardiary "original method of just cutting away from the middle of the channel didn't work so well (viewchannel.f90) so i am trying to actually adjust the Z locaton of each cell so that it is straight"
+  489  04/09/19 03:17:42 deardiary "I just might have identified a way to find the head of the flow roughly, more validation is necessary"
+  523  04/09/19 03:17:42 deardiary "identified and fixed issue in makepost.sh that caused it to run the same post.f90 everytime. cp statement should go after edits..."
+  525  04/09/19 03:17:42 deardiary "increased postsub memory to 36G" 
+  578  04/09/19 03:17:42 deardiary "updating column.f90 so that it writes out all values 100m above valley floor, but it isnt writing to the file correctly or entering the loop"
+  580  04/09/19 03:17:42 deardiary "obvious solution is that for a contant X and Z location the height of Y is also constant so all the columns will be the same size"
+  958  04/09/19 03:17:42 deardiary "updated findhead.f90 to print nose.txt. which is the head of the current along the width of the channel"
+  959  04/09/19 03:17:42 deardiary "working on getting richardson.f90 to work"
+  970  04/09/19 03:17:42 deardiary "richardson.f90 is working, moved on to entrainment.f90
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+09/04/19 04:03 massive issue with reposity and lost some scripts and post processing :C :C :C
