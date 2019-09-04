@@ -1,5 +1,9 @@
 module makeascii 
-  contains  
+  contains
+
+    
+
+  
     subroutine openascii(numunit, filename)
         use parampost 
         use constants
@@ -16,6 +20,7 @@ module makeascii
                 write(x1,str_c) t 
        
                 num_open= numunit + t
+                print*, filename, ' written as unit number ', num_open
                 open(num_open, file=filename//trim(x1)//'.txt')
         
         END DO

@@ -2,67 +2,108 @@ module var_3d
 use parampost 
 use constants 
 !use formatmod
+
         contains 
-        
-        subroutine make3dvar
+!----------------------------------------------------------------!
+        subroutine makeEP(fid_EPP, VOL, ifwrite)
+        use formatmod
+        use parampost
         implicit none
+        logical, intent(IN):: ifwrite
+        INTEGER, INTENT(IN):: fid_EPP
+        DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::VOL
+ 
         print*, 'writing ep-p' 
-        DO t=1,timesteps
+        DO t=tstart,tstop
+                fid_EP_P  = fid_EPP+t
                        DO I=1,RMAX*ZMAX*YMAX
                           !------------------ Volume Fraction of Gas or
                           !Particles
                           !------------------!
-                          if (T_G1(I,t)==0.0 .OR. EP_G1(I,t) >0.9999999) THEN ! Try to make sure not to calculate infinity densities
-                                                         
-                          current_density = 0.0
-                          else
-                          current_density =rho_p*(1-EP_G1(I,t))+(EP_G1(I,t))*(P_const/(R_vapor*T_G1(I,t)))
+                          if (EP_G1(I,t)<0.01) THEN ! Try to make sure not to calculate infinity densities
+                           EP_G1(I,t)=0.0
+                                                               
                           end if
 
-                          EP_P(I,1,t) = -LOG10(1-EP_G1(I,t)+1e-14)
-                          EP_P(I,2,t) = XXX(I,1)
-                          EP_P(I,3,t) = YYY(I,1)
-                          EP_P(I,4,t) = ZZZ(I,1)
+                          VOL(I,1,t) = -LOG10(1-EP_G1(I,t)+1e-14)
+                          VOL(I,2,t) = XXX(I,1)
+                          VOL(I,3,t) = YYY(I,1)
+                          VOL(I,4,t) = ZZZ(I,1)
+                        
+                          if (ifwrite .EQ. .TRUE.) THEN
+                          WRITE(fid_EP_P, format4var) VOL(I,1:4,t)
+                          end if                           
+
+                        end do 
+        end do 
+        print*, "done writing ep-p"
+        end subroutine
+
+!----------------------------------------------------------------!
+
+        subroutine makeTG(fid_tp, TEMP, ifwrite)
+        use parampost 
+        use formatmod 
+        use constants 
+
+        implicit none
+        INTEGER, INTENT(IN):: fid_tp
+        LOGICAL, INTENT(IN):: ifwrite
+        DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::TEMP
+
+        print*, 'writing ep-p'
+        DO t=tstart,tstop
+                fid_temp=fid_tp+t
+                DO I=1,RMAX*ZMAX*YMAX
                           !------------------------ Temperature of Gas
                           !-----------------------------!
-        !                  T_G(I,1,t) = T_G1(I,t)
-        !                  T_G(I,2,t) = XXX(I,1)
-        !                  T_G(I,3,t) = YYY(I,1)
-        !                  T_G(I,4,t) = ZZZ(I,1)
+                          TEMP(I,1,t) = T_G1(I,t)
+                          TEMP(I,2,t) = XXX(I,1)
+                          TEMP(I,3,t) = YYY(I,1)
+                          TEMP(I,4,t) = ZZZ(I,1)
+                        
+                        !if (ifwrite .EQ. .TRUE.) then
+                        !  print*, "writing"
+                          WRITE(fid_temp,format4var) TEMP(I,1:4,t)
+                        !end if
+                END DO
+        END DO 
+
+        end subroutine
+!----------------------------------------------------------------!
+        subroutine makeUG(fid_UG, VEL, ifwrite)
+        use formatmod 
+        use parampost 
+        use constants
+        implicit none
+        INTEGER, INTENT(IN):: fid_UG
+        LOGICAL, INTENT(IN):: ifwrite
+        DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::VEL
+
+        print*, 'writing ep-p'
+        DO t= tstart,tstop
+                fid_U=fid_UG +t 
+                DO I=1,RMAX*ZMAX*YMAX
                           !------------------------ Velocity
                           !of Gas
                           !--------------------------------!
-        !                  U_G(I,1,t) = U_G1(I,t)
-        !                  U_G(I,2,t) = V_G1(I,t)
-        !                  U_G(I,3,t) = W_G1(I,t)
-        !                  U_G(I,4,t) = XXX(I,1)
-        !                  U_G(I,5,t) = YYY(I,1)
-        !                  U_G(I,6,t) = ZZZ(I,1)
+                          VEL(I,1,t) = U_G1(I,t)
+                          VEL(I,2,t) = V_G1(I,t)
+                          VEL(I,3,t) = W_G1(I,t)
+                          VEL(I,4,t) = XXX(I,1)
+                          VEL(I,5,t) = YYY(I,1)
+                          VEL(I,6,t) = ZZZ(I,1)
+      
+                        if (ifwrite) then
+                        WRITE(fid_U,format6var) VEL(I,1:6,t)
+                        end if 
+          END DO
 
-                        END DO
         END DO
         print*, 'done writing ep-p'
-        end subroutine make3dvar 
 
+        end subroutine makeUG
 
- 
-        subroutine makedxfiles
-        implicit none
-        ! writes outs opendx files 
-        ! in format file(1:I,1:4)=data, XX, YY, ZZ 
-       
-                print *, "Start writing 3D variables"
-                DO t=1,timesteps
-                        fid_EP_P  = 1100+t
-          !              fid_U     = 1200+t
-         !               fid_temp  = 1250+t
-                        DO I=1,length1
-           !              WRITE(fid_temp,4F22.12) T_G(I,1:4,t) 
-           !              WRITE(fid_U,300) U_G(I,1:6,t)                 
-                         WRITE(fid_EP_P,400) EP_P(I,1:4,t)
-                        END DO
-                END DO 
-        400 FORMAT(4F22.12)
-        end subroutine makedxfiles 
+!----------------------------------------------------------------!
 end module var_3d
 

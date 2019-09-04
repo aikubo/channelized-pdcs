@@ -1,26 +1,35 @@
-module richardson
+module find_richardson
         use parampost
         use constants
         use makeascii
+        use formatmod 
+
 
         contains 
-                subroutine gradrich
-                
-                call openascii(1500, 'Richardson_t')
-                call openascii(800, 'SHUY_t')
+                subroutine gradrich(EP_P, T_G1, U_G, Ri, SHUY)
+                implicit none
+                double precision, allocatable, intent(IN):: EP_P(:,:,:)
+                double precision, allocatable, intent(INOUT)::U_G(:,:,:)
+                double precision, allocatable, intent(IN):: T_G1(:,:) 
+                double precision, allocatable, intent(INOUT):: Ri(:,:,:)
+                double precision, allocatable, intent(INOUT):: SHUY(:,:,:)
+                double precision:: Ri_grad 
+                print*, "Begin richardson gradient calculation"
+                !call openascii(1500, 'Richardson_t')
+                !call openascii(800, 'SHUY_t')
                 
                 DO t= 1,timesteps
-                
-                     DO I=1,RMAX*ZMAX*YMAX
-                               Richardson(I,1,t) = 1.000e3
-                               Richardson(I,2,t) = XXX(I,1)
-                               Richardson(I,3,t) = YYY(I,1)
-                               Richardson(I,4,t) = ZZZ(I,1)
-                     END DO
+!                
+!                     DO I=1,length1
+!                               Ri(I,1,t) = 1.000e3
+!                               Ri(I,2,t) = XXX(I,1)
+!                               Ri(I,3,t) = YYY(I,1)
+!                               Ri(I,4,t) = ZZZ(I,1)
+!                     END DO
 
 
 
-
+                print*, "correct location of X an Z direction velocities"
                 ! CORRECT THE LOCATION OF THE X AND Z DIRECTION
                 ! VELOCITIES--------------------------!
                   DO rc =4,RMAX-4           !X
@@ -43,41 +52,44 @@ module richardson
                   END DO
                 ! CORRECT THE LOCATION OF THE X AND Z DIRECTION
                 ! VELOCITIES--------------------------!
+                print*, "finished correction"
 
 
-
-
+                print*, "calculate Ri"
                 ! NOW THE VELOCITIES ARE CORRECT FOR THE CALCULATION OF GRADIENT
                 ! RICHARDSON
-                  DO rc =4,RMAX-4           !X
-                   DO zc = 4,ZMAX-4         !Z
-                    DO yc = YMAX-4,4,-1     !Y
+                  DO rc = 2,RMAX-2           !X
+                   DO zc = 2,ZMAX-2         !Z
+                    DO yc = YMAX-1,1,-1     !Y
                                 ! FUNIJK_GL (LI, LJ, LK) = 1 + (LJ - jmin3) +
                                 ! (LI-imin3)*(jmax3-jmin3+1) &
                                 ! + (LK-kmin3)*(jmax3-jmin3+1)*(imax3-imin3+1)
                              I       = 1 + (yc-1) +(rc-1)*(YMAX-1+1) +  (zc-1)*(YMAX-1+1)*(RMAX-1+1)
                              I_yp1   = 1 + (yc+1-1) +(rc-1)*(YMAX-1+1) + (zc-1)*(YMAX-1+1)*(RMAX-1+1) !Cell above
                              I_ym1   = 1 + (yc-1-1) +(rc-1)*(YMAX-1+1) +(zc-1)*(YMAX-1+1)*(RMAX-1+1) !Cell above
+                              
+                !             print*, I
 
-
-                             IF(T_G(I_ym1,1,t)>272.0 .AND. EP_P(I,1,t)<8.0) THEN
+                      IF(T_G1(I_ym1,t)>272.0 .AND. EP_P(I,1,t)<8.0 .AND. EP_P(I,1,t)>0.0) THEN
+                                               
                                                 !------Y-Richardson-------!
                                                    ! Current density at each position
                                                 int_pos1           = I_yp1
                                                 int_min1           = I_ym1
                                                 bottom             = 2*((abs(EP_P(int_pos1,3,t)-EP_P(I,3,t))))
-                                                c_pos1             = rho_p*(10**-(EP_P(int_pos1,1,t)))+(1-(10**-(EP_P(int_pos1,1,t))))*(P_const/(R_vapor*T_G(int_pos1,1,t)))
-                                                c_min1             = rho_p*(10**-(EP_P(int_min1,1,t)))+(1-(10**-(EP_P(int_min1,1,t))))*(P_const/(R_vapor*T_G(int_min1,1,t)))
+                                                c_pos1             = rho_p*(10**-(EP_P(int_pos1,1,t)))+(1-(10**-(EP_P(int_pos1,1,t))))*(P_const/(R_vapor*T_G1(int_pos1,t)))
+                                                c_min1             = rho_p*(10**-(EP_P(int_min1,1,t)))+(1-(10**-(EP_P(int_min1,1,t))))*(P_const/(R_vapor*T_G1(int_min1,t)))
+                                               ! print*, EP_P(int_pos1,1,t),EP_P(int_pos1,3,t)
+                                               ! print*, T_G1(int_pos1,t)
+                                               ! print*, bottom, c_pos1, c_min1
                                                    ! Shear Velocity components, X & Z
                                                 delta_V1           = (U_G(int_pos1,1,t)-U_G(int_min1,1,t))/bottom
-                                                !delta_V3           =
-                                                !(U_G(int_pos1,3,t)-U_G(int_min1,3,t))/bottom
-                                                !shear_v            =
-                                                !sqrt(delta_V1**2+delta_V3**2)
+                                                !delta_V3          = (U_G(int_pos1,3,t)-U_G(int_min1,3,t))/bottom
+                                                !shear_v           = sqrt(delta_V1**2+delta_V3**2)
                                                 shear_v            = delta_V1
                                                 delta_rho          =(c_pos1-c_min1)/bottom
-                                                Ri                 =((-gravity/rho_dry)*delta_rho)/(shear_v**2)
-
+                                                Ri_grad            =((-gravity/rho_dry)*delta_rho)/(shear_v**2)
+                                                !print*, shear_v, delta_rho, Ri_grad
 
                                                 ! This is done for easier colorbar in
                                                 ! Opendx,
@@ -85,27 +97,29 @@ module richardson
                                                 ! the
                                                 ! adjusted Ri and column 5 is the
                                                 ! original
-                                                if (Ri>5) THEN
-                                                Richardson(I,1,t) = 5.0
+                                                !print*, "something off here"
+                                                if (Ri_grad>5.0) THEN
+                                                Ri(I,1,t) = 5.0
                                                 !print *, "Ri", I, t, Ri
-                                                elseif (Ri<-5) THEN
-                                                Richardson(I,1,t) = -5.0
+                                                elseif (Ri_grad<-5.0) THEN
+                                                !print*, "entered elif"
+                                                Ri(I,1,t) = -5.0
+                                                !print*, "wrote ri"
                                                 !print *, "Ri", I, t, Ri
                                                 else
-                                                Richardson(I,1,t) = Ri
+                                                Ri(I,1,t) = Ri_grad
                                                 end if
 
-                                                Richardson(I,2,t) = XXX(I,1)
-                                                Richardson(I,3,t) = YYY(I,1)
-                                                Richardson(I,4,t) = ZZZ(I,1)
-                                                Richardson(I,5,t) = Ri
+                                                Ri(I,2,t) = XXX(I,1)
+                                                Ri(I,3,t) = YYY(I,1)
+                                                Ri(I,4,t) = ZZZ(I,1)
+                                                Ri(I,5,t) = Ri_grad
 
-
-
-                                                SHUY(I,1) = shear_v
-                                                SHUT(I,2) = XXX(I,1)
-                                                SHUY(I,3) = YYY(I,1)
-                                                SHUY(I,4) = ZZZ(I,1)
+                                                !print*, "shearv", shear_v 
+                                                SHUY(I,1,t) = shear_v
+                                                SHUY(I,2,t) = XXX(I,1)
+                                                SHUY(I,3,t) = YYY(I,1)
+                                                SHUY(I,4,t) = ZZZ(I,1)
                                                 !------Y-Richardson-------!
                            END IF
                     END DO
@@ -113,18 +127,27 @@ module richardson
                    END DO
                   END DO
 
-                  fid_temp =1500 +t
-                  fid_shuy =800 +t
-                  DO I=1,RMAX*ZMAX*YMAX
-                    WRITE(fid_temp,401) Richardson(I,1:5,t)
-                    write(fid_shuy, 400) SHUY(I, 1:4)
-                  END DO
+                 ! fid_temp =1500 +t
+                 ! fid_shuy =800 +t
+                 ! DO I=1,RMAX*ZMAX*YMAX
+                 !   WRITE(fid_temp,format5var) Richardson(I,1:5,t)
+                 !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
+                 ! END DO
 
         END DO
+        
+        print*, "Ri calculation done" 
 
-        400 FORMAT(4F22.12)
-        401 FORMAT(4F22.12,1x,ES22.5)
+        print*, "write Ri"
+        open(7777, file="Ri", form='unformatted')
+
+        DO I=1,length1
+           write(7777) Ri(I,1:5,:)
+        end do 
+
+        print*, "finished Ri gradient subroutine"
+                
 end subroutine gradrich 
-end module richardson
+end module find_richardson
 
 

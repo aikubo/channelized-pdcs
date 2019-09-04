@@ -10,6 +10,8 @@ CHARACTER(LEN=1) :: junk
 INTEGER:: MAX_REC = 1e9
 INTEGER:: count1,num_open,sum1,sum2
 INTEGER:: ios, int_temp,int_check,int_pos1,int_min1,int_pos2,int_min2
+INTEGER:: tstart, tstop
+DOUBLE PRECISION:: depth
 
 INTEGER::yc,I,J,K,THMAX,rc,zc,tc,t,I_yp1,I_ym1,I_zp1,I_zm1,I_xp1,I_xm1,temp_rc
 INTEGER::write_end,loop_open,fid_temp,fid_EP_P,fid_EP_G,fid_U,fid_ISO6,fid_GRAD4pt, fid_GRADsize,fid_GradV,fid_GradE
@@ -22,10 +24,10 @@ DOUBLE PRECISION,ALLOCATABLE::Iso_3(:,:,:),four_point_Iso3(:,:,:),four_point(:,:
 DOUBLE PRECISION, ALLOCATABLE :: T_G(:,:,:),U_G(:,:,:),VEL_6(:,:,:),VEL_3(:,:,:),VEL_ALL(:,:,:), VEL_temp(:,:), VEL_temp2(:,:),Richardson(:,:,:)
 DOUBLE PRECISION, ALLOCATABLE :: Ri_Dilute(:,:,:),Ri_Dense(:,:,:),char_dense(:), char_dilute(:),VEL_DENSE(:,:),VEL_DILUTE(:,:)
 
-
+double precision:: gstar, gstar2, gstar1, froude, rho_c
 DOUBLE PRECISION, ALLOCATABLE::topo2(:),topography(:),EP_G1(:,:),XXX(:,:),YYY(:,:),ZZZ(:,:)
 DOUBLE PRECISION, ALLOCATABLE :: T_G1(:,:),V_G1(:,:),U_G1(:,:),W_G1(:,:),T_S1(:,:),C_PG(:,:),C_PS1(:,:),C_PS2(:,:)
-DOUBLE PRECISION, ALLOCATABLE :: ROP_S1(:,:), U_S1(:,:), SHUY(:,:),SHWY(:,:), V_S1(:,:)
+DOUBLE PRECISION, ALLOCATABLE :: ROP_S1(:,:), U_S1(:,:), V_S1(:,:)
 
 INTEGER, ALLOCATABLE::Location_I(:,:)
 

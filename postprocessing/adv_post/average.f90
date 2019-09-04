@@ -1,7 +1,11 @@
+module averageit
+USE parampost
+USE constants
+
+
+contains
 SUBROUTINE AVERAGET 
 
-USE parampost 
-USE constants 
 
 IMPLICIT NONE 
 
@@ -84,3 +88,6 @@ END DO
 RETURN 
 
 END SUBROUTINE AVERAGET
+
+
+end module

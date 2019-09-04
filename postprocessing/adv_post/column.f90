@@ -1,138 +1,97 @@
 module column
+use formatmod
+use parampost
+use constants
+use openbinary
+use maketopo
+use makeascii
+use var_3d
 
 contains 
-        subroutine setup_col()
-        end subroutine setup_col 
+!        subroutine setup_col()
+!        end subroutine setup_col 
 
-        subroutine slice( XLOC, ZLOC)
-          use parampost 
-          use constants
-          use alloc_arays
-          implicit none 
-          call allocate_arrays
-          INTEGER, INTENT(IN):: XLOC, YLOC
-           DO I= 1, length1
-              dpu(I,t)= (1-EP_G1(I,t))*1950*(U_S1(I,t)*U_S1(I,t))
-               EP_P = -LOG10(1-EP_G1(I,t)+1e-14)
-                  IF ( EP_P .GT. 0 .AND. EP_P .LT. 6.5) THEN
+        subroutine slice(numunit, XLOC, ZLOC)
+        use formatmod 
+        implicit none 
+          !call allocate_arrays
+          DOUBLE PRECISION, INTENT(IN):: XLOC, ZLOC
+          INTEGER, INTENT(IN):: numunit
+          DOUBLE PRECISION:: VOLFR, DYNAM
+          DOUBLE PRECISION:: clearance, slope, dx
+          DOUBLE PRECISION, ALLOCATABLE :: hill(:)
+          ALLOCATE(hill(length1))
+
+          clearance = 50.
+          slope=0.18
+          dx=3.0
+         
+          
+          !I=1
+          !do zc=1,ZMAX
+          !do rc=1,RMAX
+          !do yc=1,YMAX
+          !      hill(I)=  slope*dx*(rc)+clearance-depth
+          !      I=I+1
+          !end do               
+          !end do 
+          !end do      
+          !print*, hill(1:RMAX)   
+
+          print*, "start checking column"
+           DO t=1,timesteps
+            print*,t
+            DO I= 1, length1
+              DYNAM= (1-EP_G1(I,t))*1950*(U_S1(I,t)*U_S1(I,t))
+               VOLFR = -LOG10(1-EP_G1(I,t)+1e-14)
+                !PRINT*, VOLFR
+                ! IF ( YYY(I,1) .GT. hill(I) .AND. YYY(I,1) .LT. hill(I)+100 ) THEN
                    IF( ZZZ(I,1) .EQ. ZLOC) THEN
                     IF( XXX(I,1) .EQ. XLOC) THEN
-                      WRITE(middle,405) YYY(I,1), EP_P, U_G(I,t), Ri(I,5), T_G(I,t)
+                      IF(VOLFR .GT. 0.00) THEN 
+                      WRITE(numunit,format6col) t, YYY(I,1), VOLFR, U_G1(I,t), DYNAM, T_G1(I,t) !, Ri
                     END IF
                    END IF
                   END IF 
+                end do
            END DO 
-        405 FORMAT(5F22.12)
-        400 FORMAT(4F22.12)
-        return
-       end subroutine slice
+         end subroutine slice
 
-IMPLICIT NONE 
+end module 
 
-
-OPEN(100, file='EP_G', form='unformatted')
-OPEN(101, file='T_G', form='unformatted')
-OPEN(102, file='U_G', form='unformatted')
-OPEN(103, file='U_S1', form='unformatted')
-
-call allocate_arrays 
-
-t=5
-str_c = '(I2.2)'
-write(x1,str_c) t
-OPEN(1500,FILE='Richardson_t'//trim(x1)//'.txt')
+!program sliceit
+!use parampost
+!use constants
+!use alloc_arrays
+!use openbin
+!use openascii
+!use column
+!IMPLICIT NONE 
 
 
-REWIND(100)
-DO I=1,timesteps
-     READ(100) EP_G1(:,I)END DO
+!call allocate_arrays 
 
-slabx1 = 200 
-slabz1 = 100 
-slabx2 = 600
-slabz2 = 100
+!call openbin(100, 'EP_G', EP_G1)
+!call openbin(200, 'U_G', U_G1)
+!call openbin(300, 'T_G', T_G1)
 
-do t=1,9 
+!t=4
+!str_c = '(I2.2)'
+!write(x1,str_c) t
+!OPEN(1500,FILE='Richardson_t'//trim(x1)//'.txt')
 
-        str_c = '(I2.2)'
-        write(x1,str_c) t
+!DO I=1,length1 
+!        READ(1500) Ri(I,:)
+!end do
 
-        num_open=2300 +t 
-        OPEN(num_open, FILE='slice_middle'//trim(x1)//'.txt')
-        num_open=2400 +t
-        OPEN(num_open, FILE='slice_right'//trim(x1)//'.txt')
-        num_open=2500 +t
-        open(num_open, file='slice_left'//trim(x1)//'.txt')
-        num_open=2600 +t
-        open(num_open, file='slice_out'//trim(x1)//'.txt')
+!call handletopo(topo, XXX, YYY, ZZZ) 
 
-end do
+!middle = 2500
+!OPEN(middle, file='slice_middle04.txt')
 
-DO t= 1,9
-        middle = 2300+t
-        right= 2400+t
-        left= 2500+t
-        outter= 2600+t
+!call slice(middle, 200, 150) 
+ 
 
-        str_c = '(I2.2)'
-        write(x1,str_c) t
-        OPEN(1500,FILE='Richardson_t'//trim(x1)//'.txt')
-
-
-        DO I=1,length1
-                READ(1500,*) Ri(I,1:5)
-        END DO
-
-DO I= 1, length1
- dpu(I,t)= (1-EP_G1(I,t))*1950*(U_S1(I,t)*U_S1(I,t))
- EP_P = -LOG10(1-EP_G1(I,t)+1e-14)
- IF ( EP_P .GT. 0 .AND. EP_P .LT. 6.5) THEN 
- !J = XXX(I,1)/2
- !bottom = tand(M)*2*(400-J)+20-18
-  ! print*, EP_P
-    IF( ZZZ(I,1) .EQ. 150) THEN
-      !print*, EP_P, XXX(I,1) 
-        IF( XXX(I,1) .EQ. 200) THEN 
-        !dpu(I,t)= (1-EP_G1(I,t))*1950*(U_S1(I,t)*U_S1(I,t))
-        WRITE(middle,405) YYY(I,1), EP_P, U_G(I,t), Ri(I,5), T_G(I,t) 
-               ! print*, YYY(I,1)                 
-!       !        END IF
-       END IF
-       END IF
-
-    IF( ZZZ(I,1) .EQ. 100) THEN
-      !print*, EP_P, XXX(I,1) 
-        IF( XXX(I,1) .EQ. 200) THEN
-        WRITE(right,405) YYY(I,1), EP_P, U_G(I,t), Ri(I,1), T_G(I,t)
-               ! print*, YYY(I,1)                 
-!       !        END IF
-       END IF
-       END IF
-
-    IF( ZZZ(I,1) .EQ. 200) THEN
-      !print*, EP_P, XXX(I,1) 
-        IF( XXX(I,1) .EQ. 200) THEN
-        WRITE(left,405) YYY(I,1), EP_P, U_G(I,t), Ri(I,1), T_G(I,t)
-               ! print*, YYY(I,1)                 
-!       !        END IF
-       END IF
-       END IF    
-
-    IF( ZZZ(I,1) .EQ. 300) THEN
-      !print*, EP_P, XXX(I,1) 
-        IF( XXX(I,1) .EQ. 200) THEN
-        WRITE(outter,405) YYY(I,1), EP_P, U_G(I,t), Ri(I,1), T_G(I,t)
-               ! print*, YYY(I,1)                 
-!       !        END IF
-       END IF
-       END IF
-
-
-   END IF
-END DO
-END DO 
-
-405 FORMAT(5F22.12)
-400 FORMAT(4F22.12)
-RETURN 
-END SUBROUTINE column
+!405 FORMAT(5F22.12)
+!400 FORMAT(4F22.12)
+!end program
