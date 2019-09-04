@@ -1,8 +1,12 @@
 module massdist
         contains
-        
+
         subroutine massinchannel(WIDTH, LAMBDA, SCALEHEIGHT)
         USE handletopo
+        USE CONSTANTS 
+        USE PARARMPOST 
+        USE FORMATMOD
+        
         IMPLICIT NONE
         double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         
@@ -78,7 +82,7 @@ module massdist
           END IF
          END DO
         
-         WRITE(666, 403) t, tmass, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, scalemass2
+         WRITE(666, formatmass) t, tmass, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, scalemass2
         END DO
         !! done !!
         print*, 'mass in channel done'

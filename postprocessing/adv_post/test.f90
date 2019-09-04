@@ -42,7 +42,7 @@ call openbin(100, 'EP_G', EP_G1)
 !call openbin(500, 'W_G', W_G1)
 
 call handletopo('l300_W201', XXX, YYY, ZZZ)
-call  logvolfrc(EP_G, EPP)
+call  logvolfrc(EP_G1, EPP)
 
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
