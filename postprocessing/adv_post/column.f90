@@ -6,23 +6,41 @@ use openbinary
 use maketopo
 use makeascii
 use var_3d
+use filehead 
 
 contains 
 !        subroutine setup_col()
 !        end subroutine setup_col 
 
-        subroutine slice(width, depth, lambda, numunit, XC, ZC)
+        subroutine slice(width, depth, lambda, XC, ZC)
         use formatmod 
        
         implicit none 
           !call allocate_arrays
           
           DOUBLE PRECISION, INTENT(IN):: width, lambda, depth, XC, ZC
-          INTEGER, INTENT(IN):: numunit
           DOUBLE PRECISION:: VOLFR, DYNAM
           DOUBLE PRECISION:: clearance, slope, dx
           DOUBLE PRECISION :: hill
           double precision:: XLOC, ZLOC
+          character(3)::Xstring, zstring      
+          CHARACTER(LEN=10) :: str_c
+                
+          str_c= '(I3)'
+          write(xstring,str_c) XC
+          write(zstring,str_c) ZC
+
+          routine="column.mod/slice"
+          description=" Vertical columns "
+          datatype=" t  YYY  EPP   U_G   DPU   T_G   Ri"
+          print*, xstring, zstring
+          filename='slice_x'//xstring//'_z'//zstring
+          open(888, file =filename)
+          call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
+
+     
+
+
           dx=3.0 
           XLOC=dx*XC 
           ZLOC=dx*ZC
@@ -50,7 +68,7 @@ contains
                        ! print*, XXX(I,1)
                       IF(EPP(I,t) .GT. 0.00) THEN
                       !print*, YYY(I,1)-hill, Ri_all(I,1,t) 
-                      WRITE(numunit,format7col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t)
+                      WRITE(888,format7col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t)
                       end if 
                  !     END IF
                    END IF

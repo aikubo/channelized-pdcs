@@ -64,9 +64,9 @@ call dynamicpressure(EP_G1, U_S1, DPU)
 
 !call massinchannel(width, depth, lambda, scaleh)
 !open(1300, file='slice.txt')
-!call slice(width, depth, lambda, 1300, XLOC, ZLOC)
+call slice(width, depth, lambda, XLOC, ZLOC)
 
-call average_all
+!call average_all
 
 print*, "end program"
 

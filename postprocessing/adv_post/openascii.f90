@@ -4,7 +4,7 @@ module makeascii
     
 
   
-    subroutine openascii(numunit, filename)
+    subroutine openascii(numunit, filen)
         use parampost 
         use constants
         implicit none 
@@ -12,7 +12,7 @@ module makeascii
         CHARACTER(LEN=10) :: str_c
         character(LEN=10) :: x1
         integer, intent(IN) :: numunit
-        character(LEN=*), intent(in) :: filename
+        character(LEN=*), intent(in) :: filen
          
         str_c = '(I2.2)'      
 
@@ -20,12 +20,12 @@ module makeascii
                 write(x1,str_c) t 
        
                 num_open= numunit + t
-                print*, filename, ' written as unit number ', num_open
-                open(num_open, file=filename//trim(x1)//'.txt')
+                print*, filen, ' written as unit number ', num_open
+                open(num_open, file=filen//trim(x1)//'.txt')
         
         END DO
         !write(*,*) varname 
-        print*, filename, ' written as unit number ', numunit
+        print*, filen, ' written as unit number ', numunit
  
    end subroutine openascii
 end module makeascii

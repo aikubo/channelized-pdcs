@@ -2,6 +2,7 @@ module constants
 
 DOUBLE PRECISION:: infinity = 1e30
 character(4):: simlabel
+character(120) :: datatype, filename, routine, description
 ! Values are LOG Volume Fraction of Particles EP_P
 !-------- Boundaries for Gradient Calculations -----------!
 DOUBLE PRECISION:: max_dense   = 2.5
