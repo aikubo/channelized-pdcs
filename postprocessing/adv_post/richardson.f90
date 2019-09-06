@@ -6,13 +6,14 @@ module find_richardson
 
 
         contains 
-                subroutine gradrich(EP_P, T_G1, U_G, Ri, SHUY)
+                subroutine gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
                 implicit none
+                logical, intent(IN):: printstatus
                 double precision, allocatable, intent(IN):: EP_P(:,:,:)
                 double precision, allocatable, intent(INOUT)::U_G(:,:,:)
                 double precision, allocatable, intent(IN):: T_G1(:,:) 
-                double precision, allocatable, intent(INOUT):: Ri(:,:,:)
-                double precision, allocatable, intent(INOUT):: SHUY(:,:,:)
+                double precision, allocatable, intent(INOUT):: Ri(:,:)
+                double precision, allocatable, intent(INOUT):: SHUY(:,:)
                 double precision:: Ri_grad 
                 print*, "Begin richardson gradient calculation"
                 !call openascii(1500, 'Richardson_t')
@@ -70,15 +71,15 @@ module find_richardson
                               
                 !             print*, I
 
-                      IF(T_G1(I_ym1,t)>272.0 .AND. EP_P(I,1,t)<8.0 .AND. EP_P(I,1,t)>0.0) THEN
+                      IF(T_G1(I_ym1,t)>272.0 .AND. EPP(I,t)<8.0 .AND. EPP(I,t)>0.0) THEN
                                                
                                                 !------Y-Richardson-------!
                                                    ! Current density at each position
                                                 int_pos1           = I_yp1
                                                 int_min1           = I_ym1
-                                                bottom             = 2*((abs(EP_P(int_pos1,3,t)-EP_P(I,3,t))))
-                                                c_pos1             = rho_p*(10**-(EP_P(int_pos1,1,t)))+(1-(10**-(EP_P(int_pos1,1,t))))*(P_const/(R_vapor*T_G1(int_pos1,t)))
-                                                c_min1             = rho_p*(10**-(EP_P(int_min1,1,t)))+(1-(10**-(EP_P(int_min1,1,t))))*(P_const/(R_vapor*T_G1(int_min1,t)))
+                                                bottom             = 2*((abs(YYY(int_pos1,1)-YYY(I,1))))
+                                                c_pos1             = rho_p*(10**-(EPP(int_pos1,t)))+(1-(10**-(EPP(int_pos1,t))))*(P_const/(R_vapor*T_G1(int_pos1,t)))
+                                                c_min1             = rho_p*(10**-(EPP(int_min1,t)))+(1-(10**-(EPP(int_min1,t))))*(P_const/(R_vapor*T_G1(int_min1,t)))
                                                ! print*, EP_P(int_pos1,1,t),EP_P(int_pos1,3,t)
                                                ! print*, T_G1(int_pos1,t)
                                                ! print*, bottom, c_pos1, c_min1
@@ -89,7 +90,7 @@ module find_richardson
                                                 shear_v            = delta_V1
                                                 delta_rho          =(c_pos1-c_min1)/bottom
                                                 Ri_grad            =((-gravity/rho_dry)*delta_rho)/(shear_v**2)
-                                                !print*, shear_v, delta_rho, Ri_grad
+                                                print*, Ri_grad
 
                                                 ! This is done for easier colorbar in
                                                 ! Opendx,
@@ -98,28 +99,25 @@ module find_richardson
                                                 ! adjusted Ri and column 5 is the
                                                 ! original
                                                 !print*, "something off here"
-                                                if (Ri_grad>5.0) THEN
-                                                Ri(I,1,t) = 5.0
+                                                !if (Ri_grad>5.0) THEN
+                                                !Ri(I,1,t) = 5.0
                                                 !print *, "Ri", I, t, Ri
-                                                elseif (Ri_grad<-5.0) THEN
+                                                !elseif (Ri_grad<-5.0) THEN
                                                 !print*, "entered elif"
-                                                Ri(I,1,t) = -5.0
+                                                !Ri(I,1,t) = -5.0
                                                 !print*, "wrote ri"
-                                                !print *, "Ri", I, t, Ri
-                                                else
-                                                Ri(I,1,t) = Ri_grad
-                                                end if
+                                               !print *, "Ri", I, t, Ri(I,1,t)
+                                                !else
+                                                !Ri(I,1,t) = Ri_grad
+                                                !end if
 
-                                                Ri(I,2,t) = XXX(I,1)
-                                                Ri(I,3,t) = YYY(I,1)
-                                                Ri(I,4,t) = ZZZ(I,1)
-                                                Ri(I,5,t) = Ri_grad
+                                                Ri(I,t) = Ri_grad
 
                                                 !print*, "shearv", shear_v 
-                                                SHUY(I,1,t) = shear_v
-                                                SHUY(I,2,t) = XXX(I,1)
-                                                SHUY(I,3,t) = YYY(I,1)
-                                                SHUY(I,4,t) = ZZZ(I,1)
+                                                SHUY(I,t) = shear_v
+                                               
+                                              
+                                                
                                                 !------Y-Richardson-------!
                            END IF
                     END DO
@@ -136,14 +134,18 @@ module find_richardson
 
         END DO
         
-        print*, "Ri calculation done" 
+        !print*, "Ri calculation done" 
 
-        print*, "write Ri"
-        open(7777, file="Ri", form='unformatted')
+        if (printstatus) then
 
-        DO I=1,length1
-           write(7777) Ri(I,1:5,:)
-        end do 
+                print*, "write Ri"
+                open(7777, file="Ri", form='unformatted')
+
+                DO I=1,length1
+                        write(7777) Ri(I,t) 
+                end do 
+        
+        end if 
 
         print*, "finished Ri gradient subroutine"
                 

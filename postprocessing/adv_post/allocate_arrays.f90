@@ -14,7 +14,7 @@
         ALLOCATE( U_G1(length1,timesteps))
         ALLOCATE( W_G1(length1,timesteps))
         ALLOCATE( U_S1(length1, timesteps))
-
+        ALLOCATE( Ri(length1, timesteps))
         ALLOCATE( ROP_S1(length1,timesteps))
         ALLOCATE(V_S1(length1, timesteps))
 
@@ -42,8 +42,8 @@
         ALLOCATE(T_G(length1,4,timesteps))
         ALLOCATE(U_G(length1,6,timesteps))
         ALLOCATE(Richardson(length1,5,timesteps))
-        ALLOCATE(SHUY(length1,4,timesteps))
-
+        ALLOCATE(SHUY(length1,timesteps))
+        ALLOCATE(Ri_all(length1, 2, timesteps))
         ALLOCATE(Location_I(length1,timesteps))
 
         ALLOCATE(Iso_6(length1,9,timesteps))
@@ -65,7 +65,7 @@
         ALLOCATE(char_dense(timesteps))
         ALLOCATE(char_dilute(timesteps))
 
-        ALLOCATE(dpu(length1, 4, timesteps))
+        ALLOCATE(dpu(length1, timesteps))
         ALLOCATE(dpv(length1, 4, timesteps))
 !----------------------Allocate the Gradient
 !variables-------------------------!

@@ -43,3 +43,6 @@
 09/05/19 04:57 completion issue with batch job  9874544 :: RUNNING RUNNING COMPLETED
 09/05/19 05:33 completion issue with batch job  9874533 :: RUNNING RUNNING COMPLETED
 09/05/19 12:24 completion issue with batch job  9874636 :: RUNNING RUNNING COMPLETED
+09/05/19 19:19 column.f90 subroutine slice is now able to write a column of volfr, u, tg, ri
+09/05/19 19:20 slowing converting all variable to form EP_G(RMAX*YMAX*ZMAX,timesteps) eliminating the form used for open dx
+09/05/19 19:21 ABCV7 running correctly at 3.6s in 3:17

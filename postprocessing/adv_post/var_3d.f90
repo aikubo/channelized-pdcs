@@ -18,6 +18,19 @@ use constants
 
         end subroutine
 
+
+        subroutine dynamicpressure(EP_G, U_S1, DPU)
+                double precision, dimension(:,:), intent(IN):: EP_G, U_S1
+                double precision, dimension(:,:), intent(OUT):: DPU 
+
+                   do t=1,timesteps
+                        do I=1,length1
+                                DPU(I,t)=(1-EP_G1(I,t))*1950*(U_S1(I,t)*U_S1(I,t))*(0.5) 
+                        end do
+                   end do
+        
+
+        end subroutine 
 !----------------------------------------------------------------!
         subroutine makeEP(fid_EPP, VOL, ifwrite)
         use formatmod

@@ -11,46 +11,48 @@ contains
 !        subroutine setup_col()
 !        end subroutine setup_col 
 
-        subroutine slice(numunit, XLOC, ZLOC)
+        subroutine slice(width, depth, lambda, numunit, XC, ZC)
         use formatmod 
+       
         implicit none 
           !call allocate_arrays
-          DOUBLE PRECISION, INTENT(IN):: XLOC, ZLOC
+          
+          DOUBLE PRECISION, INTENT(IN):: width, lambda, depth, XC, ZC
           INTEGER, INTENT(IN):: numunit
           DOUBLE PRECISION:: VOLFR, DYNAM
           DOUBLE PRECISION:: clearance, slope, dx
-          DOUBLE PRECISION, ALLOCATABLE :: hill(:)
-          ALLOCATE(hill(length1))
+          DOUBLE PRECISION :: hill
+          double precision:: XLOC, ZLOC
+          dx=3.0 
+          XLOC=dx*XC 
+          ZLOC=dx*ZC
 
-          clearance = 50.
-          slope=0.18
-          dx=3.0
-         
+          call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
           
-          !I=1
-          !do zc=1,ZMAX
-          !do rc=1,RMAX
-          !do yc=1,YMAX
-          !      hill(I)=  slope*dx*(rc)+clearance-depth
-          !      I=I+1
-          !end do               
-          !end do 
-          !end do      
-          !print*, hill(1:RMAX)   
+          if (ZLOC .gt. edge1 .and. ZLOC .lt. edge2) then 
+                hill = bottom
+          else
+                hill = top 
+          end if 
+                print*,hill, bottom, top
 
           print*, "start checking column"
            DO t=1,timesteps
             print*,t
             DO I= 1, length1
-              DYNAM= (1-EP_G1(I,t))*1950*(U_S1(I,t)*U_S1(I,t))
-               VOLFR = -LOG10(1-EP_G1(I,t)+1e-14)
+              !DYNAM= (1-EP_G1(I,t))*1950*(U_S1(I,t)*U_S1(I,t))
+              ! VOLFR = -LOG10(1-EP_G1(I,t)+1e-14)
                 !PRINT*, VOLFR
-                ! IF ( YYY(I,1) .GT. hill(I) .AND. YYY(I,1) .LT. hill(I)+100 ) THEN
+                ! IF ( YYY(I,1) .GT. hill .AND. YYY(I,1) .LT. hill+102 ) THEN
                    IF( ZZZ(I,1) .EQ. ZLOC) THEN
+                !        print*, ZZZ(I,1) 
                     IF( XXX(I,1) .EQ. XLOC) THEN
-                      IF(VOLFR .GT. 0.00) THEN 
-                      WRITE(numunit,format6col) t, YYY(I,1), VOLFR, U_G1(I,t), DYNAM, T_G1(I,t) !, Ri
-                    END IF
+                       ! print*, XXX(I,1)
+                      IF(EPP(I,t) .GT. 0.00) THEN
+                      !print*, YYY(I,1)-hill, Ri_all(I,1,t) 
+                      WRITE(numunit,format7col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t)
+                      end if 
+                 !     END IF
                    END IF
                   END IF 
                 end do
