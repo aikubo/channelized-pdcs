@@ -37,3 +37,9 @@
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 09/04/19 04:03 massive issue with reposity and lost some scripts and post processing :C :C :C
+09/04/19 19:33 I redid all the work I had on newsim.sh and on the simulations.txt file
+09/04/19 19:42 AV7, BV7, and CV7 prepared to run
+09/04/19 19:45 CN7 prepared to run
+09/05/19 04:57 completion issue with batch job  9874544 :: RUNNING RUNNING COMPLETED
+09/05/19 05:33 completion issue with batch job  9874533 :: RUNNING RUNNING COMPLETED
+09/05/19 12:24 completion issue with batch job  9874636 :: RUNNING RUNNING COMPLETED

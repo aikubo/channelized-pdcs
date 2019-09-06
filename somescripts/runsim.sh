@@ -3,10 +3,13 @@
 rm *.LOG
 rm *.RES
 rm TOPO*
-
+label=${PWD##*/}
 subm=$(sbatch submission.sh)
 jobid=${subm:20}
-echo "$datum $subm" > status.txt
+
+echo -e "$datum $label $subm" >> status.txt
+echo -e "$datum $label $subm" >> ~/myprojects/channelized-pdcs/status_all.txt
+
 #strigger --set --jobid=$jobid --time \
 #       --program=/home/akubo/myprojects/channelized-pdcs/somescripts/trigger.sh
 
