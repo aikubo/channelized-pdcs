@@ -1,24 +1,28 @@
 module averageit
 USE parampost
 USE constants
-
-
+use formatmod
+use filehead
 contains
-SUBROUTINE AVERAGET 
+SUBROUTINE AVERAGE_ALL 
 
 
 IMPLICIT NONE 
-
+character(50) :: datatype, routine, description 
+routine="averageit.mod/average_all"
+description=" Average of all timesteps"
+datatype="t T_G U_G V_G W_G U_S1 DPU"
 
 open(888, file ='average_all.txt')
 open(887, file= 'average_medium.txt')
 open(889, file ='average_dense.txt')
+call headerf(888, simlabel, routine, DESCRIPTION, datatype)
 
-WRITE(888,405) 800.0, 10.0, 0.0, 0.0, 10.0
-WRITE(887,405) 800.0, 10.0, 0.0, 0.0, 10.0
-WRITE(889,405) 800.0, 10.0, 0.0, 0.0, 10.0
+write(888, formatavg) 1, 800, 10, 0, 0, 10, 39000
+write(887, formatavg) 1, 800, 10, 0, 0, 10, 39000
+write(889, formatavg) 1, 800, 10, 0, 0, 10, 39000
 
-do t= 2,timesteps
+do t= 1,timesteps
 sum_1 = 0
 sum_2 = 0
 sum_3 = 0
@@ -43,51 +47,48 @@ avgdpu2=0
 
 
 
-do I= 1, length1
-        IF (EP_P(I,1,t) .Gt. min_dense .and. EP_P(I,1,t) .lt. max_dilute
-) THEN
+do I= 2, length1
+        IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. max_dilute) THEN
                sum_1 = sum_1 +1
-               avgt = T_G(I,1,t) + avgt
-               avgu = U_G(I,1,t) + avgu
-               avgv = U_G(I,2,t) + avgv
-               avgw = U_G(I,3,t) + avgw
+               avgt = T_G1(I,t) + avgt
+               avgu = U_G1(I,t) + avgu
+               avgv = U_G1(I,t) + avgv
+               avgw = V_G1(I,t) + avgw
                avgus = U_S1(I,t) + avgus
-               avgdpu = dpu(I,t) + avgdpu
+               avgdpu = DPU(I,t) + avgdpu
         END IF
 
-        IF (EP_P(I,1,t) .Gt. min_dense .and. EP_P(I,1,t) .lt. max_dense
-) THEN
+        IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. max_dense) THEN
                sum_2 = sum_2 +1
-               avgt2 = T_G(I,1,t) + avgt2
-               avgu2 = U_G(I,1,t) + avgu2
-               avgv2 = U_G(I,2,t) + avgv2
-               avgw2 = U_G(I,3,t) + avgw2
+               avgt2 = T_G1(I,t) + avgt2
+               avgu2 = U_G1(I,t) + avgu2
+               avgv2 = V_G1(I,t) + avgv2
+               avgw2 = W_G1(I,t) + avgw2
                avgus2 = U_S1(I,t) + avgus2
                avgdpu2 = dpu(I,t) + avgdpu2
 
         END IF
 
-        IF (EP_P(I,1,t) .Gt. max_dense .and. EP_P(I,1,t) .lt. min_dilute
-) THEN
+        IF (EPP(I,t) .Gt. max_dense .and. EPP(I,t) .lt. min_dilute) THEN
                sum_3 = sum_3 +1
-               avgt3 = T_G(I,1,t) + avgt3
-               avgu3 = U_G(I,1,t) + avgu3
-               avgv3 = U_G(I,2,t) + avgv3
-               avgw3 = U_G(I,3,t) + avgw3
+               avgt3 = T_G1(I,t) + avgt3
+               avgu3 = U_G1(I,t) + avgu3
+               avgv3 = V_G1(I,t) + avgv3
+               avgw3 = W_G1(I,t) + avgw3
                avgus3 = U_S1(I,t) + avgus3
                avgdpu3 = dpu(I,t) + avgdpu3
         END IF
 END DO
 
 
-     WRITE( 888, 405) avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1,  avgdpu/sum_1
-     Write (887, 405) avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
-     write(889, 405) avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
+     WRITE(888, formatavg) t, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1,  avgdpu/sum_1
+     Write (887, formatavg) t, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
+     write(889, formatavg) t, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
 
 END DO
 RETURN 
 
-END SUBROUTINE AVERAGET
+END SUBROUTINE AVERAGE_ALL
 
 
 end module

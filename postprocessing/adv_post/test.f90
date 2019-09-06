@@ -11,6 +11,8 @@ use findhead
 use find_richardson 
 use entrainment 
 use massdist
+use averageit
+
 implicit none
 integer:: tfind=8
 double precision:: ZLOC=150
@@ -20,6 +22,9 @@ double precision:: width, lambda
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
+
+simlabel='SV4'
+
 allocate(isosurface(1200,4,15))
 RMAX=404
 YMAX=154
@@ -53,13 +58,15 @@ call dynamicpressure(EP_G1, U_S1, DPU)
 
 !call makeTG(1300, T_G, printstatus)
 !call isosurf(width, lambda)
-call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
+!call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 !print*, Ri_all
 !call bulkent(EP_G1) 
 
 !call massinchannel(width, depth, lambda, scaleh)
-open(1300, file='slice.txt')
-call slice(width, depth, lambda, 1300, XLOC, ZLOC)
+!open(1300, file='slice.txt')
+!call slice(width, depth, lambda, 1300, XLOC, ZLOC)
+
+call average_all
 
 print*, "end program"
 
