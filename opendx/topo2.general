@@ -1,5 +1,5 @@
 file = ./topo2
-grid = 204 x 404 x 152
+grid = 154 x 404 x 302
 series=1
 format = ascii
 interleaving = field

@@ -24,17 +24,17 @@ contains
           DOUBLE PRECISION :: hill
           double precision:: XLOC, ZLOC
           character(3)::Xstring, zstring      
-          CHARACTER(LEN=10) :: str_c
+          CHARACTER(LEN=10) :: str_b
                 
-          str_c= '(I3)'
-          write(xstring,str_c) XC
-          write(zstring,str_c) ZC
+          str_b= '(I3.1)'
+          write(xstring,str_b) InT(XC)
+          write(zstring,str_b) int(ZC)
 
           routine="column.mod/slice"
           description=" Vertical columns "
           datatype=" t  YYY  EPP   U_G   DPU   T_G   Ri"
           print*, xstring, zstring
-          filename='slice_x'//xstring//'_z'//zstring//'.txt'
+          filename='slice_x'//trim(xstring)//'_z'//trim(zstring)//'.txt'
           !open(888, file =filename)
           call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
 

@@ -8,7 +8,7 @@ module find_richardson
         contains 
                 subroutine gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
                 implicit none
-                logical, intent(IN):: printstatus
+                integer, intent(IN):: printstatus
                 double precision, allocatable, intent(IN):: EP_P(:,:,:)
                 double precision, allocatable, intent(INOUT)::U_G(:,:,:)
                 double precision, allocatable, intent(IN):: T_G1(:,:) 
@@ -90,7 +90,7 @@ module find_richardson
                                                 shear_v            = delta_V1
                                                 delta_rho          =(c_pos1-c_min1)/bottom
                                                 Ri_grad            =((-gravity/rho_dry)*delta_rho)/(shear_v**2)
-                                                print*, Ri_grad
+                                               ! print*, Ri_grad
 
                                                 ! This is done for easier colorbar in
                                                 ! Opendx,
@@ -136,7 +136,7 @@ module find_richardson
         
         !print*, "Ri calculation done" 
 
-        if (printstatus) then
+        if (printstatus .eq. 1) then
 
                 print*, "write Ri"
                 open(7777, file="Ri", form='unformatted')

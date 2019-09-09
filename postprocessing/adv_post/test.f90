@@ -1,4 +1,4 @@
-program test 
+program post 
 use formatmod
 use parampost 
 use constants
@@ -48,7 +48,8 @@ call openbin(400, 'V_G', V_G1)
 call openbin(500, 'W_G', W_G1)
 call openbin(600, 'U_S1', U_S1)
 
-call handletopo('l300_W201', XXX, YYY, ZZZ)
+call handletopo('l0_w201', XXX, YYY, ZZZ)
+call writedxtopo
 call  logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, DPU)
 !print*, ZZZ(:,1)

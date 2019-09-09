@@ -1,5 +1,5 @@
 //
-// time: Tue Apr  9 21:49:27 2019
+// time: Mon Sep  9 01:27:16 2019
 //
 // version: 3.2.0 (format), 4.4.4 (DX)
 //
@@ -42,7 +42,7 @@ main_Slab_27_out_1 =
     // node Slab[28]: x = 572, y = 249, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "y"
     // input[3]: defaulting = 0, visible = 1, type = 1, value = 0
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 400
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 150
     //
 main_Slab_28_out_1 = 
     Slab(
@@ -55,7 +55,7 @@ main_Slab_28_out_1 =
     // node Slab[29]: x = 566, y = 353, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "z"
     // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 150
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 300
     //
 main_Slab_29_out_1 = 
     Slab(
@@ -95,7 +95,7 @@ main_Import_5_out_1 =
     // node Slab[30]: x = 912, y = 259, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "x"
     // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 400
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 397
     //
 main_Slab_30_out_1 = 
     Slab(
@@ -108,7 +108,7 @@ main_Slab_30_out_1 =
     // node Slab[31]: x = 906, y = 358, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "y"
     // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 400
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 147
     //
 main_Slab_31_out_1 = 
     Slab(
@@ -121,7 +121,7 @@ main_Slab_31_out_1 =
     // node Slab[32]: x = 954, y = 428, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "z"
     // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 147
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 297
     //
 main_Slab_32_out_1 = 
     Slab(
@@ -230,8 +230,8 @@ main_Collect_1_out_1 =
     // input[5]: defaulting = 0, visible = 0, type = 8, value = [405 208 54.6083]
     // input[6]: defaulting = 0, visible = 0, type = 8, value = [1927.35 1730.35 1576.96]
     // input[7]: defaulting = 0, visible = 0, type = 5, value = 1413.07
-    // input[8]: defaulting = 0, visible = 0, type = 1, value = 1268
-    // input[9]: defaulting = 0, visible = 0, type = 5, value = 0.705
+    // input[8]: defaulting = 0, visible = 0, type = 1, value = 948
+    // input[9]: defaulting = 0, visible = 0, type = 5, value = 0.709388
     // input[10]: defaulting = 0, visible = 0, type = 8, value = [0 1 0]
     // input[11]: defaulting = 1, visible = 0, type = 5, value = 30.0004
     // input[12]: defaulting = 0, visible = 0, type = 1, value = 0
@@ -348,11 +348,11 @@ main_Slab_27_in_4 = 400;
 main_Slab_27_out_1 = NULL;
 main_Slab_28_in_2 = "y";
 main_Slab_28_in_3 = 0;
-main_Slab_28_in_4 = 400;
+main_Slab_28_in_4 = 150;
 main_Slab_28_out_1 = NULL;
 main_Slab_29_in_2 = "z";
 main_Slab_29_in_3 = 3;
-main_Slab_29_in_4 = 150;
+main_Slab_29_in_4 = 300;
 main_Slab_29_out_1 = NULL;
 main_Isosurface_3_in_2 = { 0.0 };
 main_Isosurface_3_in_3 = NULL;
@@ -369,15 +369,15 @@ main_Import_5_in_6 = NULL;
 main_Import_5_out_1 = NULL;
 main_Slab_30_in_2 = "x";
 main_Slab_30_in_3 = 3;
-main_Slab_30_in_4 = 400;
+main_Slab_30_in_4 = 397;
 main_Slab_30_out_1 = NULL;
 main_Slab_31_in_2 = "y";
 main_Slab_31_in_3 = 3;
-main_Slab_31_in_4 = 400;
+main_Slab_31_in_4 = 147;
 main_Slab_31_out_1 = NULL;
 main_Slab_32_in_2 = "z";
 main_Slab_32_in_3 = 3;
-main_Slab_32_in_4 = 147;
+main_Slab_32_in_4 = 297;
 main_Slab_32_out_1 = NULL;
 main_Map_2_in_3 = NULL;
 main_Map_2_in_4 = NULL;
@@ -743,8 +743,8 @@ main_Image_1_in_4 = 1;
 main_Image_1_in_5 = [405 208 54.6083];
 main_Image_1_in_6 = [1927.35 1730.35 1576.96];
 main_Image_1_in_7 = 1413.07;
-main_Image_1_in_8 = 1268;
-main_Image_1_in_9 = 0.705;
+main_Image_1_in_8 = 948;
+main_Image_1_in_9 = 0.709388;
 main_Image_1_in_10 = [0 1 0];
 main_Image_1_in_11 = NULL;
 main_Image_1_in_12 = 0;

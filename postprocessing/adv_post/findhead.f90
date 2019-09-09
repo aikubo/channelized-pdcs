@@ -3,6 +3,7 @@ use parampost
 use formatmod
 use constants
 use maketopo
+use filehead
         contains 
 
         subroutine isosurf(width, lambda, averagehead)

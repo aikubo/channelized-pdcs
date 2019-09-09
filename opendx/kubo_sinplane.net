@@ -1,55 +1,18 @@
 //
-// time: Sat Mar  9 19:31:32 2019
+// time: Fri Aug 23 17:12:55 2019
 //
 // version: 3.2.0 (format), 4.4.4 (DX)
 //
 //
 // MODULE main
-// workspace: width = 841, height = 979
+// workspace: width = 1050, height = 979
 // layout: snap = 0, width = 50, height = 50, align = NN
 //
 macro main(
 ) -> (
 ) {
     // 
-    // node Import[2]: x = 528, y = 35, inputs = 6, label = Import
-    // input[1]: defaulting = 0, visible = 1, type = 32, value = "sintopo.general"
-    // input[2]: defaulting = 1, visible = 1, type = 32, value = "Volume"
-    //
-main_Import_2_out_1 = 
-    Import(
-    main_Import_2_in_1,
-    main_Import_2_in_2,
-    main_Import_2_in_3,
-    main_Import_2_in_4,
-    main_Import_2_in_5,
-    main_Import_2_in_6
-    ) [instance: 2, cache: 1];
-    // 
-    // node Isosurface[2]: x = 558, y = 240, inputs = 6, label = Isosurface
-    // input[2]: defaulting = 1, visible = 1, type = 16777221, value = { 0.0 }
-    //
-main_Isosurface_2_out_1 = 
-    Isosurface(
-    main_Import_2_out_1,
-    main_Isosurface_2_in_2,
-    main_Isosurface_2_in_3,
-    main_Isosurface_2_in_4,
-    main_Isosurface_2_in_5,
-    main_Isosurface_2_in_6
-    ) [instance: 2, cache: 1];
-    // 
-    // node Collect[1]: x = 374, y = 726, inputs = 4, label = Collect
-    //
-main_Collect_1_out_1 = 
-    Collect(
-    main_Isosurface_2_out_1,
-    main_Collect_1_in_2,
-    main_Collect_1_in_3,
-    main_Collect_1_in_4
-    ) [instance: 1, cache: 1];
-    // 
-    // node Import[1]: x = 163, y = 0, inputs = 6, label = Import
+    // node Import[1]: x = 141, y = 13, inputs = 6, label = Import
     // input[1]: defaulting = 0, visible = 1, type = 32, value = "testC.general"
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "Volume"
     //
@@ -63,10 +26,10 @@ main_Import_1_out_1 =
     main_Import_1_in_6
     ) [instance: 1, cache: 1];
     // 
-    // node Slab[13]: x = 60, y = 167, inputs = 4, label = Slab
+    // node Slab[13]: x = 61, y = 167, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "x"
     // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 190
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 196
     //
 main_Slab_13_out_1 = 
     Slab(
@@ -92,7 +55,7 @@ main_Slab_26_out_1 =
     // node Slab[15]: x = 44, y = 356, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "z"
     // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 800
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 146
     //
 main_Slab_15_out_1 = 
     Slab(
@@ -102,8 +65,8 @@ main_Slab_15_out_1 =
     main_Slab_15_in_4
     ) [instance: 15, cache: 1];
     // 
-    // node Isosurface[1]: x = 49, y = 467, inputs = 6, label = Isosurface
-    // input[2]: defaulting = 0, visible = 1, type = 16777221, value = { 1.0 1.5 2.0 5.0 8.0 }
+    // node Isosurface[1]: x = 49, y = 470, inputs = 6, label = Isosurface
+    // input[2]: defaulting = 0, visible = 1, type = 16777221, value = { 8.0 }
     // input[3]: defaulting = 1, visible = 1, type = 1, value = NULL
     //
 main_Isosurface_1_out_1 = 
@@ -116,7 +79,7 @@ main_Isosurface_1_out_1 =
     main_Isosurface_1_in_6
     ) [instance: 1, cache: 1];
     // 
-    // node Color[1]: x = 168, y = 630, inputs = 5, label = Color
+    // node Color[1]: x = 184, y = 613, inputs = 5, label = Color
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "gray"
     // input[3]: defaulting = 0, visible = 1, type = 5, value = .4
     //
@@ -129,112 +92,230 @@ main_Color_1_out_1 =
     main_Color_1_in_5
     ) [instance: 1, cache: 1];
     // 
-    // node Map[1]: x = 639, y = 364, inputs = 4, label = Map
-    //
-main_Map_1_out_1 = 
-    Map(
-    main_Map_1_in_1,
-    main_Map_1_in_2,
-    main_Map_1_in_3,
-    main_Map_1_in_4
-    ) [instance: 1, cache: 1];
-    // 
-    // node Import[3]: x = 704, y = 36, inputs = 6, label = Import
-    // input[1]: defaulting = 0, visible = 1, type = 32, value = "topo2.general"
+    // node Import[4]: x = 589, y = 71, inputs = 6, label = Import
+    // input[1]: defaulting = 0, visible = 1, type = 32, value = "topo.general"
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "Volume"
     //
-main_Import_3_out_1 = 
+main_Import_4_out_1 = 
     Import(
-    main_Import_3_in_1,
-    main_Import_3_in_2,
-    main_Import_3_in_3,
-    main_Import_3_in_4,
-    main_Import_3_in_5,
-    main_Import_3_in_6
-    ) [instance: 3, cache: 1];
+    main_Import_4_in_1,
+    main_Import_4_in_2,
+    main_Import_4_in_3,
+    main_Import_4_in_4,
+    main_Import_4_in_5,
+    main_Import_4_in_6
+    ) [instance: 4, cache: 1];
     // 
-    // node Colormap[3]: x = 534, y = 441, inputs = 19, label = Colormap
-    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.10431655 0.6875] [0.10791367 0.0] [0.85251799 0.71875] [1.0 0.75] }
-    // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.021818182 1.0] [0.99272727 1.0] }
-    // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [1.0 1.0] }
-    // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.010791367 0.48888889] [0.071942446 0.97777778] [0.76618705 1.0] [0.99272727 0.0] }
-    // input[5]: defaulting = 0, visible = 0, type = 32, value = "Colormap_3"
-    // input[7]: defaulting = 1, visible = 0, type = 5, value = -0.0
-    // input[8]: defaulting = 1, visible = 0, type = 5, value = 14.000347
-    // input[9]: defaulting = 1, visible = 0, type = 1, value = 20
-    // input[12]: defaulting = 0, visible = 0, type = 16777221, value = { -0.0 14.000347 }
-    // input[17]: defaulting = 0, visible = 0, type = 5, value = -0.0
-    // input[18]: defaulting = 0, visible = 0, type = 5, value = 14.000347
-    // window: position = (0.0371,0.0712), size = 0.3930x0.3822, screen = 0
-    //
-main_Colormap_3_out_1[cache: 2],
-main_Colormap_3_out_2[cache: 2] = 
-    Colormap(
-    main_Colormap_3_in_1,
-    main_Colormap_3_in_2,
-    main_Colormap_3_in_3,
-    main_Colormap_3_in_4,
-    main_Colormap_3_in_5,
-    main_Import_3_out_1,
-    main_Colormap_3_in_7,
-    main_Colormap_3_in_8,
-    main_Colormap_3_in_9,
-    main_Colormap_3_in_10,
-    main_Colormap_3_in_11,
-    main_Colormap_3_in_12,
-    main_Colormap_3_in_13,
-    main_Colormap_3_in_14,
-    main_Colormap_3_in_15,
-    main_Colormap_3_in_16,
-    main_Colormap_3_in_17,
-    main_Colormap_3_in_18,
-    main_Colormap_3_in_19
-    ) [instance: 3, cache: 1];
-    // 
-    // node Color[2]: x = 491, y = 544, inputs = 5, label = Color
-    // input[2]: defaulting = 1, visible = 1, type = 32, value = "blue"
-    // input[3]: defaulting = 1, visible = 1, type = 5, value = .5
-    //
-main_Color_2_out_1 = 
-    Color(
-    main_Map_1_out_1,
-    main_Colormap_3_out_1,
-    main_Colormap_3_out_2,
-    main_Color_2_in_4,
-    main_Color_2_in_5
-    ) [instance: 2, cache: 1];
-    // 
-    // node Slab[22]: x = 228, y = 196, inputs = 4, label = Slab
+    // node Slab[27]: x = 601, y = 177, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "x"
     // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
     // input[4]: defaulting = 0, visible = 1, type = 1, value = 400
     //
-main_Slab_22_out_1 = 
+main_Slab_27_out_1 = 
+    Slab(
+    main_Import_4_out_1,
+    main_Slab_27_in_2,
+    main_Slab_27_in_3,
+    main_Slab_27_in_4
+    ) [instance: 27, cache: 1];
+    // 
+    // node Slab[28]: x = 572, y = 249, inputs = 4, label = Slab
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "y"
+    // input[3]: defaulting = 0, visible = 1, type = 1, value = 0
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 400
+    //
+main_Slab_28_out_1 = 
+    Slab(
+    main_Slab_27_out_1,
+    main_Slab_28_in_2,
+    main_Slab_28_in_3,
+    main_Slab_28_in_4
+    ) [instance: 28, cache: 1];
+    // 
+    // node Slab[29]: x = 566, y = 353, inputs = 4, label = Slab
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "z"
+    // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 150
+    //
+main_Slab_29_out_1 = 
+    Slab(
+    main_Slab_28_out_1,
+    main_Slab_29_in_2,
+    main_Slab_29_in_3,
+    main_Slab_29_in_4
+    ) [instance: 29, cache: 1];
+    // 
+    // node Isosurface[3]: x = 728, y = 173, inputs = 6, label = Isosurface
+    // input[2]: defaulting = 0, visible = 1, type = 16777221, value = { 0.0 }
+    //
+main_Isosurface_3_out_1 = 
+    Isosurface(
+    main_Slab_29_out_1,
+    main_Isosurface_3_in_2,
+    main_Isosurface_3_in_3,
+    main_Isosurface_3_in_4,
+    main_Isosurface_3_in_5,
+    main_Isosurface_3_in_6
+    ) [instance: 3, cache: 1];
+    // 
+    // node Import[5]: x = 906, y = 58, inputs = 6, label = Import
+    // input[1]: defaulting = 0, visible = 1, type = 32, value = "topo2.general"
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "Volume"
+    //
+main_Import_5_out_1 = 
+    Import(
+    main_Import_5_in_1,
+    main_Import_5_in_2,
+    main_Import_5_in_3,
+    main_Import_5_in_4,
+    main_Import_5_in_5,
+    main_Import_5_in_6
+    ) [instance: 5, cache: 1];
+    // 
+    // node Slab[30]: x = 912, y = 259, inputs = 4, label = Slab
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "x"
+    // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 400
+    //
+main_Slab_30_out_1 = 
+    Slab(
+    main_Import_5_out_1,
+    main_Slab_30_in_2,
+    main_Slab_30_in_3,
+    main_Slab_30_in_4
+    ) [instance: 30, cache: 1];
+    // 
+    // node Slab[31]: x = 906, y = 358, inputs = 4, label = Slab
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "y"
+    // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 400
+    //
+main_Slab_31_out_1 = 
+    Slab(
+    main_Slab_30_out_1,
+    main_Slab_31_in_2,
+    main_Slab_31_in_3,
+    main_Slab_31_in_4
+    ) [instance: 31, cache: 1];
+    // 
+    // node Slab[32]: x = 954, y = 428, inputs = 4, label = Slab
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "z"
+    // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 147
+    //
+main_Slab_32_out_1 = 
+    Slab(
+    main_Slab_31_out_1,
+    main_Slab_32_in_2,
+    main_Slab_32_in_3,
+    main_Slab_32_in_4
+    ) [instance: 32, cache: 1];
+    // 
+    // node Map[2]: x = 741, y = 309, inputs = 4, label = Map
+    //
+main_Map_2_out_1 = 
+    Map(
+    main_Isosurface_3_out_1,
+    main_Slab_32_out_1,
+    main_Map_2_in_3,
+    main_Map_2_in_4
+    ) [instance: 2, cache: 1];
+    // 
+    // node Colormap[1]: x = 806, y = 350, inputs = 19, label = Colormap
+    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 0.39864865] [0.80653266 0.087837838] }
+    // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [0.99082569 0.63291139] }
+    // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [0.08490566 1.0] [0.3427673 1.0] [1.0 0.46835443] }
+    // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 0.99270073] [1.0 1.0] }
+    // input[5]: defaulting = 0, visible = 0, type = 32, value = "Colormap_1"
+    // input[7]: defaulting = 1, visible = 0, type = 5, value = 8.0
+    // input[8]: defaulting = 1, visible = 0, type = 5, value = 408.0
+    // input[9]: defaulting = 1, visible = 0, type = 1, value = 20
+    // input[12]: defaulting = 0, visible = 0, type = 16777221, value = { 8.0 408.0 }
+    // input[17]: defaulting = 0, visible = 0, type = 5, value = 8.0
+    // input[18]: defaulting = 0, visible = 0, type = 5, value = 408.0
+    // window: position = (0.3465,0.1784), size = 0.3816x0.3822, screen = 0
+    //
+main_Colormap_1_out_1[cache: 2],
+main_Colormap_1_out_2[cache: 2] = 
+    Colormap(
+    main_Colormap_1_in_1,
+    main_Colormap_1_in_2,
+    main_Colormap_1_in_3,
+    main_Colormap_1_in_4,
+    main_Colormap_1_in_5,
+    main_Slab_32_out_1,
+    main_Colormap_1_in_7,
+    main_Colormap_1_in_8,
+    main_Colormap_1_in_9,
+    main_Colormap_1_in_10,
+    main_Colormap_1_in_11,
+    main_Colormap_1_in_12,
+    main_Colormap_1_in_13,
+    main_Colormap_1_in_14,
+    main_Colormap_1_in_15,
+    main_Colormap_1_in_16,
+    main_Colormap_1_in_17,
+    main_Colormap_1_in_18,
+    main_Colormap_1_in_19
+    ) [instance: 1, cache: 1];
+    // 
+    // node Color[4]: x = 713, y = 513, inputs = 5, label = Color
+    // input[2]: defaulting = 1, visible = 1, type = 32, value = "blue"
+    // input[3]: defaulting = 1, visible = 1, type = 5, value = .5
+    //
+main_Color_4_out_1 = 
+    Color(
+    main_Map_2_out_1,
+    main_Colormap_1_out_1,
+    main_Colormap_1_out_2,
+    main_Color_4_in_4,
+    main_Color_4_in_5
+    ) [instance: 4, cache: 1];
+    // 
+    // node Slab[34]: x = 224, y = 147, inputs = 4, label = Slab
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "x"
+    // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 196
+    //
+main_Slab_34_out_1 = 
     Slab(
     main_Import_1_out_1,
-    main_Slab_22_in_2,
-    main_Slab_22_in_3,
-    main_Slab_22_in_4
-    ) [instance: 22, cache: 1];
+    main_Slab_34_in_2,
+    main_Slab_34_in_3,
+    main_Slab_34_in_4
+    ) [instance: 34, cache: 1];
     // 
-    // node Slab[24]: x = 212, y = 312, inputs = 4, label = Slab
+    // node Slab[33]: x = 239, y = 229, inputs = 4, label = Slab
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "z"
-    // input[3]: defaulting = 0, visible = 1, type = 1, value = 75
-    // input[4]: defaulting = 1, visible = 1, type = 1, value = 20
+    // input[3]: defaulting = 0, visible = 1, type = 1, value = 80
+    // input[4]: defaulting = 1, visible = 1, type = 1, value = 75
+    //
+main_Slab_33_out_1 = 
+    Slab(
+    main_Slab_34_out_1,
+    main_Slab_33_in_2,
+    main_Slab_33_in_3,
+    main_Slab_33_in_4
+    ) [instance: 33, cache: 1];
+    // 
+    // node Slab[24]: x = 251, y = 307, inputs = 4, label = Slab
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "y"
+    // input[3]: defaulting = 0, visible = 1, type = 1, value = 2
+    // input[4]: defaulting = 0, visible = 1, type = 1, value = 396
     //
 main_Slab_24_out_1 = 
     Slab(
-    main_Slab_22_out_1,
+    main_Slab_33_out_1,
     main_Slab_24_in_2,
     main_Slab_24_in_3,
     main_Slab_24_in_4
     ) [instance: 24, cache: 1];
     // 
-    // node Colormap[2]: x = 330, y = 473, inputs = 19, label = Colormap
-    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.10431655 0.6875] [0.10791367 0.0] [0.85251799 0.71875] [1.0 0.75] }
+    // node Colormap[2]: x = 331, y = 443, inputs = 19, label = Colormap
+    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.09798995 0.97368421] [0.16834171 0.76315789] [0.25879397 0.67763158] [0.40452261 0.34210526] [0.95979899 0.15789474] }
     // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.021818182 1.0] [0.99272727 1.0] }
     // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [1.0 1.0] }
-    // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.010791367 0.48888889] [0.071942446 0.97777778] [0.76618705 1.0] [0.99272727 0.0] }
+    // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 0.035211268] [0.012562814 0.97183099] [0.77135678 1.0] [0.99272727 0.0] }
     // input[5]: defaulting = 0, visible = 0, type = 32, value = "Colormap_2"
     // input[7]: defaulting = 1, visible = 0, type = 5, value = -0.0
     // input[8]: defaulting = 1, visible = 0, type = 5, value = 14.000347
@@ -242,7 +323,7 @@ main_Slab_24_out_1 =
     // input[12]: defaulting = 0, visible = 0, type = 16777221, value = { -0.0 14.000347 }
     // input[17]: defaulting = 0, visible = 0, type = 5, value = -0.0
     // input[18]: defaulting = 0, visible = 0, type = 5, value = 14.000347
-    // window: position = (0.0398,0.0331), size = 0.3930x0.3822, screen = 0
+    // window: position = (0.3637,0.2179), size = 0.3934x0.3822, screen = 0
     //
 main_Colormap_2_out_1[cache: 2],
 main_Colormap_2_out_2[cache: 2] = 
@@ -268,7 +349,7 @@ main_Colormap_2_out_2[cache: 2] =
     main_Colormap_2_in_19
     ) [instance: 2, cache: 1];
     // 
-    // node Color[3]: x = 301, y = 624, inputs = 5, label = Color
+    // node Color[3]: x = 299, y = 603, inputs = 5, label = Color
     //
 main_Color_3_out_1 = 
     Color(
@@ -280,6 +361,11 @@ main_Color_3_out_1 =
     ) [instance: 3, cache: 1];
     // 
     // node ColorBar[1]: x = 591, y = 690, inputs = 16, label = ColorBar
+    // input[2]: defaulting = 0, visible = 1, type = 8, value = [.85, 0.75]
+    // input[4]: defaulting = 1, visible = 1, type = 3, value = 1
+    // input[8]: defaulting = 0, visible = 1, type = 32, value = "Log Volume Fraction"
+    // input[9]: defaulting = 0, visible = 0, type = 16777248, value = {"black"}
+    // input[10]: defaulting = 1, visible = 0, type = 16777248, value = NULL
     //
 main_ColorBar_1_out_1 = 
     ColorBar(
@@ -301,14 +387,37 @@ main_ColorBar_1_out_1 =
     main_ColorBar_1_in_16
     ) [instance: 1, cache: 1];
     // 
-    // node Image[1]: x = 461, y = 796, inputs = 49, label = Image
+    // node Collect[1]: x = 374, y = 726, inputs = 4, label = Collect
+    //
+main_Collect_1_out_1 = 
+    Collect(
+    main_Color_1_out_1,
+    main_Color_4_out_1,
+    main_Color_3_out_1,
+    main_ColorBar_1_out_1
+    ) [instance: 1, cache: 1];
+    // 
+    // node Compute[1]: x = 468, y = 103, inputs = 3, label = Compute
+    // input[1]: defaulting = 0, visible = 0, type = 32, value = "$0-100000"
+    // expression: value = a-100000
+    // name[2]: value = a
+    // name[3]: value = b
+    //
+main_Compute_1_out_1 = 
+    Compute(
+    main_Compute_1_in_1,
+    main_Compute_1_in_2,
+    main_Compute_1_in_3
+    ) [instance: 1, cache: 1];
+    // 
+    // node Image[1]: x = 502, y = 763, inputs = 49, label = Image
     // input[1]: defaulting = 0, visible = 0, type = 67108863, value = "Image_1"
     // input[4]: defaulting = 0, visible = 0, type = 1, value = 1
     // input[5]: defaulting = 0, visible = 0, type = 8, value = [405 208 54.6083]
-    // input[6]: defaulting = 0, visible = 0, type = 8, value = [1066.04 869.04 2520.11]
+    // input[6]: defaulting = 0, visible = 0, type = 8, value = [1810.99 1613.99 1786.38]
     // input[7]: defaulting = 0, visible = 0, type = 5, value = 1413.07
-    // input[8]: defaulting = 0, visible = 0, type = 1, value = 1251
-    // input[9]: defaulting = 0, visible = 0, type = 5, value = 0.677
+    // input[8]: defaulting = 0, visible = 0, type = 1, value = 1269
+    // input[9]: defaulting = 0, visible = 0, type = 5, value = 0.704
     // input[10]: defaulting = 0, visible = 0, type = 8, value = [0 1 0]
     // input[11]: defaulting = 1, visible = 0, type = 5, value = 30.0004
     // input[12]: defaulting = 0, visible = 0, type = 1, value = 0
@@ -317,8 +426,8 @@ main_ColorBar_1_out_1 =
     // input[16]: defaulting = 1, visible = 0, type = 32, value = "none"
     // input[17]: defaulting = 1, visible = 0, type = 1, value = 1
     // input[18]: defaulting = 1, visible = 0, type = 1, value = 1
-    // input[19]: defaulting = 0, visible = 0, type = 1, value = 0
-    // input[22]: defaulting = 0, visible = 0, type = 32, value = "light blue"
+    // input[19]: defaulting = 0, visible = 0, type = 3, value = 0
+    // input[22]: defaulting = 0, visible = 0, type = 32, value = "white"
     // input[25]: defaulting = 0, visible = 0, type = 32, value = "single_drip1.tif"
     // input[26]: defaulting = 0, visible = 0, type = 32, value = "tiff"
     // input[29]: defaulting = 0, visible = 0, type = 3, value = 1
@@ -332,7 +441,7 @@ main_ColorBar_1_out_1 =
     // input[38]: defaulting = 0, visible = 0, type = 16777248, value = {"background", "grid", "ticks", "labels"}
     // input[41]: defaulting = 0, visible = 0, type = 32, value = "none"
     // depth: value = 24
-    // window: position = (0.4426,0.0839), size = 0.4941x0.6262, screen = 0
+    // window: position = (0.3852,0.1622), size = 0.5012x0.6594, screen = 0
     // internal caching: 1
     //
 main_Image_1_out_1,
@@ -390,28 +499,7 @@ main_Image_1_out_3 =
     main_Image_1_in_49
     ) [instance: 1, cache: 1];
     // 
-    // node MapToPlane[1]: x = 657, y = 484, inputs = 3, label = MapToPlane
-    // input[1]: defaulting = 1, visible = 1, type = 67584, value = NULL
-    // input[2]: defaulting = 1, visible = 1, type = 8, value = [400 179 150]
-    // input[3]: defaulting = 0, visible = 0, type = 8, value = [.33 .94 0]
-    //
-main_MapToPlane_1_out_1 = 
-    MapToPlane(
-    main_MapToPlane_1_in_1,
-    main_MapToPlane_1_in_2,
-    main_MapToPlane_1_in_3
-    ) [instance: 1, cache: 1];
-    // 
-    // node Normals[2]: x = 761, y = 365, inputs = 2, label = Normals
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = NULL
-    //
-main_Normals_2_out_1 = 
-    Normals(
-    main_Normals_2_in_1,
-    main_Normals_2_in_2
-    ) [instance: 2, cache: 1];
-    // 
-    // node Render[1]: x = 360, y = 829, inputs = 3, label = Render
+    // node Render[1]: x = 360, y = 848, inputs = 3, label = Render
     //
 main_Render_1_out_1 = 
     Render(
@@ -420,86 +508,8 @@ main_Render_1_out_1 =
     main_Render_1_in_3
     ) [instance: 1, cache: 1];
     // 
-    // node Slab[16]: x = 741, y = 153, inputs = 4, label = Slab
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "x"
-    // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 390
-    //
-main_Slab_16_out_1 = 
-    Slab(
-    main_Slab_16_in_1,
-    main_Slab_16_in_2,
-    main_Slab_16_in_3,
-    main_Slab_16_in_4
-    ) [instance: 16, cache: 1];
-    // 
-    // node Slab[17]: x = 741, y = 226, inputs = 4, label = Slab
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "y"
-    // input[3]: defaulting = 0, visible = 1, type = 1, value = 4
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 380
-    //
-main_Slab_17_out_1 = 
-    Slab(
-    main_Slab_16_out_1,
-    main_Slab_17_in_2,
-    main_Slab_17_in_3,
-    main_Slab_17_in_4
-    ) [instance: 17, cache: 1];
-    // 
-    // node Slab[19]: x = 421, y = 134, inputs = 4, label = Slab
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "x"
-    // input[3]: defaulting = 0, visible = 1, type = 1, value = 5
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 390
-    //
-main_Slab_19_out_1 = 
-    Slab(
-    main_Slab_19_in_1,
-    main_Slab_19_in_2,
-    main_Slab_19_in_3,
-    main_Slab_19_in_4
-    ) [instance: 19, cache: 1];
-    // 
-    // node Slab[20]: x = 361, y = 218, inputs = 4, label = Slab
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "y"
-    // input[3]: defaulting = 0, visible = 1, type = 1, value = 4
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 390
-    //
-main_Slab_20_out_1 = 
-    Slab(
-    main_Slab_19_out_1,
-    main_Slab_20_in_2,
-    main_Slab_20_in_3,
-    main_Slab_20_in_4
-    ) [instance: 20, cache: 1];
-    // 
-    // node Slab[18]: x = 363, y = 325, inputs = 4, label = Slab
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "z"
-    // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 175
-    //
-main_Slab_18_out_1 = 
-    Slab(
-    main_Slab_20_out_1,
-    main_Slab_18_in_2,
-    main_Slab_18_in_3,
-    main_Slab_18_in_4
-    ) [instance: 18, cache: 1];
-    // 
-    // node Slab[21]: x = 745, y = 298, inputs = 4, label = Slab
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "z"
-    // input[3]: defaulting = 0, visible = 1, type = 1, value = 3
-    // input[4]: defaulting = 0, visible = 1, type = 1, value = 170
-    //
-main_Slab_21_out_1 = 
-    Slab(
-    main_Slab_17_out_1,
-    main_Slab_21_in_2,
-    main_Slab_21_in_3,
-    main_Slab_21_in_4
-    ) [instance: 21, cache: 1];
-    // 
     // node WriteImage[1]: x = 382, y = 917, inputs = 4, label = WriteImage
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "test"
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "iso_9"
     // input[3]: defaulting = 0, visible = 1, type = 32, value = "tiff"
     //
     WriteImage(
@@ -511,23 +521,6 @@ main_Slab_21_out_1 =
 // network: end of macro body
 CacheScene(main_Image_1_in_1, main_Image_1_out_1, main_Image_1_out_2);
 }
-main_Import_2_in_1 = "sintopo.general";
-main_Import_2_in_2 = NULL;
-main_Import_2_in_3 = NULL;
-main_Import_2_in_4 = NULL;
-main_Import_2_in_5 = NULL;
-main_Import_2_in_6 = NULL;
-main_Import_2_out_1 = NULL;
-main_Isosurface_2_in_2 = NULL;
-main_Isosurface_2_in_3 = NULL;
-main_Isosurface_2_in_4 = NULL;
-main_Isosurface_2_in_5 = NULL;
-main_Isosurface_2_in_6 = NULL;
-main_Isosurface_2_out_1 = NULL;
-main_Collect_1_in_2 = NULL;
-main_Collect_1_in_3 = NULL;
-main_Collect_1_in_4 = NULL;
-main_Collect_1_out_1 = NULL;
 main_Import_1_in_1 = "testC.general";
 main_Import_1_in_2 = "Volume";
 main_Import_1_in_3 = NULL;
@@ -537,7 +530,7 @@ main_Import_1_in_6 = NULL;
 main_Import_1_out_1 = NULL;
 main_Slab_13_in_2 = "x";
 main_Slab_13_in_3 = 3;
-main_Slab_13_in_4 = 190;
+main_Slab_13_in_4 = 196;
 main_Slab_13_out_1 = NULL;
 main_Slab_26_in_2 = "y";
 main_Slab_26_in_3 = 4;
@@ -545,9 +538,9 @@ main_Slab_26_in_4 = 396;
 main_Slab_26_out_1 = NULL;
 main_Slab_15_in_2 = "z";
 main_Slab_15_in_3 = 3;
-main_Slab_15_in_4 = 800;
+main_Slab_15_in_4 = 146;
 main_Slab_15_out_1 = NULL;
-main_Isosurface_1_in_2 = { 1.0 1.5 2.0 5.0 8.0 };
+main_Isosurface_1_in_2 = { 8.0 };
 main_Isosurface_1_in_3 = NULL;
 main_Isosurface_1_in_4 = NULL;
 main_Isosurface_1_in_5 = NULL;
@@ -557,52 +550,93 @@ main_Color_1_in_2 = "gray";
 main_Color_1_in_3 = .4;
 main_Color_1_in_4 = NULL;
 main_Color_1_in_5 = NULL;
-main_Map_1_in_1 = NULL;
-main_Map_1_in_2 = NULL;
-main_Map_1_in_3 = NULL;
-main_Map_1_in_4 = NULL;
-main_Map_1_out_1 = NULL;
-main_Import_3_in_1 = "topo2.general";
-main_Import_3_in_2 = "Volume";
-main_Import_3_in_3 = NULL;
-main_Import_3_in_4 = NULL;
-main_Import_3_in_5 = NULL;
-main_Import_3_in_6 = NULL;
-main_Import_3_out_1 = NULL;
-main_Colormap_3_in_1 = { [0.10431655 0.6875] [0.10791367 0.0] [0.85251799 0.71875] [1.0 0.75] };
-main_Colormap_3_in_2 = { [0.021818182 1.0] [0.99272727 1.0] };
-main_Colormap_3_in_3 = { [0.0 1.0] [1.0 1.0] };
-main_Colormap_3_in_4 = { [0.010791367 0.48888889] [0.071942446 0.97777778] [0.76618705 1.0] [0.99272727 0.0] };
-main_Colormap_3_in_5 = "Colormap_3";
-main_Colormap_3_in_7 = NULL;
-main_Colormap_3_in_8 = NULL;
-main_Colormap_3_in_9 = NULL;
-main_Colormap_3_in_10 = NULL;
-main_Colormap_3_in_11 = NULL;
-main_Colormap_3_in_12 = { -0.0 14.000347 };
-main_Colormap_3_in_13 = NULL;
-main_Colormap_3_in_14 = NULL;
-main_Colormap_3_in_15 = NULL;
-main_Colormap_3_in_16 = NULL;
-main_Colormap_3_in_17 = -0.0;
-main_Colormap_3_in_18 = 14.000347;
-main_Colormap_3_in_19 = NULL;
-main_Colormap_3_out_1 = NULL;
-main_Colormap_3_out_2 = NULL;
-main_Color_2_in_4 = NULL;
-main_Color_2_in_5 = NULL;
-main_Slab_22_in_2 = "x";
-main_Slab_22_in_3 = 3;
-main_Slab_22_in_4 = 400;
-main_Slab_22_out_1 = NULL;
-main_Slab_24_in_2 = "z";
-main_Slab_24_in_3 = 75;
-main_Slab_24_in_4 = NULL;
+main_Color_1_out_1 = NULL;
+main_Import_4_in_1 = "topo.general";
+main_Import_4_in_2 = "Volume";
+main_Import_4_in_3 = NULL;
+main_Import_4_in_4 = NULL;
+main_Import_4_in_5 = NULL;
+main_Import_4_in_6 = NULL;
+main_Import_4_out_1 = NULL;
+main_Slab_27_in_2 = "x";
+main_Slab_27_in_3 = 3;
+main_Slab_27_in_4 = 400;
+main_Slab_27_out_1 = NULL;
+main_Slab_28_in_2 = "y";
+main_Slab_28_in_3 = 0;
+main_Slab_28_in_4 = 400;
+main_Slab_28_out_1 = NULL;
+main_Slab_29_in_2 = "z";
+main_Slab_29_in_3 = 3;
+main_Slab_29_in_4 = 150;
+main_Slab_29_out_1 = NULL;
+main_Isosurface_3_in_2 = { 0.0 };
+main_Isosurface_3_in_3 = NULL;
+main_Isosurface_3_in_4 = NULL;
+main_Isosurface_3_in_5 = NULL;
+main_Isosurface_3_in_6 = NULL;
+main_Isosurface_3_out_1 = NULL;
+main_Import_5_in_1 = "topo2.general";
+main_Import_5_in_2 = "Volume";
+main_Import_5_in_3 = NULL;
+main_Import_5_in_4 = NULL;
+main_Import_5_in_5 = NULL;
+main_Import_5_in_6 = NULL;
+main_Import_5_out_1 = NULL;
+main_Slab_30_in_2 = "x";
+main_Slab_30_in_3 = 3;
+main_Slab_30_in_4 = 400;
+main_Slab_30_out_1 = NULL;
+main_Slab_31_in_2 = "y";
+main_Slab_31_in_3 = 3;
+main_Slab_31_in_4 = 400;
+main_Slab_31_out_1 = NULL;
+main_Slab_32_in_2 = "z";
+main_Slab_32_in_3 = 3;
+main_Slab_32_in_4 = 147;
+main_Slab_32_out_1 = NULL;
+main_Map_2_in_3 = NULL;
+main_Map_2_in_4 = NULL;
+main_Map_2_out_1 = NULL;
+main_Colormap_1_in_1 = { [0.0 0.39864865] [0.80653266 0.087837838] };
+main_Colormap_1_in_2 = { [0.0 1.0] [0.99082569 0.63291139] };
+main_Colormap_1_in_3 = { [0.0 1.0] [0.08490566 1.0] [0.3427673 1.0] [1.0 0.46835443] };
+main_Colormap_1_in_4 = { [0.0 0.99270073] [1.0 1.0] };
+main_Colormap_1_in_5 = "Colormap_1";
+main_Colormap_1_in_7 = NULL;
+main_Colormap_1_in_8 = NULL;
+main_Colormap_1_in_9 = NULL;
+main_Colormap_1_in_10 = NULL;
+main_Colormap_1_in_11 = NULL;
+main_Colormap_1_in_12 = { 8.0 408.0 };
+main_Colormap_1_in_13 = NULL;
+main_Colormap_1_in_14 = NULL;
+main_Colormap_1_in_15 = NULL;
+main_Colormap_1_in_16 = NULL;
+main_Colormap_1_in_17 = 8.0;
+main_Colormap_1_in_18 = 408.0;
+main_Colormap_1_in_19 = NULL;
+main_Colormap_1_out_1 = NULL;
+main_Colormap_1_out_2 = NULL;
+main_Color_4_in_4 = NULL;
+main_Color_4_in_5 = NULL;
+main_Color_4_out_1 = NULL;
+main_Slab_34_in_2 = "x";
+main_Slab_34_in_3 = 3;
+main_Slab_34_in_4 = 196;
+main_Slab_34_out_1 = NULL;
+main_Slab_33_in_2 = "z";
+main_Slab_33_in_3 = 80;
+main_Slab_33_in_4 = NULL;
+main_Slab_33_out_1 = NULL;
+main_Slab_24_in_2 = "y";
+main_Slab_24_in_3 = 2;
+main_Slab_24_in_4 = 396;
 main_Slab_24_out_1 = NULL;
-main_Colormap_2_in_1 = { [0.10431655 0.6875] [0.10791367 0.0] [0.85251799 0.71875] [1.0 0.75] };
+main_Colormap_2_in_1 = { [0.09798995 0.97368421] [0.16834171 0.76315789] [0.25879397 0.67763158] [0.40452261 0.34210526] [0.95979899 0.15789474] };
 main_Colormap_2_in_2 = { [0.021818182 1.0] [0.99272727 1.0] };
 main_Colormap_2_in_3 = { [0.0 1.0] [1.0 1.0] };
-main_Colormap_2_in_4 = { [0.010791367 0.48888889] [0.071942446 0.97777778] [0.76618705 1.0] [0.99272727 0.0] };
+main_Colormap_2_in_4 = { [0.0 0.035211268] [0.012562814 0.97183099] [0.77135678 1.0] [0.99272727 0.0] };
 main_Colormap_2_in_5 = "Colormap_2";
 main_Colormap_2_in_7 = NULL;
 main_Colormap_2_in_8 = NULL;
@@ -621,14 +655,15 @@ main_Colormap_2_out_1 = NULL;
 main_Colormap_2_out_2 = NULL;
 main_Color_3_in_4 = NULL;
 main_Color_3_in_5 = NULL;
-main_ColorBar_1_in_2 = NULL;
+main_Color_3_out_1 = NULL;
+main_ColorBar_1_in_2 = [.85, 0.75];
 main_ColorBar_1_in_3 = NULL;
 main_ColorBar_1_in_4 = NULL;
 main_ColorBar_1_in_5 = NULL;
 main_ColorBar_1_in_6 = NULL;
 main_ColorBar_1_in_7 = NULL;
-main_ColorBar_1_in_8 = NULL;
-main_ColorBar_1_in_9 = NULL;
+main_ColorBar_1_in_8 = "Log Volume Fraction";
+main_ColorBar_1_in_9 = {"black"};
 main_ColorBar_1_in_10 = NULL;
 main_ColorBar_1_in_11 = NULL;
 main_ColorBar_1_in_12 = NULL;
@@ -636,6 +671,11 @@ main_ColorBar_1_in_13 = NULL;
 main_ColorBar_1_in_14 = NULL;
 main_ColorBar_1_in_15 = NULL;
 main_ColorBar_1_in_16 = NULL;
+main_ColorBar_1_out_1 = NULL;
+main_Collect_1_out_1 = NULL;
+main_Compute_1_in_1 = "$0-100000";
+main_Compute_1_in_2 = NULL;
+main_Compute_1_in_3 = NULL;
 macro Image(
         id,
         object,
@@ -952,10 +992,10 @@ main_Image_1_in_1 = "Image_1";
 main_Image_1_in_3 = "X24,,";
 main_Image_1_in_4 = 1;
 main_Image_1_in_5 = [405 208 54.6083];
-main_Image_1_in_6 = [1066.04 869.04 2520.11];
+main_Image_1_in_6 = [1810.99 1613.99 1786.38];
 main_Image_1_in_7 = 1413.07;
-main_Image_1_in_8 = 1251;
-main_Image_1_in_9 = 0.677;
+main_Image_1_in_8 = 1269;
+main_Image_1_in_9 = 0.704;
 main_Image_1_in_10 = [0 1 0];
 main_Image_1_in_11 = NULL;
 main_Image_1_in_12 = 0;
@@ -968,7 +1008,7 @@ main_Image_1_in_18 = NULL;
 main_Image_1_in_19 = 0;
 main_Image_1_in_20 = NULL;
 main_Image_1_in_21 = NULL;
-main_Image_1_in_22 = "light blue";
+main_Image_1_in_22 = "white";
 main_Image_1_in_23 = NULL;
 main_Image_1_in_25 = "single_drip1.tif";
 main_Image_1_in_26 = "tiff";
@@ -997,38 +1037,9 @@ main_Image_1_in_48 = NULL;
 main_Image_1_in_49 = NULL;
 main_Image_1_out_1 = NULL;
 main_Image_1_out_2 = NULL;
-main_MapToPlane_1_in_1 = NULL;
-main_MapToPlane_1_in_2 = NULL;
-main_MapToPlane_1_in_3 = [.33 .94 0];
-main_Normals_2_in_1 = NULL;
-main_Normals_2_in_2 = NULL;
 main_Render_1_in_3 = NULL;
 main_Render_1_out_1 = NULL;
-main_Slab_16_in_1 = NULL;
-main_Slab_16_in_2 = "x";
-main_Slab_16_in_3 = 3;
-main_Slab_16_in_4 = 390;
-main_Slab_16_out_1 = NULL;
-main_Slab_17_in_2 = "y";
-main_Slab_17_in_3 = 4;
-main_Slab_17_in_4 = 380;
-main_Slab_17_out_1 = NULL;
-main_Slab_19_in_1 = NULL;
-main_Slab_19_in_2 = "x";
-main_Slab_19_in_3 = 5;
-main_Slab_19_in_4 = 390;
-main_Slab_19_out_1 = NULL;
-main_Slab_20_in_2 = "y";
-main_Slab_20_in_3 = 4;
-main_Slab_20_in_4 = 390;
-main_Slab_20_out_1 = NULL;
-main_Slab_18_in_2 = "z";
-main_Slab_18_in_3 = 3;
-main_Slab_18_in_4 = 175;
-main_Slab_21_in_2 = "z";
-main_Slab_21_in_3 = 3;
-main_Slab_21_in_4 = 170;
-main_WriteImage_1_in_2 = "test";
+main_WriteImage_1_in_2 = "iso_9";
 main_WriteImage_1_in_3 = "tiff";
 main_WriteImage_1_in_4 = NULL;
 Executive("product version 4 4 4");

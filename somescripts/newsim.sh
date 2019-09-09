@@ -31,7 +31,8 @@ declare param=($(sh simparam.sh $new))
 
 wave=${param[0]}
 width=${param[1]}
-height=${param[2]}
+depth=${param[2]}
+height=${param[3]}
 
 topo="l$wave"
 topo+="_w"

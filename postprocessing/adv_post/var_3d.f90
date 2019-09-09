@@ -46,7 +46,7 @@ use makeascii
 
         print*, 'writing ep-p' 
 
-        if (ifwrite .eq. 1)
+        if (ifwrite .eq. 1) then
         call openascii(6200, 'EP_P_t')
         DO t=tstart,tstop
                 fid_EP_P  = fid_EPP+t
@@ -64,19 +64,16 @@ use makeascii
                           VOL(I,3,t) = YYY(I,1)
                           VOL(I,4,t) = ZZZ(I,1)
                         
-                          if (ifwrite .EQ. .TRUE.) THEN
                           WRITE(fid_EP_P, format4var) VOL(I,1:4,t)
-                          end if                           
 
                         end do 
         end do 
-elseif ( prinstatus .eq. 2 ) then 
+        else !if ( ifwrite .eq. 2 ) then 
         t= tfind
         write(x2,str_d) t 
-        open(6100, file='EP_P'//trim(x1)//'.txt')
+        open(6100, file='EP_P_t'//trim(x2)//'.txt')
 
 
-        fid_EP_P  = fid_EPP
         DO I=1,RMAX*ZMAX*YMAX
            !------------------ Volume Fraction of Gas or
            !Particles
@@ -91,9 +88,7 @@ elseif ( prinstatus .eq. 2 ) then
            VOL(I,3,t) = YYY(I,1)
            VOL(I,4,t) = ZZZ(I,1)
          
-           if (ifwrite .EQ. .TRUE.) THEN
            WRITE(6100, format4var) VOL(I,1:4,t)
-           end if                           
 
          end do 
 

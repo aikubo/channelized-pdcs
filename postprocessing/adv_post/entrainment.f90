@@ -1,6 +1,9 @@
 module entrainment 
         use parampost 
         use constants
+        use formatmod
+        use filehead
+
         contains 
                 subroutine bulkent(EP_G1)
 

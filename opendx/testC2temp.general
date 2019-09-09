@@ -1,5 +1,5 @@
-file = ./EP_P_t08.txt
-grid =204 x 404 x 152
+file = ./EP_P_t13.txt
+grid =154 x 404 x 302
 series=1
 format = ascii
 interleaving = field

@@ -82,12 +82,12 @@ end subroutine handletopo
 
 subroutine writedxtopo
        implicit none 
-       open(6000, file='topography')
-       open(6001, file='topo2')
+       open(6010, file='topography')
+       open(6011, file='topo2')
                 print *, "writing topo for dx visuals"
                 DO I = 1,RMAX*ZMAX*YMAX
-                        WRITE(6000,format4var) topography(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
-                        WRITE(6001,format4var) topo2(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
+                        WRITE(6010,format4var) topography(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
+                        WRITE(6011,format4var) topo2(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
                END DO
 end subroutine
 

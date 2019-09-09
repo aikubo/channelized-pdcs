@@ -73,7 +73,7 @@ module massdist
 
                 ! MASS IN THE CHANNEL
                 IF (YYY(I,1)<top) THEN
-                        print*, top
+                        !print*, top
                         inchannel = inchannel + (1-EP_G1(I,t))*Volume_Unit*rho_p
                 end if 
 
