@@ -5,7 +5,7 @@ use constants
 use maketopo
         contains 
 
-        subroutine isosurf(width, lambda)
+        subroutine isosurf(width, lambda, averagehead)
 !-----------------------------------------------------------------------!
 ! Written by AKubo September 2019 
 ! 
