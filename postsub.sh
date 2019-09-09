@@ -14,3 +14,4 @@
 
 checkcomplete.sh
 
+./onevis.sh
