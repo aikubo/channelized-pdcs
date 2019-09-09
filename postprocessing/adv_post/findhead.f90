@@ -84,7 +84,7 @@ use maketopo
 
 
 
--               averagehead=0
+                averagehead = 0.0
                 !write(900, *) "volfr    ", "xxx ", "yyy ", "hill        ", "yyy-hill    "
                 !t=timefind
                 !print*, 'entering first do'
