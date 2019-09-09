@@ -1,6 +1,7 @@
 module var_3d
 use parampost 
 use constants 
+use makeascii
 !use formatmod
 
         contains 
@@ -9,6 +10,7 @@ use constants
         subroutine  logvolfrc(EP_G, EPP)
         double precision, dimension(:,:), intent(IN):: EP_G
         double precision, dimension(:,:), intent(INOUT):: EPP
+ 
 
         do t=1,timesteps 
            do I=1,length1
@@ -32,15 +34,20 @@ use constants
 
         end subroutine 
 !----------------------------------------------------------------!
-        subroutine makeEP(fid_EPP, VOL, ifwrite)
+        subroutine makeEP(fid_EPP, VOL, ifwrite, tfind)
         use formatmod
         use parampost
         implicit none
-        logical, intent(IN):: ifwrite
-        INTEGER, INTENT(IN):: fid_EPP
+        INTEGER, INTENT(IN):: fid_EPP, tfind, ifwrite
         DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::VOL
- 
+        CHARACTER(LEN=10) :: str_d
+        character(LEN=10) :: x2
+        str_d = '(I2.2)' 
+
         print*, 'writing ep-p' 
+
+        if (ifwrite .eq. 1)
+        call openascii(6200, 'EP_P_t')
         DO t=tstart,tstop
                 fid_EP_P  = fid_EPP+t
                        DO I=1,RMAX*ZMAX*YMAX
@@ -63,6 +70,34 @@ use constants
 
                         end do 
         end do 
+elseif ( prinstatus .eq. 2 ) then 
+        t= tfind
+        write(x2,str_d) t 
+        open(6100, file='EP_P'//trim(x1)//'.txt')
+
+
+        fid_EP_P  = fid_EPP
+        DO I=1,RMAX*ZMAX*YMAX
+           !------------------ Volume Fraction of Gas or
+           !Particles
+           !------------------!
+           if (EP_G1(I,t)<0.01) THEN ! Try to make sure not to calculate infinity densities
+            EP_G1(I,t)=0.0
+                                                
+           end if
+
+           VOL(I,1,t) = -LOG10(1-EP_G1(I,t)+1e-14)
+           VOL(I,2,t) = XXX(I,1)
+           VOL(I,3,t) = YYY(I,1)
+           VOL(I,4,t) = ZZZ(I,1)
+         
+           if (ifwrite .EQ. .TRUE.) THEN
+           WRITE(6100, format4var) VOL(I,1:4,t)
+           end if                           
+
+         end do 
+
+end if 
         print*, "done writing ep-p"
         end subroutine
 

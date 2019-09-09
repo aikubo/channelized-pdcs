@@ -17,7 +17,7 @@ implicit none
 integer:: tfind=8
 double precision:: ZLOC=150
 double precision:: XLOC=200
-logical::printstatus 
+integer::printstatus=2
 double precision:: width, lambda
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
@@ -53,7 +53,7 @@ call  logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, DPU)
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
-!call makeEP(1100, EP_P, printstatus)
+call makeEP(1100, EP_P, printstatus, tfind)
 !call makeUG(1200, U_G, printstatus) 
 
 !call makeTG(1300, T_G, printstatus)
