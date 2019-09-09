@@ -18,7 +18,7 @@ logical::printstatus
 double precision:: width, lambda
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
-double precision:: scaleh=50.0
+double precision:: scaleh
 allocate(isosurface(1200,4,15))
 RMAX=404
 YMAX=154
@@ -46,11 +46,11 @@ call  logvolfrc(EP_G1, EPP)
 
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
-!call makeEP(1100, EP_P, printstatus)
+!call makeEP(1100, EP_P, tfind)
 !call makeUG(1200, U_G, printstatus) 
 
 !call makeTG(1300, T_G, printstatus)
-!call isosurf(width, lambda)
+call isosurf(width, lambda, scaleh)
 !call gradrich(EP_P, T_G1, U_G, Richardson, SHUY)
 
 !call bulkent(EP_G1) 

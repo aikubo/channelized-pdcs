@@ -19,15 +19,17 @@ use constants
         end subroutine
 
 !----------------------------------------------------------------!
-        subroutine makeEP(fid_EPP, VOL, ifwrite)
+        subroutine makeEP(fid_EPP, VOL, ifwrite, tfind)
         use formatmod
         use parampost
         implicit none
-        logical, intent(IN):: ifwrite
+        integer, intent(IN):: ifwrite
         INTEGER, INTENT(IN):: fid_EPP
         DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::VOL
  
         print*, 'writing ep-p' 
+
+        if (ifwrite .eq. 1) then 
         DO t=tstart,tstop
                 fid_EP_P  = fid_EPP+t
                        DO I=1,RMAX*ZMAX*YMAX
@@ -50,6 +52,39 @@ use constants
 
                         end do 
         end do 
+
+
+
+        elseif (ifwrite .eq. 2)
+                t= tfind
+                write(x1,'(I2.2)' ) t
+                open(9999, file=EP_P//trim(x1)//'.txt')
+        
+                               DO I=1,RMAX*ZMAX*YMAX
+                                  !------------------ Volume Fraction of Gas or
+                                  !Particles
+                                  !------------------!
+                                  if (EP_G1(I,t)<0.01) THEN ! Try to make sure not to calculate infinity densities
+                                   EP_G1(I,t)=0.0
+                                                                       
+                                  end if
+        
+                                  VOL(I,1,t) = -LOG10(1-EP_G1(I,t)+1e-14)
+                                  VOL(I,2,t) = XXX(I,1)
+                                  VOL(I,3,t) = YYY(I,1)
+                                  VOL(I,4,t) = ZZZ(I,1)
+                                
+                                  if (ifwrite .EQ. .TRUE.) THEN
+                                  WRITE(9999, format4var) VOL(I,1:4,t)
+                                  end if                           
+        
+                                end do 
+               
+        end if 
+
+
+
+
         print*, "done writing ep-p"
         end subroutine
 

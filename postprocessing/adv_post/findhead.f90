@@ -5,7 +5,7 @@ use constants
 use maketopo
         contains 
 
-        subroutine isosurf(width, lambda)
+        subroutine isosurf(width, lambda, avghead)
 !-----------------------------------------------------------------------!
 ! Written by AKubo September 2019 
 ! 
@@ -34,7 +34,7 @@ use maketopo
 !-----------------------------------------------------------------------!
                 implicit none 
                 double precision, intent(IN):: width, lambda 
-
+                double precision, intent(OUT):: avghead
                ! local variables ! 
                 integer:: countslope
                 double precision:: whatsign, currentsign
@@ -48,14 +48,15 @@ use maketopo
                 integer, allocatable:: noseloc(:)
                 integer::traces
                 integer:: X
-                double precision:: ztrace, dh, widthofhead 
+                double precision::  ztrace, dh, widthofhead 
                 double precision:: Usum, tsum, avgt, EPsum, sum1, avgEP, avgU
 
+                
                 traces= int(width/3)+1
 
                 allocate(isosurface(1200, 4, traces))
                 allocate(noseloc(traces))
-                
+                averagehead=0
                 !width=201
                 slope=0.18
                 dx=3.0
@@ -236,7 +237,11 @@ use maketopo
                 
                 write(9001,format8col) t, avgU, avgEP, avgT, froude, endofhead, widthofhead, head(2)
                 K=1
+
+                avghead = avghead+head(2)
                 end do 
+
+                avghead=avghead/2
                
         end subroutine
 
