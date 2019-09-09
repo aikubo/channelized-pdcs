@@ -4,7 +4,7 @@ module massmod
 
         contains 
                 subroutine massin
-                        
+                
                 OPEN(666, file='massinchannel.txt')
                 print *, "Done writing 3D variables"
                 DO t= 1,timesteps

@@ -13,6 +13,7 @@ module filehead
         character(5)  :: zone
         integer,dimension(8) :: values
 
+        open(numunit, file=filename)
         call date_and_time(date, time, zone, values)
 
     write(numunit, '(A)') "!------------------------------------------------------------!"

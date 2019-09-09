@@ -34,7 +34,7 @@ use maketopo
 !-----------------------------------------------------------------------!
                 implicit none 
                 double precision, intent(IN):: width, lambda 
-
+                double precision, intent(Out):: averagehead
                ! local variables ! 
                 integer:: countslope
                 double precision:: whatsign, currentsign
@@ -71,10 +71,20 @@ use maketopo
                 iso3=3.0
                 iso7=7.0
                 !open(900, file='head.txt')
-                open(unit=9000, file='currenthead.txt')
-                open(unit=9002, file='nose.txt')
-                OPEN(UNIT=9001, FILE='froude.txt')
-      write(9001,*) "Time - AvgU - AvgEP - AvgT - Froude - Nose X - Width - Height"
+                routine="=findhead/isosurf"
+                description="Calculate head height, width, and average U_G, T_G, EP_G"
+                datatype=" t   AvgU - AvgEP - AvgT - Froude - Nose X - Width - Height"
+                filename='froude.txt'
+                call headerf(9001, filename, simlabel, routine, DESCRIPTION, datatype)
+
+                description="Calculate head height, width, and average U_G, T_G, EP_G"
+                datatype=" t  Q  Nose of Current X Loc"
+                filename='nose.txt'
+                call headerf(9002, filename, simlabel, routine, DESCRIPTION, datatype)
+
+
+
+-               averagehead=0
                 !write(900, *) "volfr    ", "xxx ", "yyy ", "hill        ", "yyy-hill    "
                 !t=timefind
                 !print*, 'entering first do'
@@ -188,10 +198,10 @@ use maketopo
                        !nose=nose/traces
                        
                        widthofhead= (endofhead-head(1))*(2.0) 
-                       write(9000,*) t, endofhead, head(1), head(2)                         
+                      ! write(9000,*) t, endofhead, head(1), head(2)                         
                        print*, "End//Width /height of head"
                        print*, endofhead, widthofhead, head(2)
-
+                        averagehead=averagehead+head(2)
 
                 ! find average density and velocity in the head! 
                 sum1=0
@@ -237,6 +247,8 @@ use maketopo
                 write(9001,format8col) t, avgU, avgEP, avgT, froude, endofhead, widthofhead, head(2)
                 K=1
                 end do 
+
+                averagehead= averagehead/(timesteps-1)
                
         end subroutine
 
