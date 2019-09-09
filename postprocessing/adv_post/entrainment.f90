@@ -33,7 +33,7 @@ module entrainment
                      END IF
                   END DO
 
-                  WRITE(701,formatent) t, sum_p1, sum_p2, sum_p3
+                  WRITE(701, formatent) t, sum_p1, sum_p2, sum_p3
                 END DO
                 !-CALCULATE NUMBER OF GRIDS WITH SPECIFIC VOLUME
                 !FRACTION OF GAS -------------!
