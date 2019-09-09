@@ -23,7 +23,7 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='SV4'
+simlabel='AV4'
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -31,8 +31,7 @@ YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
 width=201
-lambda=0
-printstatus=.false.
+lambda=300
 timesteps=8
 tstart=3
 tstop=timesteps
@@ -48,7 +47,7 @@ call openbin(400, 'V_G', V_G1)
 call openbin(500, 'W_G', W_G1)
 call openbin(600, 'U_S1', U_S1)
 
-call handletopo('l0_w201', XXX, YYY, ZZZ)
+call handletopo('l300_w201', XXX, YYY, ZZZ)
 call writedxtopo
 call  logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, DPU)
@@ -58,13 +57,15 @@ call makeEP(1100, EP_P, printstatus, tfind)
 !call makeUG(1200, U_G, printstatus) 
 
 !call makeTG(1300, T_G, printstatus)
+print*, "finding froude"
 call isosurf(width, lambda, scaleh)
+print*, "finding richardson gradient"
 call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
-!print*, Ri_all
+print*, "calculating entrainment"
 call bulkent(EP_G1) 
-
+print*, "calculating mass in channel"
 call massinchannel(width, depth, lambda, scaleh)
-!open(1300, file='slice.txt')
+print*, "finding veritical column"
 call slice(width, depth, lambda, XLOC, ZLOC)
 
 !call average_all

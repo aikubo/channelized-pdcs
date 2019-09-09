@@ -10,6 +10,7 @@ name=${PWD##*/}
 echo $name
 
 cp /home/akubo/myprojects/channelized-pdcs/opendx/SEPT* ./
+cp /home/akubo/myprojects/channelized-pdcs/opendx/testC.general ./
 cp /home/akubo/myprojects/channelized-pdcs/opendx/topo* ./
 
 

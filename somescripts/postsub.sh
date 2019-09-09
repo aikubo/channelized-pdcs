@@ -7,11 +7,11 @@
 #SBATCH --time=03:00:00      ### WallTime (maximum running time)
 #SBATCH --nodes=1           ### Number of Nodes
 #SBATCH --ntasks-per-node=1 ### Number of tasks -- this is set for a single core executable
-#SBATCH --mem-per-cpu=20G
+#SBATCH --mem-per-cpu=12G
 #SBATCH -A dufeklab
 
 ./post.exe   ### Put your executable name here
 
-onevis.sh
-
 checkcomplete.sh
+
+onevis.sh

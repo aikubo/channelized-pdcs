@@ -54,7 +54,7 @@ use filehead
 
                 traces= int(width/3)+1
 
-                allocate(isosurface(1200, 4, traces))
+                allocate(isosurface(1200, 4, 101))
                 allocate(noseloc(traces))
                 
                 !width=201
@@ -64,7 +64,7 @@ use filehead
 
                
                
-                !print*, ztrace
+                print*, traces
 
                 iso1=1.0
                 iso6=6.0
@@ -88,7 +88,7 @@ use filehead
                 averagehead = 0.0
                 !write(900, *) "volfr    ", "xxx ", "yyy ", "hill        ", "yyy-hill    "
                 !t=timefind
-                !print*, 'entering first do'
+                print*, 'entering first do'
                 do t=2,timesteps
                 !do Q=1,traces
                 pastXXX=0.0
@@ -110,7 +110,7 @@ use filehead
                     Q= int(ZZZ(I,1)/3.)-115
                    
                     IF( VOLFR .lT. iso7 .and. VOLFR .gt. iso6) THEN
-                        !print*, 'writing'
+                        print*, 'writing'
                         hill=slope*dx*(RMAX-(XXX(I,1)/dx)) +clearance -depth
                         height=YYY(I,1)-hill
                         dh=(pastYYY-height)/(pastXXX-XXX(I,1))

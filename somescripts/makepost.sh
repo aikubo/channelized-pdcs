@@ -7,7 +7,7 @@ label=${PWD##*/}
 cp /home/akubo/myprojects/channelized-pdcs/postsub.sh $here
 sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
 
-cd  /home/akubo/myprojects/channelized-pdcs/postsub.sh
+cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 declare param=($(sh simparam.sh $label))
 
 wave=${param[0]}
@@ -18,16 +18,17 @@ depth=${param[3]}
 topo="l$wave"
 topo+="_w"
 topo+="$width"
+echo $topo
+#echo how many timesteps 
+#timestep=$(checktime2.sh)
+#echo $timesteps
 
-echo how many timesteps 
-timestep=$(checktime2.sh)
-echo $timesteps
-
+echo editing post.f90
 sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post.f90
-sed -i.bak "s|.*width=.*|width='$width'|" post.f90
-sed -i.bak "s|.*lambda=.*|lambda='$wave'|" post.f90
-sed -i.bak "s|.*depth=.*|depth='$depth'|" post.f90
-sed -i.bak "s|.*call handle.*|call handletopo('$topo2', XXX, YYY, ZZZ)|" post.f90
+sed -i.bak "s|.*width=.*|width=$width|" post.f90
+sed -i.bak "s|.*lambda=.*|lambda=$wave|" post.f90
+sed -i.bak "s|.*depth=.*|depth=$depth|" post.f90
+sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" post.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
 echo start compliling 
@@ -50,7 +51,7 @@ ifort -c -convert big_endian column.f90
 ifort -c -convert big_endian average.f90
 
 
-ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.f90 richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o test.f90  -convert big_endian -o test.exe
+ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.f90 richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post.f90  -convert big_endian -o post.exe
 
 
 cp post.exe $here 
