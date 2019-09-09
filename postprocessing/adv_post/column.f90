@@ -34,8 +34,8 @@ contains
           description=" Vertical columns "
           datatype=" t  YYY  EPP   U_G   DPU   T_G   Ri"
           print*, xstring, zstring
-          filename='slice_x'//xstring//'_z'//zstring
-          open(888, file =filename)
+          filename='slice_x'//xstring//'_z'//zstring//'.txt'
+          !open(888, file =filename)
           call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
 
      
