@@ -3,7 +3,8 @@ module massdist
         USE CONSTANTS 
         USE PARAMPOST 
         USE FORMATMOD
-        
+        USE filehead
+         
         contains
 
         subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT)
@@ -14,12 +15,15 @@ module massdist
         double precision::edge1, edge2, bottom, top
 
         print*, 'mass in channel'
-        OPEN(666, file='massinchannel.txt')
-        write(666,formatchar) "Time -Total Mass - Elutriated - Medium - Dense - Inchannel- Within Width - scaleheight - scaleheight1 - scaleheight2"
+        filename='massinchannel.txt'
+
+        routine="massdist/massinchannel"
+        description="Calculate mass distribution in different parts of the channel"
+        datatype=" t Total Mass (m^3) Elutriated % Med Dense InChannel WidthChannel 0ScaleH ScaleH 2ScaleH "
+        filename='massinchannel.txt'
+        call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
+
         print *, "Done writing 3D variables"
-        !write(666,*) "Total Mass - Elutriated - Medium - Dense - Inchannel- Within Width - scaleheight-scaleheight1 - scaleheight2"
-        print *, "Done writing 3D variables"
-        
 
       DO t= 2,timesteps
         chmass = 0
@@ -90,8 +94,8 @@ module massdist
           END IF
          END DO
         
-         WRITE(666, formatmass) t, tmass, elumass/tmass, medmass/tmass, densemass/tmass, inchannel/tmass, chmass/tmass, scalemass/tmass, scalemass1/tmass, scalemass2/tmass
-         WRITE(666, formatmass) t, tmass, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, scalemass2
+         WRITE(4500, formatmass) t, tmass, elumass/tmass, medmass/tmass, densemass/tmass, inchannel/tmass, chmass/tmass, scalemass/tmass, scalemass1/tmass, scalemass2/tmass
+         WRITE(4500, formatmass) t, tmass, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, scalemass2
         END DO
         !! done !!
         print*, 'mass in channel done'

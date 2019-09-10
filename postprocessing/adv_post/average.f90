@@ -90,7 +90,7 @@ do I= 2, length1
         END IF
 END DO
 
-
+     print*, "writing average"
      WRITE(888, formatavg) t, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1,  avgdpu/sum_1
      Write (887, formatavg) t, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
      write(889, formatavg) t, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3

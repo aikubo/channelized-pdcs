@@ -1,32 +1,51 @@
-clear alvl
-close all
-
-% graphign script 3/8/2019
-timesteps = 8;
-
-delimiterIn=' ';
-path= '/home/akubo/myprojects/straightchannels/20_18_50/';
-path2file=strcat(path,fid);
-M20D18=importdata(path2file);
-
-path= '/home/akubo/myprojects/straightchannels/20_0D_proc/';
-path2file=strcat(path,fid);
-M20D0=importdata(path2file);
-
-path= '/home/akubo/myprojects/sinchannels/sin_20_l400_w50/';
-path2file=strcat(path,fid);
-l400=importdata(path2file);
-
-path= '/home/akubo/myprojects/sinchannels/sin_20_18_l800_w50/';
-path2file=strcat(path,fid);
-l800=importdata(path2file);
+%% open file with directories 
+labels=[ "AV4", "CV4", "BW4", "CW4", "SW4", "bw7", "AV7", "CV7", "SV4" ];
+                                                                                                                                      
+%%
+[av4nose, av4ent, av4fr, av4mass] = openfiles(labels(1));
 
 
-% this function creates vertical profiles of volume fraction
-% velocity & Richardson number
+function [nose, ent, froude, massin] = openfiles(label)
+path2file = '/gpfs/projects/dufeklab/akubo/channelized-pdcs/graphs/processed/';
+nosefid='_nose.txt';
+froudefid='_froude.txt';
+slicefid='_slice_x200_z150.txt';
+entrainmentfid='_entrainment.txt';
+massfid='_massinchannel.txt';
 
-makegrl(M20D0, M20D18, l400, l800);
 
+%%
+fid=strcat(path2file, label);
+
+%% nose
+locnose=strcat(fid, nosefid);
+nose=importdata(locnose);
+
+%% entrainment
+locent=strcat(fid,entrainmentfid);
+ent=importdata(locent);
+
+%% slice
+locslic=strcat(fid,slicefid);
+slice=importdata(locslic);
+
+%% froude
+locfr=strcat(fid,froudefid);
+froude=importdata(locfr);
+
+%% mass in channel
+locmass=strcat(fid, massfid);
+massin=importdata(locmass);
+
+%% mass in%% mass in channel
+locmass=strcat(fid, massfid);
+massin=importdata(locmass);
+
+locavg=strcat(fid, avgfid);
+avg=importdata(locavg);
+
+
+end 
 
 function makegrl(M20D0, M20D18, l400, l800)
     grlfigure()

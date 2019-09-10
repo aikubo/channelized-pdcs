@@ -15,6 +15,9 @@ if (( $txtfiles > 6 )); then
 		echo "completed!"
 		echo ":-D"
 
+		cp *.txt /home/akubo/myprojects/channelized-pdcs/graphs/processed/
+		cp *.tiff /home/akubo/myprojects/channelized-pdcs/graphs/processed/
+
 
 else 
        echo -e "$datum $label error post process created $txtfiles txt files, $tifffiles tiff" >> status.txt

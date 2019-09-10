@@ -2,17 +2,27 @@ module avg
 
 use parampost
 use constants 
+use formatmod
 
 contains 
         subroutine averageall
         implicit none 
-        open(888, file ='average_all.txt')
-        open(887, file= 'average_medium.txt')
-        open(889, file ='average_dense.txt')
 
-        WRITE(888,405) 800.0, 10.0, 0.0, 0.0, 10.0
-        WRITE(887,405) 800.0, 10.0, 0.0, 0.0, 10.0
-        WRITE(889,405) 800.0, 10.0, 0.0, 0.0, 10.0
+        routine="avg/averageall"
+        description="Calculate average U_G, T_G, U_S1, DPU"
+        datatype=" t AvgT AvgU AvgW AvgV AvgU_S1 DPU"
+        filename='average_all.txt'
+     call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
+
+        filename='average_med.txt'
+     call headerf(887, filename, simlabel, routine, DESCRIPTION, datatype)
+
+        filename='average_dense.txt'
+     call headerf(889, filename, simlabel, routine, DESCRIPTION, datatype)
+
+        WRITE(888,formatavg) 1, 800.0, 10.0, 0.0, 0.0, 10.0
+        WRITE(887,formatavg) 1, 800.0, 10.0, 0.0, 0.0, 10.0
+        WRITE(889,formatavg) 1, 800.0, 10.0, 0.0, 0.0, 10.0
 
 
         do t= 2,timesteps
@@ -74,12 +84,9 @@ contains
                         END IF
                 END DO
 
-                     WRITE( 888, 405) avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1,
-                avgus/sum_1,  avgdpu/sum_1
-                     Write (887, 405) avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,
-                avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
-                     write(889, 405) avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2,
-                avgus2/sum_2, avgdpu3/sum_3
+                     WRITE( 888, formatavg) t, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1, avgdpu/sum_1
+                     Write (887, formatavg) t, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
+                     write(889, formatavg) t, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
 
                 END DO
         end subroutine averageall 

@@ -64,7 +64,7 @@ use filehead
 
                
                
-                print*, traces
+                !print*, traces
 
                 iso1=1.0
                 iso6=6.0
@@ -110,7 +110,7 @@ use filehead
                     Q= int(ZZZ(I,1)/3.)-115
                    
                     IF( VOLFR .lT. iso7 .and. VOLFR .gt. iso6) THEN
-                        print*, 'writing'
+                 !       print*, 'writing'
                         hill=slope*dx*(RMAX-(XXX(I,1)/dx)) +clearance -depth
                         height=YYY(I,1)-hill
                         dh=(pastYYY-height)/(pastXXX-XXX(I,1))

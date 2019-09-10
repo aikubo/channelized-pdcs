@@ -36,7 +36,7 @@ contains
           print*, xstring, zstring
           filename='slice_x'//trim(xstring)//'_z'//trim(zstring)//'.txt'
           !open(888, file =filename)
-          call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
+          call headerf(10001, filename, simlabel, routine, DESCRIPTION, datatype)
 
      
 

@@ -68,7 +68,7 @@ call massinchannel(width, depth, lambda, scaleh)
 print*, "finding veritical column"
 call slice(width, depth, lambda, XLOC, ZLOC)
 
-!call average_all
+call average_all
 
 print*, "end program"
 
