@@ -11,8 +11,11 @@ echo $name
 
 cp /home/akubo/myprojects/channelized-pdcs/opendx/SEPT* ./
 cp /home/akubo/myprojects/channelized-pdcs/opendx/testC.general ./
-cp /home/akubo/myprojects/channelized-pdcs/opendx/topo* ./
+cp /home/akubo/myprojects/channelized-pdcs/opendx/topo.general ./
+cp /home/akubo/myprojects/channelized-pdcs/opendx/topo2.general ./
 
+
+sed -i "s/iso_9/$name/" SEPTkubo_maptoplane.net 
 
 dx -nodisplay -execonly -script SEPTkubo_maptoplane.net
 

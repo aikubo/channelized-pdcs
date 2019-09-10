@@ -113,7 +113,7 @@ read response
 if [ "$response" == 'Y' ];then
         echo compiling mfix
 #	sed -i '$ a $new' ~/projects/simslist
-        sh ~/myprojects/mfix_model/model/make_mfix
+        sh ~/myprojects/mfix_model/model/make_kubomfix
 	
 	echo would you like to submit now? Y or N
 	read answer 

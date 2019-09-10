@@ -49,3 +49,89 @@
 09/07/19 23:19 completion issue with batch job  9909046 :: RUNNING RUNNING COMPLETED
 09/08/19 02:27 completion issue with batch job  9909054 :: RUNNING RUNNING COMPLETED
 09/08/19 10:29 completion issue with batch job  9909048 :: RUNNING RUNNING COMPLETED
+09/09/19 03:39 completion issue with batch job  9854513 :: CANCELLED+ CANCELLED COMPLETED FAILED
+09/09/19 03:40 completion issue with batch job   9854513 :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED
+09/09/19 03:44 completion issue with batch job    9854513 :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED
+09/09/19 03:47 completion issue with batch job     9854513 :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED
+09/09/19 03:53 completion issue with batch job      9854513 :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED
+09/09/19 03:57 completion issue with batch job  :: 
+09/09/19 03:57 ran SEPTkubo_mapptoplane.net
+09/09/19 04:02 completion issue with batch job       9854513 :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED
+09/09/19 04:03 ran SEPTkubo_mapptoplane.net
+09/09/19 04:13 ran SEPTkubo_mapptoplane.net
+09/09/19 04:13 completion issue with batch job        9854513 :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED :: CANCELLED+ CANCELLED COMPLETED FAILED
+09/09/19 04:25 ran SEPTkubo_mapptoplane.net
+09/09/19 04:25 completion issue with batch job  :: 
+09/09/19 04:32 ran SEPTkubo_mapptoplane.net
+09/09/19 04:32 completion issue with batch job   ::  :: 
+09/09/19 04:47 ran SEPTkubo_mapptoplane.net
+09/09/19 04:47 completion issue with batch job    ::  ::  :: 
+09/09/19 04:50 ran SEPTkubo_mapptoplane.net
+09/09/19 16:02 ran SEPTkubo_mapptoplane.net
+09/09/19 16:02 completion issue with batch job   9854520 :: RUNNING RUNNING COMPLETED :: COMPLETED COMPLETED COMPLETED COMPLETED
+09/09/19 16:05 completion issue with batch job   9844928 :: RUNNING RUNNING RUNNING :: CANCELLED+ CANCELLED COMPLETED FAILED
+09/09/19 16:05 Batch job   9874533 :: RUNNING RUNNING COMPLETED COMPLETED COMPLETED COMPLETED COMPLETED
+09/09/19 16:20 Batch job    9854520 :: RUNNING RUNNING COMPLETED :: COMPLETED COMPLETED COMPLETED COMPLETED COMPLETED COMPLETED COMPLETED COMPLETED
+09/09/19 16:23 BV4 Submitted batch job 9948606
+09/09/19 16:35 AW4 Submitted batch job 9948608
+09/09/19 16:42 BV7 prepared to run
+ BV7 Submitted batch job 9948610
+09/09/19 16:59 SV7 Submitted batch job 9948613
+09/09/19 17:16 SW4 completed 9 timesteps
+09/09/19 17:40 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:44 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:44 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:47 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:52 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:55 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:56 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:57 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:58 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:58 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:59 AV4 post process created 7 txt files, 1 tiff
+09/09/19 17:59 AV4 post process created 7 txt files, 1 tiff
+09/09/19 18:43 ran SEPTkubo_mapptoplane.net
+09/09/19 18:45 ran SEPTkubo_mapptoplane.net
+09/09/19 18:53 ran SEPTkubo_mapptoplane.net
+09/09/19 18:53 AV4 completed 15 timesteps
+09/09/19 18:50 SV7 prepared to run
+09/09/19 19:04 ran SEPTkubo_mapptoplane.net
+09/09/19 19:04 AV4 completed 15 timesteps
+09/09/19 19:13 ran SEPTkubo_mapptoplane.net
+09/09/19 19:13 AV4 completed 15 timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:36 ran SEPTkubo_mapptoplane.net
+09/09/19 19:36 channelized-pdcs ISSUE only   timesteps
+09/09/19 19:43 ran SEPTkubo_mapptoplane.net
+09/09/19 19:43 CV4 completed 13 timesteps
+09/09/19 19:43 ran SEPTkubo_mapptoplane.net
+09/09/19 19:43 BW4 completed 9 timesteps
+09/09/19 19:43 ran SEPTkubo_mapptoplane.net
+09/09/19 19:43 AV4 completed 15 timesteps
+09/09/19 19:43 ran SEPTkubo_mapptoplane.net
+09/09/19 19:43 CW4 completed 9 timesteps
+09/09/19 19:43 ran SEPTkubo_mapptoplane.net
+09/09/19 19:43 SW4 completed 9 timesteps
+09/09/19 19:43 ran SEPTkubo_mapptoplane.net
+09/09/19 19:43 bw7 completed 9 timesteps
+09/09/19 19:43 ran SEPTkubo_mapptoplane.net
+09/09/19 19:43 AV7 completed 9 timesteps
+09/09/19 19:43 ran SEPTkubo_mapptoplane.net
+09/09/19 19:43 CV7 completed 9 timesteps
+09/09/19 19:44 ran SEPTkubo_mapptoplane.net
+09/09/19 19:44 SV4 completed 9 timesteps

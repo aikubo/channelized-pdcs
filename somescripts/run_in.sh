@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 
-filename='compsim.txt'
+filename='simulationsran.txt'
 
 
 cat $filename
@@ -10,8 +10,8 @@ read scrpt
 
 while read line; do 
 	echo $line
-	#cd $line
-	/home/akubo/myprojects/channelized-pdcs/somescripts/$scrpt "$line" 
+	cd $line
+	$scrpt  
 
 done < $filename
 
