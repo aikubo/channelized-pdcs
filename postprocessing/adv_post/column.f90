@@ -68,7 +68,7 @@ contains
                        ! print*, XXX(I,1)
                       IF(EPP(I,t) .GT. 0.00) THEN
                       !print*, YYY(I,1)-hill, Ri_all(I,1,t) 
-                      WRITE(888,format7col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t)
+                      WRITE(10001,format7col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t)
                       end if 
                  !     END IF
                    END IF

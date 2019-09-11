@@ -26,11 +26,11 @@ description='Average of densities between 2.5 and 1.5'
 call headerf(889, filename, simlabel, routine, DESCRIPTION, datatype)
 
 
-write(888, formatavg) 1, 800, 10, 0, 0, 10, 39000
-write(887, formatavg) 1, 800, 10, 0, 0, 10, 39000
-write(889, formatavg) 1, 800, 10, 0, 0, 10, 39000
+write(888, formatavg) 1, 800., 10., 0., 0., 10., 39000.
+write(887, formatavg) 1, 800., 10., 0., 0., 10., 39000.
+write(889, formatavg) 1, 800., 10., 0., 0., 10., 39000.
 
-do t= 1,timesteps
+do t= 2,timesteps
 sum_1 = 0
 sum_2 = 0
 sum_3 = 0

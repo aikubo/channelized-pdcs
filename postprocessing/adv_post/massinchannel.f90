@@ -95,7 +95,6 @@ module massdist
          END DO
         
          WRITE(4500, formatmass) t, tmass, elumass/tmass, medmass/tmass, densemass/tmass, inchannel/tmass, chmass/tmass, scalemass/tmass, scalemass1/tmass, scalemass2/tmass
-         WRITE(4500, formatmass) t, tmass, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, scalemass2
         END DO
         !! done !!
         print*, 'mass in channel done'
