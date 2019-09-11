@@ -54,8 +54,8 @@ use filehead
 
                 traces= int(width/3)+1
 
-                allocate(isosurface(1200, 4, 101))
-                allocate(noseloc(traces))
+                allocate(isosurface(1200, 4, 304))
+                allocate(noseloc(304))
                 
                 !width=201
                 slope=0.18
@@ -89,6 +89,8 @@ use filehead
                 !write(900, *) "volfr    ", "xxx ", "yyy ", "hill        ", "yyy-hill    "
                 !t=timefind
                 print*, 'entering first do'
+                
+                
                 do t=2,timesteps
                 !do Q=1,traces
                 pastXXX=0.0

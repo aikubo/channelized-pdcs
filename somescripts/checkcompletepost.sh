@@ -18,7 +18,7 @@ if (( $txtfiles > 6 )); then
 		cp *.txt /home/akubo/myprojects/channelized-pdcs/graphs/processed/
 		cp *.tiff /home/akubo/myprojects/channelized-pdcs/graphs/processed/
 
-
+		echo "moved to /graphs/processed/"
 else 
        echo -e "$datum $label error post process created $txtfiles txt files, $tifffiles tiff" >> status.txt
        echo -e "$datum $label error post process created $txtfiles txt files, $tifffiles tiff" >> /home/akubo/myprojects/channelized-pdcs/status_all.txt

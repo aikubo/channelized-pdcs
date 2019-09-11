@@ -6,25 +6,23 @@ use filehead
 contains
 SUBROUTINE AVERAGE_ALL 
 
-
 IMPLICIT NONE 
 routine="averageit.mod/average_all"
 description=" Average of all timesteps"
 datatype=" t   T_G   U_G   V_G   W_G   U_S1   DPU"
 filename='average_all.txt'
-open(888, file =filename)
 call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
 
 
 filename='average_medium.txt'
 description='Average of densities between 2.5 and 5'
-open(887, file= 'average_medium.txt')
+
 call headerf(887, filename, simlabel, routine, DESCRIPTION, datatype)
 
 
 filename='average_medium.txt'
 description='Average of densities between 2.5 and 1.5'
-open(889, file ='average_dense.txt')
+
 call headerf(889, filename, simlabel, routine, DESCRIPTION, datatype)
 
 

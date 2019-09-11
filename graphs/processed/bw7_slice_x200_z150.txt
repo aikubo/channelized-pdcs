@@ -1,0 +1,9 @@
+!------------------------------------------------------------!
+  Date: 20190910
+  Simulation name: bw7 
+  Filename:slice_x200_z150.txt                                                                                                     
+  Produced in mod-subroutine:  column.mod/slice                                                                                                        
+  Written by AK September 2019
+  Description: Vertical columns                                                                                                       
+  Data format: t  YYY  EPP   U_G   DPU   T_G   Ri                                                                                     
+!------------------------------------------------------------!
