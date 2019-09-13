@@ -40,15 +40,15 @@ def openlabel(label):
     loc=fid + avgf
     avg=pd.read_fwf(loc, header=9)
 
-    #return nose, froude, ent, massin, avg 
+    return nose, froude, ent, massin, avg 
 
 def entrain(data):
     timesteps=np.arrange(1,8)
     deltaV=np.array(7)
     for i in range(1,7):
-        deltaV=(data.iloc[i] - data.iloc[i-1] 
-        #print(deltaV)
+        deltaV[i]=(data.iloc[i] - data.iloc[i-1] 
+        print('hello world')
 
-    plt.pyplot(time, deltaV)
+    plt.plot(time, deltaV)
     plt.show()
     return detlaV
