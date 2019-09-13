@@ -4,3 +4,5 @@
 09/10/19 14:54 bw7 completed 9 timesteps
 09/10/19 17:21 ran SEPTkubo_mapptoplane.net
 09/10/19 17:21 bw7 completed 9 timesteps
+09/13/19 14:49 ran SEPTkubo_mapptoplane.net
+09/13/19 14:49 bw7 post process created 9 txt files, 1 tiff
