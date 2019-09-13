@@ -23,14 +23,14 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='bw7'
+simlabel='BV4'
 
 allocate(isosurface(1200,4,15))
 RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=300
+width=201
 lambda=600
 timesteps=8
 tstart=3
@@ -47,7 +47,7 @@ call openbin(400, 'V_G', V_G1)
 call openbin(500, 'W_G', W_G1)
 call openbin(600, 'U_S1', U_S1)
 
-call handletopo('l600_w300', XXX, YYY, ZZZ)
+call handletopo('l600_w201', XXX, YYY, ZZZ)
 call writedxtopo
 call  logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, DPU)

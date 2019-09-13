@@ -35,7 +35,7 @@ depth=${param[2]}
 height=${param[3]}
 
 topo="l$wave"
-topo+="_w"
+topo+="_W"
 topo+="$width"
 echo $topo
 

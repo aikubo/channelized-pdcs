@@ -237,3 +237,10 @@
 09/10/19 17:21 ran SEPTkubo_mapptoplane.net
 09/10/19 17:21 bw7 completed 9 timesteps
 09/10/19 17:30 issue with not all txt files being created and moved into graphs/processed
+09/12/19 09:00 BV4 completed 9 timesteps
+09/12/19 13:22 AV1 prepared to run
+ AV1 Submitted batch job 9976807
+09/12/19 15:42 BV7 completed 9 timesteps
+09/12/19 20:18 BV1 prepared to run but not compiled
+09/12/19 20:28 ran SEPTkubo_mapptoplane.net
+09/12/19 20:28 BV4 completed 9 timesteps
