@@ -55,6 +55,6 @@ def entrain(data):
 nose, froude, ent, massin, avg = openlabel("AV4")
 
 vol=entrain(ent)
-print(vol)
+
 #def massin_bar(data):
     

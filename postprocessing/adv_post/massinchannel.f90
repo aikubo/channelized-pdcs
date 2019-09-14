@@ -22,6 +22,7 @@ module massdist
         datatype=" t Total Mass (m^3) Elutriated % Med Dense InChannel WidthChannel 0ScaleH ScaleH 2ScaleH "
         filename='massinchannel.txt'
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
+        write(4500, formatmass) 1, 0, 0, 0, 1.0, 0, 0, 0, 0
 
         print *, "Done writing 3D variables"
 
