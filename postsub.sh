@@ -14,4 +14,4 @@
 
 onevis.sh
 
-checkcomplete.sh
+checkcompletepost.sh
