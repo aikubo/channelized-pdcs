@@ -136,8 +136,6 @@ def opensliceavg(labels):
     slice_Ri.columns=labels
 
     return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
-    
-slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= opensliceavg(labels)
 
 def openlabel(labels):
     path2file = '/home/akh/channelized-pdcs/graphs/processed/'
@@ -155,6 +153,8 @@ def openlabel(labels):
 
     inchannelmass=pd.DataFrame()
     gtscaleheight=pd.DataFrame()
+    avulsed=pd.DataFrame()
+    avg_TG=pd.DataFrame()
 
     for sim in labels:
         fid=path2file + sim
@@ -179,19 +179,19 @@ def openlabel(labels):
         # massin
         loc=fid + massfid
         mass_temp=pd.read_fwf(loc, header=None, skiprows=9)
-        mass_temp.columns=['time', 'Total Mass (m^3)', 'Elutriated %', 'Med % ', 'Dense %', 'InChannel', ' WidthChannel', ' 0ScaleH', 'ScaleH', '2ScaleH']   
+        mass_temp.columns=['time', 'Total Mass (m^3)', 'Elutriated %', 'Med % ', 'Dense %', 'InChannel', ' Width', ' 0ScaleH', 'ScaleH', '2ScaleH']   
         gtscaleheight[sim]=mass_temp['ScaleH']
         inchannelmass[sim]=mass_temp['InChannel']
+        avulsed[sim]=1-mass_temp['InChannel']
 
         # average
         loc=fid + avgf
         avg_temp=pd.read_fwf(loc, header=None, skiprows=9)
         avg_temp.columns = ['time', 'T_G','U_G','V_G','W_G','U_S1','DPU'  ]
         avg_UG[sim]=avg_temp['U_G']
+        avg_TG[sim]=avg_temp['T_G']
 
-
-    return ent, froude, avg_UG, gtscaleheight, inchannelmass, front #nose, froude, ent, massin, avg
-
+    return ent, froude, avg_UG, avg_TG, gtscaleheight, inchannelmass, avulsed, front 
 def entrain(data):
     print('hello entrainment')
     vol=[]
@@ -206,7 +206,7 @@ def entrain(data):
 
     return deltaV
 
-def plottogether(df, xlab, ylab):
+def plottogether(fid, df, xlab, ylab):
     time=['0','5','10','15','20','25','30','35', '40']
     fig1, ax1 = plt.subplots()
     ax1.set_xticklabels(time)
@@ -214,7 +214,7 @@ def plottogether(df, xlab, ylab):
     ax1.set_xlabel(xlab)
     ax1.set_ylabel(ylab)
     ax1.set_xlim(left=0)
-    plt.show()
+    savefigure(fid)
 
 def plotcol(df, xlab, ylab):
     df1=df.fillna(14)
@@ -253,6 +253,7 @@ def setgrl(fig, axes, h,l):
     fig.set_figwidth(l)
 
 def savefigure(name):
+    path= "/home/akh/channelized-pdcs/graphs/figures"
     fid=name + '.eps'
     plt.savefig(fid, format='eps', dpi=600)
 
@@ -366,23 +367,25 @@ def normalizebywidth(data):
     return data
 
 
-#ent, froude, avg_UG, gtscaleheight, inchannelmass, front = openlabel(labels)
+ent, froude, avg_UG, avg_T, gtscaleheight, inchannelmass, avulsed, front = openlabel(labels)
 
 #nfront=normalizebywave(front)
-#deltaV=entrain(ent)
-#ndeltaV=normalizebywave(deltaV)
-#ndeltaV=normalizebywidth(ndeltaV)
-#ndeltaV=normalizebydepth(ndeltaV)
-#plottogether(ent)
+deltaV=entrain(ent)
+
+ndeltaV=normalizebywidth(deltaV)
+ndeltaV=normalizebydepth(ndeltaV)
+plottogether("entrainmentall", deltaV, "Entrainment (m^3)", "Time")
 #plottogether(froude)
-#plottogether(avg_UG)
-#plottogether(gtscaleheight)
-#plottogether(inchannelmass)
+plottogether('avgUG', avg_UG, "Average Velocity (U/UO)", "Time")
+plottogether('Elutriatedmass', gtscaleheight, 'Elutriated Mass (%)', "Time")
+plottogether('inchannel', inchannelmass, 'Mass in Channel (%)', 'Time')
+plottogether('avulsed', 1-inchannelmass, 'Mass Avulsed (%)', 'Time')
 #plottogether(front)
 #plotbyfront(inchannelmass,nfront, "% Mass in Channel")
-#plottogether(ndeltaV, "Time", "Entrainment Normalized by Geometry")
+plottogether("normalizedentrainment", ndeltaV, "Time", "Entrainment Normalized by Cross Sectional Area")
 
 #plotby(inchannelmass, avg_UG, "% Mass in Channel", "Entrainment")
 #plotcol(slice_EPP, 'Height (m)', 'Log Volume Fraction Particles')
+slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= opensliceavg(labels)
 fid = 'avgcol_0917w0Ri'
 plotallcol(fid, slice_EPP, slice_UG, slice_DPU, slice_Ri, slice_TG)
