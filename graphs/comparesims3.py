@@ -1,19 +1,23 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as font_manager
+from matplotlib.offsetbox import (TextArea, DrawingArea, OffsetImage,
+                                  AnnotationBbox)
 import pandas as pd
 import seaborn as sns
 
 #colors = sns.cubehelix_palette(8)
-palette="coolwarm"
-sns.set()
-print('hello world')
-
-
 labels=[ "AV4", "CV4", "BW4", "CW4", "SW4", "bw7", "AV7", "CV7" ]
 labels.sort()
-colors = sns.cubehelix_palette(len(labels), rot=-0.4)
 
-def openslice(labels):
+palette=sns.color_palette("coolwarm", len(labels))
+
+sns.set()
+sns.set_style("white")
+sns.set_style( "ticks",{"xtick.direction": "in","ytick.direction": "in"})
+sns.set_context("paper")
+
+def openslicet(labels, twant):
     path2file = '/home/akh/channelized-pdcs/graphs/processed/'
     slicefid='_slice_x200_z150.txt'
     slice_EPP=pd.DataFrame()
@@ -21,6 +25,60 @@ def openslice(labels):
     slice_TG=pd.DataFrame()
     slice_Ri=pd.DataFrame()
     slice_DPU=pd.DataFrame()
+
+
+    UG=[]
+    EPP=[]
+    TG=[]
+    Ri=[]
+    DPU=[]
+    
+    for sim in labels:
+        print(sim)
+        slicet=pd.DataFrame()
+        fid=path2file+sim
+        loc=fid + slicefid
+        slice_temp=pd.read_table(loc, header=None, sep= '\s+', skiprows=9)
+        col = ['UG', 'DPU', 'TG', 'Ri' ]
+        slice_temp.columns = ['time', 'YYY',  'EPP', 'UG', 'DPU', 'TG', 'Ri' ]
+
+        for i in col:
+            slicet=slice_temp[slice_temp['time']== twant]
+        slicet.reset_index(drop=True, inplace=True)
+
+        UG.append(slicet['UG'])
+        EPP.append(slicet['EPP'])
+        TG.append(slicet['TG'])
+        DPU.append(slicet['DPU'])
+        Ri.append(slicet['Ri'])
+
+        del slicet
+    slice_UG=pd.concat(UG, axis=1, ignore_index=True)
+    slice_EPP=pd.concat(EPP, axis=1, ignore_index=True)
+    slice_TG=pd.concat(TG, axis=1, ignore_index=True)
+    slice_DPU=pd.concat(DPU, axis=1, ignore_index=True)
+    slice_Ri=pd.concat(Ri, axis=1, ignore_index=True)
+
+    slice_UG.columns=labels
+    slice_TG.columns=labels
+    slice_EPP.columns=labels
+    slice_DPU.columns=labels
+    slice_Ri.columns=labels
+
+    return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
+
+#slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= openslicet(labels, 6)
+
+
+def opensliceavg(labels):
+    path2file = '/home/akh/channelized-pdcs/graphs/processed/'
+    slicefid='_slice_x200_z150.txt'
+    slice_EPP=pd.DataFrame()
+    slice_UG=pd.DataFrame()
+    slice_TG=pd.DataFrame()
+    slice_Ri=pd.DataFrame()
+    slice_DPU=pd.DataFrame()
+
 
     UG=[]
     EPP=[]
@@ -32,21 +90,15 @@ def openslice(labels):
         sliceavg=pd.DataFrame()
         fid=path2file+sim
         loc=fid + slicefid
-        slice_temp=pd.read_fwf(loc, header=None, skiprows=9)
+        slice_temp=pd.read_table(loc, header=None, sep= '\s+', skiprows=9)
         col = ['UG', 'DPU', 'TG', 'Ri' ]
         slice_temp.columns = ['time', 'YYY',  'EPP', 'UG', 'DPU', 'TG', 'Ri' ]
-        slice_temp= slice_temp.drop('time', 1)
-            ## take average 
-            #10-115 so 0-105
 
         height= slice_temp['YYY'].min()
         klength=int((456-height)/3 +1)
-        print(klength)
         height_flow= (slice_temp['YYY']-height)
         height_flow=height_flow[0:klength]
-        # get rid of all values where EPP less than 7
-        for i in col:
-            slice_temp.loc[slice_temp['EPP']>7.5, i] = 0
+
 
         # first split by timestep
         sliceavg=slice_temp[0:klength]
@@ -55,14 +107,13 @@ def openslice(labels):
             bottom=(t-1)*klength
             top=t*klength
             df=slice_temp[bottom:top]
-            if df.iloc[0,2] > 0:
+            if df.iloc[0,2] < 7.5:
             #add to average 
                 tavg=tavg+1
                 sliceavg = sliceavg+df.values
         # divide by time
         sliceavg=sliceavg/tavg
-        sliceavg['YYY']=height_flow
-        sliceavg.set_index('YYY', inplace=True, drop=True)
+        sliceavg.reset_index(inplace=True, drop=True)
 
         UG.append(sliceavg['UG'])
         EPP.append(sliceavg['EPP'])
@@ -86,8 +137,8 @@ def openslice(labels):
 
     return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
     
-slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= openslice(labels)
-print(slice_UG)
+slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= opensliceavg(labels)
+
 def openlabel(labels):
     path2file = '/home/akh/channelized-pdcs/graphs/processed/'
     nosefid='_nose.txt'
@@ -165,19 +216,101 @@ def plottogether(df, xlab, ylab):
     ax1.set_xlim(left=0)
     plt.show()
 
-
 def plotcol(df, xlab, ylab):
     df1=df.fillna(14)
     fig1, ax1 = plt.subplots()
     sns.lineplot(data=df1, palette=palette, dashes=False)
     ax1.set_xlabel(xlab)
     ax1.set_ylabel(ylab)
-    ax1.set_xlim([0,100])
-    ax1.set_ylim([2,8])
     ax1.invert_yaxis() 
 
     plt.tight_layout()
-    #return fig1, ax1
+
+def labelsubplots(axes):
+    alpha=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    for i in range(len(axes)):
+        text = axes[i].annotate(alpha[i], weight='bold', size=12, xy=(0.9, 0.9), xycoords="axes fraction")
+
+def horizplot(df, loc, labels):
+    maxy=(len(df))
+    top=3*maxy
+    height = np.arange(0,top,3)
+
+    palette=sns.color_palette("coolwarm", len(labels))
+
+    df1=df.fillna(df.min())
+    for i in range(len(labels)):
+        loc.plot(df1[labels[i]], height, label=labels[i], color=palette[i] )
+
+def setgrl(fig, axes, h,l):
+
+    #fontsll
+    font_path="/usr/share/fonts/truetype/msttcorefonts"
+    myfont= "arial.tff"
+    plt.rcParams['font.family']='Arial'
+
+    fig.set_figheight(h)
+    fig.set_figwidth(l)
+
+def savefigure(name):
+    fid=name + '.eps'
+    plt.savefig(fid, format='eps', dpi=600)
+
+def plotallcol(fid, df1, df2, df3, df4, df5):
+
+    fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
+    setgrl(fig, axes, 4, 8)
+    # EPP
+
+    loc=axes[0]
+    horizplot(df1, loc, labels)
+    axes[0].set_ylabel('Height (m)', size=9)
+    axes[0].set_xlabel('Log Volume fraction', size=9)
+    loc.set_ylim([0,150])
+    loc.set_xlim([1,8])
+    sns.despine()
+    # UG
+    loc=axes[1]
+    u0=10.0
+    horizplot(df2/u0, loc, labels)    
+    axes[1].set_xlabel('Velocity (U/U0)',size=9)
+    loc.set_ylim([0,150])
+
+    # Richardson Number 
+    loc=axes[2]
+    t0=800
+    horizplot(df5/t0, loc, labels)
+    axes[2].set_xlabel('Temperature (T/T0)', size=9)
+    loc.set_ylim([0,150])
+
+    # DPU
+    loc=axes[3]
+    df3= df3+0.000001
+    dpu=np.log10(df3)
+    horizplot(dpu, loc, labels)
+    axes[3].set_xlabel('Dynamic Pressure', size=8)
+    loc.set_ylim([0,150])
+
+    # Richardson Number 
+   # loc=axes[4]
+   # horizplot(df4, loc, labels)
+   # axes[4].set_xlabel('Richardson Number')
+   # loc.set_xlim([-5, 5])
+   # loc.set_ylim([0,150])
+
+
+
+    fig.legend(    # The line objects
+           labels=labels,   # The labels for each line
+           loc="center right",   # Position of legend
+           borderaxespad=0.5,    # Small spacing around legend box
+           title="Geometries",  # Title for the legend
+           )
+
+    labelsubplots(axes)
+
+    savefigure(fid)
+    #plt.show()
 
 def plotby(df1, df2, datalabel1, datalabel2):
     palette='coolwarm'
@@ -190,8 +323,6 @@ def plotby(df1, df2, datalabel1, datalabel2):
     ax3.set_ylabel(datalabel1)
     ax3.set_xlabel(datalabel2)
     plt.show()
-
-
 
 def normalizebywave(data):
     for sim in labels:
@@ -252,5 +383,6 @@ def normalizebywidth(data):
 #plottogether(ndeltaV, "Time", "Entrainment Normalized by Geometry")
 
 #plotby(inchannelmass, avg_UG, "% Mass in Channel", "Entrainment")
-plotcol(slice_EPP, 'Height (m)', 'Log Volume Fraction Particles')
-plt.show()
+#plotcol(slice_EPP, 'Height (m)', 'Log Volume Fraction Particles')
+fid = 'avgcol_0917w0Ri'
+plotallcol(fid, slice_EPP, slice_UG, slice_DPU, slice_Ri, slice_TG)
