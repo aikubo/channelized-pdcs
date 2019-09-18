@@ -18,8 +18,10 @@ fid='EP_P'
 name1="$name$var"
 
 #now update general file
-
-cp /home/akubo/myprojects/channelized-pdcs/opendx/cut_* ./
+cp /home/akubo/myprojects/channelized-pdcs/opendx/cut_U*.net ./
+cp /home/akubo/myprojects/channelized-pdcs/opendx/cut_U*.cfg ./
+cp /home/akubo/myprojects/channelized-pdcs/opendx/cut_x*.net ./
+cp /home/akubo/myprojects/channelized-pdcs/opendx/cut_x*.cfg ./
 cp /home/akubo/myprojects/channelized-pdcs/opendx/UG.general ./
 cp /home/akubo/myprojects/channelized-pdcs/opendx/testC.general ./
 

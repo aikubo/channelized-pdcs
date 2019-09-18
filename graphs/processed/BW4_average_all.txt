@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20190913
+  Date: 20190918
   Simulation name: BW4 
   Filename:average_all.txt                                                                                                         
   Produced in mod-subroutine:  averageit.mod/average_all                                                                                               
