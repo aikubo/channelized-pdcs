@@ -13,13 +13,13 @@ label=${PWD##*/}
 
 status=$(checktime2.sh)
 
-if (( $status > 8 )); then 
+if (( $status > 7 )); then 
 	echo $status
 	echo ":-D"
            
 	echo -e "$datum $label completed $status timesteps" >> status.txt 
 	echo -e "$datum $label completed $status timesteps" >> /home/akubo/myprojects/channelized-pdcs/status_all.txt
-	echo -e "$here" >> /home/akubo/myprojects/channelized-pdcs/completesims.txt
+	grep -qF "$here" /home/akubo/myprojects/channelized-pdcs/readyforpost.txt || echo -e "$here" >> /home/akubo/myprojects/channelized-pdcs/readyforpost.txt
 
 else 
 	echo "incomplete check output" 

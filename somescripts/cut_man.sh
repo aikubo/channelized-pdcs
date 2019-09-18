@@ -24,12 +24,12 @@ cp /home/akubo/myprojects/channelized-pdcs/opendx/UG.general ./
 cp /home/akubo/myprojects/channelized-pdcs/opendx/testC.general ./
 
 sed -i "s/iso_9/$name/" cut_x100.net
-sed -i "s/iso_9/$name/" cut_x100.net
+sed -i "s/iso_9/$name/" cut_x200.net
 sed -i "s/iso_9/$name/" cut_x300.net
 
-sed -i "s/iso_9/$name/" cut_xU100.net
-sed -i "s/iso_9/$name/" cut_xU100.net
-sed -i "s/iso_9/$name/" cut_xU300.net
+sed -i "s/iso_9/$name/" cut_Ux100.net
+sed -i "s/iso_9/$name/" cut_Ux200.net
+sed -i "s/iso_9/$name/" cut_Ux300.net
 
 dx -nodisplay -execonly -script cut_x100.net
 dx -nodisplay -execonly -script cut_x200.net

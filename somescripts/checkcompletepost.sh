@@ -15,7 +15,7 @@ if (( $txtfiles > 6 )); then
 		echo "completed!"
 		echo ":-D"
 
-		cp *.txt /home/akubo/myprojects/channelized-pdcs/graphs/processed/
+		cp !(*t08*) *.txt /home/akubo/myprojects/channelized-pdcs/graphs/processed/
 		cp *.tiff /home/akubo/myprojects/channelized-pdcs/graphs/processed/
 
 		echo "moved to /graphs/processed/"
