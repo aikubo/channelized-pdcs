@@ -4,10 +4,14 @@ echo "Making post processing script"
 here=$(pwd)
 label=${PWD##*/}
 
+#clean it up 
+rm *tiff
+rm *txt
+
+
 cp /home/akubo/myprojects/channelized-pdcs/postsub.sh $here
 sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
 
-cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 declare param=($(sh simparam.sh $label))
 
 wave=${param[0]}
@@ -15,10 +19,33 @@ width=${param[1]}
 height=${param[2]}
 depth=${param[3]}
 
-topo="l$wave"
-topo+="_w"
-topo+="$width"
+topo1="l$wave"
+topo1+="_w"
+topo1+="$width"
+echo $topo1
+
+topo2="l$wave"
+topo2+="_W"
+topo2+="$width"
+echo $topo2
+
+# check topo 
+if [ -s "$topo1" ]
+then
+   topo=$topo1
+   echo " $topo file exists and is not empty "
+elif [ -s "$topo2" ]
+then
+   topo=$topo2
+   echo "$topo2 file exists and is not empty "
+else
+   echo "topo error"
+   exit 1
+fi
+
 echo $topo
+
+cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 #echo how many timesteps 
 #timestep=$(checktime2.sh)
 #echo $timesteps

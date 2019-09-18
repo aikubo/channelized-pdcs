@@ -14,4 +14,6 @@
 
 onevis.sh
 
+cut_man.sh
+
 checkcompletepost.sh
