@@ -90,7 +90,7 @@ use makeascii
          
            WRITE(6100, format4var) VOL(I,1:4,t)
 
-           write(6101, format4var) U_G(I,t), XXX(I,1), YYY(I,1), ZZZ(I,1)
+           write(6101, format4var) U_G1(I,t), XXX(I,1), YYY(I,1), ZZZ(I,1)
 
          end do 
 
