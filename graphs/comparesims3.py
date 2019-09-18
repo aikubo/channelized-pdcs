@@ -7,7 +7,7 @@ import pandas as pd
 import seaborn as sns
 
 #colors = sns.cubehelix_palette(8)
-labels=[ "AV4", "CV4", "BW4", "CW4", "SW4", "bw7", "AV7", "CV7" ]
+labels=[ "AV4", "CV4", "BW4", "CW4", "SW4", "BW7", "AV7", "CV7", "BV7", "BV4" ]
 labels.sort()
 
 palette=sns.color_palette("coolwarm", len(labels))
