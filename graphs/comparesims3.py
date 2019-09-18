@@ -207,6 +207,8 @@ def entrain(data):
     return deltaV
 
 def plottogether(fid, df, xlab, ylab):
+    print("giplotting")
+    print(fid)
     time=['0','5','10','15','20','25','30','35', '40']
     fig1, ax1 = plt.subplots()
     ax1.set_xticklabels(time)

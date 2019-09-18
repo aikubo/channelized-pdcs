@@ -72,7 +72,7 @@ use makeascii
         t= tfind
         write(x2,str_d) t 
         open(6100, file='EP_P_t'//trim(x2)//'.txt')
-
+        open(6101, file='U_G_t'//trim(x2)//'.txt')
 
         DO I=1,RMAX*ZMAX*YMAX
            !------------------ Volume Fraction of Gas or
@@ -89,6 +89,8 @@ use makeascii
            VOL(I,4,t) = ZZZ(I,1)
          
            WRITE(6100, format4var) VOL(I,1:4,t)
+
+           write(6101, format4var) U_G(I,t), XXX(I,1), YYY(I,1), ZZZ(I,1)
 
          end do 
 
