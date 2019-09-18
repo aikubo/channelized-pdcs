@@ -16,3 +16,5 @@ export SLURM_CPU_BIND=none
 mpirun -IB -np 80 ./mfix.exe
 
 checkcomplete.sh
+
+makepost.sh

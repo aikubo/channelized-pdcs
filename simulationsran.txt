@@ -6,4 +6,4 @@
 /home/akubo/myprojects/4_INFLOW/CW4
 /home/akubo/myprojects/7_INFLOW/AV7
 /home/akubo/myprojects/7_INFLOW/CV7
-/home/akubo/myprojects/7_INFLOW/bw7
+/home/akubo/myprojects/7_INFLOW/BW7

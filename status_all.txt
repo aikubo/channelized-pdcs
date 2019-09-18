@@ -244,3 +244,57 @@
 09/12/19 20:18 BV1 prepared to run but not compiled
 09/12/19 20:28 ran SEPTkubo_mapptoplane.net
 09/12/19 20:28 BV4 completed 9 timesteps
+09/13/19 23:36 BV4 Submitted batch job 9980813
+09/15/19 17:34 ran SEPTkubo_mapptoplane.net
+09/15/19 17:34 BV7 completed 9 timesteps
+09/15/19 20:40 ran SEPTkubo_mapptoplane.net
+09/15/19 20:40 BV7 error post process created 1 txt files, 0 tiff
+09/15/19 20:37 AW4 Submitted batch job 9981403
+09/15/19 20:43 CW7 Submitted batch job 9981404
+09/15/19 20:41 AW7 prepared to run
+09/15/19 20:53 CW7 ISSUE only   timesteps
+ CW7 Submitted batch job 9981406
+09/15/19 20:53 ran SEPTkubo_mapptoplane.net
+09/15/19 20:53 CW7 error post process created 1 txt files, 0 tiff
+ AW7 Submitted batch job 9981407
+09/16/19 03:42 BV4 completed 9 timesteps
+09/17/19 18:49 ran SEPTkubo_mapptoplane.net
+09/17/19 18:50 AV4 post process created 10 txt files, 8 tiff
+09/18/19 07:54 AW4 completed 9 timesteps
+09/18/19 07:54 ran SEPTkubo_mapptoplane.net
+09/18/19 07:54 AW4 error post process created 1 txt files, 3 tiff
+09/18/19 09:11 AW7 completed 9 timesteps
+09/18/19 09:12 ran SEPTkubo_mapptoplane.net
+09/18/19 09:12 AW7 error post process created 1 txt files, 3 tiff
+09/18/19 12:38 AV4 completed 15 timesteps
+09/18/19 12:39 AW4 completed 9 timesteps
+09/18/19 12:39 BV4 completed 9 timesteps
+09/18/19 12:39 BW4 completed 9 timesteps
+09/18/19 12:39 CV4 completed 13 timesteps
+09/18/19 12:39 CW4 completed 9 timesteps
+09/18/19 12:40 SV4 completed 9 timesteps
+09/18/19 12:40 SW4 completed 9 timesteps
+09/18/19 12:41 AV7 completed 9 timesteps
+09/18/19 12:41 AW7 completed 9 timesteps
+09/18/19 12:41 BV7 completed 9 timesteps
+09/18/19 12:41 BW7 completed 9 timesteps
+09/18/19 12:42 CV7 completed 9 timesteps
+09/18/19 12:42 CW7 ISSUE only  7 timesteps
+09/18/19 13:07 ran SEPTkubo_mapptoplane.net
+09/18/19 13:08 ran SEPTkubo_mapptoplane.net
+09/18/19 13:08 ran SEPTkubo_mapptoplane.net
+09/18/19 13:08 ran SEPTkubo_mapptoplane.net
+09/18/19 13:08 SW7 Submitted batch job 9998537
+09/18/19 13:15 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 ran SEPTkubo_mapptoplane.net
+09/18/19 13:16 AW7 completed 9 timesteps
+09/18/19 13:17 BV7 completed 9 timesteps
+09/18/19 13:19 ran SEPTkubo_mapptoplane.net
+09/18/19 14:30 ran SEPTkubo_mapptoplane.net

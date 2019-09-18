@@ -33,7 +33,7 @@ for lambda=[0,300,600,900,1200]
         aspect = 8;
         depth = W/aspect;
         width = W/DZ;
-        if W> lambda
+        if W> lambda && lambda > 0
             break
         end 
        
