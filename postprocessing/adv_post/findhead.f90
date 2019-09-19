@@ -77,6 +77,7 @@ use filehead
                 datatype=" t   AvgU - AvgEP - AvgT - Froude - Nose X - Width - Height"
                 filename='froude.txt'
                 call headerf(9001, filename, simlabel, routine, DESCRIPTION, datatype)
+                write(9001, format8col) 1.0, 10, 0.4, 800, 0 , 0, 0, 0
 
                 description="Calculate head height, width, and average U_G, T_G, EP_G"
                 datatype=" t  Q  Nose of Current X Loc"

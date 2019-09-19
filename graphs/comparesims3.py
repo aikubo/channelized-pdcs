@@ -10,15 +10,23 @@ import seaborn as sns
 labels=[ "AV4", "CV4", "BW4", "CW4", "SW4", "BW7", "AV7", "CV7", "BV7", "BV4" ]
 labels.sort()
 
-palette=sns.color_palette("coolwarm", len(labels))
+def setcolorandstyle(labels):
+    palette=sns.color_palette("coolwarm", len(labels))
 
-sns.set()
-sns.set_style("white")
-sns.set_style( "ticks",{"xtick.direction": "in","ytick.direction": "in"})
-sns.set_context("paper")
+    colordf=pd.DataFrame()
+    colordf['label']=labels
+    colordf['color']=palette
+    colordf.set_index('label', drop=True, inplace=True)
+    sns.set()
+    sns.set_style("white")
+    sns.set_style( "ticks",{"xtick.direction": "in","ytick.direction": "in"})
+    sns.set_context("paper")
+    return colordf
+
+colordf= setcolorandstyle(labels)
 
 def openslicet(labels, twant):
-    path2file = '/home/akh/channelized-pdcs/graphs/processed/'
+    path2file = '/home/akh/myprojects/channelized-pdcs/graphs/processed/'
     slicefid='_slice_x200_z150.txt'
     slice_EPP=pd.DataFrame()
     slice_UG=pd.DataFrame()
@@ -71,7 +79,7 @@ def openslicet(labels, twant):
 
 
 def opensliceavg(labels):
-    path2file = '/home/akh/channelized-pdcs/graphs/processed/'
+    path2file = '/home/akh/myprojects/channelized-pdcs/graphs/processed/'
     slicefid='_slice_x200_z150.txt'
     slice_EPP=pd.DataFrame()
     slice_UG=pd.DataFrame()
@@ -138,7 +146,7 @@ def opensliceavg(labels):
     return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
 
 def openlabel(labels):
-    path2file = '/home/akh/channelized-pdcs/graphs/processed/'
+    path2file = '/home/akh/myprojects/channelized-pdcs/graphs/processed/'
     nosefid='_nose.txt'
     froudefid='_froude.txt'
     slicefid='_slice_x200_z150.txt'
@@ -166,8 +174,10 @@ def openlabel(labels):
         loc=fid + froudefid
         fr_temp=pd.read_fwf(loc, header=None, skiprows=9)
         fr_temp.columns=['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
-        froude[sim]=fr_temp['Froude']
-        front[sim]=fr_temp['Front']
+        time0=pd.DataFrame({'time':1, 'AvgU':10,'AvgEP':.39,'AvgT':800,'Froude':0,'Front':0,' Width':100,'Height':0 }, index=[0])
+        fr_temp2=pd.concat([time0,fr_temp])
+        froude[sim]=fr_temp2['Froude']
+        front[sim]=fr_temp2['Front']
 
         # ent
         loc=fid + entrainmentfid
@@ -207,7 +217,7 @@ def entrain(data):
     return deltaV
 
 def plottogether(fid, df, xlab, ylab):
-    print("giplotting")
+    print("plotting")
     print(fid)
     time=['0','5','10','15','20','25','30','35', '40']
     fig1, ax1 = plt.subplots()
@@ -369,25 +379,55 @@ def normalizebywidth(data):
     return data
 
 
+def channelfrontplot(data, wavelabel, wave):
+    amp = 0.15*wave
+    x = np.linspace(0,1200,70)
+    channel = amp*np.sin((x/wave)*(2*np.pi)) + 450
+    fig,ax= plt.subplots()
+    ax.set_ylim([0,900])
+    ax.set_xlim([0,1200])
+    ax.plot(x, channel, color='grey')
+    width=[200,300]
+    wcolor=['darksalmon', 'lightskyblue']
+    #for i in range(len(wcolor)):
+    #    ax.plot(x,channel-width[i]/2, color=wcolor[i])
+    #    ax.plot(x,channel+width[i]/2, color=wcolor[i])
+    
+    ourlabels=[s for s in labels if wavelabel in s]
+    palette=sns.color_palette("coolwarm", len(labels))
+    ax2=ax.twinx()
+    
+    for i in range(len(ourlabels)):
+        
+        sim=ourlabels[i]
+        print(sim)
+        print(data[sim])
+        print(front[sim])
+        ax2.plot(front[sim], data[sim], label=sim, color=palette[i])
+
+    plt.show()
+
 ent, froude, avg_UG, avg_T, gtscaleheight, inchannelmass, avulsed, front = openlabel(labels)
 
-#nfront=normalizebywave(front)
-deltaV=entrain(ent)
+channelfrontplot(inchannelmass, 'C', 900.)
 
-ndeltaV=normalizebywidth(deltaV)
-ndeltaV=normalizebydepth(ndeltaV)
-plottogether("entrainmentall", deltaV, "Entrainment (m^3)", "Time")
+#nfront=normalizebywave(front)
+#deltaV=entrain(ent)
+
+#ndeltaV=normalizebywidth(deltaV)
+#ndeltaV=normalizebydepth(ndeltaV)
+#plottogether("entrainmentall", deltaV, "Entrainment (m^3)", "Time")
 #plottogether(froude)
-plottogether('avgUG', avg_UG, "Average Velocity (U/UO)", "Time")
-plottogether('Elutriatedmass', gtscaleheight, 'Elutriated Mass (%)', "Time")
-plottogether('inchannel', inchannelmass, 'Mass in Channel (%)', 'Time')
-plottogether('avulsed', 1-inchannelmass, 'Mass Avulsed (%)', 'Time')
+#plottogether('avgUG', avg_UG, "Average Velocity (U/UO)", "Time")
+#plottogether('Elutriatedmass', gtscaleheight, 'Elutriated Mass (%)', "Time")
+#plottogether('inchannel', inchannelmass, 'Mass in Channel (%)', 'Time')
+#plottogether('avulsed', 1-inchannelmass, 'Mass Avulsed (%)', 'Time')
 #plottogether(front)
 #plotbyfront(inchannelmass,nfront, "% Mass in Channel")
-plottogether("normalizedentrainment", ndeltaV, "Time", "Entrainment Normalized by Cross Sectional Area")
+#plottogether("normalizedentrainment", ndeltaV, "Time", "Entrainment Normalized by Cross Sectional Area")
 
 #plotby(inchannelmass, avg_UG, "% Mass in Channel", "Entrainment")
 #plotcol(slice_EPP, 'Height (m)', 'Log Volume Fraction Particles')
-slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= opensliceavg(labels)
-fid = 'avgcol_0917w0Ri'
-plotallcol(fid, slice_EPP, slice_UG, slice_DPU, slice_Ri, slice_TG)
+#slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= opensliceavg(labels)
+#fid = 'avgcol_0917w0Ri'
+#plotallcol(fid, slice_EPP, slice_UG, slice_DPU, slice_Ri, slice_TG)
