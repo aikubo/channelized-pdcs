@@ -12,17 +12,17 @@ module massdist
         IMPLICIT NONE
         double precision, intent(INOut):: width, depth, lambda, scaleheight
         double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
-        double precision::edge1, edge2, bottom, top
+        double precision::edge1, edge2, bottom, top, outsum, buoyant, current
 
         print*, 'mass in channel'
         filename='massinchannel.txt'
 
         routine="massdist/massinchannel"
         description="Calculate mass distribution in different parts of the channel"
-        datatype=" t Total Mass (m^3) Elutriated % Med Dense InChannel WidthChannel 0ScaleH ScaleH 2ScaleH "
+        datatype=" t Total Mass (m^3) Elutriated % Med Dense InChannel WidthChannel 0ScaleH ScaleH `buoyant current.. "
         filename='massinchannel.txt'
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
-        write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0
+        write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
 
         print *, "Done writing 3D variables"
 
@@ -56,10 +56,6 @@ module massdist
                         SCALEMASS1= SCALEMASS1 + (1-EP_G1(I,t))*Volume_Unit*rho_p
                 end if
 
-                if ( YYY(I,1) .GT. 2.*SCALEHEIGHT+bottom ) then
-                        SCALEMASS2= SCALEMASS2 + (1-EP_G1(I,t))*Volume_Unit*rho_p
-                end if
-
                 ! elutriated masss
                  IF (EPP(I,t) > 5.0) THEN
                         elumass= elumass+(1-EP_G1(I,t))*Volume_Unit*rho_p
@@ -89,13 +85,24 @@ module massdist
                         END IF
                 END IF
 
+                If (YYY(I,t) > top) then 
+                        outsum = outsum + (1-EP_G1(I,t))*Volume_Unit*rho_p
+                        rho_c=rho_p*(1-EP_G(I,t))+(P_const/(R_dryair*T_G(I,t)))*(EP_G(I,t))
+                        if ( rho_c < rho_dry) then
+                        buoyant = buoyant + (1-EP_G1(I,t))*Volume_Unit*rho_p
+
+                        elseif (rho_c > rho_)
+                        current = current + (1-EP_G1(I,t))*Volume_Unit*rho_p
+
+                        end if 
+                end if 
 
                END IF
               END IF
           END IF
          END DO
         
-         WRITE(4500, formatmass) t, tmass, elumass/tmass, medmass/tmass, densemass/tmass, inchannel/tmass, chmass/tmass, scalemass/tmass, scalemass1/tmass, scalemass2/tmass
+         WRITE(4500, formatmass) t, tmass, outsum, elumass/tmass, medmass/tmass, densemass/tmass, inchannel/tmass, chmass/tmass, scalemass/tmass, scalemass1/tmass, buoyant/outsum, current/outsum
         END DO
         !! done !!
         print*, 'mass in channel done'
