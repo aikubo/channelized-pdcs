@@ -29,7 +29,7 @@ double precision, allocatable:: Ri_all(:,:,:)
 double precision:: gstar, gstar2, gstar1, froude, rho_c
 DOUBLE PRECISION, ALLOCATABLE::topo2(:),topography(:),EP_G1(:,:),XXX(:,:),YYY(:,:),ZZZ(:,:)
 DOUBLE PRECISION, ALLOCATABLE :: T_G1(:,:),V_G1(:,:),U_G1(:,:),W_G1(:,:),T_S1(:,:),C_PG(:,:),C_PS1(:,:),C_PS2(:,:)
-DOUBLE PRECISION, ALLOCATABLE :: ROP_S1(:,:), U_S1(:,:), V_S1(:,:), Ri(:,:)
+DOUBLE PRECISION, ALLOCATABLE :: ROP_S1(:,:), U_S1(:,:), V_S1(:,:), W_S1(:,:), Ri(:,:)
 
 INTEGER, ALLOCATABLE::Location_I(:,:)
 

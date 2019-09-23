@@ -14,6 +14,7 @@
         ALLOCATE( U_G1(length1,timesteps))
         ALLOCATE( W_G1(length1,timesteps))
         ALLOCATE( U_S1(length1, timesteps))
+        ALLOCATE( V_S1(length1, timesteps))
         ALLOCATE( Ri(length1, timesteps))
         ALLOCATE( ROP_S1(length1,timesteps))
         ALLOCATE(V_S1(length1, timesteps))
