@@ -33,6 +33,56 @@ use makeascii
         
 
         end subroutine 
+
+        subroutine dpupeak(DPU)
+        use formatmod 
+        use parampost 
+        use constants 
+        use headermod
+        use handletopo 
+
+        double precision:: maxdpu, maxdpuin, maxdpuout, edge1,  edge1
+        logical, allocatable:: maskshapein, maskshapeout
+
+        allocate(maskshapein(RMAX*YMAX*ZMAX))
+        allocate(maskshapeout(RMAX*YMAX*ZMAX))
+        routine="var_3d/dpupeak"
+        description="Calculate peak dynamic pressure inside and outside channel"
+        datatype=" t "
+        filename='dpu_peak.txt'
+        call headerf(4020, filename, simlabel, routine, DESCRIPTION, datatype)
+        
+        do I= 1,length1
+                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+
+                if ( YYY(I,1) .lt. top) then
+                        maskshapein(I) = .TRUE.
+                else 
+                        maskshapein(I)= .FALSE.
+                end if 
+
+                if ( YYY(I,1) .gt. top) then
+                        maskshapeout(I) = .TRUE.
+                else 
+                        maskshapeout(I)= .FALSE.
+                end if 
+        end do 
+
+        print maskshapein
+
+
+        do t=2,timesteps
+                maxdpu = maxval(DPU(:,t))
+                maxdpuin= maxval(DPU(:,t), MASK=maskshapein)
+                maxdpuout= maxval(DPU(:,t), MASK=maskshapeout)
+
+                print*, maxdpu
+        
+                write(4020, formatent) t, maxdpu, maxdpuin, maxdpuout
+        end do 
+
+        end subroutine 
+
 !----------------------------------------------------------------!
         subroutine makeEP(fid_EPP, VOL, ifwrite, tfind)
         use formatmod
