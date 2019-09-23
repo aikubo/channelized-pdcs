@@ -23,13 +23,16 @@ use maketopo
         end subroutine
 
 
-        subroutine dynamicpressure(EP_G, U_S1, DPU)
+        subroutine dynamicpressure(EP_G, U_S1, W_S1, V_S1, DPU)
                 double precision, dimension(:,:), intent(IN):: EP_G, U_S1
-                double precision, dimension(:,:), intent(OUT):: DPU 
+                double precision, dimension(:,:), intent(OUT):: DPU
+                double precision:: vel
+                print*, "making dpu"
 
                    do t=1,timesteps
                         do I=1,length1
-                                DPU(I,t)=(1-EP_G1(I,t))*1950*(U_S1(I,t)*U_S1(I,t))*(0.5) 
+                                vel = sqrt(   U_S1(I,t)**2 + V_S1(I,t)**2 + W_S1(I,t)**2)
+                                DPU(I,t)=(1-EP_G1(I,t))*1950*(vel**2)*(0.5) 
                         end do
                    end do
         
@@ -47,6 +50,8 @@ use maketopo
         datatype=" t "
         filename='dpu_peak.txt'
         call headerf(4020, filename, simlabel, routine, DESCRIPTION, datatype)
+
+        print*, "calculating peak dpu"
         
         do I= 1,length1
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)

@@ -85,7 +85,7 @@ subroutine writedxtopo
        open(6010, file='topography')
        open(6011, file='topo2')
                 print *, "writing topo for dx visuals"
-                DO I = 1,RMAX*ZMAX*YMAX
+                DO I = 1,RMAX*ZMAX*YMAXvi 
                         WRITE(6010,format4var) topography(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
                         WRITE(6011,format4var) topo2(I),XXX(I,1),YYY(I,1),ZZZ(I,1)
                END DO
