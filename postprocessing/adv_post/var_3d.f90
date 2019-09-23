@@ -2,7 +2,9 @@ module var_3d
 use parampost 
 use constants 
 use makeascii
-!use formatmod
+use formatmod
+use filehead
+use maketopo
 
         contains 
 
@@ -35,17 +37,10 @@ use makeascii
         end subroutine 
 
         subroutine dpupeak(DPU)
-        use formatmod 
-        use parampost 
-        use constants 
-        use headermod
-        use handletopo 
+        double precision, dimension(:,:), intent(INOUT):: DPU
+        double precision:: maxdpu, maxdpuin, maxdpuout
+        logical, dimension(length1):: maskshapein, maskshapeout
 
-        double precision:: maxdpu, maxdpuin, maxdpuout, edge1,  edge1
-        logical, allocatable:: maskshapein, maskshapeout
-
-        allocate(maskshapein(RMAX*YMAX*ZMAX))
-        allocate(maskshapeout(RMAX*YMAX*ZMAX))
         routine="var_3d/dpupeak"
         description="Calculate peak dynamic pressure inside and outside channel"
         datatype=" t "

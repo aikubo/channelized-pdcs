@@ -91,7 +91,7 @@ module massdist
                         if ( rho_c < rho_dry) then
                         buoyant = buoyant + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
-                        elseif (rho_c > rho_dry)
+                        elseif (rho_c > rho_dry) then
                         current = current + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
                         end if 
