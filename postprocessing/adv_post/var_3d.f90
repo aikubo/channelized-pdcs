@@ -40,6 +40,7 @@ use maketopo
         end subroutine 
 
         subroutine dpupeak(width, lambda, depth, DPU)
+        use maketopo
         double precision, intent(IN):: width, lambda, depth
         double precision, dimension(:,:), intent(INOUT):: DPU
         double precision:: maxdpu, maxdpuin, maxdpuout
