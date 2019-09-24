@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 
-filename='simulationsran.txt'
+filename='readyforpost.txt'
 
 
 cat $filename

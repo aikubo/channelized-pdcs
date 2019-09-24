@@ -16,7 +16,7 @@ if (( $txtfiles > 6 )); then
 		echo ":-D"
 
 		cp *.txt /home/akubo/myprojects/channelized-pdcs/graphs/processed/
-		cp *.tiff /home/akubo/myprojects/channelized-pdcs/graphs/processed/
+		cp *.tiff /home/akubo/myprojects/channelized-pdcs/graphs/visualizations/
 
 		echo "moved to /graphs/processed/"
 else 
@@ -25,3 +25,6 @@ else
 
 fi
 
+#clean up 
+rm scr* 
+rm core*

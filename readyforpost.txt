@@ -11,3 +11,6 @@
 /home/akubo/myprojects/7_INFLOW/BV7
 /home/akubo/myprojects/7_INFLOW/BW7
 /home/akubo/myprojects/7_INFLOW/CV7
+/home/akubo/myprojects/7_INFLOW/CW7
+/home/akubo/myprojects/7_INFLOW/SV7
+/home/akubo/myprojects/7_INFLOW/SW7

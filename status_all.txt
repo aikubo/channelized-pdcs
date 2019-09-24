@@ -298,3 +298,82 @@
 09/18/19 13:17 BV7 completed 9 timesteps
 09/18/19 13:19 ran SEPTkubo_mapptoplane.net
 09/18/19 14:30 ran SEPTkubo_mapptoplane.net
+09/18/19 14:42 ran SEPTkubo_mapptoplane.net
+09/18/19 14:31 SW7 Submitted batch job 9998708
+09/18/19 16:17 SV7 Submitted batch job 9998788
+09/18/19 16:25 ran SEPTkubo_mapptoplane.net
+09/18/19 16:25 ran SEPTkubo_mapptoplane.net
+09/18/19 16:25 ran SEPTkubo_mapptoplane.net
+09/18/19 16:25 ran SEPTkubo_mapptoplane.net
+09/18/19 16:25 ran SEPTkubo_mapptoplane.net
+09/18/19 16:26 ran SEPTkubo_mapptoplane.net
+09/18/19 16:26 ran SEPTkubo_mapptoplane.net
+09/18/19 16:26 ran SEPTkubo_mapptoplane.net
+09/18/19 16:26 ran SEPTkubo_mapptoplane.net
+09/18/19 16:26 ran SEPTkubo_mapptoplane.net
+09/18/19 16:26 ran SEPTkubo_mapptoplane.net
+09/18/19 16:26 ran SEPTkubo_mapptoplane.net
+09/18/19 16:27 AV4 post process created 10 txt files, 0 tiff
+09/18/19 16:27 AW4 post process created 10 txt files, 0 tiff
+09/18/19 16:27 BV4 post process created 10 txt files, 0 tiff
+09/18/19 16:27 BW4 post process created 10 txt files, 0 tiff
+09/18/19 16:27 CV4 post process created 10 txt files, 0 tiff
+09/18/19 16:27 CW4 post process created 10 txt files, 0 tiff
+09/18/19 16:27 SW4 post process created 10 txt files, 0 tiff
+09/18/19 16:27 SV4 post process created 10 txt files, 0 tiff
+09/18/19 16:28 BW7 post process created 10 txt files, 0 tiff
+09/18/19 16:28 AV7 post process created 10 txt files, 0 tiff
+09/18/19 16:28 BV7 post process created 10 txt files, 0 tiff
+09/18/19 16:28 CW7 post process created 10 txt files, 0 tiff
+09/18/19 16:29 ran SEPTkubo_mapptoplane.net
+09/18/19 16:29 ran SEPTkubo_mapptoplane.net
+09/18/19 16:31 AW7 error post process created 5 txt files, 0 tiff
+09/18/19 16:31 CV7 post process created 10 txt files, 0 tiff
+09/18/19 17:00 ran SEPTkubo_mapptoplane.net
+09/18/19 17:02 AV4 post process created 10 txt files, 0 tiff
+ SV7 Submitted batch job 9998850
+09/18/19 17:18 ran SEPTkubo_mapptoplane.net
+09/18/19 17:19 AV4 post process created 10 txt files, 0 tiff
+09/18/19 17:25 ran SEPTkubo_mapptoplane.net
+09/18/19 17:26 AV4 post process created 10 txt files, 0 tiff
+09/18/19 17:36 ran SEPTkubo_mapptoplane.net
+09/18/19 17:38 AV4 post process created 10 txt files, 7 tiff
+09/18/19 17:39 AV4 post process created 10 txt files, 7 tiff
+09/18/19 17:49 AV4 post process created 10 txt files, 7 tiff
+09/18/19 17:51 ran SEPTkubo_mapptoplane.net
+09/18/19 17:54 AV4 post process created 10 txt files, 7 tiff
+09/18/19 17:56 ran SEPTkubo_mapptoplane.net
+09/18/19 17:59 AW4 post process created 10 txt files, 7 tiff
+09/18/19 18:00 ran SEPTkubo_mapptoplane.net
+09/18/19 18:04 BV4 post process created 10 txt files, 7 tiff
+09/18/19 18:05 ran SEPTkubo_mapptoplane.net
+09/18/19 18:08 BW4 post process created 10 txt files, 7 tiff
+09/18/19 18:10 ran SEPTkubo_mapptoplane.net
+09/18/19 18:13 CV4 post process created 10 txt files, 7 tiff
+09/18/19 18:15 ran SEPTkubo_mapptoplane.net
+09/18/19 18:18 CW4 post process created 10 txt files, 7 tiff
+09/18/19 18:19 ran SEPTkubo_mapptoplane.net
+09/18/19 18:23 SV4 post process created 10 txt files, 7 tiff
+09/18/19 18:24 ran SEPTkubo_mapptoplane.net
+09/18/19 18:27 SW4 post process created 10 txt files, 7 tiff
+09/18/19 18:29 ran SEPTkubo_mapptoplane.net
+09/18/19 18:32 AV7 post process created 10 txt files, 7 tiff
+09/18/19 18:34 ran SEPTkubo_mapptoplane.net
+09/18/19 18:37 AW7 error post process created 5 txt files, 7 tiff
+09/18/19 18:38 ran SEPTkubo_mapptoplane.net
+09/18/19 18:41 BV7 post process created 10 txt files, 7 tiff
+09/18/19 18:43 ran SEPTkubo_mapptoplane.net
+09/18/19 18:46 BW7 post process created 10 txt files, 7 tiff
+09/18/19 18:48 ran SEPTkubo_mapptoplane.net
+09/18/19 18:51 CV7 post process created 10 txt files, 7 tiff
+09/18/19 18:52 ran SEPTkubo_mapptoplane.net
+09/18/19 18:56 CW7 post process created 10 txt files, 7 tiff
+09/19/19 06:06 CW7 completed 9 timesteps
+09/19/19 06:12 ran SEPTkubo_mapptoplane.net
+09/19/19 06:14 CW7 post process created 10 txt files, 0 tiff
+09/21/19 06:36 SV7 completed 9 timesteps
+09/21/19 06:46 ran SEPTkubo_mapptoplane.net
+09/21/19 06:47 SV7 post process created 10 txt files, 0 tiff
+09/21/19 11:07 SW7 completed 9 timesteps
+09/21/19 11:17 ran SEPTkubo_mapptoplane.net
+09/21/19 11:19 SW7 post process created 10 txt files, 0 tiff

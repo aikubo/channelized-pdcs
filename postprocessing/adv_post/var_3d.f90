@@ -59,18 +59,18 @@ use maketopo
 
                 if ( YYY(I,1) .lt. top) then
                         maskshapein(I) = .TRUE.
-                else 
+                else
                         maskshapein(I)= .FALSE.
-                end if 
+                end if
 
                 if ( YYY(I,1) .gt. top) then
                         maskshapeout(I) = .TRUE.
-                else 
+                else
                         maskshapeout(I)= .FALSE.
-                end if 
-        end do 
+                end if
+        end do
 
-        print maskshapein
+        !print*, maskshapein
 
 
         do t=2,timesteps
