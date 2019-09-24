@@ -48,7 +48,7 @@ use maketopo
 
         routine="var_3d/dpupeak"
         description="Calculate peak dynamic pressure inside and outside channel"
-        datatype=" t "
+        datatype=" t    peak pressure  peak inside    peak outside of channel"
         filename='dpu_peak.txt'
         call headerf(4020, filename, simlabel, routine, DESCRIPTION, datatype)
 
