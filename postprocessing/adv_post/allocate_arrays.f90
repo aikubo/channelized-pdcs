@@ -17,7 +17,7 @@
         ALLOCATE( V_S1(length1, timesteps))
         ALLOCATE( Ri(length1, timesteps))
         ALLOCATE( ROP_S1(length1,timesteps))
-        ALLOCATE(V_S1(length1, timesteps))
+        ALLOCATE(W_S1(length1, timesteps))
 
         ALLOCATE( XXX(length1,1))
         ALLOCATE( topography(length1))
