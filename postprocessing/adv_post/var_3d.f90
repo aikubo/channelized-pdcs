@@ -24,7 +24,7 @@ use maketopo
 
 
         subroutine dynamicpressure(EP_G, U_S1, W_S1, V_S1, DPU)
-                double precision, dimension(:,:), intent(IN):: EP_G, U_S1
+                double precision, dimension(:,:), intent(IN):: EP_G, U_S1, W_S1, V_S1
                 double precision, dimension(:,:), intent(OUT):: DPU
                 double precision:: vel
                 print*, "making dpu"
