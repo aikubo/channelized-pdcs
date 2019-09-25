@@ -8,11 +8,11 @@ import pandas as pd
 import seaborn as sns
 
 #colors = sns.cubehelix_palette(8)
-labels=[ "AV4", "CV4", "BW4", "CW4", "SW4", "BW7", "AV7", "CV7", "BV7", "BV4", "SV4", "CW7" ]
+labels=[ "AV4", "CV4", "BW4", "CW4", "SW4", "BW7", "AV7", "CV7", "EV7", "EV4", "SV4", "CW7" ]
 labels.sort()
 
 def setcolorandstyle(labels):
-    palette=sns.color_palette("coolwarm", len(labels))
+    palette=sns.color_palette("cubehelix", len(labels))
 
     colordf=pd.DataFrame()
     colordf['label']=labels
@@ -22,13 +22,22 @@ def setcolorandstyle(labels):
     sns.set_style("white")
     sns.set_style( "ticks",{"xtick.direction": "in","ytick.direction": "in"})
     sns.set_context("paper")
+
     return palette
 
 palette= setcolorandstyle(labels)
 
-def openslicet(labels, twant):
+sns.palplot(palette)
+
+def openslicet(labels, twant, loc):
     path2file = '/home/akh/myprojects/channelized-pdcs/graphs/processed/'
-    slicefid='_slice_x200_z150.txt'
+    labels = res = [k for k in labels if 'S' not in k]
+    if loc in "in":
+        slicefid='_slice_middle.txt'
+    else :
+        slicefid='_slice_outsidehalfl.txt'
+
+    
     slice_EPP=pd.DataFrame()
     slice_UG=pd.DataFrame()
     slice_TG=pd.DataFrame()
@@ -48,6 +57,9 @@ def openslicet(labels, twant):
         fid=path2file+sim
         loc=fid + slicefid
         slice_temp=pd.read_table(loc, header=None, sep= '\s+', skiprows=9)
+        if 'S' in sim: 
+            continue
+
         col = ['UG', 'DPU', 'TG', 'Ri' ]
         slice_temp.columns = ['time', 'YYY',  'EPP', 'UG', 'DPU', 'TG', 'Ri' ]
 
@@ -76,8 +88,8 @@ def openslicet(labels, twant):
 
     return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
 
-slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= openslicet(labels, 6)
-
+slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(labels, 6, 'in')
+sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(labels, 6, 'out')
 
 def opensliceavg(labels):
     path2file = '/home/akh/myprojects/channelized-pdcs/graphs/processed/'
@@ -154,6 +166,9 @@ def openlabel(labels):
     entrainmentfid='_entrainment.txt'
     massfid='_massinchannel.txt'
     avgf='_average_all.txt'
+    cross='_cross_stream.txt'
+    dpu='_dpu_peak.txt'
+
 
     ent=pd.DataFrame()
     froude=pd.DataFrame()
@@ -161,9 +176,20 @@ def openlabel(labels):
     front=pd.DataFrame()
 
     inchannelmass=pd.DataFrame()
-    gtscaleheight=pd.DataFrame()
-    avulsed=pd.DataFrame()
+    buoyantelutriated=pd.DataFrame()
+    avulseddense=pd.DataFrame()
     avg_TG=pd.DataFrame()
+    crossU=pd.DataFrame()
+    crossV= pd.DataFrame()
+    crossW=pd.DataFrame()
+
+    frac_crossU=pd.DataFrame()
+    frac_crossV= pd.DataFrame()
+    frac_crossW=pd.DataFrame()
+
+    peak_dpuin=pd.DataFrame()
+    peak_dpuout=pd.DataFrame()
+
 
     for sim in labels:
         fid=path2file + sim
@@ -190,10 +216,11 @@ def openlabel(labels):
         # massin
         loc=fid + massfid
         mass_temp=pd.read_fwf(loc, header=None, skiprows=9)
-        mass_temp.columns=['time', 'Total Mass (m^3)', 'Elutriated %', 'Med % ', 'Dense %', 'InChannel', ' Width', ' 0ScaleH', 'ScaleH', '2ScaleH']
-        gtscaleheight[sim]=mass_temp['ScaleH']
+        # t, tmass, outsum, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, buoyant, current
+        mass_temp.columns=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InChannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "Denser"]
+        buoyantelutriated[sim]=mass_temp['Buoyant']
         inchannelmass[sim]=mass_temp['InChannel']
-        avulsed[sim]=1-mass_temp['InChannel']
+        avulseddense[sim]=mass_temp['Denser']
 
         # average
         loc=fid + avgf
@@ -202,7 +229,29 @@ def openlabel(labels):
         avg_UG[sim]=avg_temp['U_G']
         avg_TG[sim]=avg_temp['T_G']
 
-    return ent, froude, avg_UG, avg_TG, gtscaleheight, inchannelmass, avulsed, front
+        #cross stream
+        #t Total Mass (Higest velocity) U W V
+        loc=fid+cross
+        cross_temp=pd.read_fwf(loc, header=None, skiprows=9)
+        cross_temp.columns=['time', 'U','AVGUDOM', 'V', 'AVGVDOM', 'W', 'AVGWDOM']
+        crossU[sim]= cross_temp['U']
+        crossW[sim]= cross_temp['W']
+        crossV[sim]= cross_temp['V']
+
+        frac_crossU[sim]= cross_temp['U']
+        frac_crossW[sim]= cross_temp['W']
+        crac_crossV[sim]= cross_temp['V']
+
+        #peak dpu 
+        loc=fid+dpu
+        dpu_temp=pd.read_fwf(loc, header=None, skiprows=9)
+        dpu_temp.columns=['time', 'peak', 'peakin', 'peakout']
+        peak_dpuin[sim]=dpu_temp['peakin']
+        peak_dpuout[sim]=dpu_temp['peakout']
+
+
+
+    return ent, froude, avg_UG, avg_TG, buoyantelutriated, inchannelmass, avulseddense, front, peak_dpuin, peak_dpuout, crossU, crossW, crossV
 def entrain(data):
     print('hello entrainment')
     vol=[]
@@ -217,7 +266,7 @@ def entrain(data):
 
     return deltaV
 
-def plottogether(fid, df, xlab, ylab):
+def plottogether(fid, df, ylab, xlab):
     print("plotting")
     print(fid)
     time=['0','5','10','15','20','25','30','35', '40']
@@ -437,15 +486,15 @@ def twotime(fid, df1, df2, datalabel1, datalabel2):
     ax1.set_xlabel("Time")
     savefigure(fid)
 
-ent, froude, avg_UG, avg_T, gtscaleheight, inchannelmass, avulsed, front = openlabel(labels)
+ent, froude, avg_UG, avg_TG, buoyantelutriated, inchannelmass, avulseddense, front, peak_dpuin, peak_dpuout, crossU, crossW, crossV = openlabel(labels)
 
 fig, axes = plt.subplots(3, 1, sharex=True)
 setgrl(fig, axes, 6, 3)
 inchannelmass.iloc[0] = 1
 axes[0].set_xlabel("Down Slope distance (m)")
-channelfrontplot(axes[0], 1 - inchannelmass, "Avulsed Mass (%)", 'A', 300.)
-channelfrontplot(axes[1], 1 - (inchannelmass), "Avulsed Mass (%)", 'B', 600.)
-channelfrontplot(axes[2], 1 - (inchannelmass), "Avulsed Mass (%)", 'C', 900.)
+channelfrontplot(axes[0], avulseddense, "Avulsed Mass (%)", 'A', 300.)
+channelfrontplot(axes[1], avulseddense, "Avulsed Mass (%)", 'B', 600.)
+channelfrontplot(axes[2], avulseddense, "Avulsed Mass (%)", 'C', 900.)
 labelsubplots(axes, "uleft")
 savefigure("massinchannelbywavelength")
 
@@ -453,10 +502,10 @@ fig, axes = plt.subplots(3, 1, sharex=True)
 setgrl(fig, axes, 6, 3)
 
 axes[2].set_xlabel("Down Slope distance (m)")
-ylim = gtscaleheight.max()
-channelfrontplot(axes[0], gtscaleheight, "Elutriated Mass (%)", 'A', 300.)
-channelfrontplot(axes[1], gtscaleheight, "Elutriated Mass (%)", 'B', 600.)
-channelfrontplot(axes[2], gtscaleheight, "Elutriated Mass (%)", 'C', 900.)
+ylim = buoyantelutriated.max()
+channelfrontplot(axes[0], buoyantelutriated, "Elutriated Mass (%)", 'A', 300.)
+channelfrontplot(axes[1], buoyantelutriated, "Elutriated Mass (%)", 'B', 600.)
+channelfrontplot(axes[2], buoyantelutriated, "Elutriated Mass (%)", 'C', 900.)
 labelsubplots(axes, "uleft")
 savefigure("elumassbywavelength")
 
@@ -468,22 +517,27 @@ ndeltaV = normalizebydepth(ndeltaV)
 plottogether("entrainmentall", deltaV, "Entrainment (m^3)", "Time")
 plottogether("froude", froude, "Froude Number", "Time")
 plottogether('avgUG', avg_UG, "Average Velocity (U/UO)", "Time")
-plottogether('Elutriatedmass', gtscaleheight, 'Elutriated Mass (%)', "Time")
+plottogether('Elutriatedmass', buoyantelutriated, 'Elutriated Mass (%)', "Time")
 plottogether('inchannel', inchannelmass, 'Mass in Channel (%)', 'Time')
-plottogether('avulsed', 1 - inchannelmass, 'Mass Avulsed (%)', 'Time')
+plottogether('avulsed', avulseddense, 'Mass Avulsed (%)', 'Time')
 plottogether("front", front, "Front Location (m)", 'Time')
-plottogether("normalizedentrainment", ndeltaV, "Time",
-             "Entrainment Normalized by Cross Sectional Area")
+plottogether("peakdpuout", peak_dpuout, 'Peak Dynamic Pressure Outside Channel (Pa)', 'Time')
+plottogether("peakdpuin", peak_dpuin, 'Peak Dynamic Pressure Inside Channel (Pa)', 'Time')
+
+#plottogether("normalizedentrainment", ndeltaV, "Time",
+ #            "Entrainment Normalized by Cross Sectional Area")
 
 #plotby(inchannelmass, avg_UG, "% Mass in Channel", "Entrainment")
 
 plotby("entvelu", gtscaleheight, deltaV, "Elutriated Mass (%)",
        "Entrainment (m^3)")
-twotime("entveluovertime", ent, gtscaleheight, "Entrainment (m^3)", "Elutriated Mass (%)")
+#twotime("entveluovertime", ent, gtscaleheight, "Entrainment (m^3)", "Elutriated Mass (%)")
 plotcol(slice_EPP, 'Height (m)', 'Log Volume Fraction Particles')
 slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= opensliceavg(labels)
-fid = 'avgcol_0917w0Ri'
-plotallcol(fid, slice_EPP, slice_UG, slice_DPU, slice_Ri, slice_TG)
+fid = 'col_in'
+plotallcol(fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
+fid = 'col_out'
+plotallcol(fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
 
 def labelparam(label):
     if "A" in label:
@@ -494,6 +548,8 @@ def labelparam(label):
         wave = 900
     elif "D" in label:
         wave = 1200
+    elif "E" in label:
+        wave = 2400
     else:
         wave = 0 
 
@@ -566,6 +622,7 @@ def regime2(data, ylab):
         end.append(data.loc[data.index[-1], sim])
         lamb.append(wave)
         vei.append(vflux)
+
     vmin=min(vei)
     vmax=max(vei)
     cs=axes.scatter(lamb, end, s=40, c=vei, cmap=cm.jet, vmin=vmin, vmax=vmax)
@@ -582,4 +639,4 @@ def regime2(data, ylab):
     #labelsubplots(axes, 'uleft')
     savefigure("regime2")
 
-regime2(1-inchannelmass, "Avulsed Mass %")
+regime2(avulseddense, "Avulsed Mass %")
