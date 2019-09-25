@@ -1,3 +1,3 @@
 ”09/25/2019” EV4 ran cut_man.sh 
 
-09/25/19 00:00 EV4 post process created 12 txt files, 0 tiff
+09/25/19 01:09 EV4 post process created 13 txt files, 0 tiff

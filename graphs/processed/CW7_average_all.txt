@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20190924
+  Date: 20190925
   Simulation name: CW7 
   Filename:average_all.txt                                                                                                         
   Produced in mod-subroutine:  averageit.mod/average_all                                                                                               

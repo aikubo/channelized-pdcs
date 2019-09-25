@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20190924
+  Date: 20190925
   Simulation name: AW4 
   Filename:average_medium.txt                                                                                                      
   Produced in mod-subroutine:  averageit.mod/average_all                                                                                               

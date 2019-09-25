@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20190924
+  Date: 20190925
   Simulation name: BW7 
   Filename:froude.txt                                                                                                              
   Produced in mod-subroutine:  =findhead/isosurf                                                                                                       
