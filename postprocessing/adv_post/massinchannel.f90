@@ -120,4 +120,62 @@ module massdist
         print*, 'mass in channel done'
         END SUBROUTINE massinchannel
 
+
+        subroutine crossstream
+                implicit none 
+                double precision:: dominantvel, tmass, mass, Umass, Vmass, Wmass
+                double precision:: Uepp, Vepp, Wepp, sum1, sum3, sum2
+                print*, 'cross stream'
+                filename='cross_stream.txt'
+        
+                routine="massdist/cross_stream"
+                description="Calculate mass distribution moving cross vs downstream"
+                datatype=" t Total Mass (Higest velocity) U W V"
+                call headerf(4510, filename, simlabel, routine, DESCRIPTION, datatype)
+
+                do t= 1,timesteps
+                        tmass=0
+                        Umass=0
+                        Vmass=0
+                        Wmass=0
+                        Uepp=0
+                        Vepp=0
+                        Wepp=0
+                        sum1=0
+                        sum2=0
+                        sum3=0
+
+                        do I=1,length1 
+                                if (EPP(I,t) .gt. 0 and .lt. 8) then 
+                                        mass = (1-EP_G1(I,t))*Volume_Unit*rho_p
+                                        tmass=tmass+ mass
+                                        dominantvel= max(U_G1(I,t), V_G1(I,t), W_G1(I,t))
+
+                                        if (dominantvel .eq. U_G1(I,t)) then 
+                                                Umass= Umass +mass
+                                                sum1= 1 + sum1
+                                                Uepp = Uepp + EP_P(I,t)
+                                        elseif (dominantvel .eq. V_G1(I,t)) then
+                                                Vmass= Vmass +mass 
+                                                sum2= 1 + sum2
+                                                Vepp = Vepp + EP_P(I,t)
+                                        elseif (dominantvel .eq. W_G1(I,t)) then 
+                                                Wmass= Wmass +mass
+                                                sum3= 1 + sum3
+                                                Wepp = Wepp + EP_P(I,t)
+                                        end if 
+                                end if
+                        end do 
+
+                        Umass=Umass/tmass
+                        Vmass=Vmass/tmass
+                        Wmass=Wmass/tmass
+                        Vepp=Vepp/sum2
+                        Uepp= Uepp/sum1
+                        Wepp=Wepp/sum3
+
+                        write(4510, format8col) t, tmass, Umass, Uepp, Vmass, Vepp, Wmass, Wepp
+                                                
+
+
 end module 
