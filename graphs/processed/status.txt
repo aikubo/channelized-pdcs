@@ -1,1 +1,3 @@
-09/24/19 22:22 SW7 error post process created 11 txt files, 0 tiff
+”09/25/2019” EV4 ran cut_man.sh 
+
+09/25/19 00:00 EV4 post process created 12 txt files, 0 tiff
