@@ -465,7 +465,7 @@ def channelfrontplot(ax, data, xlabel, wavelabel, wave):
         i=labels.index(sim)
         ax2.plot(front[sim], data[sim], label=sim, color=palette[i])
     ax2.set_xlabel(xlabel)
-    ax2.set_ylim([y1, y2])
+    ax2.set_ylim([y1-y2, y2])
     #plt.show()
 
 def twotime(fid, df1, df2, datalabel1, datalabel2):
@@ -487,27 +487,22 @@ def twotime(fid, df1, df2, datalabel1, datalabel2):
     savefigure(fid)
 
 ent, froude, avg_UG, avg_TG, buoyantelutriated, inchannelmass, avulseddense, front, peak_dpuin, peak_dpuout, crossU, crossW, crossV = openlabel(labels)
+def channelfrontsubplot(fid, data)
+    fig, axes = plt.subplots(3, 1, sharex=True)
+    setgrl(fig, axes, 6, 3)
+    inchannelmass.iloc[0] = 1
+    axes[0].set_xlabel("Down Slope distance (m)")
+    channelfrontplot(axes[0], data, "Avulsed Mass (%)", 'A', 300.)
+    channelfrontplot(axes[1], data, "Avulsed Mass (%)", 'B', 600.)
+    channelfrontplot(axes[2], data, "Avulsed Mass (%)", 'C', 900.)
+    labelsubplots(axes, "uleft")
+    savefigure(fid)
 
-fig, axes = plt.subplots(3, 1, sharex=True)
-setgrl(fig, axes, 6, 3)
-inchannelmass.iloc[0] = 1
-axes[0].set_xlabel("Down Slope distance (m)")
-channelfrontplot(axes[0], avulseddense, "Avulsed Mass (%)", 'A', 300.)
-channelfrontplot(axes[1], avulseddense, "Avulsed Mass (%)", 'B', 600.)
-channelfrontplot(axes[2], avulseddense, "Avulsed Mass (%)", 'C', 900.)
-labelsubplots(axes, "uleft")
-savefigure("massinchannelbywavelength")
-
-fig, axes = plt.subplots(3, 1, sharex=True)
-setgrl(fig, axes, 6, 3)
-
-axes[2].set_xlabel("Down Slope distance (m)")
-ylim = buoyantelutriated.max()
-channelfrontplot(axes[0], buoyantelutriated, "Elutriated Mass (%)", 'A', 300.)
-channelfrontplot(axes[1], buoyantelutriated, "Elutriated Mass (%)", 'B', 600.)
-channelfrontplot(axes[2], buoyantelutriated, "Elutriated Mass (%)", 'C', 900.)
-labelsubplots(axes, "uleft")
-savefigure("elumassbywavelength")
+channelfrontsubplot('avulsedmassbywavelength', avulseddense)
+channelfrontsubplot('elumassbywavelength',buoyantelutriated)
+channelfrontsubplot('peakdpubywavelength',peak_dpuin)
+channelfrontsubplot('peakdpuoutbywavelength',peak_dpuout)
+channelfrontsubplot('crossstreambywavelength',crossV)
 
 nfront = normalizebywave(front)
 deltaV = entrain(ent)
@@ -523,6 +518,7 @@ plottogether('avulsed', avulseddense, 'Mass Avulsed (%)', 'Time')
 plottogether("front", front, "Front Location (m)", 'Time')
 plottogether("peakdpuout", peak_dpuout, 'Peak Dynamic Pressure Outside Channel (Pa)', 'Time')
 plottogether("peakdpuin", peak_dpuin, 'Peak Dynamic Pressure Inside Channel (Pa)', 'Time')
+plottogether("cross_streamV", crossV, 'Mass Fraction with Dominant Cross Stream Velocity', 'Time')
 
 #plottogether("normalizedentrainment", ndeltaV, "Time",
  #            "Entrainment Normalized by Cross Sectional Area")
