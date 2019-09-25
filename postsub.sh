@@ -12,8 +12,8 @@
 
 ./post.exe   ### Put your executable name here
 
-onevis.sh
 
-cut_man.sh
+
+
 
 checkcompletepost.sh

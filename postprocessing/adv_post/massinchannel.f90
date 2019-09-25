@@ -88,7 +88,8 @@ module massdist
                         END IF
                 END IF
 
-                If (YYY(I,t) > top) then 
+                If (YYY(I,1) > top) then 
+                        outsum= outsum +(1-EP_G1(I,t))*Volume_Unit*rho_p
                         rho_c=rho_p*(1-EP_G1(I,t))+(P_const/(R_dryair*T_G1(I,t)))*(EP_G1(I,t))
                         if ( rho_c < rho_dry) then
                         buoyant = buoyant + (1-EP_G1(I,t))*Volume_Unit*rho_p
