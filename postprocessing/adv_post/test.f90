@@ -18,7 +18,6 @@ integer:: tfind=8
 double precision:: ZLOC=150
 double precision:: XLOC=200
 integer::printstatus=2
-double precision:: width, lambda
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
@@ -52,9 +51,16 @@ call openbin(800, 'V_S1', V_S1)
 
 call handletopo('l0_w201', XXX, YYY, ZZZ)
 !call writedxtopo
-!call  logvolfrc(EP_G1, EPP)
-call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
-call dpupeak(width, lambda, depth, DPU)
+call  logvolfrc(EP_G1, EPP)
+!call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
+!call dpupeak(width, lambda, depth, DPU)
+
+!XLOC=floor((lambda/3)*(0.5))
+!call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+!ZLOC=floor((edge2+6)/3)
+!call slice(width, depth, lambda, XLOC, ZLOC)
+!call slices2
+
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
 !call makeEP(1100, EP_P, printstatus, tfind)
@@ -66,7 +72,7 @@ call dpupeak(width, lambda, depth, DPU)
 !print*, Ri_all
 !call bulkent(EP_G1) 
 
-!call massinchannel(width, depth, lambda, scaleh)
+call massinchannel(width, depth, lambda, scaleh)
 !open(1300, file='slice.txt')
 !call slice(width, depth, lambda, XLOC, ZLOC)
 

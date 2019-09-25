@@ -19,14 +19,14 @@ module massdist
 
         routine="massdist/massinchannel"
         description="Calculate mass distribution in different parts of the channel"
-        datatype=" t Total Mass (m^3) Elutriated % Med Dense InChannel WidthChannel 0ScaleH ScaleH `buoyant current.. "
+        datatype=" t Total Mass (m^3) Elutriated % Med Dense InChannel WidthChannel 0ScaleH ScaleH buoyant current "
         filename='massinchannel.txt'
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
-        write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
+     !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
 
         print *, "Done writing 3D variables"
 
-      DO t= 2,timesteps
+      DO t= 1,timesteps
         chmass = 0
         tmass = 0
         chmassd = 0
@@ -37,7 +37,10 @@ module massdist
         scalemass=0
         scalemass2=0
         scalemass1=0
-
+        buoyant=0 
+        current=0 
+        outsum=0
+       
         DO I=1, length1
             call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
 
@@ -101,8 +104,17 @@ module massdist
               END IF
           END IF
          END DO
+         elumass=elumass/tmass
+         medmass= medmass/tmass
+         densemass= densemass/tmass
+         inchannel= inchannel/tmass
+         chmass=chmass/tmass
+         scalemass= scalemass/tmass
+         scalemass1= scalemass1/tmass
+         buoyant= buoyant/outsum
+         current=current/outsum        
         
-         WRITE(4500, formatmass) t, tmass, outsum, elumass/tmass, medmass/tmass, densemass/tmass, inchannel/tmass, chmass/tmass, scalemass/tmass, scalemass1/tmass, buoyant/outsum, current/outsum
+         WRITE(4500, formatmass) t, tmass, outsum, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, buoyant, current
         END DO
         !! done !!
         print*, 'mass in channel done'

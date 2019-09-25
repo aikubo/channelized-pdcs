@@ -12,12 +12,12 @@ contains
 !        subroutine setup_col()
 !        end subroutine setup_col 
 
-        subroutine slice(width, depth, lambda, XC, ZC)
+        subroutine slice(width, depth, lambda, XC, ZC, locstring)
         use formatmod 
        
         implicit none 
           !call allocate_arrays
-          
+          CHARACTER(len=*), intent(IN):: locstring
           DOUBLE PRECISION, INTENT(IN):: width, lambda, depth, XC, ZC
           DOUBLE PRECISION:: VOLFR, DYNAM
           DOUBLE PRECISION:: clearance, slope, dx
@@ -31,28 +31,12 @@ contains
           write(zstring,str_b) int(ZC)
 
           routine="column.mod/slice"
-          description=" Vertical columns "
+          description='Veritcal column at x'//trim(xstring)//'_z'//trim(zstring)
           datatype=" t  YYY  EPP   U_G   DPU   T_G   Ri"
           print*, xstring, zstring
-          filename='slice_x'//trim(xstring)//'_z'//trim(zstring)//'.txt'
+          filename='slice_'//locstring//'.txt'
           !open(888, file =filename)
           call headerf(10001, filename, simlabel, routine, DESCRIPTION, datatype)
-
-     
-
-
-          dx=3.0 
-          XLOC=dx*XC 
-          ZLOC=dx*ZC
-
-          call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
-          
-          if (ZLOC .gt. edge1 .and. ZLOC .lt. edge2) then 
-                hill = bottom
-          else
-                hill = top 
-          end if 
-                print*,hill, bottom, top
 
           print*, "start checking column"
            DO t=1,timesteps
@@ -62,9 +46,9 @@ contains
               ! VOLFR = -LOG10(1-EP_G1(I,t)+1e-14)
                 !PRINT*, VOLFR
                 ! IF ( YYY(I,1) .GT. hill .AND. YYY(I,1) .LT. hill+102 ) THEN
-                   IF( ZZZ(I,1) .EQ. ZLOC) THEN
+                   IF( ZZZ(I,1) .EQ. ZC) THEN
                 !        print*, ZZZ(I,1) 
-                    IF( XXX(I,1) .EQ. XLOC) THEN
+                    IF( XXX(I,1) .EQ. XC) THEN
                        ! print*, XXX(I,1)
                       IF(EPP(I,t) .GT. 0.00) THEN
                       !print*, YYY(I,1)-hill, Ri_all(I,1,t) 
@@ -76,6 +60,22 @@ contains
                 end do
            END DO 
          end subroutine slice
+
+        SUBROUTINE SLICES2
+        use maketopo
+        implicit none 
+        double precision:: ZLOC, XLOC 
+        ZLOC=300
+        XLOC=300
+        CALL SLICE(width, depth, lambda, XLOC, ZLOC, 'middle')
+        
+        XLOC=floor((lambda)*(0.5)/3)*3
+        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+        ZLOC=floor((edge2+6)/3)*3
+        print*, XLOC, ZLOC
+        call slice(width, depth, lambda, XLOC, ZLOC, 'outsidehalfl')        
+
+        end subroutine 
 
 end module 
 

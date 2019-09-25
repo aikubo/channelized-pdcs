@@ -377,3 +377,28 @@
 09/21/19 11:07 SW7 completed 9 timesteps
 09/21/19 11:17 ran SEPTkubo_mapptoplane.net
 09/21/19 11:19 SW7 post process created 10 txt files, 0 tiff
+ BV1 Submitted batch job 10017790
+09/24/19 13:49 AV4 error post process created 6 txt files, 0 tiff
+09/24/19 13:49 AW4 error post process created 6 txt files, 0 tiff
+09/24/19 13:49 BV4 error post process created 6 txt files, 0 tiff
+09/24/19 13:49 BW4 error post process created 6 txt files, 0 tiff
+09/24/19 13:50 CV4 error post process created 6 txt files, 0 tiff
+09/24/19 13:50 SV4 error post process created 6 txt files, 0 tiff
+09/24/19 13:50 SW4 error post process created 6 txt files, 0 tiff
+09/24/19 13:50 AW7 error post process created 4 txt files, 0 tiff
+09/24/19 13:50 BV7 error post process created 6 txt files, 0 tiff
+09/24/19 13:50 CW7 error post process created 6 txt files, 0 tiff
+09/24/19 13:50 CV7 error post process created 6 txt files, 0 tiff
+09/24/19 13:50 SW7 error post process created 6 txt files, 0 tiff
+09/24/19 13:51 CW4 error post process created 6 txt files, 0 tiff
+09/24/19 13:51 AV7 error post process created 6 txt files, 0 tiff
+09/24/19 13:51 BW7 error post process created 6 txt files, 0 tiff
+09/24/19 13:52 SV7 error post process created 6 txt files, 0 tiff
+09/24/19 14:29 AV7 error post process created 0 txt files, 0 tiff
+09/24/19 14:34 AV7 error post process created 6 txt files, 0 tiff
+09/24/19 14:44 AV7 error post process created 6 txt files, 0 tiff
+09/24/19 14:32 CV1 prepared to run
+09/24/19 16:23 AV7 post process created 10 txt files, 0 tiff
+09/24/19 16:41 ran SEPTkubo_mapptoplane.net
+09/24/19 16:42 AV7 post process created 10 txt files, 0 tiff
+09/24/19 16:46 BV4 prepared to run but not compiled

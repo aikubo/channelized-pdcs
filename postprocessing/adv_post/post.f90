@@ -15,15 +15,15 @@ use averageit
 
 implicit none
 integer:: tfind=8
-double precision:: ZLOC=150
-double precision:: XLOC=200
+
+
 integer::printstatus=2
-double precision:: width, lambda
+
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='BV4'
+simlabel='AV7'
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -31,7 +31,7 @@ YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
 width=201
-lambda=600
+lambda=300
 timesteps=8
 tstart=3
 tstop=timesteps
@@ -46,11 +46,13 @@ call openbin(300, 'T_G', T_G1)
 call openbin(400, 'V_G', V_G1)
 call openbin(500, 'W_G', W_G1)
 call openbin(600, 'U_S1', U_S1)
+call openbin(700, 'W_S1', W_S1)
+call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l600_w201', XXX, YYY, ZZZ)
-call writedxtopo
+call handletopo('l300_w201', XXX, YYY, ZZZ)
+!call writedxtopo
 call  logvolfrc(EP_G1, EPP)
-call dynamicpressure(EP_G1, U_S1, DPU)
+call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
 call makeEP(1100, EP_P, printstatus, tfind)
@@ -66,8 +68,8 @@ call bulkent(EP_G1)
 print*, "calculating mass in channel"
 call massinchannel(width, depth, lambda, scaleh)
 print*, "finding veritical column"
-call slice(width, depth, lambda, XLOC, ZLOC)
-
+call slices2
+print*, "averaging"
 call average_all
 
 print*, "end program"

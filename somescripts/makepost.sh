@@ -5,7 +5,7 @@ here=$(pwd)
 label=${PWD##*/}
 
 #clean it up 
-rm *tiff
+#rm *tiff
 rm *txt
 
 

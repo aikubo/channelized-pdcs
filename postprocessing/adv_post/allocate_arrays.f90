@@ -45,7 +45,6 @@
         ALLOCATE(Richardson(length1,5,timesteps))
         ALLOCATE(SHUY(length1,timesteps))
         ALLOCATE(Ri_all(length1, 2, timesteps))
-        ALLOCATE(Location_I(length1,timesteps))
 
         ALLOCATE(Iso_6(length1,9,timesteps))
         ALLOCATE(Iso_3(length1,9,timesteps))

@@ -42,7 +42,7 @@ for lambda=[0,300,600,900,1200]
              if lambda==0
                 sinuous= center;
              else        
-                sinuous = amp*sind(360*(i/lambda)) + center;
+                sinuous = amp*sind(360*((i*3)/lambda)) + center;
              end 
              
 %             

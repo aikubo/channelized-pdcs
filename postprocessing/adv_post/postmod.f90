@@ -9,7 +9,6 @@ INTEGER :: t1,t2, clock_rate, clock_max
 CHARACTER(LEN=1) :: junk
 INTEGER:: MAX_REC = 1e9
 INTEGER:: count1,num_open,sum1,sum2
-INTEGER:: ios, int_temp,int_check,int_pos1,int_min1,int_pos2,int_min2
 INTEGER:: tstart, tstop
 DOUBLE PRECISION:: depth
 DOUBLE PRECISION, ALLOCATABLE:: EPP(:,:)
@@ -17,7 +16,6 @@ DOUBLE PRECISION, ALLOCATABLE:: EPP(:,:)
 INTEGER::yc,I,J,K,THMAX,rc,zc,tc,t,I_yp1,I_ym1,I_zp1,I_zm1,I_xp1,I_xm1,temp_rc
 INTEGER::write_end,loop_open,fid_temp,fid_EP_P,fid_EP_G,fid_U,fid_ISO6,fid_GRAD4pt, fid_GRADsize,fid_GradV,fid_GradE
 INTEGER::fid_EP_G_t,fid_U_t,fid_ISO3,fid_Ri,fid_ROP1,fid_Dot,fid_dpu,fid_dpv
-INTEGER:: fide, fidy, fidw
 INTEGER::Z_minus,Z_plus,X_minus,Y_plus,Z_total,I_local
 
 DOUBLE PRECISION,ALLOCATABLE::EP_P(:,:,:),Iso_6(:,:,:), dpu(:,:), dpv(:,:,:)
@@ -31,7 +29,6 @@ DOUBLE PRECISION, ALLOCATABLE::topo2(:),topography(:),EP_G1(:,:),XXX(:,:),YYY(:,
 DOUBLE PRECISION, ALLOCATABLE :: T_G1(:,:),V_G1(:,:),U_G1(:,:),W_G1(:,:),T_S1(:,:),C_PG(:,:),C_PS1(:,:),C_PS2(:,:)
 DOUBLE PRECISION, ALLOCATABLE :: ROP_S1(:,:), U_S1(:,:), V_S1(:,:), W_S1(:,:), Ri(:,:)
 
-INTEGER, ALLOCATABLE::Location_I(:,:)
 
 DOUBLE PRECISION, ALLOCATABLE ::XX(:,:,:),YY(:,:,:),ZZ(:,:,:),channel_topo(:,:)
 DOUBLE PRECISION, ALLOCATABLE ::DY(:),y(:),x(:),theta(:),z(:),DX(:),DTH(:),DZ(:),GZ(:)
@@ -41,11 +38,10 @@ DOUBLE PRECISION:: max_mag, current_density,top,bottom !, max_dilute,min_dilute,
 !DOUBLE PRECISION::initial_ep_g,ROP1,ROP2,initial_vel,initial_temp,Area_flux,Gas_flux,Solid_flux,gravity,temp_val,local_vel
 DOUBLE PRECISION::c_pos1, c_pos2, c_min1, c_min2, delta_V1, delta_V3,shear_v,delta_rho 
 !DOUBLE PRECISION::Gas_Volume(1,5),Volume_Unit,Energy_In_G, CP_Go,Energy_In_S1,CP_S1o, Energy_In_S2, CP_S2o
-DOUBLE PRECISION::mag_grad,norm_grad(1,3),temp_dot
-
+INTEGER:: ios, int_temp,int_check,int_pos1,int_min1,int_pos2,int_min2
 !DOUBLE PRECISION:: tmass, chmass, chmassd, inchannelw, inchanneld
 !REAL:: M
-!INTEGER:: ind1, edge1, edge2, width, depth, bins, fid_shea
+DOUBLE PRECISION:: lambda, width
 !DOUBLE PRECISION:: D, U0, ROP_0, gstar, Hstar, stokest, stokesv
 DOUBLE PRECISION:: edge1, edge2
 DOUBLE PRECISION:: avgt, avgt2, avgt3, avgu, avgu2, avgu3, avgv, avgv2,avgv3, avgw, avgw2, avgw3, avgus, avgus2, avgus3, sum_1, sum_2, sum_3

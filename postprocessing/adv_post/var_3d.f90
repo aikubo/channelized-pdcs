@@ -45,10 +45,10 @@ use maketopo
         double precision, dimension(:,:), intent(INOUT):: DPU
         double precision:: maxdpu, maxdpuin, maxdpuout
         logical, dimension(length1):: maskshapein, maskshapeout
-
+        LOGICAL, dimension(length1):: locin, locout
         routine="var_3d/dpupeak"
         description="Calculate peak dynamic pressure inside and outside channel"
-        datatype=" t    peak pressure  peak inside    peak outside of channel"
+        datatype=" t, peak pressure, XXX, YYY, peak inside, XX, YY, peak outside of channel"
         filename='dpu_peak.txt'
         call headerf(4020, filename, simlabel, routine, DESCRIPTION, datatype)
 
@@ -57,13 +57,13 @@ use maketopo
         do I= 1,length1
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
 
-                if ( YYY(I,1) .lt. top) then
+                if ( YYY(I,1) .lt. top .and. EP_G1(I,t) .gt. 0 ) then
                         maskshapein(I) = .TRUE.
                 else
                         maskshapein(I)= .FALSE.
                 end if
 
-                if ( YYY(I,1) .gt. top) then
+                if ( YYY(I,1) .gt. top .and. EP_G1(I,t) .gt. 0) then
                         maskshapeout(I) = .TRUE.
                 else
                         maskshapeout(I)= .FALSE.
@@ -73,14 +73,16 @@ use maketopo
         !print*, maskshapein
 
 
-        do t=2,timesteps
+        do t=1,timesteps
                 maxdpu = maxval(DPU(:,t))
                 maxdpuin= maxval(DPU(:,t), MASK=maskshapein)
+               ! locin= maxloc(DPU(:,t), MASK=maskshapein)
                 maxdpuout= maxval(DPU(:,t), MASK=maskshapeout)
-
+               ! locout= maxloc(DPU(:,t), MASK=maskshapeout)
                 print*, maxdpu
-        
                 write(4020, formatent) t, maxdpu, maxdpuin, maxdpuout
+                !print*, PACK( DPU(:,1), mask=(locin .eq. .TRUE.))
+        !        write(4020, format8col) t, maxdpu, XXX(locin,1), YYY(locin,1), maxdpuin, XXX(locout,1), YYY(locout,1), maxdpuout
         end do 
 
         end subroutine 
