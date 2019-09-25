@@ -39,16 +39,16 @@ use maketopo
 
         end subroutine 
 
-        subroutine dpupeak(width, lambda, depth, DPU)
+        subroutine dpupeak
         use maketopo
-        double precision, intent(IN):: width, lambda, depth
-        double precision, dimension(:,:), intent(INOUT):: DPU
+
+
         double precision:: maxdpu, maxdpuin, maxdpuout
         logical, dimension(length1):: maskshapein, maskshapeout
         LOGICAL, dimension(length1):: locin, locout
         routine="var_3d/dpupeak"
         description="Calculate peak dynamic pressure inside and outside channel"
-        datatype=" t, peak pressure, XXX, YYY, peak inside, XX, YY, peak outside of channel"
+        datatype=" t, peak pressure, peak inside, peak outside of channel"
         filename='dpu_peak.txt'
         call headerf(4020, filename, simlabel, routine, DESCRIPTION, datatype)
 

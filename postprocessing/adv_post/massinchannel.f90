@@ -174,7 +174,7 @@ module massdist
                         Uepp= Uepp/sum1
                         Wepp=Wepp/sum3
 
-                        write(4510, format8col) t, tmass, Umass, Uepp, Vmass, Vepp, Wmass, Wepp
+                        write(4510, format7col) t, Umass, Uepp, Vmass, Vepp, Wmass, Wepp
                end do                                  
 
         end subroutine
