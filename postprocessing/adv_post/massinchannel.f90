@@ -111,8 +111,8 @@ module massdist
          chmass=chmass/tmass
          scalemass= scalemass/tmass
          scalemass1= scalemass1/tmass
-         buoyant= buoyant/outsum
-         current=current/outsum        
+         buoyant= buoyant/tmass
+         current=current/tmass     
         
          WRITE(4500, formatmass) t, tmass, outsum, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, buoyant, current
         END DO

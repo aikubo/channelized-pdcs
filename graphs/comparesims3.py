@@ -8,11 +8,11 @@ import pandas as pd
 import seaborn as sns
 
 #colors = sns.cubehelix_palette(8)
-labels=[ "AV4", "CV4", "BW4", "CW4", "SW4", "BW7", "AV7", "CV7", "EV7", "EV4", "SV4", "CW7" ]
+labels=[ "AV4", "CV4", "BW4", "SW4", "BW7", "AV7", "CV7", "EV7", "EV4", "SV4", "CW7" ]
 labels.sort()
 
 def setcolorandstyle(labels):
-    palette=sns.color_palette("cubehelix", len(labels))
+    palette=sns.color_palette("coolwarm", len(labels))
 
     colordf=pd.DataFrame()
     colordf['label']=labels
@@ -201,10 +201,8 @@ def openlabel(labels):
         loc=fid + froudefid
         fr_temp=pd.read_fwf(loc, header=None, skiprows=9)
         fr_temp.columns=['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
-        time0=pd.DataFrame({'time':1, 'AvgU':10,'AvgEP':.39,'AvgT':800,'Froude':0,'Front':0,' Width':100,'Height':0 }, index=[0])
-        fr_temp2=pd.concat([time0,fr_temp])
-        froude[sim]=fr_temp2['Froude']
-        front[sim]=fr_temp2['Front']
+        froude[sim]=fr_temp['Froude']
+        front[sim]=fr_temp['Front']
 
         # ent
         loc=fid + entrainmentfid
@@ -212,15 +210,16 @@ def openlabel(labels):
         ent_temp.columns=['time', 'bulk', 'medium', 'dense']
         ent[str(sim)]=ent_temp['bulk']
 
-        print(sim)
         # massin
         loc=fid + massfid
         mass_temp=pd.read_fwf(loc, header=None, skiprows=9)
         # t, tmass, outsum, elumass, medmass, densemass, inchannel, chmass, scalemass, scalemass1, buoyant, current
-        mass_temp.columns=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InChannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "Denser"]
+        mass_temp.columns=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InChannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "AvulseD"]
+        mass_temp.fillna(0)
         buoyantelutriated[sim]=mass_temp['Buoyant']
         inchannelmass[sim]=mass_temp['InChannel']
-        avulseddense[sim]=mass_temp['Denser']
+        avulseddense[sim]=mass_temp['AvulseD']
+
 
         # average
         loc=fid + avgf
@@ -240,7 +239,7 @@ def openlabel(labels):
 
         frac_crossU[sim]= cross_temp['U']
         frac_crossW[sim]= cross_temp['W']
-        crac_crossV[sim]= cross_temp['V']
+        frac_crossV[sim]= cross_temp['V']
 
         #peak dpu 
         loc=fid+dpu
@@ -269,6 +268,7 @@ def entrain(data):
 def plottogether(fid, df, ylab, xlab):
     print("plotting")
     print(fid)
+    df.fillna(0)
     time=['0','5','10','15','20','25','30','35', '40']
     fig1, ax1 = plt.subplots()
     ax1.set_xticklabels(time)
@@ -307,11 +307,11 @@ def horizplot(df, loc, labels):
     top=3*maxy
     height = np.arange(0,top,3)
 
-    palette=sns.color_palette("coolwarm", len(labels))
-
     df1=df.fillna(df.min())
-    for i in range(len(labels)):
-        loc.plot(df1[labels[i]], height, label=labels[i], color=palette[i] )
+    num=0
+    for i in df.columns:
+        j=labels.index(i)
+        loc.plot(df1[i], height, label=i, color=palette[j] )
 
 def setgrl(fig, axes, h,l):
 
@@ -329,9 +329,10 @@ def savefigure(name):
     plt.savefig(fid, format='eps', dpi=600)
 
 def plotallcol(fid, df1, df2, df3, df4, df5):
-
     fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
     setgrl(fig, axes, 4, 8)
+
+    df5.fillna(273.0)
     # EPP
 
     loc=axes[0]
@@ -348,18 +349,17 @@ def plotallcol(fid, df1, df2, df3, df4, df5):
     axes[1].set_xlabel('Velocity (U/U0)',size=9)
     loc.set_ylim([0,150])
 
-    # Richardson Number
+    # temperature
     loc=axes[2]
-    t0=800
-    horizplot(df5/t0, loc, labels)
+    t0=800.0
+    temp=df5
+    #horizplot(temp, loc, labels)
     axes[2].set_xlabel('Temperature (T/T0)', size=9)
     loc.set_ylim([0,150])
 
     # DPU
     loc=axes[3]
-    df3= df3+0.000001
-    dpu=np.log10(df3)
-    horizplot(dpu, loc, labels)
+    horizplot(df3, loc, labels)
     axes[3].set_xlabel('Dynamic Pressure', size=8)
     loc.set_ylim([0,150])
 
@@ -439,7 +439,6 @@ def normalizebywidth(data):
 
     return data
 
-
 def channelfrontplot(ax, data, xlabel, wavelabel, wave):
     amp = 0.15*wave
     x = np.linspace(0,1200,70)
@@ -463,9 +462,13 @@ def channelfrontplot(ax, data, xlabel, wavelabel, wave):
 
     for sim in ourlabels:
         i=labels.index(sim)
+        print(sim)
+        print(front[sim])
+        print(data[sim])
         ax2.plot(front[sim], data[sim], label=sim, color=palette[i])
+
     ax2.set_xlabel(xlabel)
-    ax2.set_ylim([y1-y2, y2])
+    ax2.set_ylim([y1-y2, y2+y2*.10])
     #plt.show()
 
 def twotime(fid, df1, df2, datalabel1, datalabel2):
@@ -486,50 +489,53 @@ def twotime(fid, df1, df2, datalabel1, datalabel2):
     ax1.set_xlabel("Time")
     savefigure(fid)
 
-ent, froude, avg_UG, avg_TG, buoyantelutriated, inchannelmass, avulseddense, front, peak_dpuin, peak_dpuout, crossU, crossW, crossV = openlabel(labels)
-def channelfrontsubplot(fid, data)
-    fig, axes = plt.subplots(3, 1, sharex=True)
+
+def channelfrontsubplot(fid, data, ylab):
+    fig, axes = plt.subplots(4, 1, sharex=True)
     setgrl(fig, axes, 6, 3)
     inchannelmass.iloc[0] = 1
-    axes[0].set_xlabel("Down Slope distance (m)")
-    channelfrontplot(axes[0], data, "Avulsed Mass (%)", 'A', 300.)
-    channelfrontplot(axes[1], data, "Avulsed Mass (%)", 'B', 600.)
-    channelfrontplot(axes[2], data, "Avulsed Mass (%)", 'C', 900.)
+    axes[3].set_xlabel("Down Slope distance (m)")
+    channelfrontplot(axes[0], data, ylab, 'A', 300.)
+    channelfrontplot(axes[1], data, ylab, 'B', 600.)
+    channelfrontplot(axes[2], data, ylab, 'C', 900.)
+    channelfrontplot(axes[3], data, ylab, 'E', 1200.)
     labelsubplots(axes, "uleft")
     savefigure(fid)
 
-channelfrontsubplot('avulsedmassbywavelength', avulseddense)
-channelfrontsubplot('elumassbywavelength',buoyantelutriated)
-channelfrontsubplot('peakdpubywavelength',peak_dpuin)
-channelfrontsubplot('peakdpuoutbywavelength',peak_dpuout)
-channelfrontsubplot('crossstreambywavelength',crossV)
+ent, froude, avg_UG, avg_TG, buoyantelutriated, inchannelmass, avulseddense, front, peak_dpuin, peak_dpuout, crossU, crossW, crossV = openlabel(labels)
 
-nfront = normalizebywave(front)
+peak_dpuin= np.log10(peak_dpuin + 0.000001)
+peak_dpuout= np.log10(peak_dpuout + 0.000001)
+# print(front)
+
+#channelfrontsubplot('avulsedmassbywavelength', avulseddense, 'Avulsed Mass Fraction')
+#channelfrontsubplot('elumassbywavelength',buoyantelutriated, 'Elutriated Mass Fraction')
+#channelfrontsubplot('peakdpubywavelength',peak_dpuin, 'Peak Dynamic Pressure in Channel ( Log (Pa))')
+#channelfrontsubplot('peakdpuoutbywavelength',peak_dpuout, 'Peak Dynamic Pressure outside Channel ( Log (Pa))')
+#channelfrontsubplot('crossstreambywavelength',crossV, 'Mass Fraction moving Cross Stream')
+
+# nfront = normalizebywave(front)
 deltaV = entrain(ent)
-
-ndeltaV = normalizebywidth(deltaV)
-ndeltaV = normalizebydepth(ndeltaV)
-plottogether("entrainmentall", deltaV, "Entrainment (m^3)", "Time")
-plottogether("froude", froude, "Froude Number", "Time")
-plottogether('avgUG', avg_UG, "Average Velocity (U/UO)", "Time")
-plottogether('Elutriatedmass', buoyantelutriated, 'Elutriated Mass (%)', "Time")
+print(buoyantelutriated)
+print( avulseddense)
+#plottogether("entrainmentall", deltaV, "Entrainment (m^3)", "Time")
+#plottogether("froude", froude, "Froude Number", "Time")
+#plottogether('avgUG', avg_UG, "Average Velocity (U/UO)", "Time")
+plottogether('Elutriatedmass', buoyantelutriated, 'Elutriated Mass Fraction', "Time")
 plottogether('inchannel', inchannelmass, 'Mass in Channel (%)', 'Time')
 plottogether('avulsed', avulseddense, 'Mass Avulsed (%)', 'Time')
-plottogether("front", front, "Front Location (m)", 'Time')
-plottogether("peakdpuout", peak_dpuout, 'Peak Dynamic Pressure Outside Channel (Pa)', 'Time')
-plottogether("peakdpuin", peak_dpuin, 'Peak Dynamic Pressure Inside Channel (Pa)', 'Time')
-plottogether("cross_streamV", crossV, 'Mass Fraction with Dominant Cross Stream Velocity', 'Time')
+#plottogether("front", front, "Front Location (m)", 'Time')
+#plottogether("peakdpuout", peak_dpuout, 'Peak Dynamic Pressure Outside Channel (Pa)', 'Time')
+#plottogether("peakdpuin", peak_dpuin, 'Peak Dynamic Pressure Inside Channel (Pa)', 'Time')
 
-#plottogether("normalizedentrainment", ndeltaV, "Time",
- #            "Entrainment Normalized by Cross Sectional Area")
+plottogether("cross_streamV", crossV, 'Mass Fraction with Dominant Cross Stream Velocity', 'Time')
 
 #plotby(inchannelmass, avg_UG, "% Mass in Channel", "Entrainment")
 
-plotby("entvelu", gtscaleheight, deltaV, "Elutriated Mass (%)",
+plotby("entvelu", buoyantelutriated, deltaV, "Elutriated Mass (%)",
        "Entrainment (m^3)")
 #twotime("entveluovertime", ent, gtscaleheight, "Entrainment (m^3)", "Elutriated Mass (%)")
-plotcol(slice_EPP, 'Height (m)', 'Log Volume Fraction Particles')
-slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri= opensliceavg(labels)
+
 fid = 'col_in'
 plotallcol(fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
 fid = 'col_out'
@@ -635,4 +641,4 @@ def regime2(data, ylab):
     #labelsubplots(axes, 'uleft')
     savefigure("regime2")
 
-regime2(avulseddense, "Avulsed Mass %")
+#regime2(avulseddense, "Avulsed Mass %")
