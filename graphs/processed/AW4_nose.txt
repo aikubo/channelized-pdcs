@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20190918
+  Date: 20190924
   Simulation name: AW4 
   Filename:nose.txt                                                                                                                
   Produced in mod-subroutine:  =findhead/isosurf                                                                                                       

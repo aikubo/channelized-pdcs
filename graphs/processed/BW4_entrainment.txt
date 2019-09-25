@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20190918
+  Date: 20190924
   Simulation name: BW4 
   Filename:entrainment.txt                                                                                                         
   Produced in mod-subroutine:  =entrainment/bulkent                                                                                                    
