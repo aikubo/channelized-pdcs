@@ -12,12 +12,13 @@ contains
 !        subroutine setup_col()
 !        end subroutine setup_col 
 
-        subroutine slice(width, depth, lambda, XC, ZC, locstring)
+        subroutine slice(width, depth, lambda, XC, ZC, locstring, numunit)
         use formatmod 
        
         implicit none 
           !call allocate_arrays
           CHARACTER(len=*), intent(IN):: locstring
+          integer, intent(IN):: numunit
           DOUBLE PRECISION, INTENT(IN):: width, lambda, depth, XC, ZC
           DOUBLE PRECISION:: VOLFR, DYNAM
           DOUBLE PRECISION:: clearance, slope, dx
@@ -36,7 +37,7 @@ contains
           print*, xstring, zstring
           filename='slice_'//locstring//'.txt'
           !open(888, file =filename)
-          call headerf(10001, filename, simlabel, routine, DESCRIPTION, datatype)
+          call headerf(numunit, filename, simlabel, routine, DESCRIPTION, datatype)
 
           print*, "start checking column"
            DO t=1,timesteps
@@ -52,7 +53,7 @@ contains
                        ! print*, XXX(I,1)
                       IF(EPP(I,t) .GT. 0.00) THEN
                       !print*, YYY(I,1)-hill, Ri_all(I,1,t) 
-                      WRITE(10001,format7col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t)
+                      WRITE(numunit,format7col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t)
                       end if 
                  !     END IF
                    END IF
@@ -65,16 +66,17 @@ contains
         use maketopo
         implicit none 
         double precision:: ZLOC, XLOC 
-        ZLOC=300
-        XLOC=300
-        CALL SLICE(width, depth, lambda, XLOC, ZLOC, 'middle')
+        XLOC=400
+        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+        ZLOC=floor((edge2+width/2)/3)*3  ! mid line 
+        CALL SLICE(width, depth, lambda, XLOC, ZLOC, 'middle',  10001)
         
         XLOC=floor((lambda)*(0.5)/3)*3
         call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
         ZLOC=floor((edge2+6)/3)*3
         print*, XLOC, ZLOC
 
-        call slice(width, depth, lambda, XLOC, ZLOC, 'outsidehalfl')        
+        call slice(width, depth, lambda, XLOC, ZLOC, 'outsidehalfl', 10002)        
 
         end subroutine 
 

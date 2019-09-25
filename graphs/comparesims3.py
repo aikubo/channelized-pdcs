@@ -8,7 +8,7 @@ import pandas as pd
 import seaborn as sns
 
 #colors = sns.cubehelix_palette(8)
-labels=[ "AV4", "CV4", "BW4", "SW4", "BW7", "AV7", "CV7", "EV7", "EV4", "SV4", "CW7" ]
+labels=[ "AV4", "CV4", "BW4", "SW4", "BW7", "AV7", "CV7", "EV7", "EV4", "SV4" ]
 labels.sort()
 
 def setcolorandstyle(labels):
@@ -27,16 +27,15 @@ def setcolorandstyle(labels):
 
 palette= setcolorandstyle(labels)
 
-sns.palplot(palette)
-
 def openslicet(labels, twant, loc):
     path2file = '/home/akh/myprojects/channelized-pdcs/graphs/processed/'
     labels = res = [k for k in labels if 'S' not in k]
+
     if loc in "in":
         slicefid='_slice_middle.txt'
     else :
         slicefid='_slice_outsidehalfl.txt'
-
+    print(slicefid)
     
     slice_EPP=pd.DataFrame()
     slice_UG=pd.DataFrame()
@@ -88,8 +87,8 @@ def openslicet(labels, twant, loc):
 
     return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
 
-slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(labels, 6, 'in')
-sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(labels, 6, 'out')
+slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(labels, 7, 'in')
+sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(labels, 7, 'out')
 
 def opensliceavg(labels):
     path2file = '/home/akh/myprojects/channelized-pdcs/graphs/processed/'
@@ -308,7 +307,6 @@ def horizplot(df, loc, labels):
     height = np.arange(0,top,3)
 
     df1=df.fillna(df.min())
-    num=0
     for i in df.columns:
         j=labels.index(i)
         loc.plot(df1[i], height, label=i, color=palette[j] )
@@ -331,7 +329,6 @@ def savefigure(name):
 def plotallcol(fid, df1, df2, df3, df4, df5):
     fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
     setgrl(fig, axes, 4, 8)
-
     df5.fillna(273.0)
     # EPP
 
@@ -340,7 +337,7 @@ def plotallcol(fid, df1, df2, df3, df4, df5):
     axes[0].set_ylabel('Height (m)', size=9)
     axes[0].set_xlabel('Log Volume fraction', size=9)
     loc.set_ylim([0,150])
-    loc.set_xlim([1,8])
+    loc.set_xlim([0,14])
     sns.despine()
     # UG
     loc=axes[1]
@@ -373,7 +370,7 @@ def plotallcol(fid, df1, df2, df3, df4, df5):
 
 
     fig.legend(    # The line objects
-           labels=labels,   # The labels for each line
+           labels=df1.columns,   # The labels for each line
            loc="center right",   # Position of legend
            borderaxespad=0.5,    # Small spacing around legend box
            title="Geometries",  # Title for the legend
@@ -508,39 +505,42 @@ peak_dpuin= np.log10(peak_dpuin + 0.000001)
 peak_dpuout= np.log10(peak_dpuout + 0.000001)
 # print(front)
 
-#channelfrontsubplot('avulsedmassbywavelength', avulseddense, 'Avulsed Mass Fraction')
-#channelfrontsubplot('elumassbywavelength',buoyantelutriated, 'Elutriated Mass Fraction')
-#channelfrontsubplot('peakdpubywavelength',peak_dpuin, 'Peak Dynamic Pressure in Channel ( Log (Pa))')
-#channelfrontsubplot('peakdpuoutbywavelength',peak_dpuout, 'Peak Dynamic Pressure outside Channel ( Log (Pa))')
-#channelfrontsubplot('crossstreambywavelength',crossV, 'Mass Fraction moving Cross Stream')
-
+channelfrontsubplot('avulsedmassbywavelength', avulseddense, 'Avulsed Mass Fraction')
+channelfrontsubplot('elumassbywavelength',buoyantelutriated, 'Elutriated Mass Fraction')
+channelfrontsubplot('peakdpubywavelength',peak_dpuin, 'Peak Dynamic Pressure in Channel ( Log (Pa))')
+channelfrontsubplot('peakdpuoutbywavelength',peak_dpuout, 'Peak Dynamic Pressure outside Channel ( Log (Pa))')
+channelfrontsubplot('crossstreambywavelength',crossV, 'Mass Fraction moving Cross Stream')
+plt.close("all")
 # nfront = normalizebywave(front)
 deltaV = entrain(ent)
 print(buoyantelutriated)
 print( avulseddense)
-#plottogether("entrainmentall", deltaV, "Entrainment (m^3)", "Time")
-#plottogether("froude", froude, "Froude Number", "Time")
-#plottogether('avgUG', avg_UG, "Average Velocity (U/UO)", "Time")
+plottogether("entrainmentall", deltaV, "Entrainment (m^3)", "Time")
+plottogether("froude", froude, "Froude Number", "Time")
+plottogether('avgUG', avg_UG, "Average Velocity (U/UO)", "Time")
 plottogether('Elutriatedmass', buoyantelutriated, 'Elutriated Mass Fraction', "Time")
 plottogether('inchannel', inchannelmass, 'Mass in Channel (%)', 'Time')
 plottogether('avulsed', avulseddense, 'Mass Avulsed (%)', 'Time')
-#plottogether("front", front, "Front Location (m)", 'Time')
-#plottogether("peakdpuout", peak_dpuout, 'Peak Dynamic Pressure Outside Channel (Pa)', 'Time')
-#plottogether("peakdpuin", peak_dpuin, 'Peak Dynamic Pressure Inside Channel (Pa)', 'Time')
+plottogether("front", front, "Front Location (m)", 'Time')
+plottogether("peakdpuout", peak_dpuout, 'Peak Dynamic Pressure Outside Channel (Pa)', 'Time')
+plottogether("peakdpuin", peak_dpuin, 'Peak Dynamic Pressure Inside Channel (Pa)', 'Time')
 
+plt.close("all")
 plottogether("cross_streamV", crossV, 'Mass Fraction with Dominant Cross Stream Velocity', 'Time')
 
-#plotby(inchannelmass, avg_UG, "% Mass in Channel", "Entrainment")
+plotby("massinchannel_byUG", inchannelmass, avg_UG, "% Mass in Channel", "Velocity (m/s)")
+#plotby("DPU by UG", peak_dpuin, avg_UG, "Dynamic Pressure (Log Pa)", "Velocity (m/s)")
 
-plotby("entvelu", buoyantelutriated, deltaV, "Elutriated Mass (%)",
-       "Entrainment (m^3)")
+#plotby("ent_elu", buoyantelutriated, deltaV, "Elutriated Mass Fraction (%)", "Entrainment (m^3)")
+#plotby("elu_avul", buoyantelutriated, avulseddense, "Elutriated Mass Fraction (%)", "Avulsed Mass Fraction")
+#plotby("avul", avulseddense, avg_UG, "Avulsed Mass Fraction (%)", "Velocity (m/s)")
 #twotime("entveluovertime", ent, gtscaleheight, "Entrainment (m^3)", "Elutriated Mass (%)")
 
 fid = 'col_in'
 plotallcol(fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
 fid = 'col_out'
 plotallcol(fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
-
+plt.close("all")
 def labelparam(label):
     if "A" in label:
         wave = 300
