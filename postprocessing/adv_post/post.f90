@@ -67,6 +67,8 @@ print*, "calculating entrainment"
 call bulkent(EP_G1) 
 print*, "calculating mass in channel"
 call massinchannel(width, depth, lambda, scaleh)
+print*, "calculating dominant velocities"
+call crossstream
 print*, "finding veritical column"
 call slices2
 print*, "averaging"

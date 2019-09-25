@@ -71,8 +71,8 @@ call  logvolfrc(EP_G1, EPP)
 !call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 !print*, Ri_all
 !call bulkent(EP_G1) 
-
-call massinchannel(width, depth, lambda, scaleh)
+call crossstream
+!call massinchannel(width, depth, lambda, scaleh)
 !open(1300, file='slice.txt')
 !call slice(width, depth, lambda, XLOC, ZLOC)
 

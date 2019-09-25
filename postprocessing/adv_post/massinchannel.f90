@@ -146,7 +146,7 @@ module massdist
                         sum3=0
 
                         do I=1,length1 
-                                if (EPP(I,t) .gt. 0 and .lt. 8) then 
+                                if (EPP(I,t) .gt. 0 .and. EPP(I,t) .lt. 8) then 
                                         mass = (1-EP_G1(I,t))*Volume_Unit*rho_p
                                         tmass=tmass+ mass
                                         dominantvel= max(U_G1(I,t), V_G1(I,t), W_G1(I,t))
@@ -154,15 +154,15 @@ module massdist
                                         if (dominantvel .eq. U_G1(I,t)) then 
                                                 Umass= Umass +mass
                                                 sum1= 1 + sum1
-                                                Uepp = Uepp + EP_P(I,t)
+                                                Uepp = Uepp + EPP(I,t)
                                         elseif (dominantvel .eq. V_G1(I,t)) then
                                                 Vmass= Vmass +mass 
                                                 sum2= 1 + sum2
-                                                Vepp = Vepp + EP_P(I,t)
+                                                Vepp = Vepp + EPP(I,t)
                                         elseif (dominantvel .eq. W_G1(I,t)) then 
                                                 Wmass= Wmass +mass
                                                 sum3= 1 + sum3
-                                                Wepp = Wepp + EP_P(I,t)
+                                                Wepp = Wepp + EPP(I,t)
                                         end if 
                                 end if
                         end do 
@@ -175,7 +175,7 @@ module massdist
                         Wepp=Wepp/sum3
 
                         write(4510, format8col) t, tmass, Umass, Uepp, Vmass, Vepp, Wmass, Wepp
-                                                
+               end do                                  
 
-
+        end subroutine
 end module 

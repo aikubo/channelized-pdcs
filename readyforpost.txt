@@ -1,6 +1,5 @@
 /home/akubo/myprojects/4_INFLOW/AV4
 /home/akubo/myprojects/4_INFLOW/AW4
-/home/akubo/myprojects/4_INFLOW/BV4
 /home/akubo/myprojects/4_INFLOW/BW4
 /home/akubo/myprojects/4_INFLOW/CV4
 /home/akubo/myprojects/4_INFLOW/CW4
@@ -8,7 +7,6 @@
 /home/akubo/myprojects/4_INFLOW/SW4
 /home/akubo/myprojects/7_INFLOW/AV7
 /home/akubo/myprojects/7_INFLOW/AW7
-/home/akubo/myprojects/7_INFLOW/BV7
 /home/akubo/myprojects/7_INFLOW/BW7
 /home/akubo/myprojects/7_INFLOW/CV7
 /home/akubo/myprojects/7_INFLOW/CW7
