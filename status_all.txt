@@ -499,3 +499,20 @@
 09/25/19 03:56 AV4 post process created 13 txt files, 0 tiff
 09/25/19 04:09 having a big issue with calculating the buoyant vs elutriated mass, for some reason it only calculates timesteps 2-5
 09/25/19 04:09 SV4 post process created 12 txt files, 0 tiff
+09/25/19 04:20 SV4 post process created 12 txt files, 0 tiff
+09/25/19 04:28 AW4 error post process created 0 txt files, 0 tiff
+09/25/19 04:28 CW7 error post process created 0 txt files, 0 tiff
+09/25/19 04:32 AV4 post process created 12 txt files, 0 tiff
+09/25/19 04:32 BW4 post process created 12 txt files, 0 tiff
+09/25/19 04:32 CV4 post process created 12 txt files, 0 tiff
+09/25/19 04:32 SV4 post process created 12 txt files, 0 tiff
+09/25/19 04:32 CW4 post process created 12 txt files, 0 tiff
+09/25/19 04:32 AW7 error post process created 5 txt files, 0 tiff
+09/25/19 04:32 SW4 post process created 12 txt files, 0 tiff
+09/25/19 04:32 AV7 post process created 12 txt files, 0 tiff
+09/25/19 04:32 SW7 post process created 12 txt files, 0 tiff
+09/25/19 04:32 SV7 post process created 12 txt files, 0 tiff
+09/25/19 04:32 BW7 post process created 12 txt files, 0 tiff
+09/25/19 04:32 CV7 post process created 12 txt files, 0 tiff
+09/25/19 04:32 EV7 post process created 12 txt files, 1 tiff
+09/25/19 04:32 EV4 post process created 12 txt files, 0 tiff
