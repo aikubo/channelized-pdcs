@@ -230,6 +230,38 @@ module massdist
 
         end subroutine
 
+        subroutine massbyxxx
+                implicit none 
+                double precision, allocatable:: out1, out2
+                allocate(out1(RMAX))
+                allocate(out2(RMAX))
 
+                do K=1,RMAX 
+                        out1(K) =0 
+                        out2(K) =0 
+                end do 
+
+                do t=1,timesteps
+                        do K=1,RMAX 
+                                out1(K) =0 
+                                out2(K) =0 
+                        end do 
+
+                        do I=1,length1
+                                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                                J= int(XXX(I,1))
+                                edge1= FLOOR(edge1/3.)*3. + 3.
+                                edge2= FLOOR(edge2/3.)*3. - 3.
+                                top= FLOOR(top/3.)*3. - 3  
+                                if (YYY(I,1) .eq. top .and. ZZZ(I,1) .gt. edge1) then
+                                        out1(J)= out1(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
+                                elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .gt. edge2) then
+                                        out2(J)= out2(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
+                                end if 
+
+                        end do
+
+                        write(*,*) t, out1, out2 
+                end do 
 
 end module 
