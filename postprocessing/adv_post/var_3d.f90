@@ -73,36 +73,23 @@ use maketopo
 
         print*, "calculating peak dpu"
         
-        do I= 1,length1
-                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
-
-                if ( YYY(I,1) .lt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0 ) then
-                        maskshapein(I) = .TRUE.
-                else
-                        maskshapein(I)= .FALSE.
-                end if
-
-                if ( YYY(I,1) .gt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0) then
-                        maskshapeout(I) = .TRUE.
-                else
-                        maskshapeout(I)= .FALSE.
-                end if
-        end do
-
-        !print*, maskshapein
-
-
         do t=1,timesteps
-                maxdpu = maxval(DPU(:,t))
-                maxdpuin= maxval(DPU(:,t), MASK=maskshapein)
-                locin= maxloc(DPU(:,t), MASK=maskshapein)
+                maxdpuin=0
+                maxdpuout=0
+                do I=1,length1
+                if ( YYY(I,1) .lt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0 ) then
+                        if (DPU(I,t) .gt. maxdpuin ) then 
+                        maxdpuin= DPU(I,t)
+                        end if 
+                elseif ( YYY(I,1) .gt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0) then
+                        if (DPU(I,t) .gt. maxdpuout ) then 
+                                maxdpupit= DPU(I,t)
+                        end if 
+                end do 
                 call find_min_diff(maxdpuin, DPU(:,t), rc)
-                maxdpuout= maxval(DPU(:,t), MASK=maskshapeout)
-                print*, EPP(rc,1), XXX(rc,1), YYY(rc,1), ZZZ(rc,1)
-                print*, maxdpuout
-                write(4020, formatent) t, maxdpu, maxdpuin, maxdpuout
-                !print*, PACK( DPU(:,1), mask=(locin .eq. .TRUE.))
-        !        write(4020, format8col) t, maxdpu, XXX(locin,1), YYY(locin,1), maxdpuin, XXX(locout,1), YYY(locout,1), maxdpuout
+                call find_min_diff(maxdpuout, DPU(:,t), yc)
+                write(*, *) t, maxdpu, XXX(rc,1), YYY(rc,1), maxdpuin, XXX(yc,1), YYY(yc,1), maxdpuout
+                !rite(4020, format8col) t, maxdpu, XXX(rc,1), YYY(rc,1), maxdpuin, XXX(yc,1), YYY(yc,1), maxdpuout
         end do 
 
         end subroutine 
