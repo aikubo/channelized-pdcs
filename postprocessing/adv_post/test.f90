@@ -22,7 +22,7 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='SV4'
+simlabel='AV4'
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -30,7 +30,7 @@ YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
 width=201
-lambda=0
+lambda=300
 printstatus=.false.
 timesteps=8
 tstart=3
@@ -41,19 +41,20 @@ call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
 call openbin(100, 'EP_G', EP_G1)
-call openbin(200, 'U_G', U_G1)
-call openbin(300, 'T_G', T_G1)
-call openbin(400, 'V_G', V_G1)
-call openbin(500, 'W_G', W_G1)
+!call openbin(200, 'U_G', U_G1)
+!call openbin(300, 'T_G', T_G1)
+!call openbin(400, 'V_G', V_G1)
+!call openbin(500, 'W_G', W_G1)
 call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l0_w201', XXX, YYY, ZZZ)
+call handletopo('l300_w201', XXX, YYY, ZZZ)
+!call edgevelocity
 !call writedxtopo
 call  logvolfrc(EP_G1, EPP)
-!call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
-!call dpupeak(width, lambda, depth, DPU)
+call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
+call dpupeak
 
 !XLOC=floor((lambda/3)*(0.5))
 !call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
@@ -71,7 +72,7 @@ call  logvolfrc(EP_G1, EPP)
 !call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 !print*, Ri_all
 !call bulkent(EP_G1) 
-call crossstream
+!call crossstream
 !call massinchannel(width, depth, lambda, scaleh)
 !open(1300, file='slice.txt')
 !call slice(width, depth, lambda, XLOC, ZLOC)

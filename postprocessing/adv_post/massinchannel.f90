@@ -179,21 +179,37 @@ module massdist
 
         end subroutine
 
-        subroutine lookatedges 
+        subroutine edgevelocity 
                 implicit none 
-                double precision:: perpvel
-                
+                double precision:: perpvel2, perpvel1, outsum
+                logical, dimension(length1):: maskshapeout
+                open(7888, file='edgevel.txt')
+       
                 do t= 1,timesteps
                 do I=1,length1
                         call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
                         edge1= FLOOR(edge1/3.)*3. + 3.
                         edge2= FLOOR(edge2/3.)*3. - 3.
                         top= FLOOR(top/3.)*3. - 3  
-
-                        if (YYY(I,1) .eq. top .and. XXX(I,1) .eq. edge2)
-                                perpvel = U_G1(I,t) + V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda) 
-                                write(7888, formatnose) t, XXX(I,1), perpvel 
-                                write(*,*) t, XXX(I,1), perpvel 
+                       
+                        !do J= 1,length1 
+                              !  if (ZZZ(J,1) .gt. edge2) then 
+                         !               if ( XXX(I,1) .eq. XXX(J,1)) then 
+                                                maskshapeout(J) = .TRUE.
+                         !               else 
+                                                maskshapeout(J) = .FALSE.
+                         !               end if 
+                               ! end if 
+                        !end do 
+                        
+                        if (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge1) then
+                                perpvel1 = U_G1(I,t) + V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
+                                write(*,*) t, XXX(I,1), perpvel1, W_G1(I,t)
+                        elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge2) then
+                                perpvel2 = U_G1(I,t) +V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
+                                !outsum= rho_p*SUM(EP_G1(:,t), mask= maskshapeout)  
+                                write(*,*) t, XXX(I,1), perpvel2, W_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
+                                
                         end if 
                 end do 
                 end do 

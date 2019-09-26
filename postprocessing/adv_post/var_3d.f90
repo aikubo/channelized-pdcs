@@ -37,6 +37,25 @@ use maketopo
                    end do
         
 
+        end subroutine
+
+        subroutine find_min_diff(to_find, a, idx)
+                implicit none 
+                double precision, intent(IN):: to_find 
+                double precision, dimension(:), intent(IN):: a
+                integer, intent(out):: idx
+                double precision:: diff, min_diff
+                min_diff = 1.0
+                idx = 0
+
+                do I = 1, size(a)
+                        diff = abs(a(I)-to_find)
+                        if ( diff < min_diff) then
+                                idx = I
+                                min_diff = diff
+                        end if
+                end do
+                        
         end subroutine 
 
         subroutine dpupeak
@@ -57,13 +76,13 @@ use maketopo
         do I= 1,length1
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
 
-                if ( YYY(I,1) .lt. top .and. EP_G1(I,t) .gt. 0 ) then
+                if ( YYY(I,1) .lt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0 ) then
                         maskshapein(I) = .TRUE.
                 else
                         maskshapein(I)= .FALSE.
                 end if
 
-                if ( YYY(I,1) .gt. top .and. EP_G1(I,t) .gt. 0) then
+                if ( YYY(I,1) .gt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0) then
                         maskshapeout(I) = .TRUE.
                 else
                         maskshapeout(I)= .FALSE.
@@ -76,10 +95,11 @@ use maketopo
         do t=1,timesteps
                 maxdpu = maxval(DPU(:,t))
                 maxdpuin= maxval(DPU(:,t), MASK=maskshapein)
-               ! locin= maxloc(DPU(:,t), MASK=maskshapein)
+                locin= maxloc(DPU(:,t), MASK=maskshapein)
+                call find_min_diff(maxdpuin, DPU(:,t), rc)
                 maxdpuout= maxval(DPU(:,t), MASK=maskshapeout)
-               ! locout= maxloc(DPU(:,t), MASK=maskshapeout)
-                print*, maxdpu
+                print*, EPP(rc,1), XXX(rc,1), YYY(rc,1), ZZZ(rc,1)
+                print*, maxdpuout
                 write(4020, formatent) t, maxdpu, maxdpuin, maxdpuout
                 !print*, PACK( DPU(:,1), mask=(locin .eq. .TRUE.))
         !        write(4020, format8col) t, maxdpu, XXX(locin,1), YYY(locin,1), maxdpuin, XXX(locout,1), YYY(locout,1), maxdpuout
