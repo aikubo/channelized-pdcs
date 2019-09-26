@@ -192,7 +192,7 @@ module massdist
                 datatype=" t XXX perpvel W_G EPP"
                 call headerf(7888, filename, simlabel, routine, DESCRIPTION, datatype)
 
-                 filename='edge_vel1.txt'
+                filename='edge_vel2.txt'
 
                 routine="massdist/edgevelocity"
                 description="Calculate dot product of velocity and curve of the channel on edge2"
@@ -236,6 +236,14 @@ module massdist
                 allocate(out1(3*RMAX))
                 allocate(out2(3*RMAX))
 
+                filename='massbyxxx.txt'
+
+                routine="massdist/massbyxxx"
+                description="Calculate mass outside the channel on left and right by XXX"
+                datatype=" t, XXX, mass on right, mass on left"
+                call headerf(6789, filename, simlabel, routine, DESCRIPTION,datatype)
+
+
                 do K=1, RMAX 
                         out1(K) =0 
                         out2(K) =0 
@@ -265,7 +273,7 @@ module massdist
                         end do
                         
                         do K=1,RMAX
-                                write(*,*) t, K*3, out1(K), out2(K)
+                                write(6789,formatent) t, dble(K*3.), out1(K), out2(K)
                         end do  
                 end do 
         end subroutine
