@@ -75,7 +75,8 @@ print*, "finding veritical column"
 call slices2
 print*, "averaging"
 call average_all
-
+print*, "velocity at the edges"
+call edgevelocity
 print*, "end program"
 
 end program

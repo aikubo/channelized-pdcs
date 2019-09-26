@@ -67,7 +67,7 @@ use maketopo
         LOGICAL, dimension(length1):: locin, locout
         routine="var_3d/dpupeak"
         description="Calculate peak dynamic pressure inside and outside channel"
-        datatype=" t, peak pressure, peak inside, peak outside of channel"
+        datatype=" t, peak pressure, X, Z, peak inside, X,Z, peak outside of channel"
         filename='dpu_peak.txt'
         call headerf(4020, filename, simlabel, routine, DESCRIPTION, datatype)
 
@@ -77,19 +77,22 @@ use maketopo
                 maxdpuin=0
                 maxdpuout=0
                 do I=1,length1
+                call edges(width, lambda, depth, XXX(I,1), edge1, edge2,bottom, top)
+
                 if ( YYY(I,1) .lt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0 ) then
                         if (DPU(I,t) .gt. maxdpuin ) then 
                         maxdpuin= DPU(I,t)
                         end if 
                 elseif ( YYY(I,1) .gt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0) then
                         if (DPU(I,t) .gt. maxdpuout ) then 
-                                maxdpupit= DPU(I,t)
-                        end if 
+                                maxdpuout= DPU(I,t)
+                        end if
+                end if  
                 end do 
                 call find_min_diff(maxdpuin, DPU(:,t), rc)
                 call find_min_diff(maxdpuout, DPU(:,t), yc)
-                write(*, *) t, maxdpu, XXX(rc,1), YYY(rc,1), maxdpuin, XXX(yc,1), YYY(yc,1), maxdpuout
-                !rite(4020, format8col) t, maxdpu, XXX(rc,1), YYY(rc,1), maxdpuin, XXX(yc,1), YYY(yc,1), maxdpuout
+                !write(*, *) t, XXX(rc,1), YYY(rc,1), maxdpuin, XXX(yc,1), YYY(yc,1), maxdpuout
+                write(4020, format8col) t, max(maxdpuin, maxdpuout), XXX(rc,1), ZZZ(rc,1), maxdpuin, XXX(yc,1), ZZZ(yc,1), maxdpuout
         end do 
 
         end subroutine 

@@ -183,8 +183,22 @@ module massdist
                 implicit none 
                 double precision:: perpvel2, perpvel1, outsum
                 logical, dimension(length1):: maskshapeout
-                open(7888, file='edgevel.txt')
-       
+      
+                print*, 'edge velocity'
+                filename='edge_vel1.txt'
+
+                routine="massdist/edgevelocity"
+                description="Calculate dot product of velocity and curve of the channel on edge1"
+                datatype=" t XXX perpvel W_G EPP"
+                call headerf(7888, filename, simlabel, routine, DESCRIPTION, datatype)
+
+                 filename='edge_vel1.txt'
+
+                routine="massdist/edgevelocity"
+                description="Calculate dot product of velocity and curve of the channel on edge2"
+                datatype=" t XXX perpvel W_G EPP"
+                call headerf(7889, filename, simlabel, routine, DESCRIPTION,datatype)
+
                 do t= 1,timesteps
                 do I=1,length1
                         call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
@@ -204,11 +218,11 @@ module massdist
                         
                         if (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge1) then
                                 perpvel1 = U_G1(I,t) + V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
-                                write(*,*) t, XXX(I,1), perpvel1, W_G1(I,t)
+                                write(7888,formatent) t, XXX(I,1), perpvel1, W_G1(I,t)
                         elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge2) then
                                 perpvel2 = U_G1(I,t) +V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
                                 !outsum= rho_p*SUM(EP_G1(:,t), mask= maskshapeout)  
-                                write(*,*) t, XXX(I,1), perpvel2, W_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
+                                write(7889,formatent) t, XXX(I,1), perpvel2, W_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
                                 
                         end if 
                 end do 
