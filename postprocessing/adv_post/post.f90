@@ -32,6 +32,7 @@ ZMAX=302
 length1=RMAX*YMAX*ZMAX
 width=201
 lambda=2400
+amprat=0.15
 timesteps=8
 tstart=3
 tstop=timesteps

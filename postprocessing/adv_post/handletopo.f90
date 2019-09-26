@@ -100,7 +100,7 @@ subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
         slope=0.18
         deltz=3.0
         center = (ZMAX-2)*deltz/2 
-        amprat=0.15
+
         clearance = 50.
         
         

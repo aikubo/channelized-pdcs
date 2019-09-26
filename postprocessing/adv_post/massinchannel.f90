@@ -178,4 +178,28 @@ module massdist
                end do                                  
 
         end subroutine
+
+        subroutine lookatedges 
+                implicit none 
+                double precision:: perpvel
+                
+                do t= 1,timesteps
+                do I=1,length1
+                        call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                        edge1= FLOOR(edge1/3.)*3. + 3.
+                        edge2= FLOOR(edge2/3.)*3. - 3.
+                        top= FLOOR(top/3.)*3. - 3  
+
+                        if (YYY(I,1) .eq. top .and. XXX(I,1) .eq. edge2)
+                                perpvel = U_G1(I,t) + V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda) 
+                                write(7888, formatnose) t, XXX(I,1), perpvel 
+                                write(*,*) t, XXX(I,1), perpvel 
+                        end if 
+                end do 
+                end do 
+
+        end subroutine
+
+
+
 end module 
