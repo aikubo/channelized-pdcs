@@ -209,9 +209,9 @@ module massdist
                         !do J= 1,length1 
                               !  if (ZZZ(J,1) .gt. edge2) then 
                          !               if ( XXX(I,1) .eq. XXX(J,1)) then 
-                                                maskshapeout(J) = .TRUE.
+                         !                       maskshapeout(J) = .TRUE.
                          !               else 
-                                                maskshapeout(J) = .FALSE.
+                         !                       maskshapeout(J) = .FALSE.
                          !               end if 
                                ! end if 
                         !end do 
@@ -232,11 +232,11 @@ module massdist
 
         subroutine massbyxxx
                 implicit none 
-                double precision, allocatable:: out1, out2
-                allocate(out1(RMAX))
-                allocate(out2(RMAX))
+                double precision, allocatable:: out1(:), out2(:)
+                allocate(out1(3*RMAX))
+                allocate(out2(3*RMAX))
 
-                do K=1,RMAX 
+                do K=1, RMAX 
                         out1(K) =0 
                         out2(K) =0 
                 end do 
@@ -249,19 +249,24 @@ module massdist
 
                         do I=1,length1
                                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
-                                J= int(XXX(I,1))
+                                J= int(XXX(I,1))/3
                                 edge1= FLOOR(edge1/3.)*3. + 3.
                                 edge2= FLOOR(edge2/3.)*3. - 3.
-                                top= FLOOR(top/3.)*3. - 3  
-                                if (YYY(I,1) .eq. top .and. ZZZ(I,1) .gt. edge1) then
+                                top= FLOOR(top/3.)*3. - 3 
+
+                                if (EPP(I,t) .gt. 1 .and. EPP(I,t) .lt. 8) then 
+                                if (YYY(I,1) .eq. top .and. ZZZ(I,1) .lt. edge1) then
                                         out1(J)= out1(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .gt. edge2) then
                                         out2(J)= out2(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if 
+                                end if 
 
                         end do
-
-                        write(*,*) t, out1, out2 
+                        
+                        do K=1,RMAX
+                                write(*,*) t, K*3, out1(K), out2(K)
+                        end do  
                 end do 
-
+        end subroutine
 end module 

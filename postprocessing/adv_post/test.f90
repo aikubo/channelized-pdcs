@@ -53,9 +53,9 @@ call handletopo('l300_w201', XXX, YYY, ZZZ)
 !call edgevelocity
 !call writedxtopo
 call  logvolfrc(EP_G1, EPP)
-call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
-call dpupeak
-
+!call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
+!call dpupeak
+call massbyxxx
 !XLOC=floor((lambda/3)*(0.5))
 !call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
 !ZLOC=floor((edge2+6)/3)
