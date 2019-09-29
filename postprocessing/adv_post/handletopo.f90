@@ -96,7 +96,7 @@ subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
        implicit none 
        double precision, intent(IN):: wid, dep, lamb, XLOC
        double precision, intent(OUT):: edge1, edge2, bottom, top
-       double precision:: deltz, centerline, amprat, center, clearance, slope
+       double precision:: deltz, centerline, center, clearance, slope
         slope=0.18
         deltz=3.0
         center = (ZMAX-2)*deltz/2 
