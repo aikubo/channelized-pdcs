@@ -68,7 +68,7 @@ contains
         double precision:: ZLOC, XLOC 
         XLOC=400
         call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
-        ZLOC=floor((edge2+width/2)/3)*3  ! mid line 
+        ZLOC=floor((edge2-width/2)/3)*3  ! mid line 
         CALL SLICE(width, depth, lambda, XLOC, ZLOC, 'middle',  10001)
         
         XLOC=floor((lambda)*(0.5)/3)*3

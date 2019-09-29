@@ -543,3 +543,4 @@
 09/27/19 13:51 AW4 error post process created 0 txt files, 0 tiff
 09/28/19 16:51 CW7 completed 9 timesteps
 09/28/19 16:54 CW7 post process created 15 txt files, 0 tiff
+09/29/19 14:53 AV4 post process created 15 txt files, 0 tiff
