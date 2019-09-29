@@ -192,7 +192,7 @@ module massdist
                 datatype=" t XXX perpvel W_G EPP"
                 call headerf(7888, filename, simlabel, routine, DESCRIPTION, datatype)
 
-                 filename='edge_vel1.txt'
+                filename='edge_vel2.txt'
 
                 routine="massdist/edgevelocity"
                 description="Calculate dot product of velocity and curve of the channel on edge2"
@@ -209,9 +209,9 @@ module massdist
                         !do J= 1,length1 
                               !  if (ZZZ(J,1) .gt. edge2) then 
                          !               if ( XXX(I,1) .eq. XXX(J,1)) then 
-                                                maskshapeout(J) = .TRUE.
+                         !                       maskshapeout(J) = .TRUE.
                          !               else 
-                                                maskshapeout(J) = .FALSE.
+                         !                       maskshapeout(J) = .FALSE.
                          !               end if 
                                ! end if 
                         !end do 
@@ -232,11 +232,19 @@ module massdist
 
         subroutine massbyxxx
                 implicit none 
-                double precision, allocatable:: out1, out2
-                allocate(out1(RMAX))
-                allocate(out2(RMAX))
+                double precision, allocatable:: out1(:), out2(:)
+                allocate(out1(3*RMAX))
+                allocate(out2(3*RMAX))
 
-                do K=1,RMAX 
+                filename='massbyxxx.txt'
+
+                routine="massdist/massbyxxx"
+                description="Calculate mass outside the channel on left and right by XXX"
+                datatype=" t, XXX, mass on right, mass on left"
+                call headerf(6789, filename, simlabel, routine, DESCRIPTION,datatype)
+
+
+                do K=1, RMAX 
                         out1(K) =0 
                         out2(K) =0 
                 end do 
@@ -249,19 +257,24 @@ module massdist
 
                         do I=1,length1
                                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
-                                J= int(XXX(I,1))
+                                J= int(XXX(I,1))/3
                                 edge1= FLOOR(edge1/3.)*3. + 3.
                                 edge2= FLOOR(edge2/3.)*3. - 3.
-                                top= FLOOR(top/3.)*3. - 3  
-                                if (YYY(I,1) .eq. top .and. ZZZ(I,1) .gt. edge1) then
+                                top= FLOOR(top/3.)*3. - 3 
+
+                                if (EPP(I,t) .gt. 1 .and. EPP(I,t) .lt. 8) then 
+                                if (YYY(I,1) .eq. top .and. ZZZ(I,1) .lt. edge1) then
                                         out1(J)= out1(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .gt. edge2) then
                                         out2(J)= out2(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if 
+                                end if 
 
                         end do
-
-                        write(*,*) t, out1, out2 
+                        
+                        do K=1,RMAX
+                                write(6789,formatent) t, dble(K*3.), out1(K), out2(K)
+                        end do  
                 end do 
-
+        end subroutine
 end module 

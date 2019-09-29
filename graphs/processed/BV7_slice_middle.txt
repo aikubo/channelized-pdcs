@@ -1,0 +1,9 @@
+!------------------------------------------------------------!
+  Date: 20190927
+  Simulation name: BV7 
+  Filename:slice_middle.txt                                                                                                        
+  Produced in mod-subroutine:  column.mod/slice                                                                                                        
+  Written by AK September 2019
+  Description:Veritcal column at x400_z651                                                                                            
+  Data format: t  YYY  EPP   U_G   DPU   T_G   Ri                                                                                     
+!------------------------------------------------------------!
