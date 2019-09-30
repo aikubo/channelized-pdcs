@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20190926
+  Date: 20190929
   Simulation name: EV4 
   Filename:average_medium.txt                                                                                                      
   Produced in mod-subroutine:  averageit.mod/average_all                                                                                               

@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20190926
+  Date: 20190929
   Simulation name: CV4 
   Filename:entrainment.txt                                                                                                         
   Produced in mod-subroutine:  =entrainment/bulkent                                                                                                    

@@ -31,12 +31,13 @@ contains
           write(xstring,str_b) InT(XC)
           write(zstring,str_b) int(ZC)
 
+         
           routine="column.mod/slice"
           description='Veritcal column at x'//trim(xstring)//'_z'//trim(zstring)
           datatype=" t  YYY  EPP   U_G   DPU   T_G   Ri"
           print*, xstring, zstring
           filename='slice_'//locstring//'.txt'
-          !open(888, file =filename)
+          print*, "open slice file", xstring, zstring 
           call headerf(numunit, filename, simlabel, routine, DESCRIPTION, datatype)
 
           print*, "start checking column"
@@ -67,9 +68,10 @@ contains
         implicit none 
         double precision:: ZLOC, XLOC 
         print*, "slices"
-        XLOC=400
+        XLOC=300
         call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
         ZLOC=floor((edge2-width/2)/3)*3  ! mid line 
+        print*, XLOC, ZLOC
         CALL SLICE(width, depth, lambda, XLOC, ZLOC, 'middle',  10001)
         print*, XLOC, ZLOC 
         XLOC=floor((lambda)*(0.5)/3)*3
@@ -77,14 +79,14 @@ contains
         ZLOC=floor((edge2+6)/3)*3
         print*, XLOC, ZLOC
 
-        call slice(width, depth, lambda, XLOC, ZLOC, 'outsidehalfl', 10002)        
+        call slice(width, depth, lambda, XLOC, ZLOC, 'halfl', 10002)        
 
         XLOC=floor((lambda)/3)*3
         call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
         ZLOC=floor((edge2+6)/3)*3
         print*, XLOC, ZLOC
 
-        call slice(width, depth, lambda, XLOC, ZLOC, 'outsideonel', 10003)
+        call slice(width, depth, lambda, XLOC, ZLOC, 'onel', 10003)
 
 
         end subroutine 
