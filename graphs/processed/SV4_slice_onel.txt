@@ -1,0 +1,9 @@
+!------------------------------------------------------------!
+  Date: 20190929
+  Simulation name: SV4 
+  Filename:slice_onel.txt                                                                                                          
+  Produced in mod-subroutine:  column.mod/slice                                                                                                        
+  Written by AK September 2019
+  Description:Veritcal column at x  0_z555                                                                                            
+  Data format: t  YYY  EPP   U_G   DPU   T_G   Ri                                                                                     
+!------------------------------------------------------------!

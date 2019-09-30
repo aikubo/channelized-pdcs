@@ -23,7 +23,7 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='BV4'
+simlabel='BV7'
 
 allocate(isosurface(1200,4,15))
 RMAX=404
