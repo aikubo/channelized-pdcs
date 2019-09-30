@@ -55,12 +55,12 @@ call handletopo('l300_w201', XXX, YYY, ZZZ)
 call  logvolfrc(EP_G1, EPP)
 !call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 !call dpupeak
-call massbyxxx
+!call massbyxxx
 !XLOC=floor((lambda/3)*(0.5))
 !call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
 !ZLOC=floor((edge2+6)/3)
 !call slice(width, depth, lambda, XLOC, ZLOC)
-!call slices2
+call slices2
 
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
