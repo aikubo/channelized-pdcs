@@ -10,7 +10,11 @@
 #read name 
 
 #declare param=($(sh simparam.sh $name))
+filename='moresims.txt'
 
+sed -i "s/A/X/" moresims.txt 
+sed -i "s/B/Y/" moresims.txt
+sed -i "s/C/Z/" moresims.txt
 #wave=${param[1]}
 #width=${param[2]}
 #height=${param[4]}
@@ -23,40 +27,6 @@
 #topoline=$(grep -i 'OPEN(1010101,' init_fvars.f)
 #echo $topoline
 #topo=${topoline%'*}
-label=AV4
-declare param=($(sh simparam.sh $label))
-
-wave=${param[0]}
-width=${param[1]}
-height=${param[2]}
-depth=${param[3]}
-
-topo1="l$wave"
-topo1+="_w"
-topo1+="$width"
-echo $topo1
-
-topo2="l$wave"
-topo2+="_W"
-topo2+="$width"
-echo $topo2
-
-# check topo 
-if [ -s "$topo1" ]
-then
-   topo=$topo1
-   echo " $topo file exists and is not empty "
-elif [ -s "$topo2" ]
-then
-   topo=$topo2
-   echo "$topo2 file exists and is not empty "
-else
-   echo "topo error"
-   exit 1
-fi
-
-echo $topo 
-
 #bottom=100
 #height=3
 #BC1=$bottom

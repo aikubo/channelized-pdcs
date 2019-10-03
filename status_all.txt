@@ -565,3 +565,4 @@
 09/29/19 19:44 EV7 post process created 16 txt files, 1 tiff
 09/29/19 19:47 SV7 post process created 16 txt files, 0 tiff
 09/29/19 19:47 BW7 post process created 16 txt files, 0 tiff
+10/03/19 16:39 adding another amplitude ratiols
