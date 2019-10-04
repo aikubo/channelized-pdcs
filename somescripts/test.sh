@@ -10,11 +10,21 @@
 #read name 
 
 #declare param=($(sh simparam.sh $name))
-filename='moresims.txt'
+filename='moresim.txt'
 
-sed -i "s/A/X/" moresims.txt 
-sed -i "s/B/Y/" moresims.txt
-sed -i "s/C/Z/" moresims.txt
+sed -i.bak "s/V/&X/" moresim.txt 
+sed -i.bak "s/300/&,20/" moresim.txt 
+sed -i.bak "s/600/&,20/" moresim.txt 
+sed -i.bak "s/900/&,20/" moresim.txt  
+sed -i.bak "s/1200/&,20/" moresim.txt 
+sed -i.bak "s/0/&,0/" moresim.txt 
+
+sed -i.bak "s/300/&,20/" moresim.txt 
+sed -i.bak "s/600/&,20/" moresim.txt 
+sed -i.bak "s/900/&,20/" moresim.txt  
+sed -i.bak "s/1200/&,20/" moresim.txt 
+sed -i.bak "s/0/&,0/" moresim.txt 
+
 #wave=${param[1]}
 #width=${param[2]}
 #height=${param[4]}

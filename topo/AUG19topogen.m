@@ -29,6 +29,9 @@ for lambda=[0,300,600,900,1200]
     for W=[102,201,300,450]
        for amprat=[0.09, 0.15, 0.20]
 
+        if lambda==0
+            amprat=0
+        end 
         amp= lambda*amprat/DZ;
         aspect = 8;
         depth = W/aspect;
