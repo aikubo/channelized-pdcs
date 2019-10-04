@@ -27,8 +27,8 @@ GRAD = 0.02;
 Y=zeros(ZMAX, IMAX);
 for lambda=[0,300,600,900,1200]
     for W=[102,201,300,450]
-       
-        amprat= .15;
+       for amprat=[0.09, 0.15, 0.20]
+
         amp= lambda*amprat/DZ;
         aspect = 8;
         depth = W/aspect;
@@ -63,9 +63,9 @@ for lambda=[0,300,600,900,1200]
                 else 
                     Y(z,i) = hill;
                 end 
-               
+             end
             end
-        end
+        
 
     
 %figure;   
@@ -77,9 +77,11 @@ for lambda=[0,300,600,900,1200]
 %surf(correct)
 
 %shading interp
-    filen = ['l' num2str(lambda) '_W' num2str(W)];
+    amprat
+    filen = ['l' num2str(lambda) '_A' num2str(amprat*100) '_W' num2str(W)];
     dlmwrite( filen ,Y,'delimiter',' ')   
-        end
+       end
+     end
 end
     
 %surf(Y)
