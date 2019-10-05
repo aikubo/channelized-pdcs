@@ -30,11 +30,14 @@ declare param=($(sh simparam.sh $new))
 #sh simparam.sh $name
 
 wave=${param[0]}
-width=${param[1]}
-depth=${param[2]}
+amp=${param[1]}
+width=${param[2]}
+
 height=${param[3]}
 
 topo="l$wave"
+topo+="_A"
+topo+="$amp"
 topo+="_W"
 topo+="$width"
 echo $topo

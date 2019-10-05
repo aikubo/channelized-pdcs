@@ -277,4 +277,89 @@ module massdist
                         end do  
                 end do 
         end subroutine
+        
+        subroutine density(loc,tim,rhc, mass)
+        implicit none
+        integer, intent(IN):: loc, tim
+        double precision, intent(Out):: mass, rhc
+                rhc=rho_p*(1-EP_G1(loc,tim))+(P_const/(R_dryair*(T_G1(loc,tim))))*(EP_G1(loc,tim))
+                mass=3.*3.*3.*rhc
+        end subroutine 
+
+        subroutine energypotential
+        implicit none
+        double precision:: D, mass, KP1,PE, KP2, perpvel, totvel, h, outvel
+        double precision, allocatable:: KPsum1(:,:,:), KPsum2(:,:,:)
+        filename='potential.txt'
+
+        routine="massdist/energypotential"
+        description="Calculate mass outside the channel on left and right by XXX"
+        datatype=" RMAX by ZMAX array of kinetic energy in channel"
+        !call headerf(90909, filename, simlabel, routine,DESCRIPTION,datatype)        
+        open(90909, file=filename)
+
+        allocate(KPsum1(RMAX, ZMAX, timesteps))
+        allocate(KPsum2(RMAX, ZMAX, timesteps))
+
+
+        do t=1,timesteps
+                KPsum1(:,:,t)=0 
+                KPsum2(:,:,t)=0
+        end do 
+
+
+        t= 8 
+
+        do I=1,length1
+
+                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                if ( EP_G1(I,t) .gt. 0.00) then
+                if( YYY(I,1) .gt. bottom .and. YYY(I,1) .lt. top) then 
+                        perpvel = U_G1(I,t)*cos((XXX(I,1)/lambda)*2*3.14) + (W_G1(I,t))*sin((XXX(I,1)/lambda)*2*3.14)
+                        totvel = sqrt(U_G1(I,t)**2+V_G1(I,t)**2+W_G1(I,t)**2)
+                        print*, "perp", perpvel, "tot", totvel 
+                        h= depth-(YYY(I,1)-bottom)
+                        call density(I,t,rho_c, mass)
+                        PE= mass*h*gravity
+                        KP1= 0.5*mass*perpvel**2
+                        KP2= 0.5*mass*totvel**2
+
+                        if ( isnan(KP1) .eq. .FALSE. ) then 
+                           print*, h, KP1/PE, KP2/PE
+                        end if 
+
+
+                        rc=int(XXX(I,1)/3.0)
+                        zc=int(ZZZ(I,1)/3.0)
+
+                        KPsum1(rc,zc,t)=KPsum1(rc,zc,t) + KP1/PE
+                        KPsum2(rc,zc,t)=KPsum2(rc,zc,t) +KP2/PE
+
+                  end if 
+                end if
+            end do 
+
+            D = (depth/3.0)
+            do rc=1,RMAX
+                do zc=1,ZMAX
+
+                   KPsum1(rc,zc,t) = KPsum1(rc,zc,t)/D
+                   KPsum2(rc,zc,t) = KPsum2(rc,zc,t)/D
+                        
+                end do 
+            end do 
+
+
+            print*, KPsum1(:,:,t)
+
+                       
+            
+             
+            do rc=1,RMAX
+                do zc=1,ZMAX
+                write(90909,format1var) KPsum2(rc,zc,t)
+            end do 
+            end do
+
+        end subroutine 
 end module 
