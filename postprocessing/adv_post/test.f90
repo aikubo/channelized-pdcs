@@ -50,10 +50,11 @@ call openbin(500, 'W_G', W_G1)
 !call openbin(800, 'V_S1', V_S1)
 
 call handletopo('l300_w201', XXX, YYY, ZZZ)
-call energypotential
+!call energypotential
 !call edgevelocity
 !call writedxtopo
-!call  logvolfrc(EP_G1, EPP)
+call  logvolfrc(EP_G1, EPP)
+call integratemass
 !call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 !call dpupeak
 !call massbyxxx

@@ -284,10 +284,59 @@ module massdist
         double precision, intent(Out):: mass, rhc
                 rhc=rho_p*(1-EP_G1(loc,tim))+(P_const/(R_dryair*(T_G1(loc,tim))))*(EP_G1(loc,tim))
                 mass=3.*3.*3.*rhc
+        end subroutine
+
+        subroutine integratemass 
+        implicit none 
+        double precision, allocatable:: intmass(:,:,:), currentcells(:,:)
+        double precision:: mass
+         filename='intmass.txt'
+
+        routine="massdist/energypotential"
+        description="Calculate mass integral from EPP 0.5 to 8"
+        datatype=" RMAX by ZMAX array of kinetic energy in channel"
+        !call headerf(90990, filename, simlabel, routine,DESCRIPTION,datatype)     
+        allocate(intmass(RMAX, ZMAX, timesteps))
+        allocate(currentcells(RMAX, ZMAX))
+
+        t=8 
+        do rc=1,RMAX
+                do zc =1,ZMAX
+                        currentcells(rc,zc) = 0 
+                end do 
+        end do 
+        
+        do I=1,length1
+        !        call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                if (EPP(I,t) .gt. 0.5 .and. EPP(I,t) .lt.  8) then 
+                        rc = int(XXX(I,t)/3.)
+                        zc = int(ZZZ(I,t)/3.)
+                        call density(I,t, rho_c, mass)
+                        intmass(rc,zc,t)= intmass(rc,zc,t) +mass
+                        currentcells(rc,zc) = currentcells(rc,zc) +1
+
+                end if 
+        end do 
+
+        do rc=1,RMAX
+                do zc =1,ZMAX 
+                        intmass(rc,zc,t)= intmass(rc,zc,t)/currentcells(rc,zc)
+
+                        if ( isnan(intmass(rc, zc, t)) .eq. .FALSE.) then
+                                print*, intmass(rc,zc,t)
+                        end if 
+                end do 
+        end do 
+
+        
+                
+
         end subroutine 
 
         subroutine energypotential
         implicit none
+        double precision, dimension(2)::N1, N2, U
+        double precision:: dy, dx, mag, ux, uy, vel1, vel2
         double precision:: D, mass, KP1,PE, KP2, perpvel, totvel, h, outvel
         double precision, allocatable:: KPsum1(:,:,:), KPsum2(:,:,:)
         filename='potential.txt'
@@ -298,8 +347,11 @@ module massdist
         !call headerf(90909, filename, simlabel, routine,DESCRIPTION,datatype)        
         open(90909, file=filename)
 
+        filename= 'perpvel.txt'
+        open(90901, filename)
         allocate(KPsum1(RMAX, ZMAX, timesteps))
         allocate(KPsum2(RMAX, ZMAX, timesteps))
+       ! allocate(intmass(RMAX, ZMAX, timesteps))
 
 
         do t=1,timesteps
@@ -308,24 +360,34 @@ module massdist
         end do 
 
 
-        t= 8 
+        do t =1,timesteps 
 
         do I=1,length1
 
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
                 if ( EP_G1(I,t) .gt. 0.00) then
                 if( YYY(I,1) .gt. bottom .and. YYY(I,1) .lt. top) then 
-                        perpvel = U_G1(I,t)*cos((XXX(I,1)/lambda)*2*3.14) + (W_G1(I,t))*sin((XXX(I,1)/lambda)*2*3.14)
-                        totvel = sqrt(U_G1(I,t)**2+V_G1(I,t)**2+W_G1(I,t)**2)
-                        print*, "perp", perpvel, "tot", totvel 
-                        h= depth-(YYY(I,1)-bottom)
-                        call density(I,t,rho_c, mass)
-                        PE= mass*h*gravity
-                        KP1= 0.5*mass*perpvel**2
-                        KP2= 0.5*mass*totvel**2
+                       ux= U_G1(I,t)
+                       uy= W_G1(I,t)
 
-                        if ( isnan(KP1) .eq. .FALSE. ) then 
-                           print*, h, KP1/PE, KP2/PE
+                       U = (/ ux, uy /)
+                       dx = 1.0 
+                       dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
+                       mag = sqrt(dy**2 + dx**2)
+                       N1=(/ dy/mag, -dx/mag /)
+                       N2=(/ -dy/mag, dx/mag /) 
+
+                       vel1= dot_product(U, N1)
+                       vel2 = dot_product(U,N2)
+                       perpvel = max(vel1,vel2)
+                       call density(I,t, rho_c, mass)
+                       KP1 =  (0.5)*mass*perpvel**2
+
+                       h = depth-(YYY(I,1) - bottom)
+                       PE = mass*gravity*h
+
+                          if ( isnan(KP1) .eq. .FALSE. ) then 
+                           print*, perpvel, N1, N2, U
                         end if 
 
 
@@ -333,7 +395,7 @@ module massdist
                         zc=int(ZZZ(I,1)/3.0)
 
                         KPsum1(rc,zc,t)=KPsum1(rc,zc,t) + KP1/PE
-                        KPsum2(rc,zc,t)=KPsum2(rc,zc,t) +KP2/PE
+                        KPsum2(rc,zc,t)=KPsum2(rc,zc,t) + perpvel
 
                   end if 
                 end if
@@ -350,16 +412,22 @@ module massdist
             end do 
 
 
-            print*, KPsum1(:,:,t)
-
+            !print*, KPsum1(:,:,t)
+            print*, maxval(KPsum1(:,:,t))
+            print*, maxval(KPsum2(:,:,t))
                        
             
              
             do rc=1,RMAX
                 do zc=1,ZMAX
-                write(90909,format1var) KPsum2(rc,zc,t)
+!                write(90909,format1var) KPsum1(rc,zc,t)
+!                write(90901,format1var) KPsum2(rc,zc,t)
+
             end do 
             end do
+
+        end do 
+
 
         end subroutine 
 end module 
