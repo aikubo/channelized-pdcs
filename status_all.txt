@@ -566,3 +566,11 @@
 09/29/19 19:47 SV7 post process created 16 txt files, 0 tiff
 09/29/19 19:47 BW7 post process created 16 txt files, 0 tiff
 10/03/19 16:39 adding another amplitude ratiols
+10/03/19 18:37 AWX4 Submitted batch job 10124017
+10/03/19 18:38 AWZ4 Submitted batch job 10124018
+10/03/19 18:53 AWX4 ISSUE only   timesteps
+10/03/19 18:53 AWZ4 ISSUE only   timesteps
+ AWX4 Submitted batch job 10124130
+10/03/19 23:15 AWX4 ISSUE only   timesteps
+ AWZ4 Submitted batch job 10124131
+ AWX4 Submitted batch job 10124132

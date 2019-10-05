@@ -1,4 +1,6 @@
 module formatmod
+character(len=20)::formatzmax='(302F20.10)'
+character(len=20)::format1var='(F20.10)'
 character(len=15)::formatnose='(I3,2F22.12)'
 CHARACTER(LEN=10)::formatcolumn='(i5,5F22.12)'
 CHARACTER(LEN=30)::formatent='(I3,3F22.12)'
