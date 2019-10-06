@@ -51,7 +51,7 @@ call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
 call handletopo('l600_W201', XXX, YYY, ZZZ)
-call writedxtopo
+!call writedxtopo
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 call dpupeak
@@ -79,6 +79,13 @@ print*, "velocity at the edges"
 call edgevelocity
 print*, "mass by xxx"
 call massbyxxx
+print*, "peak dpu"
+call dpupeak
+print*, "int mass in channel"
+call integratemass
+print*, "energy potential"
+call enegypotential
+
 print*, "end program"
 
 end program
