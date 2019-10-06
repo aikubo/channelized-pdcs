@@ -17,6 +17,12 @@ read new
 
 here=$(pwd)
 
+if [ -d  "$here/$new"] 
+then 
+	echo "error already exists"
+	exit 1
+fi 
+
 echo copying
 cp -R /home/akubo/myprojects/sinchannels/SIMDIR/  $here/$new
 

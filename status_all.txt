@@ -574,3 +574,7 @@
 10/03/19 23:15 AWX4 ISSUE only   timesteps
  AWZ4 Submitted batch job 10124131
  AWX4 Submitted batch job 10124132
+10/05/19 01:07 BWX4 Submitted batch job 10124588
+10/05/19 01:11 CWX4 Submitted batch job 10124589
+10/05/19 02:25 CWZ4 prepared to run
+10/05/19 18:56 CWZ4 Submitted batch job 10125349
