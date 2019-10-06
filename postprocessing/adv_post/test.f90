@@ -22,7 +22,7 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='AV4'
+simlabel='AV7'
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -49,12 +49,13 @@ call openbin(500, 'W_G', W_G1)
 !call openbin(700, 'W_S1', W_S1)
 !call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l300_w201', XXX, YYY, ZZZ)
+call handletopo('l300_A15_W201', XXX, YYY, ZZZ)
 !call energypotential
 !call edgevelocity
 !call writedxtopo
-call  logvolfrc(EP_G1, EPP)
-call integratemass
+!call  logvolfrc(EP_G1, EPP)
+!call integratemass
+call energypotential
 !call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 !call dpupeak
 !call massbyxxx
