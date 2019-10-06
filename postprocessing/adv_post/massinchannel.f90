@@ -337,26 +337,56 @@ module massdist
         implicit none
         double precision, dimension(2)::N1, N2, U
         double precision:: dy, dx, mag, ux, uy, vel1, vel2
-        double precision:: D, mass, KP1,PE, KP2, perpvel, totvel, h, outvel
-        double precision, allocatable:: KPsum1(:,:,:), KPsum2(:,:,:)
-        filename='potential.txt'
+        double precision:: D, W, mass, KP1,PE, KP2, perpvel, totvel, h, outvel
+        double precision, allocatable:: KPsum1(:,:,:), KPsum2(:,:,:), PEsum(:,:,:)
+        double precision, allocatable::perpx(:,:), pex(:,:), kex(:,:)
 
+        filename='KE.txt'
         routine="massdist/energypotential"
-        description="Calculate mass outside the channel on left and right by XXX"
-        datatype=" RMAX by ZMAX array of kinetic energy in channel"
-        !call headerf(90909, filename, simlabel, routine,DESCRIPTION,datatype)        
-        open(90909, file=filename)
-
+        description="KE pointing out of channel"
+        datatype=" RMAX by ZMAX by t  array of kinetic energy in channel (J)"
+        call headerf(90909, filename, simlabel, routine,DESCRIPTION,datatype)  
+      
         filename= 'perpvel.txt'
-        !open(90901, filename)
+        description=" RMAX by ZMAX by t perpvel (m/s)"
+        datatype=" RMAX by ZMAX array of kinetic energy in channel"
+        call headerf(90910, filename, simlabel, routine,DESCRIPTION,datatype)
+ 
+        filename= 'PE.txt'
+        description=" Calculates potential energy necessary to overflow at each height"
+        datatype=" RMAX by ZMAX by t potential energy (J)"
+        call headerf(90911, filename, simlabel, routine,DESCRIPTION,datatype)
+        
+         filename= 'perpvelbyx.txt'
+        description="integrates perpvel over width "
+        datatype=" RMAX by t array of perpvel in channel"
+        call headerf(90912, filename, simlabel, routine,DESCRIPTION,datatype)
+     
+        filename= 'PEbyx.txt'
+        description="Integrates by width potential energy necessary to overflow at each height"
+        datatype=" RMAX by t potential energy (J)"
+        call headerf(90913, filename, simlabel, routine,DESCRIPTION,datatype)
+
+        filename= 'KEbyx.txt'
+        description=" Integrates by width K energy necessary height"
+        datatype=" RMAX by t kinetic energy (J)"
+        call headerf(90914, filename, simlabel, routine,DESCRIPTION,datatype)
+ 
+
         allocate(KPsum1(RMAX, ZMAX, timesteps))
         allocate(KPsum2(RMAX, ZMAX, timesteps))
-       ! allocate(intmass(RMAX, ZMAX, timesteps))
-
+        allocate(PEsum(RMAX, ZMAX, timesteps))
+        allocate(pex(RMAX,timesteps))
+        allocate(kex(RMAX,timesteps))
+        allocate(perpx(RMAX,timesteps))
 
         do t=1,timesteps
                 KPsum1(:,:,t)=0 
                 KPsum2(:,:,t)=0
+                PEsum(:,:,t)=0
+                pex(:,t)=0
+                kex(:,t)=0 
+                perpx(:,t)=0
         end do 
 
 
@@ -386,32 +416,38 @@ module massdist
                        h = depth-(YYY(I,1) - bottom)
                        PE = mass*gravity*h
 
-                          if ( isnan(KP1) .eq. .FALSE. ) then 
-                           print*, perpvel, N1, N2, U
-                        end if 
+                      !    if ( isnan(KP1) .eq. .FALSE. ) then 
+                      !     print*, perpvel, N1, N2, U
+                      !  end if 
 
 
                         rc=int(XXX(I,1)/3.0)
                         zc=int(ZZZ(I,1)/3.0)
-
-                        KPsum1(rc,zc,t)=KPsum1(rc,zc,t) + KP1/PE
+                        PEsum(rc,zc,t) = PEsum(rc,zc,t) + PE
+                        KPsum1(rc,zc,t)=KPsum1(rc,zc,t) + KP1
                         KPsum2(rc,zc,t)=KPsum2(rc,zc,t) + perpvel
 
                   end if 
                 end if
             end do 
-
+            !print*, "testing dim =2"
+            !print*, KPsum1(404, :, t) 
             D = (depth/3.0)
+            W = width/3.0
             do rc=1,RMAX
+                pex(rc,t) = SUM(PEsum(rc,:,t))/W
+                kex(rc,t) = SUM(KPsum1(rc,:,t))/W 
+                perpx(rc,t)=SUM(KPsum2(rc,:,t))/W
+                
                 do zc=1,ZMAX
-
+                   PEsum(rc,zc,t)= PEsum(rc,zc,t)/D
                    KPsum1(rc,zc,t) = KPsum1(rc,zc,t)/D
                    KPsum2(rc,zc,t) = KPsum2(rc,zc,t)/D
                         
                 end do 
             end do 
 
-
+                
             !print*, KPsum1(:,:,t)
             print*, maxval(KPsum1(:,:,t))
             print*, maxval(KPsum2(:,:,t))
@@ -419,10 +455,13 @@ module massdist
             
              
             do rc=1,RMAX
+                write(90913, format1var) pex(rc,t) !
+                write(90914, format1var) kex(rc,t) !
+                write(90912, format1var) perpx(rc,t) !
                 do zc=1,ZMAX
-!                write(90909,format1var) KPsum1(rc,zc,t)
-!                write(90901,format1var) KPsum2(rc,zc,t)
-
+                !write(90909,format1var) KPsum1(rc,zc,t)
+                !write(90910,format1var) KPsum2(rc,zc,t)
+                !write(90911, format1var) PEsum(rc,zc,t)
             end do 
             end do
 
