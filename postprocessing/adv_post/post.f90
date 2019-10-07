@@ -23,15 +23,15 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='BV7'
+simlabel='AWX4'
 
 allocate(isosurface(1200,4,15))
 RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=201
-lambda=600
+width=300
+lambda=300
 amprat=0.15
 timesteps=8
 tstart=3
@@ -50,8 +50,8 @@ call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l600_W201', XXX, YYY, ZZZ)
-!call writedxtopo
+call handletopo('l300_A9_W300', XXX, YYY, ZZZ)
+call writedxtopo
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 call dpupeak
@@ -84,7 +84,7 @@ call dpupeak
 print*, "int mass in channel"
 call integratemass
 print*, "energy potential"
-call enegypotential
+call energypotential
 
 print*, "end program"
 

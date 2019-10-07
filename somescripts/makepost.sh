@@ -14,7 +14,7 @@ sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
 
 declare param=($(sh simparam.sh $label))
 
-ve=${param[0]}
+wave=${param[0]}
 amp=${param[1]}
 width=${param[2]}
 
