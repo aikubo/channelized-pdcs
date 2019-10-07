@@ -1,8 +1,8 @@
 module constants 
 
 DOUBLE PRECISION:: infinity = 1e30
-character(4):: simlabel
-character(120) :: datatype, filename, routine, description
+character(5):: simlabel
+character(150) :: datatype, filename, routine, description
 ! Values are LOG Volume Fraction of Particles EP_P
 !-------- Boundaries for Gradient Calculations -----------!
 DOUBLE PRECISION:: max_dense   = 2.5
@@ -22,6 +22,7 @@ DOUBLE PRECISION, PARAMETER::T_amb    = 273.0 !K
 DOUBLE PRECISION, PARAMETER::rho_dry  = P_const/(R_dryair*T_amb)  !kg/m**3RAMETER
 DOUBLE PRECISION, PARAMETER::char_length = 20.0
 DOUBLE PRECISION, PARAMETER::mu_g        = 2.0e-5 !Pa s
+double precision, parameter:: pi = 3.14159265359
 !--------------------------- Constants
 !------------------------------------------!
 

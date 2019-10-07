@@ -15,29 +15,22 @@ sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
 declare param=($(sh simparam.sh $label))
 
 wave=${param[0]}
-width=${param[1]}
-height=${param[2]}
-depth=${param[3]}
+amp=${param[1]}
+width=${param[2]}
 
-topo1="l$wave"
-topo1+="_w"
-topo1+="$width"
-echo $topo1
+height=${param[3]}
 
-topo2="l$wave"
-topo2+="_W"
-topo2+="$width"
-echo $topo2
-
+topo="l$wave"
+topo+="_A"
+topo+="$amp"
+topo+="_W"
+topo+="$width"
+echo $topo
+cp /home/akubo/myprojects/channelized-pdcs/topo/topofiles/$topo ./
 # check topo 
-if [ -s "$topo1" ]
+if [ -s "$topo" ]
 then
-   topo=$topo1
    echo " $topo file exists and is not empty "
-elif [ -s "$topo2" ]
-then
-   topo=$topo2
-   echo "$topo2 file exists and is not empty "
 else
    echo "topo error"
    exit 1
