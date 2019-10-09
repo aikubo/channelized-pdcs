@@ -6,7 +6,7 @@ labelamp=['X', 'Y', 'Z']
 amp=[9,15,20]
 
 widdepth=['N', 'V', 'W']
-width=[100, 200, 300]
+width=[102, 201, 300]
 depth=[15, 27, 39]
 
 vollabel=[ '1', '4', '7', '0']
