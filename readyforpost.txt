@@ -16,3 +16,5 @@
 /home/akubo/myprojects/4_INFLOW/EV4
 /home/akubo/myprojects/4_INFLOW/BV4
 /home/akubo/myprojects/7_INFLOW/BV7
+/home/akubo/myprojects/4_INFLOW/AWX4
+/home/akubo/myprojects/4_INFLOW/AWZ4

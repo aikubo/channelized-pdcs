@@ -294,8 +294,8 @@ module massdist
 
         routine="massdist/energypotential"
         description="Calculate mass integral from EPP 0.5 to 8"
-        datatype=" RMAX by ZMAX array of kinetic energy in channel"
-        !call headerf(90990, filename, simlabel, routine,DESCRIPTION,datatype)     
+        datatype=" RMAX by ZMAX by time array of g"
+        call headerf(90999, filename, simlabel, routine,DESCRIPTION,datatype)     
         allocate(intmass(RMAX, ZMAX, timesteps))
         allocate(currentcells(RMAX, ZMAX))
 
@@ -324,7 +324,9 @@ module massdist
 
                         if ( isnan(intmass(rc, zc, t)) .eq. .FALSE.) then
                                 print*, intmass(rc,zc,t)
-                        end if 
+                        end if
+
+                        write(90999, format1var) intmass(rc,zc,t) 
                 end do 
         end do 
 
