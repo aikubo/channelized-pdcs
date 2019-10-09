@@ -461,9 +461,9 @@ module massdist
                 write(90914, format1var) kex(rc,t) !
                 write(90912, format1var) perpx(rc,t) !
                 do zc=1,ZMAX
-                !write(90909,format1var) KPsum1(rc,zc,t)
-                !write(90910,format1var) KPsum2(rc,zc,t)
-                !write(90911, format1var) PEsum(rc,zc,t)
+                        write(90909,format1var) KPsum1(rc,zc,t)
+                        write(90910,format1var) KPsum2(rc,zc,t)
+                        write(90911, format1var) PEsum(rc,zc,t)
             end do 
             end do
 

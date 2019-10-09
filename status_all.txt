@@ -585,3 +585,72 @@
 10/06/19 16:52 ran SEPTkubo_mapptoplane.net
 10/06/19 16:52 AVX4 Submitted batch job 10125513
 10/06/19 17:26 AVZ4 Submitted batch job 10125514
+10/07/19 12:37 CWX4 completed 9 timesteps
+10/07/19 12:43 CWX4 post process created 23 txt files, 0 tiff
+10/07/19 13:01 BWX4 completed 9 timesteps
+10/07/19 13:07 BWX4 post process created 23 txt files, 0 tiff
+10/07/19 14:52 AVX4 error post process created 0 txt files, 0 tiff
+10/08/19 06:57 CWZ4 completed 9 timesteps
+10/08/19 07:03 CWZ4 post process created 23 txt files, 0 tiff
+10/09/19 13:34 AVX4 prepared to run
+ AVX4 Submitted batch job 10198791
+10/09/19 14:06 AVZ4 prepared to run
+ AVZ4 Submitted batch job 10198896
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 4_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:39 7_INFLOW ISSUE only   timesteps
+10/09/19 14:40 AVX4 ISSUE only   timesteps
+10/09/19 14:40 AVY4 completed 15 timesteps
+10/09/19 14:40 AVZ4 ISSUE only   timesteps
+10/09/19 14:40 AWX4 completed 9 timesteps
+10/09/19 14:40 AWY4 completed 9 timesteps
+10/09/19 14:40 AWZ4 completed 9 timesteps
+10/09/19 14:40 BVY4 completed 9 timesteps
+10/09/19 14:40 BWV4 completed 9 timesteps
+10/09/19 14:40 BWX4 completed 9 timesteps
+10/09/19 14:40 CVY4 completed 13 timesteps
+10/09/19 14:40 CWX4 completed 9 timesteps
+10/09/19 14:40 CWY4 completed 9 timesteps
+10/09/19 14:40 CWZ4 completed 9 timesteps
+10/09/19 14:40 EV4 completed 9 timesteps
+10/09/19 14:40 SVY4 completed 9 timesteps
+10/09/19 14:40 SWY4 completed 9 timesteps
+10/09/19 14:40 xhmmm ISSUE only   timesteps
+10/09/19 14:40 AV7 completed 9 timesteps
+10/09/19 14:40 AW7 completed 9 timesteps
+10/09/19 14:40 BV7 completed 9 timesteps
+10/09/19 14:40 BV7_STEEP completed 9 timesteps
+10/09/19 14:40 BW7 completed 9 timesteps
+10/09/19 14:40 CN7 ISSUE only   timesteps
+10/09/19 14:40 CV7 completed 9 timesteps
+10/09/19 14:40 CW7 completed 9 timesteps
+10/09/19 14:40 EV7 completed 9 timesteps
+10/09/19 14:40 EW7 completed 9 timesteps
+10/09/19 14:40 SV7 completed 9 timesteps
+10/09/19 14:40 SW7 completed 9 timesteps

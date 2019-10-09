@@ -28,6 +28,6 @@ else
 	echo -e "$datum $label ISSUE only  $status timesteps" >> /home/akubo/myprojects/channelized-pdcs/status_all.txt
 fi
 
-echo $status
-echo "completed!"
-echo ":-D"
+
+
+
