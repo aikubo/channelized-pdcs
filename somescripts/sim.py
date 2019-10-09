@@ -1,6 +1,6 @@
 import numpy as np
 labelwave=['A', 'B', 'C', 'D', 'E']
-wave=[0, 300,600,900,1200,2400]
+wave=[300,600,900,1200,2400]
 
 labelamp=['X', 'Y', 'Z']
 amp=[9,15,20]
