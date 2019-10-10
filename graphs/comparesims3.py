@@ -66,8 +66,8 @@ labels=[ "AV4", "CV4" ] #, "BW4", "SW4", "BW7", "AV7", "CV7", "EV7", "EV4", "SV4
 labels.sort()
 
 avgTG, avgUG, avgdpu, peakin, peakout, xout, xin, zout, zin,  froude, front, bulk_ent, med_ent, dense_ent, avulseddense, buoyantelutriated, massout = openall(labels,path)
-peak_in= np.log10(peakin + 0.000001)
-peak_out= np.log10(peakout + 0.000001)
+peak_in= peakin #np.log10(peakin + 0.000001)
+peak_out= peakout #np.log10(peakout + 0.000001)
 # print(front)cd
 
 channelfrontsubplot(labels, 'avulsedmassbywavelength', front, avulseddense, 'Avulsed Mass Fraction')

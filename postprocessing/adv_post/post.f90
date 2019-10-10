@@ -17,13 +17,16 @@ implicit none
 integer:: tfind=8
 
 
-integer::printstatus=2
+integer::printstatus
+
 
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
 simlabel='CWZ4'
+printstatus=1
+
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -51,13 +54,16 @@ call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
 call handletopo('l900_A20_W300', XXX, YYY, ZZZ)
-call writedxtopo
+
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 call dpupeak
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
-call makeEP(1100, EP_P, printstatus, tfind)
+if (printstatus .ne. 0) then
+    call makeEP(1100, EP_P, printstatus, tfind)
+    call writedxtopo
+end if 
 !call makeUG(1200, U_G, printstatus) 
 
 !call makeTG(1300, T_G, printstatus)

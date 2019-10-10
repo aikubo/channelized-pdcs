@@ -4,10 +4,7 @@ echo "Making post processing script"
 here=$(pwd)
 label=${PWD##*/}
 
-#clean it up 
-#rm *tiff
-rm *txt
-
+rm $label*
 
 cp /home/akubo/myprojects/channelized-pdcs/postsub.sh $here
 sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
@@ -44,12 +41,23 @@ cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 #echo $timesteps
 
 echo editing post.f90
+if [ -s "EP_P_t08.txt" ]
+then
+   echo "EP_P_t08 exists and is not empty"
+   sed -i "s| .*printstatus=.*| printstatus=0|" post.f90
+else 
+   echo "EP_P_t08.txt does not exist"
+   sed -i "s| .*printstatus=.*| printstatus=2|" post.f90
+fi
+
 sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post.f90
 sed -i.bak "s|.*width=.*|width=$width|" post.f90
 sed -i.bak "s|.*lambda=.*|lambda=$wave|" post.f90
 sed -i.bak "s|.*depth=.*|depth=$depth|" post.f90
 sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" post.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
+
+
 
 echo start compliling 
 
