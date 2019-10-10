@@ -1,11 +1,11 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SV4 
-  Filename:cross_stream.txt                                                                                                        
-  Produced in mod-subroutine:  massdist/cross_stream                                                                                                   
+  Date: 20191009
+  Simulation name: SV4  
+  Filename:cross_stream.txt                                                                                                                                      
+  Produced in mod-subroutine:  massdist/cross_stream                                                                                                                                 
   Written by AK September 2019
-  Description:Calculate mass distribution moving cross vs downstream                                                                  
-  Data format: t Total Mass (Higest velocity) U W V                                                                                   
+  Description:Calculate mass distribution moving cross vs downstream                                                                                                
+  Data format: t Total Mass (Higest velocity) U W V                                                                                                                 
 !------------------------------------------------------------!
   1        1.000000000000        0.397940008672        0.000000000000                   NaN        0.000000000000                   NaN
   2        0.999641977036        2.658660938678        0.000300642744        4.490581218386        0.000057380220        5.458770485701

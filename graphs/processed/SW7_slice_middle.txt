@@ -1,11 +1,11 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SW7 
-  Filename:slice_middle.txt                                                                                                        
-  Produced in mod-subroutine:  column.mod/slice                                                                                                        
+  Date: 20191009
+  Simulation name: SW7  
+  Filename:slice_middle.txt                                                                                                                                      
+  Produced in mod-subroutine:  column.mod/slice                                                                                                                                      
   Written by AK September 2019
-  Description:Veritcal column at x300_z450                                                                                            
-  Data format: t  YYY  EPP   U_G   DPU   T_G   Ri                                                                                     
+  Description:Veritcal column at x300_z450                                                                                                                          
+  Data format: t  YYY  EPP   U_G   DPU   T_G   Ri                                                                                                                   
 !------------------------------------------------------------!
   1      186.000000000000       14.000347260752        0.000000000000        0.000000000000      273.000000000000        0.000000000000
   1      189.000000000000       14.000347260752        0.000000000000        0.000000000000      273.000000000000        0.000000000000

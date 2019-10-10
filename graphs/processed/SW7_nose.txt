@@ -1,11 +1,11 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SW7 
-  Filename:nose.txt                                                                                                                
-  Produced in mod-subroutine:  =findhead/isosurf                                                                                                       
+  Date: 20191009
+  Simulation name: SW7  
+  Filename:nose.txt                                                                                                                                              
+  Produced in mod-subroutine:  =findhead/isosurf                                                                                                                                     
   Written by AK September 2019
-  Description:Calculate head height, width, and average U_G, T_G, EP_G                                                                
-  Data format: t  Q  Nose of Current X Loc                                                                                            
+  Description:Calculate head height, width, and average U_G, T_G, EP_G                                                                                              
+  Data format: t  Q  Nose of Current X Loc                                                                                                                          
 !------------------------------------------------------------!
            2           1   150.000000000000     
            2           2   150.000000000000     

@@ -1,11 +1,11 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SV4 
-  Filename:froude.txt                                                                                                              
-  Produced in mod-subroutine:  =findhead/isosurf                                                                                                       
+  Date: 20191009
+  Simulation name: SV4  
+  Filename:froude.txt                                                                                                                                            
+  Produced in mod-subroutine:  =findhead/isosurf                                                                                                                                     
   Written by AK September 2019
-  Description:Calculate head height, width, and average U_G, T_G, EP_G                                                                
-  Data format: t   AvgU - AvgEP - AvgT - Froude - Nose X - Width - Height                                                             
+  Description:Calculate head height, width, and average U_G, T_G, EP_G                                                                                              
+  Data format: t   AvgU - AvgEP - AvgT - Froude - Nose X - Width - Height                                                                                           
 !------------------------------------------------------------!
 ****        0.000000000000        0.400000005960        0.000000000000        0.000000000000        0.000000000000        0.000000000000        0.000000000000
    2       15.033282641033        0.989432647609      587.412522119428        1.243613640925      116.779411764706       58.058823529412       15.850286586320

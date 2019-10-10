@@ -20,3 +20,13 @@
 /home/akubo/myprojects/4_INFLOW/BWX4
 /home/akubo/myprojects/4_INFLOW/CWZ4
 /home/akubo/myprojects/4_INFLOW/AVY4
+/home/akubo/myprojects/4_INFLOW/CWY4
+/home/akubo/myprojects/4_INFLOW/CVY4
+/home/akubo/myprojects/4_INFLOW/BVY4
+/home/akubo/myprojects/7_INFLOW/AVY7
+/home/akubo/myprojects/7_INFLOW/BVY7
+/home/akubo/myprojects/7_INFLOW/CVY7
+/home/akubo/myprojects/7_INFLOW/BWY7
+/home/akubo/myprojects/7_INFLOW/CWY7
+/home/akubo/myprojects/4_INFLOW/AWY4
+/home/akubo/myprojects/4_INFLOW/AWZ4

@@ -1,11 +1,11 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SW7 
-  Filename:average_medium.txt                                                                                                      
-  Produced in mod-subroutine:  averageit.mod/average_all                                                                                               
+  Date: 20191009
+  Simulation name: SW7  
+  Filename:average_medium.txt                                                                                                                                    
+  Produced in mod-subroutine:  averageit.mod/average_all                                                                                                                             
   Written by AK September 2019
-  Description:Average of densities between 2.5 and 1.5                                                                                
-  Data format: t   T_G   U_G   V_G   W_G   U_S1   DPU                                                                                 
+  Description:Average of densities between 2.5 and 1.5                                                                                                              
+  Data format: t   T_G   U_G   V_G   W_G   U_S1   DPU                                                                                                               
 !------------------------------------------------------------!
   1      800.000000000000       10.000000000000        0.000000000000        0.000000000000       10.000000000000    39000.000000000000
   2      787.662332106965       30.410838334984       -2.801229345079        0.027757263028       30.396652096553      450.540179587669

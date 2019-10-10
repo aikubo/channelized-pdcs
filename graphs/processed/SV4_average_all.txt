@@ -1,11 +1,11 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SV4 
-  Filename:average_all.txt                                                                                                         
-  Produced in mod-subroutine:  averageit.mod/average_all                                                                                               
+  Date: 20191009
+  Simulation name: SV4  
+  Filename:average_all.txt                                                                                                                                       
+  Produced in mod-subroutine:  averageit.mod/average_all                                                                                                                             
   Written by AK September 2019
-  Description: Average of all timesteps                                                                                               
-  Data format: t   T_G   U_G   V_G   W_G   U_S1   DPU                                                                                 
+  Description: Average of all timesteps                                                                                                                             
+  Data format: t   T_G   U_G   V_G   W_G   U_S1   DPU                                                                                                               
 !------------------------------------------------------------!
   1      800.000000000000       10.000000000000        0.000000000000        0.000000000000       10.000000000000    39000.000000000000
   2      567.621908915566       16.100922053931       16.100922053931       -0.764490626805       16.415528896018     1619.821326476741

@@ -1,11 +1,11 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SW7 
-  Filename:edge_vel2.txt                                                                                                           
-  Produced in mod-subroutine:  massdist/edgevelocity                                                                                                   
+  Date: 20191009
+  Simulation name: SW7  
+  Filename:edge_vel2.txt                                                                                                                                         
+  Produced in mod-subroutine:  massdist/edgevelocity                                                                                                                                 
   Written by AK September 2019
-  Description:Calculate dot product of velocity and curve of the channel on edge2                                                     
-  Data format: t XXX perpvel W_G EPP                                                                                                  
+  Description:Calculate dot product of velocity and curve of the channel on edge2                                                                                   
+  Data format: t XXX perpvel W_G EPP                                                                                                                                
 !------------------------------------------------------------!
   1        3.000000000000                   NaN        0.000000000000
   1        6.000000000000                   NaN        0.000000000000

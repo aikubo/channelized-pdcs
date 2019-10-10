@@ -1,9 +1,9 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SW7 
-  Filename:slice_halfl.txt                                                                                                         
-  Produced in mod-subroutine:  column.mod/slice                                                                                                        
+  Date: 20191009
+  Simulation name: SW7  
+  Filename:slice_halfl.txt                                                                                                                                       
+  Produced in mod-subroutine:  column.mod/slice                                                                                                                                      
   Written by AK September 2019
-  Description:Veritcal column at x  0_z606                                                                                            
-  Data format: t  YYY  EPP   U_G   DPU   T_G   Ri                                                                                     
+  Description:Veritcal column at x  0_z606                                                                                                                          
+  Data format: t  YYY  EPP   U_G   DPU   T_G   Ri                                                                                                                   
 !------------------------------------------------------------!

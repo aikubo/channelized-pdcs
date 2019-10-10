@@ -1,11 +1,11 @@
 !------------------------------------------------------------!
-  Date: 20190929
-  Simulation name: SV7 
-  Filename:entrainment.txt                                                                                                         
-  Produced in mod-subroutine:  =entrainment/bulkent                                                                                                    
+  Date: 20191009
+  Simulation name: SV7  
+  Filename:entrainment.txt                                                                                                                                       
+  Produced in mod-subroutine:  =entrainment/bulkent                                                                                                                                  
   Written by AK September 2019
-  Description: CALCULATE NUMBER OF GRIDS WITH SPECIFIC VOLUME FRACTION OF GAS                                                         
-  Data format: t  Whole current  Medium  Dense  (m^3)                                                                                 
+  Description: CALCULATE NUMBER OF GRIDS WITH SPECIFIC VOLUME FRACTION OF GAS                                                                                       
+  Data format: t  Whole current  Medium  Dense  (m^3)                                                                                                               
 !------------------------------------------------------------!
   1      402.000000000000      402.000000000000      402.000000000000
   2    18437.000000000000    13051.000000000000    10165.000000000000
