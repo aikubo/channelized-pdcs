@@ -19,3 +19,4 @@
 /home/akubo/myprojects/4_INFLOW/CWX4
 /home/akubo/myprojects/4_INFLOW/BWX4
 /home/akubo/myprojects/4_INFLOW/CWZ4
+/home/akubo/myprojects/4_INFLOW/AVY4

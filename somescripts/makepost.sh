@@ -44,10 +44,10 @@ echo editing post.f90
 if [ -s "EP_P_t08.txt" ]
 then
    echo "EP_P_t08 exists and is not empty"
-   sed -i "s| .*printstatus=.*| printstatus=0|" post.f90
+   sed -i.bak "s|.*printstatus=.*|printstatus=0|" post.f90
 else 
    echo "EP_P_t08.txt does not exist"
-   sed -i "s| .*printstatus=.*| printstatus=2|" post.f90
+   sed -i.bak "s|.*printstatus=.*|printstatus=2|" post.f90
 fi
 
 sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post.f90

@@ -418,15 +418,21 @@ module massdist
                        perpvel = max(vel1,vel2)
                        call density(I,t, rho_c, mass)
                        KP1 =  (0.5)*mass*perpvel**2
-
+                       !print*, N1, N2 
+                       !print*, U
                        h = depth-(YYY(I,1) - bottom)
                        PE = mass*gravity*h
 
                       !    if ( isnan(KP1) .eq. .FALSE. ) then 
                       !     print*, perpvel, N1, N2, U
                       !  end if 
-
-
+                        if ( perpvel .gt. 30.0000) then
+                               print*, "greater than 30"
+                               print*, perpvel, U
+                               print*, "loc at " 
+                               print*, XXX(I,1), ZZZ(I,1)
+                        end if 
+                 
                         rc=int(XXX(I,1)/3.0)
                         zc=int(ZZZ(I,1)/3.0)
                         PEsum(rc,zc,t) = PEsum(rc,zc,t) + PE
@@ -441,9 +447,9 @@ module massdist
             D = (depth/3.0)
             W = width/3.0
             do rc=1,RMAX
-                pex(rc,t) = SUM(PEsum(rc,:,t))/W
-                kex(rc,t) = SUM(KPsum1(rc,:,t))/W 
-                perpx(rc,t)=SUM(KPsum2(rc,:,t))/W
+                pex(rc,t) = SUM(PEsum(rc,:,t))/(W*D)
+                kex(rc,t) = SUM(KPsum1(rc,:,t))/(W*D) 
+                perpx(rc,t)=SUM(KPsum2(rc,:,t))/(W*D)
                 
                 do zc=1,ZMAX
                    PEsum(rc,zc,t)= PEsum(rc,zc,t)/D

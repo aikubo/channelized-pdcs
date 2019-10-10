@@ -1,5 +1,17 @@
 #!/bin/bash 
 
+if [ -s "EP_P_t08.txt" ]
+then
+   echo "EP_P_t08 exists and is not empty"
+   #sed -i "s| .*printstatus=.*| printstatus=0|" post.f90
+else
+   echo "EP_P_t08.txt does not exist"
+   #sed -i "s| .*printstatus=.*| printstatus=2|" post.f90
+fi
+
+
+
+
 #C1=$(($ch+5))
 #BC2=$(($BC1+10))
 #oldt="topo_$old"
@@ -10,21 +22,6 @@
 #read name 
 
 #declare param=($(sh simparam.sh $name))
-filename='moresim.txt'
-
-sed -i.bak "s/V/&X/" moresim.txt 
-sed -i.bak "s/300/&,20/" moresim.txt 
-sed -i.bak "s/600/&,20/" moresim.txt 
-sed -i.bak "s/900/&,20/" moresim.txt  
-sed -i.bak "s/1200/&,20/" moresim.txt 
-sed -i.bak "s/0/&,0/" moresim.txt 
-
-sed -i.bak "s/300/&,20/" moresim.txt 
-sed -i.bak "s/600/&,20/" moresim.txt 
-sed -i.bak "s/900/&,20/" moresim.txt  
-sed -i.bak "s/1200/&,20/" moresim.txt 
-sed -i.bak "s/0/&,0/" moresim.txt 
-
 #wave=${param[1]}
 #width=${param[2]}
 #height=${param[4]}
