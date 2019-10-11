@@ -85,8 +85,18 @@ contains
         call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
         ZLOC=floor((edge2+6)/3)*3
         print*, XLOC, ZLOC
-
         call slice(width, depth, lambda, XLOC, ZLOC, 'onel', 10003)
+
+
+        XLOC=floor((lambda)*(0.75)/3)*3
+        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+        ZLOC=floor((edge2+100)/3)*3
+        print*, XLOC, ZLOC
+
+        call slice(width, depth, lambda, XLOC, ZLOC, '3quarter_100m', 10003)        
+
+
+
 
 
         end subroutine 
