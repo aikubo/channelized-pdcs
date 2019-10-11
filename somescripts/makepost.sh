@@ -35,7 +35,7 @@ fi
 
 echo $topo
 
-cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
+
 #echo how many timesteps 
 #timestep=$(checktime2.sh)
 #echo $timesteps
@@ -44,12 +44,14 @@ echo editing post.f90
 if [ -s "EP_P_t08.txt" ]
 then
    echo "EP_P_t08 exists and is not empty"
-   sed -i.bak "s|.*printstatus=.*|printstatus=0|" post.f90
-else 
+   stat=0  
+ else 
    echo "EP_P_t08.txt does not exist"
-   sed -i.bak "s|.*printstatus=.*|printstatus=2|" post.f90
+   stat=2  
 fi
 
+cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
+sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post.f90
 sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post.f90
 sed -i.bak "s|.*width=.*|width=$width|" post.f90
 sed -i.bak "s|.*lambda=.*|lambda=$wave|" post.f90

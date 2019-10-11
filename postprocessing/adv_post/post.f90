@@ -25,7 +25,7 @@ double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
 simlabel='SW7'
-printstatus=2
+printstatus=0
 
 
 allocate(isosurface(1200,4,15))
@@ -57,7 +57,7 @@ call handletopo('l0_A0_W300', XXX, YYY, ZZZ)
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
-call dpupeak
+
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
 if (printstatus .ne. 0) then

@@ -1,17 +1,17 @@
 #!/bin/bash 
 
+echo editing post.f90
 if [ -s "EP_P_t08.txt" ]
 then
    echo "EP_P_t08 exists and is not empty"
-   #sed -i "s| .*printstatus=.*| printstatus=0|" post.f90
-else
+   stat=0
+ else
    echo "EP_P_t08.txt does not exist"
-   #sed -i "s| .*printstatus=.*| printstatus=2|" post.f90
+   stat=2
 fi
 
-
-
-
+#cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
+sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post.f90
 #C1=$(($ch+5))
 #BC2=$(($BC1+10))
 #oldt="topo_$old"
