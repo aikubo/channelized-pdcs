@@ -267,9 +267,9 @@ module massdist
                                 top= FLOOR(top/3.)*3. - 3 
 
                                 if (EPP(I,t) .gt. 1 .and. EPP(I,t) .lt. 8) then 
-                                if (YYY(I,1) .eq. top .and. ZZZ(I,1) .lt. edge1) then
+                                if (YYY(I,1) .gt. top .and. ZZZ(I,1) .lt. edge1) then
                                         out1(J)= out1(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
-                                elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .gt. edge2) then
+                                elseif (YYY(I,1) .gt. top .and. ZZZ(I,1) .gt. edge2) then
                                         out2(J)= out2(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if 
                                 end if 

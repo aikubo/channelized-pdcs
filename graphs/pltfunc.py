@@ -128,8 +128,9 @@ def pltbytimebyx(df, t, fig, ax):
 
     for i in labels:
         y_temp=df[i]
-        y=df[start:end]
+        y=y_temp[start:end]
         j=labels.index(i)
+        print(palette[j])
         ax.plot(xxx,y, color=palette[j], label=i)
 
 
