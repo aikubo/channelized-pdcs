@@ -1,0 +1,9 @@
+!------------------------------------------------------------!
+  Date: 20191011
+  Simulation name: SW4  
+  Filename:slice_3quarter_100m.txt                                                                                                                               
+  Produced in mod-subroutine:  column.mod/slice                                                                                                                                      
+  Written by AK September 2019
+  Description:Veritcal column at x  0_z699                                                                                                                          
+  Data format: t  YYY  EPP   U_G   DPU   T_G   Ri                                                                                                                   
+!------------------------------------------------------------!
