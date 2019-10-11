@@ -1,7 +1,8 @@
-09/29/19 19:44 CV7 post process created 16 txt files, 0 tiff
-10/09/19 14:40 CV7 completed 9 timesteps
-10/09/19 17:11 CVY7 completed 9 timesteps
-10/09/19 18:51 CVY7 completed 9 timesteps
-10/09/19 19:04 CVY7 post process created 38 txt files, 0 tiff
-10/11/19 00:34 CVY7 post process created 38 txt files, 0 tiff
-10/11/19 01:13 CVY7 post process created 38 txt files, 0 tiff
+09/29/19 19:47 BW7 post process created 16 txt files, 0 tiff
+10/09/19 14:40 BW7 completed 9 timesteps
+10/09/19 17:11 BWY7 completed 9 timesteps
+10/09/19 18:51 BWY7 completed 9 timesteps
+10/09/19 19:04 BWY7 post process created 38 txt files, 0 tiff
+10/11/19 00:34 BWY7 post process created 38 txt files, 0 tiff
+10/11/19 01:13 BWY7 post process created 38 txt files, 0 tiff
+10/11/19 14:11 BWY7 post process created 38 txt files, 0 tiff
