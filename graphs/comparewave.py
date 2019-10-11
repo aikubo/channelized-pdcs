@@ -10,6 +10,7 @@ import seaborn as sns
 from openmod import *
 from entrainmod import *
 from pltfunc import *
+from normalize import *
 
 
 path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"

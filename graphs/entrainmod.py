@@ -9,7 +9,7 @@ import seaborn as sns
 
 from openmod import *
 from pltfunc import *
-
+from normalize import *
 
 def entrain(labels, data):
     print('hello entrainment')
@@ -29,9 +29,18 @@ def entrain(labels, data):
 alllabels= [ "AVY4","AWX4", "AWY4", "AVY7", "BVY4", "BWX4", "CVY4", "CWX4", "SV4", "SW4", "BVY7", "CWY7", "CWY4", "SW7", "SV7"]
 alllabels.sort()
 print(len(alllabels))
-path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+## MAC
+#path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+
+## LAPTOP
+path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
 ent1, ent2, ent, = openent(alllabels, path)
 deltaV=entrain(alllabels, ent1)
 print(deltaV)
 
 plottogether(alllabels,"entrainmentall", deltaV, "Entrainment (m^3)", "Time")
+
+deltaV=normalizebyvol(deltaV)
+print(deltaV)
+
+plottogether(alllabels,"Nentrainmentall", deltaV, "Entrainment/Volume of Flow", "Time")

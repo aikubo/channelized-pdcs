@@ -44,10 +44,6 @@ def setcolors(labels):
 def setcolorandstyle(labels):
     palette=setcolors(labels)
 
-    colordf=pd.DataFrame()
-    colordf['label']=labels
-    colordf['color']=palette
-    colordf.set_index('label', drop=True, inplace=True)
     sns.set()
     sns.set_style("white")
     sns.set_style( "ticks",{"xtick.direction": "in","ytick.direction": "in"})
@@ -86,7 +82,9 @@ def savefigure(name):
     plt.savefig(fid, format='eps', dpi=600)
 
 def plottogether(labels, fid, df, ylab, xlab):
-    fig, ax = plt.subplots()
+
+    fig, ax=plt.subplots()
+
     palette=setgrl(labels, fig, ax, 5, 5)
     print(len(palette))
     print("plotting")
@@ -105,6 +103,35 @@ def plottogether(labels, fid, df, ylab, xlab):
     ax.set_xlim(left=0)
     plt.tight_layout()
     savefigure(fid)
+
+def plottogether2(fid, df, x, ylab, xlab, fig, ax):
+    labels=df.columns.tolist()
+    palette=setcolors(labels)
+    print(len(palette))
+    print("plotting")
+    print(fid)
+    df.fillna(0)
+    
+    for i in labels:
+        y=df[i]
+        j=labels.index(i)
+        print(x)
+        print(y)
+        ax.plot(x,y, color = palette[j], label=i)
+
+def pltbytimebyx(df, t, fig, ax):
+    labels=df.columns.tolist()
+    palette=setcolors(labels)
+    start=(t*404)
+    end=(t+1)*404
+    xxx=np.arange(0,1212,3)
+
+    for i in labels:
+        y_temp=df[i]
+        y=df[start:end]
+        j=labels.index(i)
+        ax.plot(xxx,y, color=palette[j], label=i)
+
 
 def horizplot(df, loc, labels):
     maxy=(len(df))
