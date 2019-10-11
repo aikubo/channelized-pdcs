@@ -64,7 +64,12 @@ def openpeakdpu(labels,path):
     zout=openmine(labels, path, fid, cols, 'ZZZout')
     xin=openmine(labels, path, fid, cols, 'XXXin')
     zin=openmine(labels, path, fid, cols, 'ZZZin')
-
+    peakin.drop(peakin.index[8])
+    peakout.drop(peakout.index[8])
+    xin.drop(xin.index[8])
+    zin.drop(zin.index[8])
+    zout.drop(zout.index[8])
+    xout.drop(xout.index[8])
     return peakin, peakout, xout, xin, zout, zin
 
 def openall(labels,path):

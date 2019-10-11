@@ -2,9 +2,47 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
 import seaborn as sns 
+def setcolors(labels):
+    length=len(labels)
+
+    Alabel=0
+    Blabel=0
+    Clabel=0
+    Slabel=0 
+    Elabel=0
+    Dlabel=0
+
+    for i in labels:
+        if "A" in i:
+            Alabel+=1
+        elif "B" in i:
+            Blabel+=1
+        elif "C" in i:
+            Clabel+=1
+        elif "S" in i:
+            Slabel+=1
+        elif "E" in i:
+            Elabel+=1
+        elif "D" in i:
+            Dlabel+=1
+
+    Acolors=sns.color_palette("Reds", Alabel)
+    Bcolors=sns.color_palette( "YlGn", Blabel)
+    Ccolors=sns.color_palette("Blues", Clabel)
+    Dcolors=sns.color_palette("PuBu", Clabel)
+    Ecolors=sns.color_palette("Purples", Clabel)
+    Scolors=sns.color_palette("Greys", Slabel )
+
+    temp_colors= Acolors+Bcolors+Ccolors+Scolors
+
+    colors= sns.color_palette(temp_colors)
+
+    return colors
+
+
 
 def setcolorandstyle(labels):
-    palette=sns.color_palette("coolwarm", len(labels))
+    palette=setcolors(labels)
 
     colordf=pd.DataFrame()
     colordf['label']=labels
@@ -49,16 +87,23 @@ def savefigure(name):
 
 def plottogether(labels, fid, df, ylab, xlab):
     fig, ax = plt.subplots()
-    palette=setgrl(labels, fig, ax, 5, 4)
+    palette=setgrl(labels, fig, ax, 5, 5)
+    print(len(palette))
     print("plotting")
     print(fid)
     df.fillna(0)
-    time=['0','5','10','15','20','25','30','35', '40']
+    
+    for i in labels:
+        x=df[i]
+        time=np.arange(0,5*(len(x)),5)
+        j=labels.index(i)
+        plt.plot(time, x, color=palette[j], label=i)
+    ax.legend(bbox_to_anchor=(1.01, 1.01))
     ax.set_xticklabels(time)
-    sns.lineplot(data=df, palette=palette, dashes=False)
     ax.set_xlabel(xlab)
     ax.set_ylabel(ylab)
     ax.set_xlim(left=0)
+    plt.tight_layout()
     savefigure(fid)
 
 def horizplot(df, loc, labels):
