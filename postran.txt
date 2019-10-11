@@ -30,3 +30,4 @@
 /home/akubo/myprojects/7_INFLOW/CWY7
 /home/akubo/myprojects/4_INFLOW/AWY4
 /home/akubo/myprojects/4_INFLOW/AWZ4
+/home/akubo/myprojects/4_INFLOW/AVX4

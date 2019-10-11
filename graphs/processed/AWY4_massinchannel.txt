@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191009
+  Date: 20191011
   Simulation name: AWY4 
   Filename:massinchannel.txt                                                                                                                                     
   Produced in mod-subroutine:  massdist/massinchannel                                                                                                                                

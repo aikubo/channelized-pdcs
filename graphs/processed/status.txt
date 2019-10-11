@@ -1,4 +1,6 @@
-10/09/19 14:40 AWZ4 completed 9 timesteps
-10/09/19 17:11 AWZ4 completed 9 timesteps
-10/09/19 18:51 AWZ4 completed 9 timesteps
-10/09/19 19:06 AWZ4 post process created 24 txt files, 0 tiff
+09/29/19 19:44 BV7 post process created 16 txt files, 0 tiff
+10/09/19 14:40 BV7 completed 9 timesteps
+10/09/19 17:11 BVY7 completed 9 timesteps
+10/09/19 18:51 BVY7 completed 9 timesteps
+10/09/19 19:04 BVY7 post process created 38 txt files, 0 tiff
+10/11/19 00:37 BVY7 post process created 38 txt files, 0 tiff

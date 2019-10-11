@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191009
+  Date: 20191011
   Simulation name: CWZ4 
   Filename:average_medium.txt                                                                                                                                    
   Produced in mod-subroutine:  averageit.mod/average_all                                                                                                                             

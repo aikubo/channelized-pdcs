@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191009
+  Date: 20191011
   Simulation name: SV4  
   Filename:slice_middle.txt                                                                                                                                      
   Produced in mod-subroutine:  column.mod/slice                                                                                                                                      
