@@ -67,8 +67,8 @@ def xxxplotsbywave(path, fid, datacol, out, pid, xlab, ylab):
             #borderaxespad=0.5,    # Small spacing around legend box
             title="Geometries",  # Title for the legend
             )
-    plt.show()
-    #savefigure(pid)
+    #plt.show()
+    savefigure(pid)
 
 def xxxplotsnorm(path, fid1, datacol1, out1, fid2, datacol2, out2, pid, xlab, ylab):
     
@@ -95,8 +95,8 @@ def xxxplotsnorm(path, fid1, datacol1, out1, fid2, datacol2, out2, pid, xlab, yl
             #borderaxespad=0.5,    # Small spacing around legend box
             title="Geometries",  # Title for the legend
             )
-    plt.show()
-    #savefigure(pid
+   # plt.show()
+    savefigure(pid)
 
 time=[0,5,10,20,25,30,35,40]
 
@@ -145,10 +145,24 @@ subplotsbywave(path, fid, datacols, out, time, pid, xlab, ylab)
 
 fid='_massbyxxx.txt'
 datacols=[ 't', 'XXX', 'massonright', 'massonleft']
-out='massonleft'
+out='massonright'
 pid='massoutbyxxxinsubplots'
 xlab="X (m)"
 ylab="Mass out of the channel (kg)"
 
-xxxplotsbywave(path, fid, datacols, out, pid, xlab, ylab)
+fig, axes = plt.subplots(1,4, sharey=True)
+palette=setgrl(alllabels, fig, axes, 5, 8)
+t=7
 
+for i in waves:
+    labels=[j for j in alllabels if i in j]
+    print(labels)
+    data1=openmine(labels, path, fid, datacols, 'massonright')
+    data2=openmine(labels, path, fid, datacols, 'massonleft')
+    data= data1+data2
+    print(data)
+    loc=waves.index(i)
+    ax=axes[loc]
+    pltbytimebyx(data, t, fig, ax)
+savefigure(pid)
+#plt.show()

@@ -115,8 +115,6 @@ def plottogether2(fid, df, x, ylab, xlab, fig, ax):
     for i in labels:
         y=df[i]
         j=labels.index(i)
-        print(x)
-        print(y)
         ax.plot(x,y, color = palette[j], label=i)
 
 def pltbytimebyx(df, t, fig, ax):
@@ -130,7 +128,6 @@ def pltbytimebyx(df, t, fig, ax):
         y_temp=df[i]
         y=y_temp[start:end]
         j=labels.index(i)
-        print(palette[j])
         ax.plot(xxx,y, color=palette[j], label=i)
 
 
@@ -155,7 +152,7 @@ def plotallcol(labels, fid, df1, df2, df3, df4, df5):
     axes[0].set_ylabel('Height (m)', size=9)
     axes[0].set_xlabel('Log Volume fraction', size=9)
     loc.set_ylim([0,150])
-    loc.set_xlim([0,14])
+    loc.set_xlim([0,8])
     sns.despine()
     # UG
     loc=axes[1]

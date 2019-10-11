@@ -4,17 +4,25 @@ import matplotlib.pyplot as plt
 import pltfunc
 from pltfunc import plotallcol as sliceplt
 
-path = "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-labels=['AV7', 'AW4']
-
+path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+alllabels= [ "AVY4","AWX4", "AWY4", "AVY7", "BVY4", "BWX4", "CVY4", "CWX4", "SV4", "SW4", "BVY7", "CWY7", "CWY4", "SW7", "SV7"]
+alllabels.sort()
+labels=alllabels
 def openslicet(path2file, labels, twant, loc):
     
     
     if loc in "in":
         slicefid='_slice_middle.txt'
-    else :
-        slicefid='_slice_outsidehalfl.txt'
-        labels = [k for k in labels if 'S' not in k]
+    elif loc in "half" :
+        slicefid='_slice_halfl.txt'
+        labels = [k for k in labels if "S" not in k]
+    elif loc in "onel" :
+        slicefid='_slice_onel.txt'
+        labels = [k for k in labels if "S" not in k]
+    elif loc in "quart" :
+        slicefid='_slice_3quarter_100m.txt'
+        labels = [k for k in labels if "S" not in k]
+    print(labels)
     
     slice_EPP=pd.DataFrame()
     slice_UG=pd.DataFrame()
@@ -35,9 +43,6 @@ def openslicet(path2file, labels, twant, loc):
         fid=path2file+sim
         loc=fid + slicefid
         slice_temp=pd.read_table(loc, header=None, sep= '\s+', skiprows=9)
-        if 'S' in sim: 
-            continue
-
         col = ['UG', 'DPU', 'TG', 'Ri' ]
         slice_temp.columns = ['time', 'YYY',  'EPP', 'UG', 'DPU', 'TG', 'Ri' ]
 
@@ -134,12 +139,19 @@ def opensliceavg(path2file, labels):
     return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
 
 slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(path, labels, 7, 'in')
-sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(path, labels, 7, 'out')
-
+sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(path, labels, 7, 'one')
+sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= openslicet(path, labels, 7, 'half')
+sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= openslicet(path, labels, 7, 'quart')
 
 fid = 'col_in'
 sliceplt(labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
 
 print(slicein_TG)
-fid = 'col_out'
+fid = 'col_onel'
 sliceplt(labels, fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
+
+fid = 'col_half'
+sliceplt(labels, fid, sliceouth_EPP, sliceouth_UG, sliceouth_DPU, sliceouth_Ri, sliceouth_TG)
+
+fid = 'col_quart'
+sliceplt(labels, fid, sliceoutq_EPP, sliceoutq_UG, sliceoutq_DPU, sliceoutq_Ri, sliceoutq_TG)
