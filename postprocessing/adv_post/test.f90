@@ -12,6 +12,7 @@ use find_richardson
 use entrainment 
 use massdist
 use averageit
+use track 
 
 implicit none
 integer:: tfind=8
@@ -22,7 +23,7 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='AV7'
+simlabel='AVX7'
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -32,11 +33,13 @@ length1=RMAX*YMAX*ZMAX
 width=201
 lambda=300
 printstatus=.false.
+
+deltat=5.0
 timesteps=8
 tstart=3
 tstop=timesteps
 depth = 27
-amprat=0.15
+amprat=0.09
 call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
@@ -49,13 +52,15 @@ call openbin(500, 'W_G', W_G1)
 !call openbin(700, 'W_S1', W_S1)
 !call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l300_A15_W201', XXX, YYY, ZZZ)
+call handletopo('l300_A9_W201', XXX, YYY, ZZZ)
+
+call track_parcel
 !call energypotential
 !call edgevelocity
 !call writedxtopo
 !call  logvolfrc(EP_G1, EPP)
 !call integratemass
-call energypotential
+!call energypotential
 !call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 !call dpupeak
 !call massbyxxx

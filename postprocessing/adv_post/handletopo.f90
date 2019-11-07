@@ -119,14 +119,13 @@ end subroutine
 
 subroutine FUNIJK(xl,yl,zl,IJK)
      implicit none 
-     integer, intent(IN):: xc, yc, zc
+     integer, intent(IN):: xl, yl, zl
      integer, intent(OUT):: IJK
      ! FUNIJK_GL (LI, LJ, LK) = 1 + (LJ - jmin3) +
      ! (LI-imin3)*(jmax3-jmin3+1) &
      ! + (LK-kmin3)*(jmax3-jmin3+1)*(imax3-imin3+1)
 
-     I  = 1 + (yl-1) +(xl-1)*(YMAX-1+1) +  (zl-1)*(YMAX-1+1)*(RMAX-1+1)
-
+     IJK = 1 + (yl-1) +(xl-1)*(YMAX-1+1) +  (zl-1)*(YMAX-1+1)*(RMAX-1+1) 
 end subroutine
 
 subroutine loctoind(loc,ind)
