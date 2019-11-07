@@ -115,8 +115,25 @@ subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
 
         bottom= slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep
         top= slope*deltz*(RMAX-(XLOC/deltz)) +clearance 
-      
-        
+end subroutine
+
+subroutine FUNIJK(xl,yl,zl,IJK)
+     implicit none 
+     integer, intent(IN):: xc, yc, zc
+     integer, intent(OUT):: IJK
+     ! FUNIJK_GL (LI, LJ, LK) = 1 + (LJ - jmin3) +
+     ! (LI-imin3)*(jmax3-jmin3+1) &
+     ! + (LK-kmin3)*(jmax3-jmin3+1)*(imax3-imin3+1)
+
+     I  = 1 + (yl-1) +(xl-1)*(YMAX-1+1) +  (zl-1)*(YMAX-1+1)*(RMAX-1+1)
+
+end subroutine
+
+subroutine loctoind(loc,ind)
+     double precision, intent(IN):: loc
+     integer, intent(out):: ind
+
+     ind= int( floor(loc)/3)
 end subroutine
 
 end module maketopo

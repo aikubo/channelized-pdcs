@@ -36,6 +36,7 @@ length1=RMAX*YMAX*ZMAX
 width=300
 lambda=600
 amprat=0.15
+deltat=5.0
 timesteps=8
 tstart=3
 tstop=timesteps

@@ -262,11 +262,11 @@ module massdist
                         do I=1,length1
                                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
                                 J= int(XXX(I,1))/3
-                                edge1= FLOOR(edge1/3.)*3. + 3.
-                                edge2= FLOOR(edge2/3.)*3. - 3.
-                                top= FLOOR(top/3.)*3. - 3 
+                                edge1= FLOOR(edge1/3.)*3.
+                                edge2= FLOOR(edge2/3.)*3.
+                                top= FLOOR(top/3.)*3. 
 
-                                if (EPP(I,t) .gt. 1 .and. EPP(I,t) .lt. 8) then 
+                                if (EPP(I,t) .gt. .5) then 
                                 if (YYY(I,1) .gt. top .and. ZZZ(I,1) .lt. edge1) then
                                         out1(J)= out1(J) + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 elseif (YYY(I,1) .gt. top .and. ZZZ(I,1) .gt. edge2) then

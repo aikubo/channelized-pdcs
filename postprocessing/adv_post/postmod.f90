@@ -10,7 +10,7 @@ CHARACTER(LEN=1) :: junk
 INTEGER:: MAX_REC = 1e9
 INTEGER:: count1,num_open,sum1,sum2
 INTEGER:: tstart, tstop
-DOUBLE PRECISION:: depth
+DOUBLE PRECISION:: depth, deltat
 DOUBLE PRECISION, ALLOCATABLE:: EPP(:,:)
 double precision:: amprat
 INTEGER::yc,I,J,K,THMAX,rc,zc,tc,t,I_yp1,I_ym1,I_zp1,I_zm1,I_xp1,I_xm1,temp_rc
