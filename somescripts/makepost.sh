@@ -65,7 +65,6 @@ echo start compliling
 
 echo compiling modules and subroutines
 ifort -c -convert big_endian headermod.f90
-ifort -c -convert big_endian richardson.f90
 ifort -c -convert big_endian formatmod.f90
 ifort -c -convert big_endian postmod.f90
 ifort -c -convert big_endian constants.f90
@@ -79,7 +78,7 @@ ifort -c -convert big_endian entrainment.f90
 ifort -c -convert big_endian massinchannel.f90
 ifort -c -convert big_endian column.f90
 ifort -c -convert big_endian average.f90
-
+ifort -c -convert big_endian richardson.f90
 
 ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post.f90  -convert big_endian -o post.exe
 

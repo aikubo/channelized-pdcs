@@ -1,1 +1,13 @@
-09/24/19 22:22 SW7 error post process created 11 txt files, 0 tiff
+09/29/19 19:43 AW7 error post process created 5 txt files, 0 tiff
+10/09/19 14:40 AW7 completed 9 timesteps
+10/09/19 17:11 AWY7 completed 9 timesteps
+10/09/19 18:51 AWY7 completed 9 timesteps
+10/09/19 19:06 AWY7 error post process created 9 txt files, 0 tiff
+10/11/19 00:33 AWY7 error post process created 9 txt files, 0 tiff
+10/11/19 01:13 AWY7 error post process created 8 txt files, 0 tiff
+10/11/19 14:10 AWY7 error post process created 8 txt files, 0 tiff
+10/11/19 14:39 AWY7 error post process created 8 txt files, 0 tiff
+11/11/19 18:33 AWY7 error post process created 8 txt files, 0 tiff
+11/12/19 13:33 AWY7 error post process created 8 txt files, 0 tiff
+11/12/19 13:36 AWY7 error post process created 8 txt files, 0 tiff
+11/12/19 13:51 AWY7 post process created 28 txt files, 0 tiff

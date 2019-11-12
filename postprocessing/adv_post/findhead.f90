@@ -54,7 +54,7 @@ use filehead
 
                 traces= int(width/3)+1
 
-                allocate(isosurface(1200, 4, 304))
+                allocate(isosurface(1212, 4, 304))
                 allocate(noseloc(304))
                 
                 !width=201
@@ -252,7 +252,7 @@ use filehead
                 K=1
                 end do 
 
-                averagehead= averagehead/(timesteps-1)
+                !averagehead= averagehead/(timesteps-1)
                
         end subroutine
 
