@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191111
+  Date: 20191112
   Simulation name: SV7  
   Filename:intmass.txt                                                                                                                                           
   Produced in mod-subroutine:  massdist/energypotential                                                                                                                              

@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191111
+  Date: 20191112
   Simulation name: SW4  
   Filename:massbyxxx.txt                                                                                                                                         
   Produced in mod-subroutine:  massdist/massbyxxx                                                                                                                                    

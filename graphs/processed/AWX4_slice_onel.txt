@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191111
+  Date: 20191112
   Simulation name: AWX4 
   Filename:slice_onel.txt                                                                                                                                        
   Produced in mod-subroutine:  column.mod/slice                                                                                                                                      

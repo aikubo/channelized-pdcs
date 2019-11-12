@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191111
+  Date: 20191112
   Simulation name: CVX7 
   Filename:entrainment.txt                                                                                                                                       
   Produced in mod-subroutine:  =entrainment/bulkent                                                                                                                                  
