@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191011
+  Date: 20191111
   Simulation name: CWZ4 
   Filename:slice_onel.txt                                                                                                                                        
   Produced in mod-subroutine:  column.mod/slice                                                                                                                                      

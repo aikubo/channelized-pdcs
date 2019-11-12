@@ -1,8 +1,1 @@
-10/09/19 14:06 AVZ4 prepared to run
- AVZ4 Submitted batch job 10198896
-10/09/19 14:40 AVZ4 ISSUE only  timesteps
-10/09/19 17:11 AVZ4 ISSUE only 0 timesteps
-10/09/19 18:51 AVZ4 ISSUE only 0 timesteps
- AVZ4 Submitted batch job 10225970
-10/17/19 20:26 AVZ4 completed 9 timesteps
-10/17/19 20:32 AVZ4 post process created 25 txt files, 0 tiff
+09/24/19 22:22 SW7 error post process created 11 txt files, 0 tiff

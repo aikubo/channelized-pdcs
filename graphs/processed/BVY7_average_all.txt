@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191011
+  Date: 20191111
   Simulation name: BVY7 
   Filename:average_all.txt                                                                                                                                       
   Produced in mod-subroutine:  averageit.mod/average_all                                                                                                                             

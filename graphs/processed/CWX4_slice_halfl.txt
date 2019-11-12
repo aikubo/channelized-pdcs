@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191011
+  Date: 20191111
   Simulation name: CWX4 
   Filename:slice_halfl.txt                                                                                                                                       
   Produced in mod-subroutine:  column.mod/slice                                                                                                                                      

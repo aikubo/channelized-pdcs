@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191017
+  Date: 20191111
   Simulation name: AVZ4 
   Filename:intmass.txt                                                                                                                                           
   Produced in mod-subroutine:  massdist/energypotential                                                                                                                              

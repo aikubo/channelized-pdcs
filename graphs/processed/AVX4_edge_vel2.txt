@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191011
+  Date: 20191111
   Simulation name: AVX4 
   Filename:edge_vel2.txt                                                                                                                                         
   Produced in mod-subroutine:  massdist/edgevelocity                                                                                                                                 
