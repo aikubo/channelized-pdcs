@@ -20,7 +20,7 @@ description='Average of densities between 2.5 and 5'
 call headerf(887, filename, simlabel, routine, DESCRIPTION, datatype)
 
 
-filename='average_medium.txt'
+filename='average_dense.txt'
 description='Average of densities between 2.5 and 1.5'
 
 call headerf(889, filename, simlabel, routine, DESCRIPTION, datatype)

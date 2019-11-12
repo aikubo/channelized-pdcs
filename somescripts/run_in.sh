@@ -13,5 +13,6 @@ while read line; do
 	cd $line
 	$scrpt  
 
+
 done < $filename
 

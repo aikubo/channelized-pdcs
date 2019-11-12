@@ -4,7 +4,6 @@
 /home/akubo/myprojects/4_INFLOW/AVX4
 /home/akubo/myprojects/4_INFLOW/AWZ4
 /home/akubo/myprojects/4_INFLOW/BVY4
-/home/akubo/myprojects/4_INFLOW/BWV4
 /home/akubo/myprojects/4_INFLOW/BWX4
 /home/akubo/myprojects/4_INFLOW/CVY4
 /home/akubo/myprojects/4_INFLOW/CWX4

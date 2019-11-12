@@ -244,7 +244,7 @@ module massdist
 
                 routine="massdist/massbyxxx"
                 description="Calculate mass outside the channel on left and right by XXX"
-                datatype=" t, XXX, mass on right, mass on left"
+                datatype=" t, XXX, mass on right, mass on left, totalmass"
                 call headerf(6789, filename, simlabel, routine, DESCRIPTION,datatype)
                 
 
@@ -277,7 +277,7 @@ module massdist
                         end do
                         
                         do K=1,RMAX
-                                write(6789,formatent) t, dble(K*3.), out1(K), out2(K)
+                                write(6789,format5var) t, dble(K*3.), out1(K), out2(K), out1(K)+out2(K)
                         end do  
                 end do 
         end subroutine
