@@ -11,12 +11,20 @@ from openmod import *
 from pltfunc import *
 from normalize import *
 
-alllabels= [ "AVY4","AWX4", "AWY4", "AVY7", "BVY4", "BWX4", "CVY4", "CWX4", "SV4", "SW4", "BVY7", "CWY7", "CWY4", "SW7", "SV7"]
+import os
+
+
+
+## 'AWY4','AWY7','CNY7','CVZ7','CWX7','CWZ7',
+alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4',
+            'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
+            'AVX7', 'AVZ7',    'BVX7',  'BVZ7',  'BWY7',    'CVY7',     'SV7',
+            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7',    'CWY7',  'SW7' ] 
 alllabels.sort()
 waves=["A", "B", "C", "S"]
 ## MAC
 path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-
+os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
 #path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
 

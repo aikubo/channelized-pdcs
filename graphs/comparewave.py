@@ -11,14 +11,25 @@ from openmod import *
 from entrainmod import *
 from pltfunc import *
 from normalize import *
+import os 
 
 
-path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+## 'AWY4','AWY7','CNY7','CVZ7','CWX7','CWZ7',
+alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4',
+            'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
+            'AVX7', 'AVZ7',    'BVX7',  'BVZ7',  'BWY7',    'CVY7',     'SV7',
+            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7',    'CWY7',  'SW7' ] 
 
-alllabels= [ "AVY4","AWX4", "AWY4", "AVY7", "BVY4", "BWX4", "CVY4", "CWX4", "SV4", "SW4", "BVY7", "CWY7", "CWY4", "SW7", "SV7"]
-#labels=[ "AVY4", "CVY4", "BVY4" ] #, "BW4", "SW4", "BW7", "AV7", "CV7", "EV7", "EV4", "SV4" ]
 labels=alllabels
 labels.sort()
+
+waves=["A", "B", "C", "S"]
+## MAC
+path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+## LAPTOP
+#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+
 
 avgTG, avgUG, avgdpu, peakin, peakout, xout, xin, zout, zin,  froude, front, bulk_ent, med_ent, dense_ent, avulseddense, buoyantelutriated, massout = openall(labels,path)
 peak_in= peakin #np.log10(peakin + 0.000001)
