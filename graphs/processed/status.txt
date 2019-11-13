@@ -1,12 +1,4 @@
-09/29/19 19:44 AV7 post process created 16 txt files, 0 tiff
-10/09/19 14:40 AV7 completed 9 timesteps
-10/09/19 17:11 AVY7 completed 9 timesteps
-10/09/19 18:51 AVY7 completed 9 timesteps
-10/09/19 19:04 AVY7 post process created 38 txt files, 0 tiff
-10/11/19 00:34 AVY7 post process created 38 txt files, 0 tiff
-10/11/19 01:13 AVY7 post process created 38 txt files, 0 tiff
-10/11/19 14:10 AVY7 post process created 38 txt files, 0 tiff
-10/11/19 14:40 AVY7 post process created 39 txt files, 0 tiff
-11/11/19 18:34 AVY7 post process created 39 txt files, 0 tiff
-11/12/19 14:28 AVY7 post process created 25 txt files, 0 tiff
-11/12/19 14:50 AVY7 post process created 25 txt files, 0 tiff
+11/06/19 14:03 CWX7 Submitted batch job 10411895
+11/09/19 06:00 CWX7 completed 9 timesteps
+11/09/19 06:06 CWX7 post process created 25 txt files, 0 tiff
+11/11/19 18:34 CWX7 post process created 25 txt files, 0 tiff
