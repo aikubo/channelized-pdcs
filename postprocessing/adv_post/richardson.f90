@@ -100,15 +100,15 @@ module find_richardson
                                                 ! original
                                                 !print*, "something off here"
                                                 if (Ri_grad>5.0) THEN
-                                                Ri(I,1,t) = 5.0
+                                                Ri(I,t) = 5.0
                                                 !print *, "Ri", I, t, Ri
                                                 elseif (Ri_grad<-5.0) THEN
                                                 !print*, "entered elif"
-                                                Ri(I,1,t) = -5.0
+                                                Ri(I,t) = -5.0
                                                 !print*, "wrote ri"
                                                !print *, "Ri", I, t, Ri(I,1,t)
                                                 else
-                                                Ri(I,1,t) = Ri_grad
+                                                Ri(I,t) = Ri_grad
                                                 end if
 
                                                 Ri(I,t) = Ri_grad
