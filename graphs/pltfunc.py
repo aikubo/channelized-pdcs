@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns 
 import matplotlib.patches as mpatches
-
 def setcolors(labels):
     length=len(labels)
 
@@ -50,7 +49,6 @@ def printlegend(labels, filename):
     fig.legend(patches, labels, loc='center', frameon=False)
     savefigure(filename)
     
-
 
 
 def setcolorandstyle(labels):
@@ -108,7 +106,7 @@ def plottogether(labels, fid, df, ylab, xlab):
         time=np.arange(0,5*(len(x)),5)
         j=labels.index(i)
         plt.plot(time, x, color=palette[j], label=i)
-    #ax.legend(bbox_to_anchor=(1.01, 1.01))
+    ax.legend(bbox_to_anchor=(1.01, 1.01))
     ax.set_xticklabels(time)
     ax.set_xlabel(xlab)
     ax.set_ylabel(ylab)
@@ -116,7 +114,19 @@ def plottogether(labels, fid, df, ylab, xlab):
     plt.tight_layout()
     savefigure(fid)
 
-def plottogether2(fid, df, x, ylab, xlab, fig, ax):
+def plotscatter(labels, fid, x,y, ylab, xlab, fig, ax):
+    palette=setcolors(labels)
+    print("plotting")
+    print(fid)
+    for sim in labels:
+        i=labels.index(sim)
+        plt.scatter(x[sim], y[sim], color=palette[i])
+    ax.set_xlabel(xlab)
+    ax.set_ylabel(ylab)
+    plt.show()
+
+
+def plottogether2(labels, fid, df, x, ylab, xlab, fig, ax):
     labels=df.columns.tolist()
     palette=setcolors(labels)
     print(len(palette))
@@ -128,6 +138,11 @@ def plottogether2(fid, df, x, ylab, xlab, fig, ax):
         y=df[i]
         j=labels.index(i)
         ax.plot(x,y, color = palette[j], label=i)
+
+    ax.set_xlabel(xlab)
+    ax.set_ylabel(ylab)
+
+    plt.show()
 
 def pltbytimebyx(df, t, fig, ax):
     labels=df.columns.tolist()
@@ -155,8 +170,8 @@ def horizplot(df, loc, labels):
         loc.plot(df1[i], height, label=i, color=palette[j] )
 
 def plotallcol(labels, fid, df1, df2, df3, df4, df5):
-    fig, axes= plt.subplots(1,5, sharey=True, sharex=False)
-    setgrl(labels, fig, axes, 5, 8)
+    fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
+    setgrl(labels, fig, axes, 4, 8)
     df5.fillna(273.0)
     # EPP
     loc=axes[0]
@@ -188,18 +203,20 @@ def plotallcol(labels, fid, df1, df2, df3, df4, df5):
     loc.set_ylim([0,150])
 
     # Richardson Number
-    loc=axes[4]
-    horizplot(ri, loc, labels)
-    axes[4].set_xlabel('Richardson Number')
-    loc.set_xlim([-5, 5])
-    loc.set_ylim([0,150])
+    # loc=axes[4]
+    # horizplot(df4, loc, labels)
+    # axes[4].set_xlabel('Richardson Number')
+    # loc.set_xlim([-5, 5])
+    # loc.set_ylim([0,150])
 
-    # fig.legend(    # The line objects
-    #        labels=df1.columns,   # The labels for each line
-    #        loc="center right",   # Position of legend
-    #        borderaxespad=0.5,    # Small spacing around legend box
-    #        title="Geometries",  # Title for the legend
-    #        )
+
+
+    fig.legend(    # The line objects
+           labels=df1.columns,   # The labels for each line
+           loc="center right",   # Position of legend
+           borderaxespad=0.5,    # Small spacing around legend box
+           title="Geometries",  # Title for the legend
+           )
 
     labelsubplots(axes, "uright")
 
@@ -215,7 +232,7 @@ def plotby(labels, fid, df1, df2, datalabel1, datalabel2):
         df3=pd.DataFrame()
         df3['x']=df2[sim]
         df3[sim]=df1[sim]
-        sns.lineplot(x=df3.x, y=df3.iloc[:,1], color=c, label=sim) #, legend='brief')
+        sns.lineplot(x=df3.x, y=df3.iloc[:,1], color=c, label=sim, legend='brief')
     ax.set_ylabel(datalabel1)
     ax.set_xlabel(datalabel2)
     savefigure(fid)
@@ -275,6 +292,84 @@ def channelfrontsubplot(labels, fid, front, data, ylab):
     channelfrontplot(labels, fig, axes[0], front, data, ylab, 'A', 300.)
     channelfrontplot(labels, fig, axes[1], front, data, ylab, 'B', 600.)
     channelfrontplot(labels, fig, axes[2], front, data, ylab, 'C', 900.)
-    #channelfrontplot(labels, fig, axes[3], front, data, ylab, 'E', 1200.)
+    channelfrontplot(labels, fig, axes[3], front, data, ylab, 'E', 1200.)
     labelsubplots(axes, "uleft")
     savefigure(fid)
+
+def subplotsbywave(path, fid, datacol, out, pltby, pid, xlab, ylab):
+    
+    fig, axes = plt.subplots(1,4, sharey=True)
+    palette=setgrl(alllabels, fig, axes, 4, 8)
+    for i in waves:
+        labels=[j for j in alllabels if i in j]
+        print(labels)
+        loc=waves.index(i)
+        ax=axes[loc]
+        data=openmine(labels, path, fid, datacol, out)
+        plottogether2(pid, data, pltby, ylab, xlab, fig, ax)
+    
+    axes[0].set_ylabel(ylab)
+
+    fig.legend(    # The line objects
+            bbox_to_anchor=(1.01, 0.9), #outside on right
+            labels=alllabels,   # The labels for each line
+            #loc="center right",   # Position of legend
+            #borderaxespad=0.5,    # Small spacing around legend box
+            title="Geometries",  # Title for the legend
+            )
+    plt.show()
+    #savefigure(pid)
+
+def xxxplotsbywave(path, fid, datacol, out, pid, xlab, ylab):
+    
+    #path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+    fig, axes = plt.subplots(1,4, sharey=True)
+    palette=setgrl(alllabels, fig, axes, 5, 8)
+    t=5
+    for i in waves:
+        labels=[j for j in alllabels if i in j]
+        print(labels)
+        loc=waves.index(i)
+        ax=axes[loc]
+        data=openmine(labels, path, fid, datacol, out)
+        pltbytimebyx(data, t, fig, ax)
+    
+    axes[0].set_ylabel(ylab)
+
+    fig.legend(    # The line objects
+            bbox_to_anchor=(1.01, 0.9), #outside on right
+            labels=alllabels,   # The labels for each line
+            #loc="center right",   # Position of legend
+            #borderaxespad=0.5,    # Small spacing around legend box
+            title="Geometries",  # Title for the legend
+            )
+    #plt.show()
+    savefigure(pid)
+
+def xxxplotsnorm(path, fid1, datacol1, out1, fid2, datacol2, out2, pid, xlab, ylab):
+    
+    #path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+    fig, axes = plt.subplots(1,4, sharey=True)
+    palette=setgrl(alllabels, fig, axes, 5, 8)
+    t=4
+    for i in waves:
+        labels=[j for j in alllabels if i in j]
+        print(labels)
+        loc=waves.index(i)
+        ax=axes[loc]
+        data1=openmine(labels, path, fid1, datacol1, out1)
+        data2=openmine(labels, path, fid2, datacol2, out2)
+        data=data1/data2
+        pltbytimebyx(data, t, fig, ax)
+    
+    axes[0].set_ylabel(ylab)
+
+    fig.legend(    # The line objects
+            bbox_to_anchor=(1.01, 0.9), #outside on right
+            labels=alllabels,   # The labels for each line
+            #loc="center right",   # Position of legend
+            #borderaxespad=0.5,    # Small spacing around legend box
+            title="Geometries",  # Title for the legend
+            )
+   # plt.show()
+    savefigure(pid)

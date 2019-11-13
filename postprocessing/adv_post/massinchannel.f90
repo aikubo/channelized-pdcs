@@ -277,7 +277,7 @@ module massdist
                         end do
                         
                         do K=1,RMAX
-                                write(6789,format5var) t, dble(K*3.), out1(K), out2(K), out1(K)+out2(K)
+                                write(6789,formatmassxx) t, (K*3), out1(K), out2(K), out1(K)+out2(K)
                         end do  
                 end do 
         end subroutine
