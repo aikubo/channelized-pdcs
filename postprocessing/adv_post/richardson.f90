@@ -99,17 +99,17 @@ module find_richardson
                                                 ! adjusted Ri and column 5 is the
                                                 ! original
                                                 !print*, "something off here"
-                                                !if (Ri_grad>5.0) THEN
-                                                !Ri(I,1,t) = 5.0
+                                                if (Ri_grad>5.0) THEN
+                                                Ri(I,1,t) = 5.0
                                                 !print *, "Ri", I, t, Ri
-                                                !elseif (Ri_grad<-5.0) THEN
+                                                elseif (Ri_grad<-5.0) THEN
                                                 !print*, "entered elif"
-                                                !Ri(I,1,t) = -5.0
+                                                Ri(I,1,t) = -5.0
                                                 !print*, "wrote ri"
                                                !print *, "Ri", I, t, Ri(I,1,t)
-                                                !else
-                                                !Ri(I,1,t) = Ri_grad
-                                                !end if
+                                                else
+                                                Ri(I,1,t) = Ri_grad
+                                                end if
 
                                                 Ri(I,t) = Ri_grad
 
