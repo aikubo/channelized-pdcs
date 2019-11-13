@@ -35,3 +35,5 @@
 /home/akubo/myprojects/7_INFLOW/BWX7
 /home/akubo/myprojects/7_INFLOW/BWZ7
 /home/akubo/myprojects/7_INFLOW/CVX7
+/home/akubo/myprojects/7_INFLOW/CWZ7
+/home/akubo/myprojects/7_INFLOW/CWX7
