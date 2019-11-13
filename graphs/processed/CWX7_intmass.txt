@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191111
+  Date: 20191113
   Simulation name: CWX7 
   Filename:intmass.txt                                                                                                                                           
   Produced in mod-subroutine:  massdist/energypotential                                                                                                                              
@@ -10878,7 +10878,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -11180,7 +11180,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -11482,7 +11482,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -11784,7 +11784,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -49534,7 +49534,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -50742,7 +50742,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -77016,7 +77016,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -77318,7 +77318,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -77620,7 +77620,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -77922,7 +77922,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN

@@ -1,4 +1,1 @@
-11/06/19 14:41 CWZ7 Submitted batch job 10412018
-11/09/19 19:44 CWZ7 completed 9 timesteps
-11/09/19 19:50 CWZ7 post process created 25 txt files, 0 tiff
-11/11/19 18:34 CWZ7 post process created 25 txt files, 0 tiff
+11/13/19 03:06 BVZ7 post process created 25 txt files, 0 tiff

@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191112
+  Date: 20191113
   Simulation name: CVY7 
   Filename:intmass.txt                                                                                                                                           
   Produced in mod-subroutine:  massdist/energypotential                                                                                                                              
@@ -10274,7 +10274,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -10576,7 +10576,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -10878,7 +10878,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -11180,7 +11180,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -49534,7 +49534,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -50742,7 +50742,7 @@
                  NaN
                  NaN
                  NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
@@ -78828,7 +78828,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -79130,7 +79130,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -79432,7 +79432,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -79734,7 +79734,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
