@@ -1,16 +1,29 @@
-import pandas as pd
-import numpy as np
+import os
+
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
 import pltfunc
 from pltfunc import plotallcol as sliceplt
 
+## MAC
 path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-alllabels= [ "AVY4","AWX4", "AWY4", "AVY7", "BVY4", "BWX4", "CVY4", "CWX4", "SV4", "SW4", "BVY7", "CWY7", "CWY4", "SW7", "SV7"]
+os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+## LAPTOP
+#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+
+## still running 
+## 'CVZ7'
+alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4',
+            'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
+            'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'SV7', 'AWY4','AWY7','CWX7','CWZ7',
+            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',  'SW7' ] 
+
 alllabels.sort()
 labels=alllabels
 def openslicet(path2file, labels, twant, loc):
-    
-    
+        
     if loc in "in":
         slicefid='_slice_middle.txt'
     elif loc in "half" :
@@ -146,7 +159,6 @@ sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= openslic
 fid = 'col_in'
 sliceplt(labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
 
-print(slicein_TG)
 fid = 'col_onel'
 sliceplt(labels, fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
 

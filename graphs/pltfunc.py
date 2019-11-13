@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
 import seaborn as sns 
+import matplotlib.patches as mpatches
+
 def setcolors(labels):
     length=len(labels)
 
@@ -38,6 +40,16 @@ def setcolors(labels):
     colors= sns.color_palette(temp_colors)
 
     return colors
+
+def printlegend(labels, filename):
+    colors = setcolors(labels)
+    fig = plt.figure()
+    patches = [ 
+        mpatches.Patch(color=color, label=label) 
+        for label, color in zip(labels, colors)]
+    fig.legend(patches, labels, loc='center', frameon=False)
+    savefigure(filename)
+    
 
 
 
@@ -96,7 +108,7 @@ def plottogether(labels, fid, df, ylab, xlab):
         time=np.arange(0,5*(len(x)),5)
         j=labels.index(i)
         plt.plot(time, x, color=palette[j], label=i)
-    ax.legend(bbox_to_anchor=(1.01, 1.01))
+    #ax.legend(bbox_to_anchor=(1.01, 1.01))
     ax.set_xticklabels(time)
     ax.set_xlabel(xlab)
     ax.set_ylabel(ylab)
@@ -143,8 +155,8 @@ def horizplot(df, loc, labels):
         loc.plot(df1[i], height, label=i, color=palette[j] )
 
 def plotallcol(labels, fid, df1, df2, df3, df4, df5):
-    fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
-    setgrl(labels, fig, axes, 4, 8)
+    fig, axes= plt.subplots(1,5, sharey=True, sharex=False)
+    setgrl(labels, fig, axes, 5, 8)
     df5.fillna(273.0)
     # EPP
     loc=axes[0]
@@ -176,20 +188,18 @@ def plotallcol(labels, fid, df1, df2, df3, df4, df5):
     loc.set_ylim([0,150])
 
     # Richardson Number
-    # loc=axes[4]
-    # horizplot(df4, loc, labels)
-    # axes[4].set_xlabel('Richardson Number')
-    # loc.set_xlim([-5, 5])
-    # loc.set_ylim([0,150])
+    loc=axes[4]
+    horizplot(ri, loc, labels)
+    axes[4].set_xlabel('Richardson Number')
+    loc.set_xlim([-5, 5])
+    loc.set_ylim([0,150])
 
-
-
-    fig.legend(    # The line objects
-           labels=df1.columns,   # The labels for each line
-           loc="center right",   # Position of legend
-           borderaxespad=0.5,    # Small spacing around legend box
-           title="Geometries",  # Title for the legend
-           )
+    # fig.legend(    # The line objects
+    #        labels=df1.columns,   # The labels for each line
+    #        loc="center right",   # Position of legend
+    #        borderaxespad=0.5,    # Small spacing around legend box
+    #        title="Geometries",  # Title for the legend
+    #        )
 
     labelsubplots(axes, "uright")
 
@@ -205,7 +215,7 @@ def plotby(labels, fid, df1, df2, datalabel1, datalabel2):
         df3=pd.DataFrame()
         df3['x']=df2[sim]
         df3[sim]=df1[sim]
-        sns.lineplot(x=df3.x, y=df3.iloc[:,1], color=c, label=sim, legend='brief')
+        sns.lineplot(x=df3.x, y=df3.iloc[:,1], color=c, label=sim) #, legend='brief')
     ax.set_ylabel(datalabel1)
     ax.set_xlabel(datalabel2)
     savefigure(fid)
@@ -265,6 +275,6 @@ def channelfrontsubplot(labels, fid, front, data, ylab):
     channelfrontplot(labels, fig, axes[0], front, data, ylab, 'A', 300.)
     channelfrontplot(labels, fig, axes[1], front, data, ylab, 'B', 600.)
     channelfrontplot(labels, fig, axes[2], front, data, ylab, 'C', 900.)
-    channelfrontplot(labels, fig, axes[3], front, data, ylab, 'E', 1200.)
+    #channelfrontplot(labels, fig, axes[3], front, data, ylab, 'E', 1200.)
     labelsubplots(axes, "uleft")
     savefigure(fid)

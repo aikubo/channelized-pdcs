@@ -8,20 +8,8 @@ import pandas as pd
 import seaborn as sns
 
 from openmod import *
+from entrainmod import *
 from pltfunc import *
 from normalize import *
+import os 
 
-def entrain(labels, data):
-    print('hello entrainment')
-    vol=[]
-    deltaV=pd.DataFrame(columns=labels)
-    for sim in labels:
-        print(sim)
-        v=data[sim]
-        dv=[0]
-        for i in range(1,8):
-            ent=v[i]-v[i-1]
-            dv.append(ent)
-        deltaV[sim]=dv
-
-    return deltaV

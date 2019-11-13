@@ -11,7 +11,6 @@ def openmine(labels, path2file, fid, cols, out):
         temp_all[sim]=temp_1[out]
     return temp_all
 
-path = "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
 frcols= ['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
 
 masscol=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InChannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "AvulseD"]
@@ -64,12 +63,12 @@ def openpeakdpu(labels,path):
     zout=openmine(labels, path, fid, cols, 'ZZZout')
     xin=openmine(labels, path, fid, cols, 'XXXin')
     zin=openmine(labels, path, fid, cols, 'ZZZin')
-    peakin.drop(peakin.index[8])
-    peakout.drop(peakout.index[8])
-    xin.drop(xin.index[8])
-    zin.drop(zin.index[8])
-    zout.drop(zout.index[8])
-    xout.drop(xout.index[8])
+    # peakin.drop(peakin.index[8])
+    # peakout.drop(peakout.index[8])
+    # xin.drop(xin.index[8])
+    # zin.drop(zin.index[8])
+    # zout.drop(zout.index[8])
+    # xout.drop(xout.index[8])
     return peakin, peakout, xout, xin, zout, zin
 
 def openall(labels,path):
