@@ -13,3 +13,11 @@ from pltfunc import *
 from normalize import *
 import os 
 
+## MAC
+path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+labels= ['AVX4']
+
+massR, massL = openmassxxx(labels, path)
+
+print(massR)

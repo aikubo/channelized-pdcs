@@ -51,10 +51,12 @@ def labelparam(label):
     else :
         amp=0
 
-    return wave, amp, width, depth, inlet, vflux
+
+    return wave, amp*wave, width, depth, depth*inlet, vflux
 
 def normalizebyamp(data):
     labels=data.columns
+    result=pd.DataFrame()
     for sim in labels:
         if "X" in sim:
             amp=0.09
@@ -64,10 +66,12 @@ def normalizebyamp(data):
             amp = 0.2
 
 
-        data[sim]=data[sim]
+        result[sim]=data[sim]/amp
+    return result
 
 def normalizebywave(data):
     labels=data.columns
+    result=pd.DataFrame()
     for sim in labels:
         if "A" in sim :
             wave=300
@@ -82,9 +86,9 @@ def normalizebywave(data):
         elif "E" in sim:
             wave=2400
 
-        data[sim]= data[sim]/wave
+        result[sim]= data[sim]/wave
 
-    return front
+    return result
 
 def normalizebydepth(data):
     labels=data.columns
@@ -115,16 +119,32 @@ def normalizebywidth(data):
     return data
 
 def normalizebyCA(data):
-    data=normalizebywidth(data)
-    data=normalizebydepth(data)
+    result=normalizebywidth(data)
+    result=normalizebydepth(data)
 
-    return data
+    return result
 
 def normalizebyvol(data):
     labels=data.columns
+    result=pd.DataFrame()
     for sim in labels:
         wave, amp, width, depth, inlet, vflux=labelparam(sim)
-        print(vflux)
+        result[sim]=data[sim]/vflux
+    return result
 
-        data[sim]=data[sim]/vflux
-    return data
+def normalizebypower(data):
+    labels=data.columns
+    result=pd.DataFrame()
+    for sim in labels:
+        wave, amp, width, depth, inlet, vflux=labelparam(sim)
+        result[sim]=data[sim]/(amp*amp)
+    return result
+
+def normalizebymass(data):
+    labels=data.columns
+    result=pd.DataFrame()
+    for sim in labels:
+        wave, amp, width, depth, inlet, vflux=labelparam(sim)
+    
+        result[sim]=(data[sim]/vflux)
+    return result

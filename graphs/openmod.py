@@ -1,12 +1,12 @@
 import pandas as pd
 
-def openmine(labels, path2file, fid, cols, out):
+def openmine(labels, path2file, fid, cols, out, colspec='infer'):
     temp_all=pd.DataFrame()
 
     for sim in labels: 
         pathid=path2file+sim
         loc= pathid+fid
-        temp_1=pd.read_fwf(loc, header=None, skiprows=9)
+        temp_1=pd.read_fwf(loc, header=None, skiprows=9, colspecs=colspec)
         temp_1.columns=cols
         temp_all[sim]=temp_1[out]
     return temp_all
@@ -27,14 +27,14 @@ perpx=['Perpx']
 
 def openmassxxx(labels, path2file):
     fid='_massbyxxx.txt'
-    cols=['time', 'xxx', 'massR', 'massL']
-    time=[2,3,4,5,6,7,8]
-    massR=pd.DataFrame()
+    cols=['time', 'xxx', 'massR', 'massL', 'sum']
+    colspec= [[1,4], [5,9], [13,29], [32,49], [52,68]]
     massL=pd.DataFrame()
+    time=[2,3,4,5,6,7,8]
     for sim in labels: 
         pathid=path2file+sim
         loc= pathid+fid
-        temp=pd.read_fwf(loc, header=None, skiprows=9)
+        temp=pd.read_fwf(loc, header=None, skiprows=9, colspecs=colspec)
         temp.columns=cols
 
         tot=pd.DataFrame()
@@ -55,34 +55,34 @@ def openmassxxx(labels, path2file):
 def openaverage(labels, path):
     fid='_average_all.txt'
     cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
-    avgTG=openmine(labels, path, fid, cols, 'T_G')
-    avgUG=openmine(labels, path, fid, cols, 'U_G')
-    avgdpu=openmine(labels, path, fid, cols, 'DPU')
+    avgTG=openmine(labels, path, fid, cols, 'T_G', colspecs=colspec)
+    avgUG=openmine(labels, path, fid, cols, 'U_G', colspecs=colspec)
+    avgdpu=openmine(labels, path, fid, cols, 'DPU', colspecs=colspec)
 
     return avgTG, avgUG, avgdpu
 
 def openmassdist(labels, path):
     fid='_massinchannel.txt'
     cols=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InCcdhannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "AvulseD"]
-    massout=openmine(labels, path, fid, cols, "Mass outside")
-    avulsed=openmine(labels, path, fid, cols, "AvulseD")
-    buoyant=openmine(labels, path, fid, cols, "Buoyant")
+    massout=openmine(labels, path, fid, cols, "Mass outside", colspecs=colspec)
+    avulsed=openmine(labels, path, fid, cols, "AvulseD",colspecs=colspec)
+    buoyant=openmine(labels, path, fid, cols, "Buoyant",colspecs=colspec)
     return avulsed, buoyant, massout
 
 def openent(labels,path):
     fid='_entrainment.txt'
     entcol= ['time', 'bulk', 'medium', 'dense']
-    bulk_ent = openmine(labels, path, fid, entcol, 'bulk')
-    med_ent = openmine(labels, path, fid, entcol, 'medium')
-    dense_ent = openmine(labels, path, fid, entcol, 'dense')
+    bulk_ent = openmine(labels, path, fid, entcol, 'bulk',colspecs=colspec)
+    med_ent = openmine(labels, path, fid, entcol, 'medium',colspecs=colspec)
+    dense_ent = openmine(labels, path, fid, entcol, 'dense',colspecs=colspec)
 
     return bulk_ent, med_ent, dense_ent
 
 def openfroude(labels, path):
     froudefid='_froude.txt'
     frcols= ['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
-    froude=openmine(labels, path, froudefid, frcols, 'Froude')
-    front=openmine(labels, path, froudefid, frcols, 'Front')
+    froude=openmine(labels, path, froudefid, frcols, 'Froude',colspecs=colspec)
+    front=openmine(labels, path, froudefid, frcols, 'Front',colspecs=colspec)
     return froude, front
 
 def openpeakdpu(labels,path):
@@ -112,7 +112,7 @@ def openall(labels,path):
 
     return avgTG, avgUG, avgdpu, peakin, peakout, xout, xin, zout, zin,  froude, front, bulk_ent, med_ent, dense_ent, avulseddense, buoyantelutriated, massout
 
-def sumovertime(labels,path, fid, cols, out):
+def sumovertime(labels,path, fid, cols, out, colspec='infer'):
     result=pd.DataFrame()
     time=[1,2,3,4,5,6,7,8]
 
@@ -121,12 +121,12 @@ def sumovertime(labels,path, fid, cols, out):
 
         pathid=path+sim
         loc= pathid+fid
-        temp_1=pd.read_fwf(loc, header=None, skiprows=9)
+        temp_1=pd.read_fwf(loc, header=None, skiprows=9,colspecs=colspec)
         temp_1.columns=cols
 
         for t in time:
             temp2=temp_1[temp_1['time']== t]
-            temp2.sort_values(by=["XXX"], inplace=True)
+            temp2.sort_values(by=["XXX"])
             temp3 = temp2[out]
             if t==1:
                 summass= temp3
@@ -137,19 +137,18 @@ def sumovertime(labels,path, fid, cols, out):
 
     return result 
 
-def picktime(labels,path, fid, cols, out, twant):
+def picktime(labels,path, fid, cols, out, twant, colspec='infer'):
     result=pd.DataFrame()
     for sim in labels: 
 
         pathid=path+sim
         loc= pathid+fid
         print(loc)
-        temp_1=pd.read_fwf(loc, header=None, skiprows=9)
+        temp_1=pd.read_fwf(loc, header=None, skiprows=9,colspecs=colspec)
         temp_1.columns=cols
-        #temp_1.sort_values(by=["XXX"], inplace=True)
+        temp_1.sort_values(by=["XXX"])
         temp2=temp_1[temp_1['time']== twant]
         temp2.reset_index(drop=True, inplace=True)
-        print(temp2)
         result[sim]=temp2[out]
 
     return result 
