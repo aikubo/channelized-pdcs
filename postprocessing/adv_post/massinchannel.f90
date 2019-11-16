@@ -187,7 +187,7 @@ module massdist
                 implicit none 
                 double precision:: perpvel2, perpvel1, outsum,  perpvel
                 logical, dimension(length1):: maskshapeout
-                double precision, allocatable:: curtains(:,:,:)
+                double precision, allocatable:: curtains(:,:)
                 
                 allocate(curtains(YMAX, 2*timesteps))
                 print*, 'edge velocity'
