@@ -189,7 +189,7 @@ module massdist
                 logical, dimension(length1):: maskshapeout
                 double precision, allocatable:: curtains(:,:)
                 
-                allocate(curtains(YMAX, 2*timesteps))
+                allocate(curtains(RMAX, YMAX))
                 print*, 'edge velocity'
                 filename='edge_vel1.txt'
 
@@ -213,7 +213,7 @@ module massdist
                 call headerf(7088, filename, simlabel, routine, DESCRIPTION, datatype)
 
                 do yc =1,YMAX 
-                        curtains(yc, :) = 0 
+                        curtains(:,yc) = 0 
                 end do 
 
                 do t= 1,timesteps
@@ -226,9 +226,9 @@ module massdist
                         top= FLOOR(top/3.)*3. - 3  
                         perpvel = U_G1(I,t) + V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
                         if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge2) then
-                                rc = (t+1)
+                                rc = int(XXX(I,1)/3.0)
                                 yc= int(YYY(I,1)/3.0)
-                                curtains(yc,rc)= perpvel
+                                curtains(rc,yc)= perpvel
                         elseif (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
                                 rc = t
                                 yc= int(YYY(I,1)/3.0)
@@ -240,10 +240,9 @@ module massdist
                                 
                         end if 
                 end do 
+                do yc =1,YMAX 
+                        write(7088, formatcurtain) curtains(:,yc)
                 end do 
-
-                do yc=1,YMAX
-                        write(7088, formatcurtain) curtains(yc,:)
                 end do 
 
         end subroutine

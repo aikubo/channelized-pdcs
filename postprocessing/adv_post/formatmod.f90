@@ -15,7 +15,7 @@ CHARACTER(LEN=30)::formatmassxxx='(i3, i5, 3F20.9)'
 CHARACTER(LEN=30)::formatmass='(i4,11F25.10)'
 character(len=10)::formatchar='(A117)'
 CHARACTER(LEN=20)::formatavg='(i3,6F22.10)'
-CHARACTER(LEN=20)::formatcurtain='(16F22.10)'
+CHARACTER(LEN=20)::formatcurtain='(154F10.5)'
 
 end module formatmod
 
