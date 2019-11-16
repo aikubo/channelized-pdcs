@@ -208,7 +208,7 @@ module massdist
                 filename='edge_vel_y.txt'
 
                 routine="massdist/edgevelocity"
-                description="Calculate dot product of velocity and curve of the channel above edge1"
+                description="Calculate dot product of velocity and curve over y, summed over timesteps"
                 datatype=" "
                 call headerf(7088, filename, simlabel, routine, DESCRIPTION, datatype)
 
@@ -225,14 +225,14 @@ module massdist
                         edge2= FLOOR(edge2/3.)*3. - 3.
                         top= FLOOR(top/3.)*3. - 3  
                         perpvel = U_G1(I,t) + V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
-                        if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge2) then
+                        if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
                                 rc = int(XXX(I,1)/3.0)
                                 yc= int(YYY(I,1)/3.0)
-                                curtains(rc,yc)= perpvel
-                        elseif (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
-                                rc = t
-                                yc= int(YYY(I,1)/3.0)
-                                curtains(yc,rc)= perpvel                                
+                                curtains(rc,yc)= curtains(rc,yc)+perpvel
+                        !elseif (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
+                        !        rc = t
+                        !        yc= int(YYY(I,1)/3.0)
+                        !        curtains(yc,rc)= curtains(rc,yc)+perpvel                                
                         elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge1) then
                                 write(7888,formatent) t, XXX(I,1), perpvel, W_G1(I,t)
                         elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge2) then
@@ -240,10 +240,11 @@ module massdist
                                 
                         end if 
                 end do 
-                do yc =1,YMAX 
+                end do 
+                
+                do yc =1,YMAX
                         write(7088, formatcurtain) curtains(:,yc)
-                end do 
-                end do 
+                end do
 
         end subroutine
 
