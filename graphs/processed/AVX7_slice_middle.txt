@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191113
+  Date: 20191115
   Simulation name: AVX7 
   Filename:slice_middle.txt                                                                                                                                      
   Produced in mod-subroutine:  column.mod/slice                                                                                                                                      

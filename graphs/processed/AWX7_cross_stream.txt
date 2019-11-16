@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191113
+  Date: 20191115
   Simulation name: AWX7 
   Filename:cross_stream.txt                                                                                                                                      
   Produced in mod-subroutine:  massdist/cross_stream                                                                                                                                 

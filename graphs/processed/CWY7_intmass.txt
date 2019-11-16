@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191113
+  Date: 20191115
   Simulation name: CWY7 
   Filename:intmass.txt                                                                                                                                           
   Produced in mod-subroutine:  massdist/energypotential                                                                                                                              
@@ -614,6 +614,7 @@
                  NaN
                  NaN
                  NaN
+       70.5174201785
                  NaN
                  NaN
                  NaN
@@ -915,6 +916,7 @@
                  NaN
                  NaN
                  NaN
+       63.6178664392
                  NaN
                  NaN
                  NaN
@@ -1216,6 +1218,7 @@
                  NaN
                  NaN
                  NaN
+       56.4071469282
                  NaN
                  NaN
                  NaN
@@ -1517,6 +1520,7 @@
                  NaN
                  NaN
                  NaN
+       50.1304137335
                  NaN
                  NaN
                  NaN
@@ -1814,140 +1818,11 @@
                  NaN
                  NaN
                  NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       48.0209026766
                  NaN
                  NaN
                  NaN
@@ -2245,9 +2120,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       48.6416993360
                  NaN
                  NaN
                  NaN
@@ -2545,9 +2422,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       48.6745391277
                  NaN
                  NaN
                  NaN
@@ -2845,9 +2724,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       49.1752280895
                  NaN
                  NaN
                  NaN
@@ -3145,9 +3026,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.0688492433
                  NaN
                  NaN
                  NaN
@@ -3445,9 +3328,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.8992455895
                  NaN
                  NaN
                  NaN
@@ -3745,9 +3630,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       51.1735844064
                  NaN
                  NaN
                  NaN
@@ -4045,9 +3932,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.7197676182
                  NaN
                  NaN
                  NaN
@@ -4345,9 +4234,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.3791271293
                  NaN
                  NaN
                  NaN
@@ -4645,9 +4536,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.4197380893
                  NaN
                  NaN
                  NaN
@@ -4945,9 +4838,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.5913833598
                  NaN
                  NaN
                  NaN
@@ -5245,9 +5140,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       51.1242724974
                  NaN
                  NaN
                  NaN
@@ -5545,9 +5442,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       51.9046781553
                  NaN
                  NaN
                  NaN
@@ -5845,9 +5744,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       52.6543263233
                  NaN
                  NaN
                  NaN
@@ -6145,9 +6046,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       53.4384039784
                  NaN
                  NaN
                  NaN
@@ -6445,9 +6348,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       53.4597054272
                  NaN
                  NaN
                  NaN
@@ -6745,9 +6650,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       53.1810791738
                  NaN
                  NaN
                  NaN
@@ -7045,9 +6952,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       52.2183565900
                  NaN
                  NaN
                  NaN
@@ -7345,9 +7254,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       51.4374594009
                  NaN
                  NaN
                  NaN
@@ -7645,9 +7556,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.8707498082
                  NaN
                  NaN
                  NaN
@@ -7945,9 +7858,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.3647282787
                  NaN
                  NaN
                  NaN
@@ -8245,9 +8160,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       49.4305573010
                  NaN
                  NaN
                  NaN
@@ -8545,9 +8462,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       48.7404592866
                  NaN
                  NaN
                  NaN
@@ -8845,9 +8764,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       47.9929138997
                  NaN
                  NaN
                  NaN
@@ -9145,9 +9066,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       46.9709399209
                  NaN
                  NaN
                  NaN
@@ -9445,9 +9368,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       45.6377638034
                  NaN
                  NaN
                  NaN
@@ -9745,9 +9670,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       44.3762107186
                  NaN
                  NaN
                  NaN
@@ -10045,9 +9972,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       43.7732651898
                  NaN
                  NaN
                  NaN
@@ -10345,9 +10274,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       43.4083523884
                  NaN
                  NaN
                  NaN
@@ -10645,9 +10576,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       42.9333749084
                  NaN
                  NaN
                  NaN
@@ -10945,9 +10878,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       42.4538030041
                  NaN
                  NaN
                  NaN
@@ -11245,9 +11180,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       42.2434721456
                  NaN
                  NaN
                  NaN
@@ -11545,9 +11482,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       42.2933236122
                  NaN
                  NaN
                  NaN
@@ -11845,9 +11784,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       42.4195230646
                  NaN
                  NaN
                  NaN
@@ -12145,9 +12086,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       42.5294679182
                  NaN
                  NaN
                  NaN
@@ -12445,9 +12388,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       42.9974150532
                  NaN
                  NaN
                  NaN
@@ -12745,9 +12690,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       43.5317612182
                  NaN
                  NaN
                  NaN
@@ -13045,9 +12992,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       43.8647259562
                  NaN
                  NaN
                  NaN
@@ -13345,9 +13294,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       43.9053716425
                  NaN
                  NaN
                  NaN
@@ -13645,9 +13596,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       43.5939815720
                  NaN
                  NaN
                  NaN
@@ -13945,9 +13898,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       44.0153938395
                  NaN
                  NaN
                  NaN
@@ -14245,9 +14200,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       44.9674215766
                  NaN
                  NaN
                  NaN
@@ -14545,9 +14502,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       46.3228442048
                  NaN
                  NaN
                  NaN
@@ -14845,9 +14804,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       47.4951101573
                  NaN
                  NaN
                  NaN
@@ -15145,9 +15106,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       48.7128787769
                  NaN
                  NaN
                  NaN
@@ -15445,9 +15408,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       50.5540480469
                  NaN
                  NaN
                  NaN
@@ -15745,9 +15710,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       53.6536437462
                  NaN
                  NaN
                  NaN
@@ -16045,9 +16012,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       57.5650505138
                  NaN
                  NaN
                  NaN
@@ -16345,9 +16314,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       61.9376592571
                  NaN
                  NaN
                  NaN
@@ -16645,9 +16616,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       68.1972558530
                  NaN
                  NaN
                  NaN
@@ -16945,9 +16918,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       76.1595294544
                  NaN
                  NaN
                  NaN
@@ -17245,9 +17220,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       91.4154775422
                  NaN
                  NaN
                  NaN
@@ -17545,9 +17522,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      191.9990572918
                  NaN
                  NaN
                  NaN
@@ -17845,9 +17824,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      218.6429547027
                  NaN
                  NaN
                  NaN
@@ -18145,9 +18126,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      221.9413212592
                  NaN
                  NaN
                  NaN
@@ -18445,9 +18428,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      228.1861222626
                  NaN
                  NaN
                  NaN
@@ -18745,9 +18730,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      219.2045182866
                  NaN
                  NaN
                  NaN
@@ -19036,7 +19023,6 @@
                  NaN
                  NaN
                  NaN
-       34.4969621156
                  NaN
                  NaN
                  NaN
@@ -19046,9 +19032,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      223.8377704137
                  NaN
                  NaN
                  NaN
@@ -19338,7 +19326,6 @@
                  NaN
                  NaN
                  NaN
-       33.7559947975
                  NaN
                  NaN
                  NaN
@@ -19347,9 +19334,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      231.5421114270
                  NaN
                  NaN
                  NaN
@@ -19640,7 +19629,6 @@
                  NaN
                  NaN
                  NaN
-       32.6616575562
                  NaN
                  NaN
                  NaN
@@ -19648,9 +19636,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      229.6875828183
                  NaN
                  NaN
                  NaN
@@ -19942,16 +19932,17 @@
                  NaN
                  NaN
                  NaN
-       32.2281917985
                  NaN
                  NaN
                  NaN
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      231.7226130878
                  NaN
                  NaN
                  NaN
@@ -20244,15 +20235,16 @@
                  NaN
                  NaN
                  NaN
-       32.1452632057
                  NaN
                  NaN
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      232.0878265161
                  NaN
                  NaN
                  NaN
@@ -20546,14 +20538,15 @@
                  NaN
                  NaN
                  NaN
-       31.9255618582
                  NaN
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      225.0665921003
                  NaN
                  NaN
                  NaN
@@ -20848,13 +20841,14 @@
                  NaN
                  NaN
                  NaN
-       31.5241520071
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      203.2151463479
                  NaN
                  NaN
                  NaN
@@ -21150,12 +21144,13 @@
                  NaN
                  NaN
                  NaN
-       31.8294083481
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      207.8756455459
                  NaN
                  NaN
                  NaN
@@ -21452,11 +21447,12 @@
                  NaN
                  NaN
                  NaN
-       31.8416052867
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      196.8175015247
                  NaN
                  NaN
                  NaN
@@ -21754,10 +21750,11 @@
                  NaN
                  NaN
                  NaN
-       31.7442730897
+            Infinity
                  NaN
                  NaN
                  NaN
+      205.4466072706
                  NaN
                  NaN
                  NaN
@@ -22055,10 +22052,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
-       32.3998509981
                  NaN
                  NaN
+      202.2040277048
                  NaN
                  NaN
                  NaN
@@ -22356,10 +22354,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
-       32.4144669545
                  NaN
+      193.4795757180
                  NaN
                  NaN
                  NaN
@@ -22657,10 +22656,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
-       32.0596319912
+      200.2691763595
                  NaN
                  NaN
                  NaN
@@ -22962,7 +22962,7 @@
                  NaN
                  NaN
                  NaN
-       31.9501582430
+      209.8123627535
                  NaN
                  NaN
                  NaN
@@ -23264,7 +23264,7 @@
                  NaN
                  NaN
                  NaN
-       32.0718314361
+      209.9741731026
                  NaN
                  NaN
                  NaN
@@ -23566,7 +23566,7 @@
                  NaN
                  NaN
                  NaN
-       32.1314360159
+      224.3356405609
                  NaN
                  NaN
                  NaN
@@ -23868,7 +23868,7 @@
                  NaN
                  NaN
                  NaN
-       31.9674157232
+      224.8526443682
                  NaN
                  NaN
                  NaN
@@ -24170,7 +24170,7 @@
                  NaN
                  NaN
                  NaN
-       31.7132073143
+      221.1965417266
                  NaN
                  NaN
                  NaN
@@ -24472,7 +24472,7 @@
                  NaN
                  NaN
                  NaN
-       31.6197798416
+      223.3083424331
                  NaN
                  NaN
                  NaN
@@ -24774,7 +24774,7 @@
                  NaN
                  NaN
                  NaN
-       31.4668213687
+      235.2350971341
                  NaN
                  NaN
                  NaN
@@ -25076,7 +25076,7 @@
                  NaN
                  NaN
                  NaN
-       31.3479331886
+      233.7548291459
                  NaN
                  NaN
                  NaN
@@ -25378,7 +25378,7 @@
                  NaN
                  NaN
                  NaN
-       31.2965763232
+      232.6801676335
                  NaN
                  NaN
                  NaN
@@ -25680,7 +25680,7 @@
                  NaN
                  NaN
                  NaN
-       31.8237823733
+      238.7510015056
                  NaN
                  NaN
                  NaN
@@ -25982,7 +25982,7 @@
                  NaN
                  NaN
                  NaN
-       32.6630223536
+      241.8993115857
                  NaN
                  NaN
                  NaN
@@ -26284,7 +26284,7 @@
                  NaN
                  NaN
                  NaN
-       33.2732664153
+      242.9271490921
                  NaN
                  NaN
                  NaN
@@ -26586,7 +26586,7 @@
                  NaN
                  NaN
                  NaN
-       33.7463307058
+      241.3734373506
                  NaN
                  NaN
                  NaN
@@ -26888,7 +26888,7 @@
                  NaN
                  NaN
                  NaN
-       33.5252304882
+      245.9559063368
                  NaN
                  NaN
                  NaN
@@ -27190,7 +27190,7 @@
                  NaN
                  NaN
                  NaN
-       32.9688146909
+      246.7301952088
                  NaN
                  NaN
                  NaN
@@ -27492,7 +27492,7 @@
                  NaN
                  NaN
                  NaN
-       32.5909057980
+      254.3432692328
                  NaN
                  NaN
                  NaN
@@ -27794,7 +27794,7 @@
                  NaN
                  NaN
                  NaN
-       32.5743518097
+      261.2457275701
                  NaN
                  NaN
                  NaN
@@ -28096,7 +28096,7 @@
                  NaN
                  NaN
                  NaN
-       32.9236025648
+      270.3080730682
                  NaN
                  NaN
                  NaN
@@ -28398,7 +28398,7 @@
                  NaN
                  NaN
                  NaN
-       33.2158421163
+      281.1659890399
                  NaN
                  NaN
                  NaN
@@ -28700,7 +28700,7 @@
                  NaN
                  NaN
                  NaN
-       33.4152227057
+      291.9721523753
                  NaN
                  NaN
                  NaN
@@ -29002,7 +29002,7 @@
                  NaN
                  NaN
                  NaN
-       33.7032605444
+      297.6186415628
                  NaN
                  NaN
                  NaN
@@ -29304,7 +29304,7 @@
                  NaN
                  NaN
                  NaN
-       33.9593050169
+      296.3405737547
                  NaN
                  NaN
                  NaN
@@ -29606,7 +29606,7 @@
                  NaN
                  NaN
                  NaN
-       34.1155005973
+      295.0815357867
                  NaN
                  NaN
                  NaN
@@ -29908,7 +29908,7 @@
                  NaN
                  NaN
                  NaN
-       34.1460144174
+      296.2502913117
                  NaN
                  NaN
                  NaN
@@ -30210,7 +30210,7 @@
                  NaN
                  NaN
                  NaN
-       33.9690840166
+      292.0800741114
                  NaN
                  NaN
                  NaN
@@ -30512,7 +30512,7 @@
                  NaN
                  NaN
                  NaN
-       33.6993301305
+      285.9246423008
                  NaN
                  NaN
                  NaN
@@ -30814,7 +30814,7 @@
                  NaN
                  NaN
                  NaN
-       34.2484604457
+      284.8539282017
                  NaN
                  NaN
                  NaN
@@ -31116,7 +31116,7 @@
                  NaN
                  NaN
                  NaN
-       33.9848601195
+      285.3834146184
                  NaN
                  NaN
                  NaN
@@ -31418,7 +31418,7 @@
                  NaN
                  NaN
                  NaN
-       37.3544292498
+      287.2780693327
                  NaN
                  NaN
                  NaN
@@ -31720,7 +31720,7 @@
                  NaN
                  NaN
                  NaN
-       41.5467474025
+      290.2142939611
                  NaN
                  NaN
                  NaN
@@ -32022,7 +32022,7 @@
                  NaN
                  NaN
                  NaN
-       49.4956628298
+      294.8210590068
                  NaN
                  NaN
                  NaN
@@ -32324,7 +32324,7 @@
                  NaN
                  NaN
                  NaN
-       55.8042566244
+      306.5777789623
                  NaN
                  NaN
                  NaN
@@ -32626,7 +32626,7 @@
                  NaN
                  NaN
                  NaN
-       67.4087792827
+      314.7593627117
                  NaN
                  NaN
                  NaN
@@ -32928,7 +32928,7 @@
                  NaN
                  NaN
                  NaN
-       76.4864721837
+      328.6645996669
                  NaN
                  NaN
                  NaN
@@ -33230,7 +33230,7 @@
                  NaN
                  NaN
                  NaN
-       86.1246308370
+      336.7788680119
                  NaN
                  NaN
                  NaN
@@ -33532,7 +33532,7 @@
                  NaN
                  NaN
                  NaN
-       99.4029010479
+      340.2749633052
                  NaN
                  NaN
                  NaN
@@ -33834,7 +33834,7 @@
                  NaN
                  NaN
                  NaN
-      112.8252223075
+      347.3897143845
                  NaN
                  NaN
                  NaN
@@ -34136,7 +34136,7 @@
                  NaN
                  NaN
                  NaN
-      124.4480167813
+      357.1028378374
                  NaN
                  NaN
                  NaN
@@ -34438,7 +34438,7 @@
                  NaN
                  NaN
                  NaN
-      135.8162376415
+      366.9905018508
                  NaN
                  NaN
                  NaN
@@ -34740,7 +34740,7 @@
                  NaN
                  NaN
                  NaN
-      146.9631933025
+      371.3690760920
                  NaN
                  NaN
                  NaN
@@ -35042,7 +35042,7 @@
                  NaN
                  NaN
                  NaN
-      165.5321951287
+      381.9143962771
                  NaN
                  NaN
                  NaN
@@ -35344,7 +35344,7 @@
                  NaN
                  NaN
                  NaN
-      180.2320293656
+      395.3280419577
                  NaN
                  NaN
                  NaN
@@ -35646,7 +35646,7 @@
                  NaN
                  NaN
                  NaN
-      199.7187266784
+      408.1780510778
                  NaN
                  NaN
                  NaN
@@ -35948,7 +35948,7 @@
                  NaN
                  NaN
                  NaN
-      207.9693696779
+      421.0210142594
                  NaN
                  NaN
                  NaN
@@ -36250,7 +36250,7 @@
                  NaN
                  NaN
                  NaN
-      213.8317764966
+      436.1410235351
                  NaN
                  NaN
                  NaN
@@ -36552,7 +36552,7 @@
                  NaN
                  NaN
                  NaN
-      223.9308774274
+      445.4968610134
                  NaN
                  NaN
                  NaN
@@ -36854,7 +36854,7 @@
                  NaN
                  NaN
                  NaN
-      225.3413260351
+      457.9405619175
                  NaN
                  NaN
                  NaN
@@ -37156,7 +37156,7 @@
                  NaN
                  NaN
                  NaN
-      231.6225242785
+      463.0524646909
                  NaN
                  NaN
                  NaN
@@ -37458,7 +37458,7 @@
                  NaN
                  NaN
                  NaN
-      235.3776159187
+      465.9288242954
                  NaN
                  NaN
                  NaN
@@ -37760,7 +37760,7 @@
                  NaN
                  NaN
                  NaN
-      237.1071008174
+      468.5042613350
                  NaN
                  NaN
                  NaN
@@ -38062,7 +38062,7 @@
                  NaN
                  NaN
                  NaN
-      242.2743415443
+      465.6403478088
                  NaN
                  NaN
                  NaN
@@ -38364,7 +38364,7 @@
                  NaN
                  NaN
                  NaN
-      248.5259641022
+      459.0779477797
                  NaN
                  NaN
                  NaN
@@ -38666,7 +38666,7 @@
                  NaN
                  NaN
                  NaN
-      251.5816394933
+      451.9626181898
                  NaN
                  NaN
                  NaN
@@ -38968,7 +38968,7 @@
                  NaN
                  NaN
                  NaN
-      255.2621821093
+      443.6758304338
                  NaN
                  NaN
                  NaN
@@ -39270,7 +39270,7 @@
                  NaN
                  NaN
                  NaN
-      264.3709696851
+      429.8959465111
                  NaN
                  NaN
                  NaN
@@ -39572,7 +39572,7 @@
                  NaN
                  NaN
                  NaN
-      268.7418726522
+      428.0985274926
                  NaN
                  NaN
                  NaN
@@ -39874,7 +39874,7 @@
                  NaN
                  NaN
                  NaN
-      275.5789798864
+      418.9750705462
                  NaN
                  NaN
                  NaN
@@ -40176,7 +40176,7 @@
                  NaN
                  NaN
                  NaN
-      284.0060469863
+      415.2977015226
                  NaN
                  NaN
                  NaN
@@ -40478,7 +40478,7 @@
                  NaN
                  NaN
                  NaN
-      292.2463584784
+      412.1999738789
                  NaN
                  NaN
                  NaN
@@ -40780,7 +40780,7 @@
                  NaN
                  NaN
                  NaN
-      294.9128326933
+      408.2472741389
                  NaN
                  NaN
                  NaN
@@ -41082,7 +41082,7 @@
                  NaN
                  NaN
                  NaN
-      293.5088238513
+      409.5838447081
                  NaN
                  NaN
                  NaN
@@ -41384,7 +41384,7 @@
                  NaN
                  NaN
                  NaN
-      299.1617456918
+      414.1981305894
                  NaN
                  NaN
                  NaN
@@ -41686,7 +41686,7 @@
                  NaN
                  NaN
                  NaN
-      306.6202836622
+      430.3581992675
                  NaN
                  NaN
                  NaN
@@ -41988,7 +41988,7 @@
                  NaN
                  NaN
                  NaN
-      311.2930883563
+      438.4644533690
                  NaN
                  NaN
                  NaN
@@ -42290,7 +42290,7 @@
                  NaN
                  NaN
                  NaN
-      321.5255113195
+      449.9250226817
                  NaN
                  NaN
                  NaN
@@ -42592,7 +42592,7 @@
                  NaN
                  NaN
                  NaN
-      326.2508911420
+      463.1571126583
                  NaN
                  NaN
                  NaN
@@ -42894,7 +42894,7 @@
                  NaN
                  NaN
                  NaN
-      332.0567769662
+      477.3734655863
                  NaN
                  NaN
                  NaN
@@ -43196,7 +43196,7 @@
                  NaN
                  NaN
                  NaN
-      347.2449305185
+      480.6628928497
                  NaN
                  NaN
                  NaN
@@ -43498,7 +43498,7 @@
                  NaN
                  NaN
                  NaN
-      361.0899495363
+      477.5157938286
                  NaN
                  NaN
                  NaN
@@ -43800,7 +43800,7 @@
                  NaN
                  NaN
                  NaN
-      372.7884917263
+      476.3932160757
                  NaN
                  NaN
                  NaN
@@ -44102,7 +44102,7 @@
                  NaN
                  NaN
                  NaN
-      390.1676049741
+      481.4395203541
                  NaN
                  NaN
                  NaN
@@ -44404,7 +44404,7 @@
                  NaN
                  NaN
                  NaN
-      463.2523720958
+      506.2602582092
                  NaN
                  NaN
                  NaN
@@ -44706,7 +44706,7 @@
                  NaN
                  NaN
                  NaN
-      453.5084905579
+      509.0416625691
                  NaN
                  NaN
                  NaN
@@ -45008,7 +45008,7 @@
                  NaN
                  NaN
                  NaN
-      450.7760337046
+      516.2550313298
                  NaN
                  NaN
                  NaN
@@ -45310,7 +45310,7 @@
                  NaN
                  NaN
                  NaN
-      444.2943604237
+      513.0000848457
                  NaN
                  NaN
                  NaN
@@ -45612,7 +45612,7 @@
                  NaN
                  NaN
                  NaN
-      443.3359393597
+      505.7928139114
                  NaN
                  NaN
                  NaN
@@ -45914,7 +45914,7 @@
                  NaN
                  NaN
                  NaN
-      437.9648068310
+      496.9222278845
                  NaN
                  NaN
                  NaN
@@ -46216,7 +46216,7 @@
                  NaN
                  NaN
                  NaN
-      438.1317266949
+      488.1125106494
                  NaN
                  NaN
                  NaN
@@ -46518,7 +46518,7 @@
                  NaN
                  NaN
                  NaN
-      436.8510190551
+      494.4852308145
                  NaN
                  NaN
                  NaN
@@ -46820,7 +46820,7 @@
                  NaN
                  NaN
                  NaN
-      440.5007450162
+      507.9021578649
                  NaN
                  NaN
                  NaN
@@ -47122,7 +47122,7 @@
                  NaN
                  NaN
                  NaN
-      443.0028344484
+      527.2882182047
                  NaN
                  NaN
                  NaN
@@ -47424,7 +47424,7 @@
                  NaN
                  NaN
                  NaN
-      442.8224196527
+      518.6617930349
                  NaN
                  NaN
                  NaN
@@ -47726,7 +47726,7 @@
                  NaN
                  NaN
                  NaN
-      441.4334580557
+      515.9314238968
                  NaN
                  NaN
                  NaN
@@ -48330,7 +48330,7 @@
                  NaN
                  NaN
                  NaN
-      443.3009165497
+      519.4144424764
                  NaN
                  NaN
                  NaN
@@ -48632,7 +48632,7 @@
                  NaN
                  NaN
                  NaN
-      442.7809317792
+      525.0112801190
                  NaN
                  NaN
                  NaN
@@ -48934,7 +48934,7 @@
                  NaN
                  NaN
                  NaN
-      448.6771730828
+      519.6925960836
                  NaN
                  NaN
                  NaN
@@ -49236,7 +49236,7 @@
                  NaN
                  NaN
                  NaN
-      450.7830764181
+      527.8583981795
                  NaN
                  NaN
                  NaN
@@ -49538,7 +49538,7 @@
                  NaN
                  NaN
                  NaN
-      456.6529579962
+      534.3780725964
                  NaN
                  NaN
                  NaN
@@ -49840,7 +49840,7 @@
                  NaN
                  NaN
                  NaN
-      464.8553239613
+      544.6270517880
                  NaN
                  NaN
                  NaN
@@ -50142,7 +50142,7 @@
                  NaN
                  NaN
                  NaN
-      470.8827123152
+      537.7623241399
                  NaN
                  NaN
                  NaN
@@ -50444,7 +50444,7 @@
                  NaN
                  NaN
                  NaN
-      473.1267511918
+      534.2974679434
                  NaN
                  NaN
                  NaN
@@ -50746,7 +50746,7 @@
                  NaN
                  NaN
                  NaN
-      479.5383268817
+      529.8359096318
                  NaN
                  NaN
                  NaN
@@ -51048,7 +51048,7 @@
                  NaN
                  NaN
                  NaN
-      490.2834907790
+      542.7981135123
                  NaN
                  NaN
                  NaN
@@ -51350,7 +51350,7 @@
                  NaN
                  NaN
                  NaN
-      497.5841892875
+      555.2052257240
                  NaN
                  NaN
                  NaN
@@ -51652,7 +51652,7 @@
                  NaN
                  NaN
                  NaN
-      503.4975168333
+      548.3482487021
                  NaN
                  NaN
                  NaN
@@ -51954,7 +51954,7 @@
                  NaN
                  NaN
                  NaN
-      499.4086034867
+      551.7198088311
                  NaN
                  NaN
                  NaN
@@ -52256,7 +52256,7 @@
                  NaN
                  NaN
                  NaN
-      500.8164060465
+      575.2374213118
                  NaN
                  NaN
                  NaN
@@ -52558,7 +52558,7 @@
                  NaN
                  NaN
                  NaN
-      506.9288542561
+      602.1598427124
                  NaN
                  NaN
                  NaN
@@ -52860,7 +52860,7 @@
                  NaN
                  NaN
                  NaN
-      507.2188293738
+      601.9773068566
                  NaN
                  NaN
                  NaN
@@ -53162,7 +53162,7 @@
                  NaN
                  NaN
                  NaN
-      508.3576693260
+      608.3342836140
                  NaN
                  NaN
                  NaN
@@ -53464,7 +53464,7 @@
                  NaN
                  NaN
                  NaN
-      510.4532533141
+      604.3009830797
                  NaN
                  NaN
                  NaN
@@ -53766,7 +53766,7 @@
                  NaN
                  NaN
                  NaN
-      517.7283252861
+      590.8313410119
                  NaN
                  NaN
                  NaN
@@ -54068,7 +54068,7 @@
                  NaN
                  NaN
                  NaN
-      524.9901342364
+      576.5971024511
                  NaN
                  NaN
                  NaN
@@ -54370,7 +54370,7 @@
                  NaN
                  NaN
                  NaN
-      530.9113529307
+      572.9252925656
                  NaN
                  NaN
                  NaN
@@ -54672,7 +54672,7 @@
                  NaN
                  NaN
                  NaN
-      540.1378255180
+      569.5766340249
                  NaN
                  NaN
                  NaN
@@ -54974,7 +54974,7 @@
                  NaN
                  NaN
                  NaN
-      540.4083711835
+      573.1624843705
                  NaN
                  NaN
                  NaN
@@ -55276,7 +55276,7 @@
                  NaN
                  NaN
                  NaN
-      546.4242211960
+      595.9702328373
                  NaN
                  NaN
                  NaN
@@ -55578,7 +55578,7 @@
                  NaN
                  NaN
                  NaN
-      554.1379478403
+      593.5429812635
                  NaN
                  NaN
                  NaN
@@ -55880,7 +55880,7 @@
                  NaN
                  NaN
                  NaN
-      558.4648177336
+      624.2933855555
                  NaN
                  NaN
                  NaN
@@ -56182,7 +56182,7 @@
                  NaN
                  NaN
                  NaN
-      568.1040994820
+      618.9639605923
                  NaN
                  NaN
                  NaN
@@ -56484,7 +56484,7 @@
                  NaN
                  NaN
                  NaN
-      578.2243588263
+      609.7717321808
                  NaN
                  NaN
                  NaN
@@ -56786,7 +56786,7 @@
                  NaN
                  NaN
                  NaN
-      592.2608927275
+      580.0557421127
                  NaN
                  NaN
                  NaN
@@ -57088,7 +57088,7 @@
                  NaN
                  NaN
                  NaN
-      606.0831157659
+      556.9097153875
                  NaN
                  NaN
                  NaN
@@ -57390,7 +57390,7 @@
                  NaN
                  NaN
                  NaN
-      611.6913184052
+      562.8051962436
                  NaN
                  NaN
                  NaN
@@ -57692,7 +57692,7 @@
                  NaN
                  NaN
                  NaN
-      622.0954329882
+      553.5264557739
                  NaN
                  NaN
                  NaN
@@ -57994,7 +57994,7 @@
                  NaN
                  NaN
                  NaN
-      629.0894581798
+      538.2215019310
                  NaN
                  NaN
                  NaN
@@ -58296,7 +58296,7 @@
                  NaN
                  NaN
                  NaN
-      638.7252936817
+      528.4991390001
                  NaN
                  NaN
                  NaN
@@ -58598,7 +58598,7 @@
                  NaN
                  NaN
                  NaN
-      646.8722489560
+      523.3570420513
                  NaN
                  NaN
                  NaN
@@ -58900,7 +58900,7 @@
                  NaN
                  NaN
                  NaN
-      653.3639709576
+      528.4110612683
                  NaN
                  NaN
                  NaN
@@ -59202,7 +59202,7 @@
                  NaN
                  NaN
                  NaN
-      657.5943132121
+      533.4715503869
                  NaN
                  NaN
                  NaN
@@ -59504,7 +59504,7 @@
                  NaN
                  NaN
                  NaN
-      654.4431922163
+      518.9697227980
                  NaN
                  NaN
                  NaN
@@ -59806,7 +59806,7 @@
                  NaN
                  NaN
                  NaN
-      654.9611279975
+      521.4592123513
                  NaN
                  NaN
                  NaN
@@ -60108,7 +60108,7 @@
                  NaN
                  NaN
                  NaN
-      647.0379332535
+      515.4785175209
                  NaN
                  NaN
                  NaN
@@ -60410,7 +60410,7 @@
                  NaN
                  NaN
                  NaN
-      651.4764891751
+      525.1847852818
                  NaN
                  NaN
                  NaN
@@ -60712,7 +60712,7 @@
                  NaN
                  NaN
                  NaN
-      646.2733133837
+      536.7183458443
                  NaN
                  NaN
                  NaN
@@ -61014,7 +61014,7 @@
                  NaN
                  NaN
                  NaN
-      635.0591768507
+      555.3581851599
                  NaN
                  NaN
                  NaN
@@ -61316,7 +61316,7 @@
                  NaN
                  NaN
                  NaN
-      634.1048321426
+      554.6073710742
                  NaN
                  NaN
                  NaN
@@ -61618,7 +61618,7 @@
                  NaN
                  NaN
                  NaN
-      624.1858303051
+      568.8641317334
                  NaN
                  NaN
                  NaN
@@ -61920,7 +61920,7 @@
                  NaN
                  NaN
                  NaN
-      621.1979061358
+      589.3075624374
                  NaN
                  NaN
                  NaN
@@ -62222,7 +62222,7 @@
                  NaN
                  NaN
                  NaN
-      610.6943803721
+      562.1035243196
                  NaN
                  NaN
                  NaN
@@ -62524,7 +62524,7 @@
                  NaN
                  NaN
                  NaN
-      609.2884141949
+      534.7737093994
                  NaN
                  NaN
                  NaN
@@ -62826,7 +62826,7 @@
                  NaN
                  NaN
                  NaN
-      604.2950861533
+      502.3354228062
                  NaN
                  NaN
                  NaN
@@ -63128,7 +63128,7 @@
                  NaN
                  NaN
                  NaN
-      598.0537511552
+      515.7491765374
                  NaN
                  NaN
                  NaN
@@ -63430,7 +63430,7 @@
                  NaN
                  NaN
                  NaN
-      598.2210025278
+      532.1296673457
                  NaN
                  NaN
                  NaN
@@ -63732,7 +63732,7 @@
                  NaN
                  NaN
                  NaN
-      595.9844845758
+      542.3044238899
                  NaN
                  NaN
                  NaN
@@ -64034,7 +64034,7 @@
                  NaN
                  NaN
                  NaN
-      591.3570648901
+      544.0984438163
                  NaN
                  NaN
                  NaN
@@ -64333,13 +64333,10 @@
                  NaN
                  NaN
             Infinity
-                 NaN
-                 NaN
-                 NaN
-      584.4917729356
                  NaN
                  NaN
                  NaN
+      548.0802524052
                  NaN
                  NaN
                  NaN
@@ -64637,16 +64634,11 @@
                  NaN
                  NaN
                  NaN
-                 NaN
-      573.5257578861
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      559.2627721852
                  NaN
                  NaN
                  NaN
@@ -64940,14 +64932,15 @@
                  NaN
                  NaN
                  NaN
-      562.3699674091
                  NaN
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      548.8273762603
                  NaN
                  NaN
                  NaN
@@ -65242,13 +65235,14 @@
                  NaN
                  NaN
                  NaN
-      552.2939541576
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      548.1508898251
                  NaN
                  NaN
                  NaN
@@ -65544,12 +65538,13 @@
                  NaN
                  NaN
                  NaN
-      546.1389990431
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      560.0286480065
                  NaN
                  NaN
                  NaN
@@ -65846,11 +65841,12 @@
                  NaN
                  NaN
                  NaN
-      534.3092870403
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      551.1811118377
                  NaN
                  NaN
                  NaN
@@ -66148,10 +66144,11 @@
                  NaN
                  NaN
                  NaN
-      528.7579065291
+            Infinity
                  NaN
                  NaN
                  NaN
+      530.2390968238
                  NaN
                  NaN
                  NaN
@@ -66449,10 +66446,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
-      530.4629351348
                  NaN
                  NaN
+      520.1296276628
                  NaN
                  NaN
                  NaN
@@ -66750,10 +66748,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
-      527.6397790367
                  NaN
+      523.6143740168
                  NaN
                  NaN
                  NaN
@@ -67051,10 +67050,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
-      520.6111635352
+      518.2191487642
                  NaN
                  NaN
                  NaN
@@ -67356,7 +67356,7 @@
                  NaN
                  NaN
                  NaN
-      521.9390174165
+      510.6166280880
                  NaN
                  NaN
                  NaN
@@ -67658,7 +67658,7 @@
                  NaN
                  NaN
                  NaN
-      512.3997167893
+      499.0044676002
                  NaN
                  NaN
                  NaN
@@ -67960,7 +67960,7 @@
                  NaN
                  NaN
                  NaN
-      511.4694653681
+      497.3238868177
                  NaN
                  NaN
                  NaN
@@ -68259,25 +68259,10 @@
                  NaN
                  NaN
             Infinity
-                 NaN
-                 NaN
-                 NaN
-      510.6733321192
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
                  NaN
                  NaN
                  NaN
+      490.3536459682
                  NaN
                  NaN
                  NaN
@@ -68564,7 +68549,6 @@
                  NaN
                  NaN
                  NaN
-      513.3939934949
                  NaN
                  NaN
                  NaN
@@ -68576,41 +68560,11 @@
                  NaN
                  NaN
                  NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
-                 NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      473.8938384708
                  NaN
                  NaN
                  NaN
@@ -68866,7 +68820,6 @@
                  NaN
                  NaN
                  NaN
-      511.9682948124
                  NaN
                  NaN
                  NaN
@@ -68909,9 +68862,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      502.7474597250
                  NaN
                  NaN
                  NaN
@@ -69168,7 +69123,6 @@
                  NaN
                  NaN
                  NaN
-      518.0644940300
                  NaN
                  NaN
                  NaN
@@ -69210,9 +69164,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      481.2477513011
                  NaN
                  NaN
                  NaN
@@ -69470,7 +69426,6 @@
                  NaN
                  NaN
                  NaN
-      516.1931528188
                  NaN
                  NaN
                  NaN
@@ -69511,9 +69466,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      436.8736266037
                  NaN
                  NaN
                  NaN
@@ -69772,7 +69729,6 @@
                  NaN
                  NaN
                  NaN
-      515.3915282752
                  NaN
                  NaN
                  NaN
@@ -69812,9 +69768,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      425.9586068901
                  NaN
                  NaN
                  NaN
@@ -70074,7 +70032,6 @@
                  NaN
                  NaN
                  NaN
-      515.7499087060
                  NaN
                  NaN
                  NaN
@@ -70113,9 +70070,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      420.4103843679
                  NaN
                  NaN
                  NaN
@@ -70376,7 +70335,6 @@
                  NaN
                  NaN
                  NaN
-      506.4975960555
                  NaN
                  NaN
                  NaN
@@ -70414,9 +70372,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      398.1791822921
                  NaN
                  NaN
                  NaN
@@ -70678,7 +70638,6 @@
                  NaN
                  NaN
                  NaN
-      493.4600969537
                  NaN
                  NaN
                  NaN
@@ -70715,9 +70674,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      402.8187433688
                  NaN
                  NaN
                  NaN
@@ -70980,7 +70941,6 @@
                  NaN
                  NaN
                  NaN
-      477.6879322970
                  NaN
                  NaN
                  NaN
@@ -71016,9 +70976,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      400.3295736450
                  NaN
                  NaN
                  NaN
@@ -71282,7 +71244,6 @@
                  NaN
                  NaN
                  NaN
-      470.1825605284
                  NaN
                  NaN
                  NaN
@@ -71317,9 +71278,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      396.5846031143
                  NaN
                  NaN
                  NaN
@@ -71584,7 +71547,6 @@
                  NaN
                  NaN
                  NaN
-      475.8644612598
                  NaN
                  NaN
                  NaN
@@ -71618,9 +71580,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      355.6931066526
                  NaN
                  NaN
                  NaN
@@ -71886,7 +71850,6 @@
                  NaN
                  NaN
                  NaN
-      483.5832921997
                  NaN
                  NaN
                  NaN
@@ -71919,9 +71882,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      314.3235814570
                  NaN
                  NaN
                  NaN
@@ -72188,7 +72153,6 @@
                  NaN
                  NaN
                  NaN
-      502.7506808147
                  NaN
                  NaN
                  NaN
@@ -72220,9 +72184,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      302.8944498856
                  NaN
                  NaN
                  NaN
@@ -72490,7 +72456,6 @@
                  NaN
                  NaN
                  NaN
-      526.9478664458
                  NaN
                  NaN
                  NaN
@@ -72521,9 +72486,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      270.0553588035
                  NaN
                  NaN
                  NaN
@@ -72792,7 +72759,6 @@
                  NaN
                  NaN
                  NaN
-      504.5581470576
                  NaN
                  NaN
                  NaN
@@ -72822,9 +72788,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      240.9893015903
                  NaN
                  NaN
                  NaN
@@ -73094,7 +73062,6 @@
                  NaN
                  NaN
                  NaN
-      509.7490825076
                  NaN
                  NaN
                  NaN
@@ -73123,9 +73090,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      224.8149282916
                  NaN
                  NaN
                  NaN
@@ -73396,7 +73365,6 @@
                  NaN
                  NaN
                  NaN
-      524.4513161706
                  NaN
                  NaN
                  NaN
@@ -73424,9 +73392,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      203.2197093154
                  NaN
                  NaN
                  NaN
@@ -73698,7 +73668,6 @@
                  NaN
                  NaN
                  NaN
-      513.9538469421
                  NaN
                  NaN
                  NaN
@@ -73725,9 +73694,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      169.8925762281
                  NaN
                  NaN
                  NaN
@@ -74000,7 +73971,6 @@
                  NaN
                  NaN
                  NaN
-      454.7788806781
                  NaN
                  NaN
                  NaN
@@ -74026,9 +73996,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      168.7289599780
                  NaN
                  NaN
                  NaN
@@ -74302,7 +74274,6 @@
                  NaN
                  NaN
                  NaN
-      356.3281250244
                  NaN
                  NaN
                  NaN
@@ -74327,9 +74298,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      156.1547279343
                  NaN
                  NaN
                  NaN
@@ -74604,7 +74577,6 @@
                  NaN
                  NaN
                  NaN
-       39.8040341344
                  NaN
                  NaN
                  NaN
@@ -74628,9 +74600,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      126.3239144430
                  NaN
                  NaN
                  NaN
@@ -74906,7 +74880,6 @@
                  NaN
                  NaN
                  NaN
-       32.8691867869
                  NaN
                  NaN
                  NaN
@@ -74929,9 +74902,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      122.3293461865
                  NaN
                  NaN
                  NaN
@@ -75208,7 +75183,6 @@
                  NaN
                  NaN
                  NaN
-       32.7170872857
                  NaN
                  NaN
                  NaN
@@ -75230,9 +75204,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      121.2939020439
                  NaN
                  NaN
                  NaN
@@ -75510,7 +75486,6 @@
                  NaN
                  NaN
                  NaN
-       32.7139863894
                  NaN
                  NaN
                  NaN
@@ -75531,9 +75506,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      119.2981346305
                  NaN
                  NaN
                  NaN
@@ -75812,7 +75789,6 @@
                  NaN
                  NaN
                  NaN
-       32.8408400059
                  NaN
                  NaN
                  NaN
@@ -75832,9 +75808,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      117.2825131035
                  NaN
                  NaN
                  NaN
@@ -76114,7 +76092,6 @@
                  NaN
                  NaN
                  NaN
-       33.0012182028
                  NaN
                  NaN
                  NaN
@@ -76133,9 +76110,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      115.5445783932
                  NaN
                  NaN
                  NaN
@@ -76416,7 +76395,6 @@
                  NaN
                  NaN
                  NaN
-       33.1105765546
                  NaN
                  NaN
                  NaN
@@ -76434,9 +76412,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      113.7400083618
                  NaN
                  NaN
                  NaN
@@ -76718,7 +76698,6 @@
                  NaN
                  NaN
                  NaN
-       33.2593999057
                  NaN
                  NaN
                  NaN
@@ -76735,9 +76714,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      112.4395923179
                  NaN
                  NaN
                  NaN
@@ -77020,7 +77001,6 @@
                  NaN
                  NaN
                  NaN
-       33.4136544298
                  NaN
                  NaN
                  NaN
@@ -77036,9 +77016,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      111.8994497603
                  NaN
                  NaN
                  NaN
@@ -77322,7 +77304,6 @@
                  NaN
                  NaN
                  NaN
-       33.5318227805
                  NaN
                  NaN
                  NaN
@@ -77337,9 +77318,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      112.4373601597
                  NaN
                  NaN
                  NaN
@@ -77624,7 +77607,6 @@
                  NaN
                  NaN
                  NaN
-       33.5987725836
                  NaN
                  NaN
                  NaN
@@ -77638,9 +77620,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      113.6930935521
                  NaN
                  NaN
                  NaN
@@ -77926,7 +77910,6 @@
                  NaN
                  NaN
                  NaN
-       33.7247094889
                  NaN
                  NaN
                  NaN
@@ -77939,9 +77922,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      115.2862064382
                  NaN
                  NaN
                  NaN
@@ -78228,7 +78213,6 @@
                  NaN
                  NaN
                  NaN
-       33.9380421764
                  NaN
                  NaN
                  NaN
@@ -78240,9 +78224,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      117.1859241868
                  NaN
                  NaN
                  NaN
@@ -78530,7 +78516,6 @@
                  NaN
                  NaN
                  NaN
-       34.0507073386
                  NaN
                  NaN
                  NaN
@@ -78541,9 +78526,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      119.4992705034
                  NaN
                  NaN
                  NaN
@@ -78832,7 +78819,6 @@
                  NaN
                  NaN
                  NaN
-       33.8532163552
                  NaN
                  NaN
                  NaN
@@ -78842,9 +78828,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      121.1370466826
                  NaN
                  NaN
                  NaN
@@ -79134,7 +79122,6 @@
                  NaN
                  NaN
                  NaN
-       33.5831803929
                  NaN
                  NaN
                  NaN
@@ -79143,9 +79130,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      121.1371912362
                  NaN
                  NaN
                  NaN
@@ -79436,7 +79425,6 @@
                  NaN
                  NaN
                  NaN
-       33.4893414588
                  NaN
                  NaN
                  NaN
@@ -79444,9 +79432,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      120.6650046526
                  NaN
                  NaN
                  NaN
@@ -79738,16 +79728,17 @@
                  NaN
                  NaN
                  NaN
-       33.5096367428
                  NaN
                  NaN
                  NaN
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      116.9306967076
                  NaN
                  NaN
                  NaN
@@ -80040,15 +80031,16 @@
                  NaN
                  NaN
                  NaN
-       33.4697061461
                  NaN
                  NaN
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      112.9122430389
                  NaN
                  NaN
                  NaN
@@ -80342,14 +80334,15 @@
                  NaN
                  NaN
                  NaN
-       33.4747605305
                  NaN
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      108.8383772288
                  NaN
                  NaN
                  NaN
@@ -80644,13 +80637,14 @@
                  NaN
                  NaN
                  NaN
-       33.5236380973
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      105.6722141738
                  NaN
                  NaN
                  NaN
@@ -80946,12 +80940,13 @@
                  NaN
                  NaN
                  NaN
-       33.3860672543
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+      102.7869507794
                  NaN
                  NaN
                  NaN
@@ -81248,11 +81243,12 @@
                  NaN
                  NaN
                  NaN
-       33.0508398237
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
+       99.8886311678
                  NaN
                  NaN
                  NaN
@@ -81550,10 +81546,11 @@
                  NaN
                  NaN
                  NaN
-       32.8901036494
+            Infinity
                  NaN
                  NaN
                  NaN
+       97.3913163151
                  NaN
                  NaN
                  NaN
@@ -81851,10 +81848,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
-       33.0260142272
                  NaN
                  NaN
+       94.7668154162
                  NaN
                  NaN
                  NaN
@@ -82152,10 +82150,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
-       33.2850679951
                  NaN
+       92.5474115317
                  NaN
                  NaN
                  NaN
@@ -82453,10 +82452,11 @@
                  NaN
                  NaN
                  NaN
+            Infinity
                  NaN
                  NaN
                  NaN
-       33.7395957698
+       90.6184307253
                  NaN
                  NaN
                  NaN
@@ -82758,7 +82758,7 @@
                  NaN
                  NaN
                  NaN
-       34.2838044830
+       87.9776904060
                  NaN
                  NaN
                  NaN
@@ -83060,7 +83060,7 @@
                  NaN
                  NaN
                  NaN
-       35.0651726009
+       85.8753482334
                  NaN
                  NaN
                  NaN
@@ -83362,7 +83362,7 @@
                  NaN
                  NaN
                  NaN
-       36.1663130541
+       83.7670563510
                  NaN
                  NaN
                  NaN
@@ -83664,7 +83664,7 @@
                  NaN
                  NaN
                  NaN
-       37.4499046119
+       80.9616564499
                  NaN
                  NaN
                  NaN
@@ -83966,7 +83966,7 @@
                  NaN
                  NaN
                  NaN
-       38.3884121584
+       79.0256467026
                  NaN
                  NaN
                  NaN
@@ -84268,7 +84268,7 @@
                  NaN
                  NaN
                  NaN
-       38.9795753442
+       77.8381843855
                  NaN
                  NaN
                  NaN
@@ -84570,7 +84570,7 @@
                  NaN
                  NaN
                  NaN
-       39.6873044155
+       76.9327522707
                  NaN
                  NaN
                  NaN
@@ -84872,7 +84872,7 @@
                  NaN
                  NaN
                  NaN
-       40.2028750611
+       76.3410168415
                  NaN
                  NaN
                  NaN
@@ -85174,7 +85174,7 @@
                  NaN
                  NaN
                  NaN
-       39.6507028014
+       74.5743010603
                  NaN
                  NaN
                  NaN
@@ -85476,7 +85476,7 @@
                  NaN
                  NaN
                  NaN
-       39.0516071167
+       73.6001685200
                  NaN
                  NaN
                  NaN
@@ -85778,7 +85778,7 @@
                  NaN
                  NaN
                  NaN
-       38.7635202684
+       73.4494604880
                  NaN
                  NaN
                  NaN
@@ -86080,7 +86080,7 @@
                  NaN
                  NaN
                  NaN
-       39.0101243281
+       73.8457784759
                  NaN
                  NaN
                  NaN
@@ -86382,7 +86382,7 @@
                  NaN
                  NaN
                  NaN
-       40.1105949122
+       74.8590012238
                  NaN
                  NaN
                  NaN
@@ -86684,7 +86684,7 @@
                  NaN
                  NaN
                  NaN
-       41.5750821282
+       76.1280705655
                  NaN
                  NaN
                  NaN
@@ -86986,7 +86986,7 @@
                  NaN
                  NaN
                  NaN
-       42.9921554324
+       77.4041693051
                  NaN
                  NaN
                  NaN
@@ -87288,7 +87288,7 @@
                  NaN
                  NaN
                  NaN
-       44.0032994109
+       77.7457047015
                  NaN
                  NaN
                  NaN
@@ -87590,7 +87590,7 @@
                  NaN
                  NaN
                  NaN
-       44.6664183773
+       77.6865279395
                  NaN
                  NaN
                  NaN
@@ -87892,7 +87892,7 @@
                  NaN
                  NaN
                  NaN
-       44.7014498889
+       76.5326042767
                  NaN
                  NaN
                  NaN
@@ -88194,7 +88194,7 @@
                  NaN
                  NaN
                  NaN
-       44.6503235849
+       75.5133467151
                  NaN
                  NaN
                  NaN
@@ -88496,7 +88496,7 @@
                  NaN
                  NaN
                  NaN
-       44.2099264191
+       73.1546969481
                  NaN
                  NaN
                  NaN
@@ -88798,7 +88798,7 @@
                  NaN
                  NaN
                  NaN
-       43.7807613890
+       70.0708670231
                  NaN
                  NaN
                  NaN
@@ -89100,7 +89100,7 @@
                  NaN
                  NaN
                  NaN
-       44.6821935390
+       66.6288250451
                  NaN
                  NaN
                  NaN
@@ -89402,7 +89402,7 @@
                  NaN
                  NaN
                  NaN
-       46.8612072392
+       65.6439072553
                  NaN
                  NaN
                  NaN
@@ -89704,7 +89704,7 @@
                  NaN
                  NaN
                  NaN
-       49.2948684527
+       65.1176035591
                  NaN
                  NaN
                  NaN
@@ -90006,7 +90006,7 @@
                  NaN
                  NaN
                  NaN
-       47.9675665138
+       67.5504781402
                  NaN
                  NaN
                  NaN
@@ -90308,7 +90308,7 @@
                  NaN
                  NaN
                  NaN
-       41.1330403208
+       81.4271207600
                  NaN
                  NaN
                  NaN
@@ -90610,7 +90610,7 @@
                  NaN
                  NaN
                  NaN
-       32.7339156923
+      122.0771058629
                  NaN
                  NaN
                  NaN
@@ -90912,7 +90912,7 @@
                  NaN
                  NaN
                  NaN
-       32.5488158441
+      205.8295800284
                  NaN
                  NaN
                  NaN

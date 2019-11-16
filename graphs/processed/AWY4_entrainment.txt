@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191113
+  Date: 20191115
   Simulation name: AWY4 
   Filename:entrainment.txt                                                                                                                                       
   Produced in mod-subroutine:  =entrainment/bulkent                                                                                                                                  

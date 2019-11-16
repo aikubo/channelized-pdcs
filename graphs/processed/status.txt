@@ -1,1 +1,2 @@
-11/13/19 03:06 BVZ7 post process created 25 txt files, 0 tiff
+11/13/19 14:52 CWY7 prepared to run
+11/15/19 19:54 CWY7 post process created 27 txt files, 0 tiff

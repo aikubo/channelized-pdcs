@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191113
+  Date: 20191115
   Simulation name: CWY4 
   Filename:edge_vel2.txt                                                                                                                                         
   Produced in mod-subroutine:  massdist/edgevelocity                                                                                                                                 

@@ -242,8 +242,8 @@ module massdist
                 end do 
                 end do 
                 
-                do yc =1,YMAX
-                        write(7088, formatcurtain) curtains(:,yc)
+                do rc =1,RMAX
+                        write(7088, formatcurtain) curtains(rc,:)
                 end do
 
         end subroutine
