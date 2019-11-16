@@ -185,9 +185,11 @@ module massdist
 
         subroutine edgevelocity 
                 implicit none 
-                double precision:: perpvel2, perpvel1, outsum
+                double precision:: perpvel2, perpvel1, outsum,  perpvel
                 logical, dimension(length1):: maskshapeout
-      
+                double precision, allocatable:: curtains(:,:,:)
+                
+                allocate(curtains(YMAX, 2*timesteps))
                 print*, 'edge velocity'
                 filename='edge_vel1.txt'
 
@@ -203,33 +205,45 @@ module massdist
                 datatype=" t XXX perpvel W_G EPP"
                 call headerf(7889, filename, simlabel, routine, DESCRIPTION,datatype)
 
+                filename='edge_vel_y.txt'
+
+                routine="massdist/edgevelocity"
+                description="Calculate dot product of velocity and curve of the channel above edge1"
+                datatype=" "
+                call headerf(7088, filename, simlabel, routine, DESCRIPTION, datatype)
+
+                do yc =1,YMAX 
+                        curtains(yc, :) = 0 
+                end do 
+
                 do t= 1,timesteps
+
                 do I=1,length1
+
                         call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
                         edge1= FLOOR(edge1/3.)*3. + 3.
                         edge2= FLOOR(edge2/3.)*3. - 3.
                         top= FLOOR(top/3.)*3. - 3  
-                       
-                        !do J= 1,length1 
-                              !  if (ZZZ(J,1) .gt. edge2) then 
-                         !               if ( XXX(I,1) .eq. XXX(J,1)) then 
-                         !                       maskshapeout(J) = .TRUE.
-                         !               else 
-                         !                       maskshapeout(J) = .FALSE.
-                         !               end if 
-                               ! end if 
-                        !end do 
-                        
-                        if (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge1) then
-                                perpvel1 = U_G1(I,t) + V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
-                                write(7888,formatent) t, XXX(I,1), perpvel1, W_G1(I,t)
+                        perpvel = U_G1(I,t) + V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
+                        if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge2) then
+                                rc = (t+1)
+                                yc= int(YYY(I,1)/3.0)
+                                curtains(yc,rc)= perpvel
+                        elseif (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
+                                rc = t
+                                yc= int(YYY(I,1)/3.0)
+                                curtains(yc,rc)= perpvel                                
+                        elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge1) then
+                                write(7888,formatent) t, XXX(I,1), perpvel, W_G1(I,t)
                         elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge2) then
-                                perpvel2 = U_G1(I,t) +V_G1(I,t)*amprat*cosd(XXX(I,t)/lambda)
-                                !outsum= rho_p*SUM(EP_G1(:,t), mask= maskshapeout)  
-                                write(7889,formatent) t, XXX(I,1), perpvel2, W_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
+                                write(7889,formatent) t, XXX(I,1), perpvel, W_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
                                 
                         end if 
                 end do 
+                end do 
+
+                do yc=1,YMAX
+                        write(7088, formatcurtain) curtains(yc,:)
                 end do 
 
         end subroutine
