@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191115
+  Date: 20191117
   Simulation name: CVX7 
   Filename:slice_halfl.txt                                                                                                                                       
   Produced in mod-subroutine:  column.mod/slice                                                                                                                                      

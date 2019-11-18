@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191115
+  Date: 20191117
   Simulation name: SV4  
   Filename:edge_vel1.txt                                                                                                                                         
   Produced in mod-subroutine:  massdist/edgevelocity                                                                                                                                 

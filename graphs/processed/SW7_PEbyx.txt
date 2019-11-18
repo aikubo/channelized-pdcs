@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191115
+  Date: 20191117
   Simulation name: SW7  
   Filename:PEbyx.txt                                                                                                                                             
   Produced in mod-subroutine:  massdist/energypotential                                                                                                                              

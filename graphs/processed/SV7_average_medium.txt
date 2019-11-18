@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191115
+  Date: 20191117
   Simulation name: SV7  
   Filename:average_medium.txt                                                                                                                                    
   Produced in mod-subroutine:  averageit.mod/average_all                                                                                                                             

@@ -188,7 +188,7 @@ module massdist
                 double precision:: perpvel2, perpvel1, outsum,  perpvel
                 logical, dimension(length1):: maskshapeout
                 double precision, allocatable:: curtains(:,:)
-                
+                double precision :: mag 
                 allocate(curtains(RMAX, YMAX))
                 print*, 'edge velocity'
                 filename='edge_vel1.txt'
@@ -221,11 +221,12 @@ module massdist
                 do I=1,length1
 
                         call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
-                        edge1= FLOOR(edge1/3.)*3. + 3.
-                        edge2= FLOOR(edge2/3.)*3. - 3.
-                        top= FLOOR(top/3.)*3. - 3  
-                        perpvel1 = U_G1(I,t)*(2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) - V_G1(I,t)
-                        perpvel2 = U_G1(I,t)*(-2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) + V_G1(I,t)
+                        edge1= FLOOR(edge1/3.)*3. ! + 3.
+                        edge2= FLOOR(edge2/3.)*3. !- 3.
+                        top= FLOOR(top/3.)*3. !- 6   
+                        mag= sqrt( 1 + ((2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda))**2)
+                        perpvel1 = (U_G1(I,t)*(2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) - V_G1(I,t))/mag
+                        perpvel2 = (U_G1(I,t)*(-2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) + V_G1(I,t))/mag
                         if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
                                 rc = int(XXX(I,1)/3.0)
                                 yc= int(YYY(I,1)/3.0)

@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191115
+  Date: 20191117
   Simulation name: BWZ4 
   Filename:intmass.txt                                                                                                                                           
   Produced in mod-subroutine:  massdist/energypotential                                                                                                                              

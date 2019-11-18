@@ -5,13 +5,12 @@ filename='readyforpost.txt'
 
 
 cat $filename
-echo what script would you like to run in these directories
-read scrpt 
+echo "running post"
 
 while read line; do 
 	echo $line
 	cd $line
-	$scrpt  
+	makepost.sh  
 
 done < $filename
 
@@ -26,6 +25,7 @@ done < $filename
 cd /home/akubo/myprojects/channelized-pdcs/graphs/processed
 rm EP_P*
 rm U_G* 
+rm streamlines*
 
 git add *.txt
 gitadd.sh
