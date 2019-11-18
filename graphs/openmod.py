@@ -11,7 +11,6 @@ def openmine(labels, path2file, fid, cols, out, colspec='infer'):
         temp_all[sim]=temp_1[out]
     return temp_all
 
-path = "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
 frcols= ['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
 
 masscol=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InChannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "AvulseD"]
@@ -22,84 +21,71 @@ pex=['Potential']
 kex=['Kinetic']
 perpx=['Perpx']
 
-
-
-
-def openmassxxx(labels, path2file):
-    fid='_massbyxxx.txt'
-    cols=['time', 'xxx', 'massR', 'massL', 'sum']
-    colspec= [[1,4], [5,9], [13,29], [32,49], [52,68]]
-    massL=pd.DataFrame()
-    time=[2,3,4,5,6,7,8]
-    for sim in labels: 
-        pathid=path2file+sim
-        loc= pathid+fid
-        temp=pd.read_fwf(loc, header=None, skiprows=9, colspecs=colspec)
-        temp.columns=cols
-
-        tot=pd.DataFrame()
-        tot=temp[temp['time']== 1]
-        for t in time:
-            temp_1=temp[temp['time']== t]
-            temp_1.reset_index(drop=True, inplace=True)
-            tot=tot+temp_1
-
-        massR[sim]=tot['massR']
-        massL[sim]=tot['massL']
-
-    return massR, massL     
-        
-
-
+      
 
 def openaverage(labels, path):
     fid='_average_all.txt'
     cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
-    avgTG=openmine(labels, path, fid, cols, 'T_G', colspecs=colspec)
-    avgUG=openmine(labels, path, fid, cols, 'U_G', colspecs=colspec)
-    avgdpu=openmine(labels, path, fid, cols, 'DPU', colspecs=colspec)
+    colspec= [[1,4], [12,26], [33, 48], [57,70], [79,92], [101,114], [119,135]]
+    avgTG=openmine(labels, path, fid, cols, 'T_G', colspec)
+    avgUG=openmine(labels, path, fid, cols, 'U_G', colspec)
+    avgdpu=openmine(labels, path, fid, cols, 'DPU', colspec)
 
     return avgTG, avgUG, avgdpu
+
+def opendenseaverage(labels, path):
+    fid='_average_dense.txt'
+    cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
+    colspec= [[1,4], [12,26], [33, 48], [57,70], [79,92], [101,114], [119,135]]
+    avgTG=openmine(labels, path, fid, cols, 'T_G', colspec)
+    avgUG=openmine(labels, path, fid, cols, 'U_G', colspec)
+    avgdpu=openmine(labels, path, fid, cols, 'DPU', colspec)
+
+    return avgTG, avgUG, avgdpu
+
 
 def openmassdist(labels, path):
     fid='_massinchannel.txt'
     cols=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InCcdhannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "AvulseD"]
-    massout=openmine(labels, path, fid, cols, "Mass outside", colspecs=colspec)
-    avulsed=openmine(labels, path, fid, cols, "AvulseD",colspecs=colspec)
-    buoyant=openmine(labels, path, fid, cols, "Buoyant",colspecs=colspec)
+    colspec=[[1,6], [17,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [193,205], [218,230], [243,255], [268, 280] ]
+    massout=openmine(labels, path, fid, cols, "Mass outside", colspec)
+    avulsed=openmine(labels, path, fid, cols, "AvulseD",colspec)
+    buoyant=openmine(labels, path, fid, cols, "Buoyant",colspec)
     return avulsed, buoyant, massout
 
 def openent(labels,path):
     fid='_entrainment.txt'
     entcol= ['time', 'bulk', 'medium', 'dense']
-    bulk_ent = openmine(labels, path, fid, entcol, 'bulk',colspecs=colspec)
-    med_ent = openmine(labels, path, fid, entcol, 'medium',colspecs=colspec)
-    dense_ent = openmine(labels, path, fid, entcol, 'dense',colspecs=colspec)
+    colspec= [[2,5], [17, 26], [31, 48], [54,69]]
+    bulk_ent = openmine(labels, path, fid, entcol, 'bulk',colspec)
+    med_ent = openmine(labels, path, fid, entcol, 'medium',colspec)
+    dense_ent = openmine(labels, path, fid, entcol, 'dense',colspec)
 
     return bulk_ent, med_ent, dense_ent
 
 def openfroude(labels, path):
     froudefid='_froude.txt'
     frcols= ['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
-    froude=openmine(labels, path, froudefid, frcols, 'Froude',colspecs=colspec)
-    front=openmine(labels, path, froudefid, frcols, 'Front',colspecs=colspec)
+    froude=openmine(labels, path, froudefid, frcols, 'Froude')
+    front=openmine(labels, path, froudefid, frcols, 'Front')
     return froude, front
 
 def openpeakdpu(labels,path):
     fid='_dpu_peak.txt'
     cols=['time', 'peak','XXXin', 'ZZZin', 'peakin', 'XXXout', 'ZZZout','peakout']
+
     peakin=openmine(labels, path, fid, cols, 'peakin')
     peakout=openmine(labels, path, fid, cols, 'peakout')
     xout=openmine(labels, path, fid, cols, 'XXXout')
     zout=openmine(labels, path, fid, cols, 'ZZZout')
     xin=openmine(labels, path, fid, cols, 'XXXin')
     zin=openmine(labels, path, fid, cols, 'ZZZin')
-    peakin.drop(peakin.index[8])
-    peakout.drop(peakout.index[8])
-    xin.drop(xin.index[8])
-    zin.drop(zin.index[8])
-    zout.drop(zout.index[8])
-    xout.drop(xout.index[8])
+    # peakin.drop(peakin.index[8])
+    # peakout.drop(peakout.index[8])
+    # xin.drop(xin.index[8])
+    # zin.drop(zin.index[8])
+    # zout.drop(zout.index[8])
+    # xout.drop(xout.index[8])
     return peakin, peakout, xout, xin, zout, zin
 
 def openall(labels,path):
@@ -126,7 +112,8 @@ def sumovertime(labels,path, fid, cols, out, colspec='infer'):
 
         for t in time:
             temp2=temp_1[temp_1['time']== t]
-            temp2.sort_values(by=["XXX"])
+            if "XXX" in cols:
+                temp2.sort_values(by=["XXX"])
             temp3 = temp2[out]
             if t==1:
                 summass= temp3
@@ -146,7 +133,8 @@ def picktime(labels,path, fid, cols, out, twant, colspec='infer'):
         print(loc)
         temp_1=pd.read_fwf(loc, header=None, skiprows=9,colspecs=colspec)
         temp_1.columns=cols
-        temp_1.sort_values(by=["XXX"])
+        if "XXX" in cols:
+            temp_1.sort_values(by=["XXX"])
         temp2=temp_1[temp_1['time']== twant]
         temp2.reset_index(drop=True, inplace=True)
         result[sim]=temp2[out]
