@@ -16,8 +16,41 @@ import os
 ## MAC
 path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
 os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
-labels= ['AVX4']
+## LAPTOP
+#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
 
-massR, massL = openmassxxx(labels, path)
+sim='AVY4'
 
-print(massR)
+fid = "_edge_vel_y.txt"
+pathid=path+sim
+loc= pathid+fid
+
+widths = [10] * 404
+temp_1=pd.read_fwf(loc, header=None, skiprows=9) #, widths=widths)
+
+wave, amp, width, depth, inlet, vflux= labelparam(sim)
+
+lengths= (wave/3.) *np.asarray([ 0.5, 1, 1.5, 2, 3])
+labels = ['0.5l', 'l', '1.5l', '2l', '3l']
+lengths=[int(x) for x in lengths ]
+
+fig, ax = plt.subplots()
+
+for x in lengths: 
+    curtain = temp_1.iloc[x]
+    j=lengths.index(x)
+    height=np.arange(0,462,3)
+    slope = 0.18
+    dx=3
+    IMAX=404
+    clearance = 50
+    top= slope*dx*(IMAX -x)+clearance
+    top=float(top)
+    height=height.astype('float32')
+    height-=top    
+    ax.plot(curtain, height, label=labels[j] )
+ax.legend()
+ax.set_ylim([0,300])
+ax.set_ylabel('Height Above Channel Edge (m)')
+ax.set_xlabel('Summed Flux (m/s)')
+plt.show()

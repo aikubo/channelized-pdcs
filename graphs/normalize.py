@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+
 def labelparam(label):
     if "A" in label:
         wave = 300

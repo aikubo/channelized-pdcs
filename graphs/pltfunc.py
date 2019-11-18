@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns 
 import matplotlib.patches as mpatches
+import os 
+
 def setcolors(labels):
     length=len(labels)
 
@@ -74,7 +76,7 @@ def setgrl(labels, fig, axes, h,l):
 def labelsubplots(axes, loc):
     alpha=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     if loc in "uleft":
-        xy = (0.05, 0.85)
+        xy = (0.05, 0.8)
     elif loc == "lleft":
         xy = (0.05, 0.05)
     elif loc == "lright":
@@ -87,9 +89,11 @@ def labelsubplots(axes, loc):
 
 
 def savefigure(name):
-    path= "/home/akh/myprojects/channelized-pdcs/graphs/figures"
-    fid=name + '.eps'
-    plt.savefig(fid, format='eps', dpi=600)
+    path= os.getcwd()
+    path+= "/figures/"
+    #fid=name + '.eps'
+    fid=path + name +'.jpg'
+    plt.savefig(fid, dpi=600)
 
 def plottogether(labels, fid, df, ylab, xlab):
 
@@ -123,7 +127,7 @@ def plotscatter(labels, fid, x,y, ylab, xlab, fig, ax):
         plt.scatter(x[sim], y[sim], color=palette[i])
     ax.set_xlabel(xlab)
     ax.set_ylabel(ylab)
-    plt.show()
+    savefigure(fid)
 
 
 def plottogether2(labels, fid, df, x, ylab, xlab, fig, ax):
@@ -171,7 +175,7 @@ def horizplot(df, loc, labels):
 
 def plotallcol(labels, fid, df1, df2, df3, df4, df5):
     fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
-    setgrl(labels, fig, axes, 4, 8)
+    setgrl(labels, fig, axes, 5, 8)
     df5.fillna(273.0)
     # EPP
     loc=axes[0]
@@ -238,13 +242,12 @@ def plotby(labels, fid, df1, df2, datalabel1, datalabel2):
     savefigure(fid)
 
 def channelfrontplot(labels, fig, ax, front, data, xlabel, wavelabel, wave):
-    palette = setgrl(labels, fig, ax, 5, 4)
+    palette = setgrl(labels, fig, ax, 6, 5)
     amp = 0.15*wave
     x = np.linspace(0,1200,70)
     channel = amp*np.sin((x/wave)*(2*np.pi)) + 450
     y2= max(data.max())
     y1= min(data.min())
-    ax.set_ylim([0,900])
     ax.set_xlim([0,1200])
     ax.plot(x, channel, color='grey')
     width=[200,300]
@@ -263,7 +266,7 @@ def channelfrontplot(labels, fig, ax, front, data, xlabel, wavelabel, wave):
         ax2.plot(front[sim], data[sim], label=sim, color=palette[i])
 
     ax2.set_xlabel(xlabel)
-    ax2.set_ylim([y1-y2, y2+y2*.10])
+    ax2.set_ylim([y1, y2+y2*.10])
     #plt.show()
 
 def twotime(labels, fid, df1, df2, datalabel1, datalabel2):
@@ -286,13 +289,12 @@ def twotime(labels, fid, df1, df2, datalabel1, datalabel2):
     savefigure(fid)
 
 def channelfrontsubplot(labels, fid, front, data, ylab):
-    fig, axes = plt.subplots(4, 1, sharex=True)
+    fig, axes = plt.subplots(3, 1, sharex=True)
     palette= setgrl(labels, fig, axes, 6, 3)
-    axes[3].set_xlabel("Down Slope distance (m)")
+    axes[2].set_xlabel("Down Slope distance (m)")
     channelfrontplot(labels, fig, axes[0], front, data, ylab, 'A', 300.)
     channelfrontplot(labels, fig, axes[1], front, data, ylab, 'B', 600.)
     channelfrontplot(labels, fig, axes[2], front, data, ylab, 'C', 900.)
-    channelfrontplot(labels, fig, axes[3], front, data, ylab, 'E', 1200.)
     labelsubplots(axes, "uleft")
     savefigure(fid)
 
