@@ -223,10 +223,10 @@ module massdist
                         call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
                         edge1= FLOOR(edge1/3.)*3. ! + 3.
                         edge2= FLOOR(edge2/3.)*3. !- 3.
-                        top= FLOOR(top/3.)*3. !- 6   
+                        top= FLOOR(bottom/3.)*3. !- 6   
                         mag= sqrt( 1 + ((2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda))**2)
-                        perpvel1 = (U_G1(I,t)*(2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) - V_G1(I,t))/mag
-                        perpvel2 = (U_G1(I,t)*(-2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) + V_G1(I,t))/mag
+                        perpvel1 = (U_G1(I,t)*(2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) - W_G1(I,t))/mag
+                        perpvel2 = (U_G1(I,t)*(-2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) + W_G1(I,t))/mag
                         if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
                                 rc = int(XXX(I,1)/3.0)
                                 yc= int(YYY(I,1)/3.0)
@@ -236,9 +236,9 @@ module massdist
                         !        yc= int(YYY(I,1)/3.0)
                         !        curtains(yc,rc)= curtains(rc,yc)+perpvel                                
                         elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge1) then
-                                write(7888,formatent) t, XXX(I,1), perpvel1, W_G1(I,t)
+                                write(7888,formatent) t, XXX(I,1), perpvel1, V_G1(I,t)
                         elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge2) then
-                                write(7889,formatent) t, XXX(I,1), perpvel2, W_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
+                                write(7889,formatent) t, XXX(I,1), perpvel2, V_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
                                 
                         end if 
                 end do 
