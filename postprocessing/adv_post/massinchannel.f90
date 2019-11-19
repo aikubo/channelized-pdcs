@@ -189,7 +189,7 @@ module massdist
                 logical, dimension(length1):: maskshapeout
                 double precision, allocatable:: curtains1(:,:), curtains2(:,:)
                 double precision, allocatable:: edgevel1(:),edgevel2(:)
-                double precision :: mag, XLOC
+                double precision :: XLOC
                 double precision, dimension(2)::N1, N2, U
                 double precision:: dy, dx, mag, ux, uy, vel1, vel2
                 allocate(curtains1(RMAX, YMAX))
@@ -226,39 +226,40 @@ module massdist
 
                 do t= 1,timesteps
 
-                do I=1,length1
+                        do I=1,length1
 
-                        call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
-                        edge1= FLOOR(edge1/3.)*3. ! + 3.
-                        edge2= FLOOR(edge2/3.)*3. !- 3.
-                        bottom= FLOOR(bottom/3.)*3. !- 6   
-                        ux= U_G1(I,t)
-                        uy= W_G1(I,t)
- 
-                        U = (/ ux, uy /)
-                        dx = 1.0 
-                        dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
-                        mag = sqrt(dy**2 + dx**2)
-                        N1=(/ dy/mag, -dx/mag /)
-                        N2=(/ -dy/mag, dx/mag /) 
- 
-                        vel1= dot_product(U,N1)
-                        vel2 = dot_product(U,N2)
-                        perpvel = max(vel1,vel2)
+                                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                                edge1= FLOOR(edge1/3.)*3. ! + 3.
+                                edge2= FLOOR(edge2/3.)*3. !- 3.
+                                bottom= FLOOR(bottom/3.)*3. !- 6   
+                                ux= U_G1(I,t)
+                                uy= W_G1(I,t)
+        
+                                U = (/ ux, uy /)
+                                dx = 1.0 
+                                dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
+                                mag = sqrt(dy**2 + dx**2)
+                                N1=(/ dy/mag, -dx/mag /)
+                                N2=(/ -dy/mag, dx/mag /) 
+        
+                                vel1= dot_product(U,N1)
+                                vel2 = dot_product(U,N2)
+                                perpvel = max(vel1,vel2)
 
-                        
-                        if (YYY(I,1) .gt. bottom .and. ZZZ(I,1) .eq. edge1) then
-                                perpvel = vel1
-                                rc = int(XXX(I,1)/3.0)
-                                yc= int(YYY(I,1)/3.0)
-                                curtains1(rc,yc)= curtains1(rc,yc)+perpvel
-                        if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge2) then
-                                perpvel = vel2
-                                rc = int(XXX(I,1)/3.0)
-                                yc= int(YYY(I,1)/3.0)
-                                curtains2(rc,yc)= curtains2(rc,yc)+perpvel
-                        end if 
-                end do 
+                                
+                                if (YYY(I,1) .gt. bottom .and. ZZZ(I,1) .eq. edge1) then
+                                        perpvel = vel1
+                                        rc = int(XXX(I,1)/3.0)
+                                        yc= int(YYY(I,1)/3.0)
+                                        curtains1(rc,yc)= curtains1(rc,yc)+perpvel
+                                end if 
+                                if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge2) then
+                                        perpvel = vel2
+                                        rc = int(XXX(I,1)/3.0)
+                                        yc= int(YYY(I,1)/3.0)
+                                        curtains2(rc,yc)= curtains2(rc,yc)+perpvel
+                                end if 
+                        end do 
                 end do 
                 
                 do rc=1,RMAX
