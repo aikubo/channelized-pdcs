@@ -51,6 +51,7 @@ then
 fi
 
 cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
+git pull
 sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post.f90
 sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post.f90
 sed -i.bak "s|.*width=.*|width=$width|" post.f90
