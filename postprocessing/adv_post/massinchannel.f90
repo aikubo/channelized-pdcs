@@ -188,7 +188,7 @@ module massdist
                 double precision:: perpvel2, perpvel1, outsum,  perpvel
                 logical, dimension(length1):: maskshapeout
                 double precision, allocatable:: curtains1(:,:), curtains2(:,:)
-                double precision, allocatable:: edgevel1(:,:),edgevel2(:,:)
+                double precision, allocatable:: edgevel1(:),edgevel2(:)
                 double precision :: mag, XLOC
                 allocate(curtains1(RMAX, YMAX))
                 allocate(curtains2(RMAX, YMAX))
@@ -218,7 +218,8 @@ module massdist
                 call headerf(7088, filename, simlabel, routine, DESCRIPTION, datatype)
 
                 do yc =1,YMAX 
-                        curtains(:,yc) = 0 
+                        curtains1(:,yc) = 0 
+                        curtains2(:,yc) = 0 
                 end do 
 
                 do t= 1,timesteps
