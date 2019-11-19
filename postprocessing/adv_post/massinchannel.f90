@@ -271,9 +271,11 @@ module massdist
                         call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
                         y1= FLOOR(bottom/3.)
                         y2= FLOOR(top/3.)
+                        print*, y1, y2
                         do yc= y1,y2 
                                 sum1=sum1+curtains1(rc,yc)
                                 sum2=sum2+curtains2(rc,yc)
+                                print*, curtains1(rc,yc), sum1
                         end do 
 
                         edgevel1(rc)=sum1/(depth) 
