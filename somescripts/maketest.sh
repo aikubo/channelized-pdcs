@@ -80,7 +80,7 @@ ifort -c -convert big_endian column.f90
 ifort -c -convert big_endian average.f90
 ifort -c -convert big_endian richardson.f90
 
-ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post.f90  -convert big_endian -o test.exe
+ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o test.f90  -convert big_endian -o test.exe
 
 
 cp test.exe $here 
