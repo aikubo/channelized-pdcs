@@ -187,9 +187,14 @@ module massdist
                 implicit none 
                 double precision:: perpvel2, perpvel1, outsum,  perpvel
                 logical, dimension(length1):: maskshapeout
-                double precision, allocatable:: curtains(:,:)
-                double precision :: mag 
-                allocate(curtains(RMAX, YMAX))
+                double precision, allocatable:: curtains1(:,:), curtains2(:,:)
+                double precision, allocatable:: edgevel1(:,:),edgevel2(:,:)
+                double precision :: mag, XLOC
+                allocate(curtains1(RMAX, YMAX))
+                allocate(curtains2(RMAX, YMAX))
+                allocate(edgevel1(RMAX))
+                allocate(edgevel2(RMAX))
+
                 print*, 'edge velocity'
                 filename='edge_vel1.txt'
 
@@ -223,28 +228,44 @@ module massdist
                         call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
                         edge1= FLOOR(edge1/3.)*3. ! + 3.
                         edge2= FLOOR(edge2/3.)*3. !- 3.
-                        bottom= FLOOR(bottom/3.)*3.+6 !- 6   
-                        mag= sqrt( 1 + ((2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda))**2)
-                        perpvel1 = (U_G1(I,t)*(2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) - W_G1(I,t))/mag
-                        perpvel2 = (U_G1(I,t)*(-2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) + W_G1(I,t))/mag
-                        print*, perpvel1
+                        bottom= FLOOR(bottom/3.)*3. !- 6   
+                        ux= U_G1(I,t)
+                        uy= W_G1(I,t)
+ 
+                        U = (/ ux, uy /)
+                        dx = 1.0 
+                        dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
+                        mag = sqrt(dy**2 + dx**2)
+                        N1=(/ dy/mag, -dx/mag /)
+                        N2=(/ -dy/mag, dx/mag /) 
+ 
+                        vel1= dot_product(U,N1)
+                        vel2 = dot_product(U,N2)
+                        perpvel = max(vel1,vel2)
+
+                        
                         if (YYY(I,1) .gt. bottom .and. ZZZ(I,1) .eq. edge1) then
+                                perpvel = vel1
                                 rc = int(XXX(I,1)/3.0)
                                 yc= int(YYY(I,1)/3.0)
-                                curtains(rc,yc)= curtains(rc,yc)+perpvel1
-                        !elseif (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
-                        !        rc = t
-                        !        yc= int(YYY(I,1)/3.0)
-                        !        curtains(yc,rc)= curtains(rc,yc)+perpvel                                
-                        elseif (YYY(I,1) .eq. bottom .and. ZZZ(I,1) .eq. edge1) then
-                                write(7888,formatent) t, XXX(I,1), perpvel1, V_G1(I,t)
-                        elseif (YYY(I,1) .eq. bottom .and. ZZZ(I,1) .eq. edge2) then
-                                write(7889,formatent) t, XXX(I,1), perpvel2, V_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
-                                
+                                curtains1(rc,yc)= curtains1(rc,yc)+perpvel
+                        if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge2) then
+                                perpvel = vel2
+                                rc = int(XXX(I,1)/3.0)
+                                yc= int(YYY(I,1)/3.0)
+                                curtains2(rc,yc)= curtains2(rc,yc)+perpvel
                         end if 
                 end do 
                 end do 
                 
+                do rc=1,RMAX
+                        XLOC= dble(rc*3.)
+                        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+                        edgevel1(rc)=sum(curtains1(rc,:))/(YMAX*3.-FLOOR(bottom/3.)*3.) 
+                        edgevel2(rc)=sum(curtains1(rc,:))/(YMAX*3.-FLOOR(bottom/3.)*3.) 
+                        print*, edgevel1(rc), edgevel2(rc)
+                end do 
+
                 do rc =1,RMAX
                         write(7088, formatcurtain) curtains(rc,:)
                 end do
