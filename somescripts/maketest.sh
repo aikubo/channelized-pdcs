@@ -6,8 +6,8 @@ label=${PWD##*/}
 
 rm $label*
 
-cp /home/akubo/myprojects/channelized-pdcs/postsub.sh $here
-sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
+cp /home/akubo/myprojects/channelized-pdcs/testsub.sh $here
+sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" testsub.sh
 
 declare param=($(sh simparam.sh $label))
 
@@ -83,12 +83,12 @@ ifort -c -convert big_endian richardson.f90
 ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post.f90  -convert big_endian -o test.exe
 
 
-cp post.exe $here 
-cp post.f90 $here
+cp test.exe $here 
+cp test.f90 $here
 cd $here 
 
 echo "submit to run"
-sbatch postsub.sh
+sbatch testsub.sh
 echo "running"
 
 echo testing!

@@ -1005,3 +1005,5 @@
 11/19/19 10:19 ANX4 completed 9 timesteps
 11/19/19 10:34 ANX4 post process created 27 txt files, 0 tiff
 11/19/19 11:06 AVY4 post process created 27 txt files, 0 tiff
+11/19/19 11:41 AVY4 post process created 27 txt files, 0 tiff
+11/19/19 12:07 AVY4 post process created 27 txt files, 0 tiff
