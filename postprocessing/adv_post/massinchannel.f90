@@ -227,6 +227,7 @@ module massdist
                         mag= sqrt( 1 + ((2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda))**2)
                         perpvel1 = (U_G1(I,t)*(2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) - W_G1(I,t))/mag
                         perpvel2 = (U_G1(I,t)*(-2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) + W_G1(I,t))/mag
+                        print*, perpvel1
                         if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
                                 rc = int(XXX(I,1)/3.0)
                                 yc= int(YYY(I,1)/3.0)
