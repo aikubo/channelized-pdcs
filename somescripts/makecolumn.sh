@@ -15,6 +15,7 @@ timestep=10 #$(checktime2.sh)
 echo $timestep
 
 ########################################################
+git pull
 cd ~/myprojects/channelized-pdcs/postprocessing/adv_post/
 sed -i.bak "s/.*timesteps=.*/timesteps=$timestep/" makecolumn.f90
 
