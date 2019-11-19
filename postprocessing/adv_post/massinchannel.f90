@@ -223,12 +223,12 @@ module massdist
                         call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
                         edge1= FLOOR(edge1/3.)*3. ! + 3.
                         edge2= FLOOR(edge2/3.)*3. !- 3.
-                        top= FLOOR(bottom/3.)*3. !- 6   
+                        bottom= FLOOR(bottom/3.)*3. !- 6   
                         mag= sqrt( 1 + ((2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda))**2)
                         perpvel1 = (U_G1(I,t)*(2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) - W_G1(I,t))/mag
                         perpvel2 = (U_G1(I,t)*(-2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) + W_G1(I,t))/mag
                         print*, perpvel1
-                        if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge1) then
+                        if (YYY(I,1) .gt. bottom .and. ZZZ(I,1) .eq. edge1) then
                                 rc = int(XXX(I,1)/3.0)
                                 yc= int(YYY(I,1)/3.0)
                                 curtains(rc,yc)= curtains(rc,yc)+perpvel1
@@ -236,9 +236,9 @@ module massdist
                         !        rc = t
                         !        yc= int(YYY(I,1)/3.0)
                         !        curtains(yc,rc)= curtains(rc,yc)+perpvel                                
-                        elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge1) then
+                        elseif (YYY(I,1) .eq. bottom .and. ZZZ(I,1) .eq. edge1) then
                                 write(7888,formatent) t, XXX(I,1), perpvel1, V_G1(I,t)
-                        elseif (YYY(I,1) .eq. top .and. ZZZ(I,1) .eq. edge2) then
+                        elseif (YYY(I,1) .eq. bottom .and. ZZZ(I,1) .eq. edge2) then
                                 write(7889,formatent) t, XXX(I,1), perpvel2, V_G1(I,t) !, perpvel2, W_G1(I,t) !, outsum 
                                 
                         end if 
@@ -344,7 +344,7 @@ module massdist
                         intmass(rc,zc,t)= intmass(rc,zc,t)/currentcells(rc,zc)
 
                         if ( isnan(intmass(rc, zc, t)) .eq. .FALSE.) then
-                                print*, intmass(rc,zc,t)
+                                !print*, intmass(rc,zc,t)
                         end if
 
                         write(90999, format1var) intmass(rc,zc,t) 
@@ -430,7 +430,7 @@ module massdist
                        N1=(/ dy/mag, -dx/mag /)
                        N2=(/ -dy/mag, dx/mag /) 
 
-                       vel1= dot_product(U, N1)
+                       vel1= dot_product(U,N1)
                        vel2 = dot_product(U,N2)
                        perpvel = max(vel1,vel2)
                        call density(I,t, rho_c, mass)
@@ -443,12 +443,12 @@ module massdist
                       !    if ( isnan(KP1) .eq. .FALSE. ) then 
                       !     print*, perpvel, N1, N2, U
                       !  end if 
-                        if ( perpvel .gt. 30.0000) then
-                               print*, "greater than 30"
-                               print*, perpvel, U
-                               print*, "loc at " 
-                               print*, XXX(I,1), ZZZ(I,1)
-                        end if 
+                       ! if ( perpvel .gt. 30.0000) then
+                       !        print*, "greater than 30"
+                       !        print*, perpvel, U
+                       !        print*, "loc at " 
+                       !        print*, XXX(I,1), ZZZ(I,1)
+                       !  end if 
                  
                         rc=int(XXX(I,1)/3.0)
                         zc=int(ZZZ(I,1)/3.0)
