@@ -223,7 +223,7 @@ module massdist
                         call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
                         edge1= FLOOR(edge1/3.)*3. ! + 3.
                         edge2= FLOOR(edge2/3.)*3. !- 3.
-                        bottom= FLOOR(bottom/3.)*3. !- 6   
+                        bottom= FLOOR(bottom/3.)*3.+6 !- 6   
                         mag= sqrt( 1 + ((2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda))**2)
                         perpvel1 = (U_G1(I,t)*(2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) - W_G1(I,t))/mag
                         perpvel2 = (U_G1(I,t)*(-2.0*pi)*amprat*cos((2*pi)*XXX(I,t)/lambda) + W_G1(I,t))/mag

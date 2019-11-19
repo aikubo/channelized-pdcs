@@ -50,3 +50,5 @@
 /home/akubo/myprojects/4_INFLOW/BVX4
 /home/akubo/myprojects/7_INFLOW/CWZ7
 /home/akubo/myprojects/7_INFLOW/CWX7
+/home/akubo/myprojects/4_INFLOW/ANY4
+/home/akubo/myprojects/4_INFLOW/ANX4
