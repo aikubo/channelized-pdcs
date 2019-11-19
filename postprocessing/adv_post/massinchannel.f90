@@ -190,6 +190,8 @@ module massdist
                 double precision, allocatable:: curtains1(:,:), curtains2(:,:)
                 double precision, allocatable:: edgevel1(:),edgevel2(:)
                 double precision :: mag, XLOC
+                double precision, dimension(2)::N1, N2, U
+                double precision:: dy, dx, mag, ux, uy, vel1, vel2
                 allocate(curtains1(RMAX, YMAX))
                 allocate(curtains2(RMAX, YMAX))
                 allocate(edgevel1(RMAX))
@@ -268,7 +270,7 @@ module massdist
                 end do 
 
                 do rc =1,RMAX
-                        write(7088, formatcurtain) curtains(rc,:)
+                        write(7088, formatcurtain) curtains1(rc,:)
                 end do
 
         end subroutine
