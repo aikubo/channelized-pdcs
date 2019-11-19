@@ -269,8 +269,8 @@ module massdist
 
                         XLOC= dble(rc*3.)
                         call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
-                        y1= FLOOR(bottom/3.)*3
-                        y2= FLOOR(top/3.)*3
+                        y1= FLOOR(bottom/3.)
+                        y2= FLOOR(top/3.)
                         do yc= y1,y2 
                                 sum1=sum1+curtains1(rc,yc)
                                 sum2=sum2+curtains2(rc,yc)
@@ -283,7 +283,7 @@ module massdist
                         print*, edgevel1(rc), edgevel2(rc)
 
                 end do 
-                
+
                 do rc =1,RMAX
                         write(7088, formatcurtain) curtains1(rc,:)
                 end do
