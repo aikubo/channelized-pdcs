@@ -189,9 +189,10 @@ module massdist
                 logical, dimension(length1):: maskshapeout
                 double precision, allocatable:: curtains1(:,:), curtains2(:,:)
                 double precision, allocatable:: edgevel1(:),edgevel2(:)
-                double precision :: XLOC
+                double precision :: XLOC, sum1, sum2
                 double precision, dimension(2)::N1, N2, U
                 double precision:: dy, dx, mag, ux, uy, vel1, vel2
+                integer:: y1, y2
                 allocate(curtains1(RMAX, YMAX))
                 allocate(curtains2(RMAX, YMAX))
                 allocate(edgevel1(RMAX))
@@ -201,22 +202,22 @@ module massdist
                 filename='edge_vel1.txt'
 
                 routine="massdist/edgevelocity"
-                description="Calculate dot product of velocity and curve of the channel on edge1"
-                datatype=" t XXX perpvel W_G EPP"
+                description="Velocity pointing out of curve edge1 depth average summed over time"
+                datatype=" t XXX perpvel V_G EPP"
                 call headerf(7888, filename, simlabel, routine, DESCRIPTION, datatype)
 
                 filename='edge_vel2.txt'
 
                 routine="massdist/edgevelocity"
-                description="Calculate dot product of velocity and curve of the channel on edge2"
-                datatype=" t XXX perpvel W_G EPP"
+                description="Velocity pointing out of curve edge2 depth average summed over time"
+                datatype=" t XXX perpvel V_G EPP"
                 call headerf(7889, filename, simlabel, routine, DESCRIPTION,datatype)
 
                 filename='edge_vel_y.txt'
 
                 routine="massdist/edgevelocity"
                 description="Calculate dot product of velocity and curve over y, summed over timesteps"
-                datatype=" "
+                datatype=" 2D matrix of rmax by ymax"
                 call headerf(7088, filename, simlabel, routine, DESCRIPTION, datatype)
 
                 do yc =1,YMAX 
@@ -263,11 +264,24 @@ module massdist
                 end do 
                 
                 do rc=1,RMAX
+                        sum1=0 
+                        sum2=0
+
                         XLOC= dble(rc*3.)
                         call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
-                        edgevel1(rc)=sum(curtains1(rc,:))/(YMAX*3.-FLOOR(bottom/3.)*3.) 
-                        edgevel2(rc)=sum(curtains1(rc,:))/(YMAX*3.-FLOOR(bottom/3.)*3.) 
+                        y1= FLOOR(bottom/3.)*3
+                        y2= FLOOR(top/3.)*3
+                        do yc= y1,y2 
+                                sum1=sum1+curtains1(rc,yc)
+                                sum2=sum2+curtains2(rc,yc)
+                        end do 
+
+                        edgevel1(rc)=sum1/(depth) 
+                        edgevel2(rc)=sum2/(depth) 
+
+                        ! depth averaged, summed over time
                         print*, edgevel1(rc), edgevel2(rc)
+
                 end do 
 
                 do rc =1,RMAX
