@@ -224,7 +224,7 @@ module massdist
                         curtains1(:,yc) = 0 
                         curtains2(:,yc) = 0 
                 end do 
-
+                print*, "timeloop"
                 do t= 1,timesteps
 
                         do I=1,length1
@@ -262,7 +262,7 @@ module massdist
                                 end if 
                         end do 
                 end do 
-                
+                print*, "sum over depth"
                 do rc=1,RMAX
                         sum1=0 
                         sum2=0
@@ -283,7 +283,7 @@ module massdist
                         print*, edgevel1(rc), edgevel2(rc)
 
                 end do 
-
+                
                 do rc =1,RMAX
                         write(7088, formatcurtain) curtains1(rc,:)
                 end do
