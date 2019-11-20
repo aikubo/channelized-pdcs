@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191117
+  Date: 20191120
   Simulation name: AWX4 
   Filename:massinchannel.txt                                                                                                                                     
   Produced in mod-subroutine:  massdist/massinchannel                                                                                                                                

@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191117
+  Date: 20191120
   Simulation name: CVY7 
   Filename:intmass.txt                                                                                                                                           
   Produced in mod-subroutine:  massdist/energypotential                                                                                                                              
@@ -10274,7 +10274,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -10576,7 +10576,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -10878,7 +10878,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -11180,7 +11180,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -11482,7 +11482,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -11784,7 +11784,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -12086,7 +12086,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -12388,7 +12388,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -12690,7 +12690,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -12992,7 +12992,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -13294,7 +13294,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -13596,7 +13596,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -13898,7 +13898,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -14200,7 +14200,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -14502,7 +14502,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -14804,7 +14804,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -15106,7 +15106,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -15408,7 +15408,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -15710,7 +15710,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -16012,7 +16012,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -16314,7 +16314,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -16616,7 +16616,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -16918,7 +16918,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -17220,7 +17220,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -17522,7 +17522,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -17824,7 +17824,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -18126,7 +18126,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -18428,7 +18428,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -18730,7 +18730,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -19032,7 +19032,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -19334,7 +19334,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -19636,7 +19636,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -19938,7 +19938,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -20240,7 +20240,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -20542,7 +20542,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -20844,7 +20844,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -21146,7 +21146,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -21448,7 +21448,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -21750,7 +21750,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -22052,7 +22052,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -22354,7 +22354,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -22656,7 +22656,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -22958,7 +22958,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -23260,7 +23260,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -23562,7 +23562,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -23864,7 +23864,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -24166,7 +24166,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -24468,7 +24468,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -24770,7 +24770,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -25072,7 +25072,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -25374,7 +25374,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -25676,7 +25676,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -25978,7 +25978,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -26280,7 +26280,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -26582,7 +26582,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -26884,7 +26884,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -27186,7 +27186,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -27488,7 +27488,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -27790,7 +27790,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -28092,7 +28092,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -28394,7 +28394,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -28696,7 +28696,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -28998,7 +28998,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -29300,7 +29300,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -29602,7 +29602,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -29904,7 +29904,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -30206,7 +30206,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -30508,7 +30508,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -30810,7 +30810,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -31112,7 +31112,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -31414,7 +31414,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -31716,7 +31716,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -32018,7 +32018,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -32320,7 +32320,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -32622,7 +32622,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -32924,7 +32924,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -33226,7 +33226,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -33528,7 +33528,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -33830,7 +33830,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -34132,7 +34132,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -34434,7 +34434,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -34736,7 +34736,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -35038,7 +35038,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -35340,7 +35340,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -35642,7 +35642,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -35944,7 +35944,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -36246,7 +36246,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -36548,7 +36548,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -36850,7 +36850,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -37152,7 +37152,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -37454,7 +37454,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -37756,7 +37756,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -38058,7 +38058,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -38360,7 +38360,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -38662,7 +38662,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -38964,7 +38964,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -39266,7 +39266,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -39568,7 +39568,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -39870,7 +39870,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -40172,7 +40172,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -40474,7 +40474,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -40776,7 +40776,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -41078,7 +41078,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -41380,7 +41380,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -41682,7 +41682,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -41984,7 +41984,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -42286,7 +42286,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -42588,7 +42588,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -42890,7 +42890,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -43192,7 +43192,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -43494,7 +43494,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -43796,7 +43796,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -44098,7 +44098,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -44400,7 +44400,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -44702,7 +44702,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -45004,7 +45004,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -45306,7 +45306,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -45608,7 +45608,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -45910,7 +45910,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -46212,7 +46212,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -46514,7 +46514,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -46816,7 +46816,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -47118,7 +47118,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -47420,7 +47420,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -47722,7 +47722,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -48024,7 +48024,6 @@
                  NaN
                  NaN
                  NaN
-            Infinity
                  NaN
                  NaN
                  NaN
@@ -48326,7 +48325,8 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -48628,7 +48628,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -48930,7 +48930,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -49232,7 +49232,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -49836,7 +49836,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -50138,7 +50138,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -50440,7 +50440,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -50742,7 +50742,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -51044,7 +51044,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -51346,7 +51346,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -51648,7 +51648,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -51950,7 +51950,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -52252,7 +52252,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -52554,7 +52554,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -52856,7 +52856,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -53158,7 +53158,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -53460,7 +53460,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -53762,7 +53762,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -54064,7 +54064,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -54366,7 +54366,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -54668,7 +54668,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -54970,7 +54970,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -55272,7 +55272,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -55574,7 +55574,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -55876,7 +55876,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -56178,7 +56178,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -56480,7 +56480,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -56782,7 +56782,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -57084,7 +57084,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -57386,7 +57386,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -57688,7 +57688,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -57990,7 +57990,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -58292,7 +58292,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -58594,7 +58594,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -58896,7 +58896,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -59198,7 +59198,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -59500,7 +59500,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -59802,7 +59802,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -60104,7 +60104,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -60406,7 +60406,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -60708,7 +60708,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -61010,7 +61010,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -61312,7 +61312,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -61614,7 +61614,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -61916,7 +61916,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -62218,7 +62218,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -62520,7 +62520,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -62822,7 +62822,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -63124,7 +63124,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -63426,7 +63426,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -63728,7 +63728,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -64030,7 +64030,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -64332,7 +64332,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -64634,7 +64634,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -64936,7 +64936,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -65238,7 +65238,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -65540,7 +65540,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -65842,7 +65842,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -66144,7 +66144,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -66446,7 +66446,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -66748,7 +66748,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -67050,7 +67050,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -67352,7 +67352,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -67654,7 +67654,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -67956,7 +67956,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -68258,7 +68258,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -68560,7 +68560,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -68862,7 +68862,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -69164,7 +69164,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -69466,7 +69466,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -69768,7 +69768,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -70070,7 +70070,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -70372,7 +70372,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -70674,7 +70674,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -70976,7 +70976,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -71278,7 +71278,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -71580,7 +71580,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -71882,7 +71882,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -72184,7 +72184,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -72486,7 +72486,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -72788,7 +72788,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -73090,7 +73090,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -73392,7 +73392,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -73694,7 +73694,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -73996,7 +73996,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -74298,7 +74298,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -74600,7 +74600,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -74902,7 +74902,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -75204,7 +75204,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -75506,7 +75506,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -75808,7 +75808,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -76110,7 +76110,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -76412,7 +76412,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -76714,7 +76714,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -77016,7 +77016,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -77318,7 +77318,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -77620,7 +77620,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -77922,7 +77922,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -78224,7 +78224,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
@@ -78526,7 +78526,7 @@
                  NaN
                  NaN
                  NaN
-            Infinity
+                 NaN
                  NaN
                  NaN
                  NaN
