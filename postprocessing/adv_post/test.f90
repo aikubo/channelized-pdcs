@@ -24,7 +24,7 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='AVY4'
+simlabel='CVY4'
 printstatus=0
 
 
@@ -34,7 +34,7 @@ YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
 width=201
-lambda=300
+lambda=900
 amprat=0.15
 deltat=5.0
 timesteps=8
@@ -54,24 +54,24 @@ call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l300_A15_W201', XXX, YYY, ZZZ)
+call handletopo('l900_A15_W201', XXX, YYY, ZZZ)
 
 call logvolfrc(EP_G1, EPP)
-call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
+!call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 
 !print*, ZZZ(:,1)
 !call openascii(1100, 'EP_P_t')
-if (printstatus .ne. 0) then
-    call makeEP(1100, EP_P, printstatus, tfind)
-    call writedxtopo
-end if 
+!if (printstatus .ne. 0) then
+!    call makeEP(1100, EP_P, printstatus, tfind)
+!    call writedxtopo
+!end if 
 !call makeUG(1200, U_G, printstatus) 
 
 !call makeTG(1300, T_G, printstatus)
 print*, "finding froude"
 !call isosurf(width, lambda, scaleh)
 print*, "finding richardson gradient"
-!call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
+call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"
 !call bulkent(EP_G1) 
 print*, "calculating mass in channel"

@@ -1,0 +1,10 @@
+file = ./Richardson_t08.txt
+grid =154 x 404 x 302
+series=1
+format = ascii
+interleaving = field
+majority = column
+field = Volume,locations
+structure = scalar,3-vector
+type = float,float
+dependency = positions,positions

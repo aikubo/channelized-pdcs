@@ -189,6 +189,7 @@ module massdist
                 logical, dimension(length1):: maskshapeout
                 double precision, allocatable:: curtains1(:,:), curtains2(:,:)
                 double precision, allocatable:: edgevel1(:),edgevel2(:)
+                double precision, allocatable:: minvel1(:), minvel2(:)
                 double precision :: XLOC, sum1, sum2
                 double precision, dimension(2)::N1, N2, U
                 double precision:: dy, dx, mag, ux, uy, vel1, vel2
@@ -197,21 +198,23 @@ module massdist
                 allocate(curtains2(RMAX, YMAX))
                 allocate(edgevel1(RMAX))
                 allocate(edgevel2(RMAX))
+                allocate(minvel1(RMAX))
+                allocate(minvel2(RMAX))
 
                 print*, 'edge velocity'
-                filename='edge_vel1.txt'
+                filename='edge_vel.txt'
 
                 routine="massdist/edgevelocity"
                 description="Velocity pointing out of curve edge1 depth average summed over time"
-                datatype=" t XXX perpvel V_G EPP"
+                datatype="XXX perpvel1 perpvel2 minvel1 minvel2 "
                 call headerf(7888, filename, simlabel, routine, DESCRIPTION, datatype)
 
-                filename='edge_vel2.txt'
+                !filename='edge_vel2.txt'
 
-                routine="massdist/edgevelocity"
-                description="Velocity pointing out of curve edge2 depth average summed over time"
-                datatype=" t XXX perpvel V_G EPP"
-                call headerf(7889, filename, simlabel, routine, DESCRIPTION,datatype)
+                !routine="massdist/edgevelocity"
+                !description="Velocity pointing out of curve edge2 depth average summed over time"
+                !datatype=" t XXX perpvel V_G EPP"
+                !call headerf(7889, filename, simlabel, routine, DESCRIPTION,datatype)
 
                 filename='edge_vel_y.txt'
 
@@ -277,11 +280,12 @@ module massdist
                         !         sum2=sum2+curtains2(rc,yc)
                         ! end do 
 
-                        print*, max(curtains2(rc,:))
+                        !print*, maxval(curtains2(rc,:))
 
-                        edgevel1(rc)=max(curtains1(rc,:))
-                        edgevel2(rc)= max(curtains2(rc,:))
-
+                        edgevel1(rc)=maxval(curtains1(rc,:))
+                        edgevel2(rc)= maxval(curtains2(rc,:))
+                        minvel2(rc)= minval(curtains2(rc,:))
+                        minvel1(rc)=minval(curtains1(rc,:))
                         ! depth averaged, summed over time
                         print*, edgevel1(rc), edgevel2(rc)
 
@@ -289,6 +293,8 @@ module massdist
 
                 do rc =1,RMAX
                         write(7088, formatcurtain) curtains1(rc,:)
+                        write(7888, format5var) rc*3.,  edgevel1(rc), edgevel2(rc), minvel1(rc), minvel2(rc) 
+                
                 end do
 
         end subroutine

@@ -111,8 +111,8 @@ module find_richardson
                                                 Ri(I,t) = Ri_grad
                                                 end if
 
-                                                Ri(I,t) = Ri_grad
-
+                                                !Ri(I,t) = Ri_grad
+                                                !print*, Ri(I,t)
                                                 !print*, "shearv", shear_v 
                                                 SHUY(I,t) = shear_v
                                                
@@ -134,12 +134,14 @@ module find_richardson
 
         END DO
 
-        if (printstatus .ne. 0) then
+        !if (printstatus .ne. 0) then
+        print*, "writing to txt file"
                 DO I=1,RMAX*ZMAX*YMAX
-                        WRITE(1510, format4var) Ri(I,t), XXX(I,1), YYY(I,1), ZZZ(I,1)
+                        WRITE(1510, format4var) Ri(I,8), XXX(I,1), YYY(I,1), ZZZ(I,1)
                 !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
                 END DO
-        end if 
+        print*, "done with writing"
+      !  end if 
         
         !print*, "Ri calculation done" 
 
