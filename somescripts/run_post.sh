@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 
-filename='readyforpost.txt'
+filename='/home/akubo/myprojects/channelized-pdcs/readyforpost.txt'
 
 
 cat $filename
@@ -26,6 +26,7 @@ cd /home/akubo/myprojects/channelized-pdcs/graphs/processed
 rm EP_P*
 rm U_G* 
 rm streamlines*
+rm Richardson_t08.txt 
 
 git add *.txt
 gitadd.sh
