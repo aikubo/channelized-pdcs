@@ -230,8 +230,8 @@ module massdist
                         do I=1,length1
 
                                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
-                                edge1= FLOOR(edge1/3.)*3. ! + 3.
-                                edge2= FLOOR(edge2/3.)*3. !- 3.
+                                edge1= FLOOR(edge1/3.)*3. + 6.
+                                edge2= FLOOR(edge2/3.)*3. - 6.
                                 bottom= FLOOR(bottom/3.)*3. !- 6   
                                 ux= U_G1(I,t)
                                 uy= W_G1(I,t)
@@ -245,7 +245,7 @@ module massdist
         
                                 vel1= dot_product(U,N1)
                                 vel2 = dot_product(U,N2)
-                                perpvel = max(vel1,vel2)
+                                !perpvel = max(vel1,vel2)
 
                                 
                                 if (YYY(I,1) .gt. bottom .and. ZZZ(I,1) .eq. edge1) then
@@ -254,7 +254,7 @@ module massdist
                                         yc= int(YYY(I,1)/3.0)
                                         curtains1(rc,yc)= curtains1(rc,yc)+perpvel
                                 end if 
-                                if (YYY(I,1) .gt. top .and. ZZZ(I,1) .eq. edge2) then
+                                if (YYY(I,1) .gt. bottom .and. ZZZ(I,1) .eq. edge2) then
                                         perpvel = vel2
                                         rc = int(XXX(I,1)/3.0)
                                         yc= int(YYY(I,1)/3.0)
@@ -275,7 +275,6 @@ module massdist
                         do yc= y1,y2 
                                 sum1=sum1+curtains1(rc,yc)
                                 sum2=sum2+curtains2(rc,yc)
-                                print*, curtains1(rc,yc), sum1
                         end do 
 
                         edgevel1(rc)=sum1/(depth) 
