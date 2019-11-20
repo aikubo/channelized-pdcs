@@ -19,7 +19,7 @@ name+="_Ri"
 
 sed -i "s/iso_9/$name/" RI.net 
 
-dx -nodisplay -execonly -script SEPTkubo_maptoplane.net
+dx -nodisplay -execonly -script RI.net
 
 #mkdir ~/myprojects/graphics/visuals/$sim
 #cp *tif* ~/myprojects/graphics/visuals/$sim
