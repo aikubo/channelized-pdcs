@@ -277,10 +277,10 @@ module massdist
                         !         sum2=sum2+curtains2(rc,yc)
                         ! end do 
 
-                        print*, max(curtains(rc,:))
+                        print*, max(curtains2(rc,:))
 
-                        edgevel1(rc)=
-                        edgevel2(rc)= 
+                        edgevel1(rc)=max(curtains1(rc,:))
+                        edgevel2(rc)= max(curtains2(rc,:))
 
                         ! depth averaged, summed over time
                         print*, edgevel1(rc), edgevel2(rc)
