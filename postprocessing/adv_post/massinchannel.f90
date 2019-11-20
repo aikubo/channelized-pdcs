@@ -268,17 +268,19 @@ module massdist
                         sum2=0
 
                         XLOC= dble(rc*3.)
-                        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
-                        y1= FLOOR(bottom/3.)
-                        y2= FLOOR(top/3.)
-                        print*, y1, y2
-                        do yc= y1,y2 
-                                sum1=sum1+curtains1(rc,yc)
-                                sum2=sum2+curtains2(rc,yc)
-                        end do 
+                        ! call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+                        ! y1= FLOOR(bottom/3.)
+                        ! y2= FLOOR(top/3.)
+                        ! print*, y1, y2
+                        ! do yc= y1,y2 
+                        !         sum1=sum1+curtains1(rc,yc)
+                        !         sum2=sum2+curtains2(rc,yc)
+                        ! end do 
 
-                        edgevel1(rc)=sum1/(depth) 
-                        edgevel2(rc)=sum2/(depth) 
+                        print*, max(curtains(rc,:))
+
+                        edgevel1(rc)=
+                        edgevel2(rc)= 
 
                         ! depth averaged, summed over time
                         print*, edgevel1(rc), edgevel2(rc)

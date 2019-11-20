@@ -16,7 +16,7 @@ module find_richardson
                 double precision, allocatable, intent(INOUT):: SHUY(:,:)
                 double precision:: Ri_grad 
                 print*, "Begin richardson gradient calculation"
-                !call openascii(1500, 'Richardson_t')
+                open(1500, file='Richardson_t08.txt', FORMAT='FORMATTED')
                 !call openascii(800, 'SHUY_t')
                 
                 DO t= 1,timesteps
@@ -127,12 +127,19 @@ module find_richardson
 
                  ! fid_temp =1500 +t
                  ! fid_shuy =800 +t
-                 ! DO I=1,RMAX*ZMAX*YMAX
-                 !   WRITE(fid_temp,format5var) Richardson(I,1:5,t)
-                 !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
-                 ! END DO
+                !   DO I=1,RMAX*ZMAX*YMAX
+                !     WRITE(1500,format5var) 
+                !  !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
+                !   END DO
 
         END DO
+
+        if (printstatus .ne. 0) then
+                DO I=1,RMAX*ZMAX*YMAX
+                        WRITE(fid_temp,format4var) XXX(I,1), YYY(I,1), ZZZ(I,1), Ri(I,t)
+                !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
+                END DO
+        end if 
         
         !print*, "Ri calculation done" 
 
