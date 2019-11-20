@@ -136,7 +136,7 @@ module find_richardson
 
         if (printstatus .ne. 0) then
                 DO I=1,RMAX*ZMAX*YMAX
-                        WRITE(1510, format4var) XXX(I,1), YYY(I,1), ZZZ(I,1), Ri(I,t)
+                        WRITE(1510, format4var) Ri(I,t), XXX(I,1), YYY(I,1), ZZZ(I,1)
                 !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
                 END DO
         end if 

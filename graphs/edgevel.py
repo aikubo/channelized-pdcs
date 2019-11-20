@@ -42,15 +42,17 @@ for twant in time:
     palette=setgrl(alllabels, fig, axes, 5, 8)
 
     fid="_edge_vel1.txt"
-    cols= ["time", "XXX", "perpvel", "W_G"]
-    out= "perpvel"
-    colspec= [[1,4], [5,9], [13,29], [32,49], [52,68]]
+    cols= ["XXX", "perpvel1", "perpvel2", "minval1", "minval2"]
+    out= "perpvel1"
+    colspec= [[7, 13], [31,44], [53,63],[74,87],[96,109]]
     evel=picktime(labels,path,fid,cols,out, twant)
     print(evel)
     print(massR)
     cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
     TG, UG, DPU= opendenseaverage(labels,path)
-    sumUG= UG.iloc[twant-1]
+    sumUG=pd.DataFrame()
+    for sim in labels:
+        sumUG[sim]= sum(UG[sim])
     nvel= evel/sumUG
     nmass=normalizebymass(massR)
 
