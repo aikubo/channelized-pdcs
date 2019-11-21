@@ -26,7 +26,7 @@ alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'C
             'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
             'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'SV7', 'AWY4','AWY7','CWX7','CWZ7',
             'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',  'SW7' ] 
-labels= ['AVX4', 'BVX4', 'CVX4','AVY7',  'CVY7',  'BVY7'] # #alllabels
+labels= ['AVX4', 'BVX4', 'CVX4' ] #,'AVY7',  'CVY7',  'BVY7'] # #alllabels
 time= [1,2,3,4,5,6,7,8]
 
 

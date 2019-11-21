@@ -46,14 +46,16 @@ def curtains(sim,path):
         dx=3
         IMAX=404
         clearance = 50
-        top= slope*dx*(IMAX -x)+clearance
+        top= slope*dx*(IMAX -x)+clearance-depth
         top=float(top)
         height=height.astype('float32')
         height-=top    
         ax.plot(curtain, height, label=labels[j] )
     ax.legend()
     ax.set_ylim([0,300])
-    ax.set_ylabel('Height Above Channel Edge (m)')
+    plt.hlines(depth, -50, 70, colors='k')
+    ax.annotate('Top of Channel', xy=(40,depth+1) )
+    ax.set_ylabel('Height Above Channel Bottom (m)')
     ax.set_xlabel('Summed Flux (m/s)')
     name= sim+'curtain'
     savefigure(name)

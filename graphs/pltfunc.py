@@ -215,12 +215,12 @@ def plotallcol(labels, fid, df1, df2, df3, df4, df5):
 
 
 
-    fig.legend(    # The line objects
-           labels=df1.columns,   # The labels for each line
-           loc="center right",   # Position of legend
-           borderaxespad=0.5,    # Small spacing around legend box
-           title="Geometries",  # Title for the legend
-           )
+    # fig.legend(    # The line objects
+    #        labels=df1.columns,   # The labels for each line
+    #        loc="center right",   # Position of legend
+    #        borderaxespad=0.5,    # Small spacing around legend box
+    #        title="Geometries",  # Title for the legend
+    #        )
 
     labelsubplots(axes, "uright")
 

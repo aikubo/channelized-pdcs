@@ -543,7 +543,41 @@ module massdist
             end do
 
         end do 
-
-
         end subroutine 
+
+        subroutine transectsfromchannel
+        implicit none 
+        integer:: zc1, zc2
+        t =8 
+        do rc=2,RMAX-2
+                XLOC= dble(rc)*3.0
+                call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
+                ! edge 1 
+                zc1= 2 
+                zc2= int(edge1/3.0)
+                yc = int(top/3.0)+6
+                call FUNIJK(rc,yc,zc2,IJK)
+
+                if (abs(W_G1(IJK,t)) .gt. 0.0000) then 
+                        do zc= zc2, zc1
+                                call FUNIJK(rc,yc,zc2,IJK)
+                                write(*,*) zc2-zc, EP_P(IJK,t), T_G1(IJK,t), DPU(IJK,t)
+                        end do 
+                end if
+                !edge 2 
+                ! zc1= int(edge2/3.0)
+                ! zc2= 299
+                ! yc = int(top/3.0)
+                ! call FUNIJK(rc,yc,zc2,IJK)
+
+                ! if (abs(W_G1(IJK,t)) .gt. 0.0000) then 
+                !         do zc= zc1, zc2
+                !                 call FUNIJK(rc,yc,zc2,IJK)
+                !                 write(*,*) zc1-zc, EP_P(IJK,t), T_G1(IJK,t), DPU(IJK,t)
+                !         end do 
+                ! end if
+        end do 
+
+
+
        end module 

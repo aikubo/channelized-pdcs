@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-import pltfunc
-from pltfunc import plotallcol as sliceplt
-
+from pltfunc import *
 ## MAC
 path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
 os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
@@ -15,13 +13,13 @@ os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 
 ## still running 
 ## 'CVZ7'
-alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4',
-            'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
-            'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'SV7', 'AWY4','AWY7','CWX7','CWZ7',
-            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',  'SW7' ] 
+# #alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4',
+#             'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
+#             'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'SV7', 'AWY4','AWY7','CWX7','CWZ7',
+#             'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',  'SW7' ] 
 
-alllabels.sort()
-labels=alllabels
+#alllabels.sort()
+labels= [ 'AVX4', 'BVX4', 'CVX4', 'AVX7', 'BVX7', 'CVX7' ] 
 def openslicet(path2file, labels, twant, loc):
         
     if loc in "in":
@@ -156,14 +154,16 @@ sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(pa
 sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= openslicet(path, labels, 7, 'half')
 sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= openslicet(path, labels, 7, 'quart')
 
-fid = 'col_in'
-sliceplt(labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
+fid = 'col_in_comparewave'
+plotallcol(labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
 
-fid = 'col_onel'
-sliceplt(labels, fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
+fid = 'col_onel_comparewave'
+plotallcol(labels, fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
 
-fid = 'col_half'
-sliceplt(labels, fid, sliceouth_EPP, sliceouth_UG, sliceouth_DPU, sliceouth_Ri, sliceouth_TG)
+fid = 'col_half_comparewave'
+plotallcol(labels, fid, sliceouth_EPP, sliceouth_UG, sliceouth_DPU, sliceouth_Ri, sliceouth_TG)
 
-fid = 'col_quart'
-sliceplt(labels, fid, sliceoutq_EPP, sliceoutq_UG, sliceoutq_DPU, sliceoutq_Ri, sliceoutq_TG)
+fid = 'col_quart_comparewave'
+plotallcol(labels, fid, sliceoutq_EPP, sliceoutq_UG, sliceoutq_DPU, sliceoutq_Ri, sliceoutq_TG)
+
+printlegend(labels, 'slice_comparewave')
