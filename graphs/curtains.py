@@ -14,29 +14,31 @@ from normalize import *
 import os 
 
 ## MAC
-#path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-#os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
 #path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
 
 def curtains(sim,path):
+    print(sim)
     fid = "_edge_vel_y.txt"
     pathid=path+sim
     loc= pathid+fid
 
-    widths = [10] * 404
+    widths = [10] * 154
     temp_1=pd.read_fwf(loc, header=None, skiprows=9) #, widths=widths)
 
     wave, amp, width, depth, inlet, vflux= labelparam(sim)
 
     lengths= (wave/3.) *np.asarray([ 0.5, 1, 1.5, 2, 3])
     labels = ['0.5l', 'l', '1.5l', '2l', '3l']
-    lengths = [x for x in length if x < 1212]
+    lengths = [x for x in lengths if x < 404]
     lengths=[int(x) for x in lengths ]
-
+    print(lengths)
     fig, ax = plt.subplots()
 
     for x in lengths: 
+        print(x)
         curtain = temp_1.iloc[x]
         j=lengths.index(x)
         height=np.arange(0,462,3)
@@ -55,3 +57,8 @@ def curtains(sim,path):
     ax.set_xlabel('Summed Flux (m/s)')
     name= sim+'curtain'
     savefigure(name)
+
+wavelabels= [ 'AVX4', 'BVX4', 'CVX4', 'AVX7', 'BVX7' ] #, 'CVX7' ] 
+
+for sim in wavelabels:
+    curtains(sim, path )

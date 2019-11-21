@@ -28,6 +28,7 @@ os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 #path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
 
 avgTG, avgUG, avgdpu, peakin, peakout, xout, xin, zout, zin,  froude, front, bulk_ent, med_ent, dense_ent, avulseddense, buoyantelutriated, massout = openall(labels,path)
+davgTG, davgUG, davgdpu = opendenseaverage(labels, path)
 peak_in= peakin/39000 #np.log10(peakin + 0.000001)
 peak_out= peakout/39000 #np.log10(peakout + 0.000001)
 
@@ -38,7 +39,10 @@ plt.close("all")
 # nfront = normalizebywave(front)
 
 ## over time
-plottogether(labels,'avgUG', avgUG/10, "Average Velocity (U/UO)", "Time")
+plottogether(labels,'avgUG', avgUG/10, "Average Bulk Velocity (U/UO)", "Time")
+plottogether(labels,'avgTG', avgTG/800, "Average Bulk Temperature (U/TO)", "Time")
+plottogether(labels,'davgTG', davgTG/800, "Average Bed Load Temperature (U/TO)", "Time")
+plottogether(labels,'davgUG', davgUG/10, "Average Bed Load Velocity (U/UO)", "Time")
 plottogether(labels,'Elutriatedmass', buoyantelutriated, 'Elutriated Mass Fraction', "Time")
 plottogether(labels,'avulsed', avulseddense, 'Mass Avulsed (%)', 'Time')
 plottogether(labels, "front", front, "Front Location (m)", 'Time')
@@ -47,5 +51,4 @@ plottogether(labels,"peakdpuin", peak_in, 'Peak Dynamic Pressure Inside Channel 
 
 plt.close("all")
 
-for 
 
