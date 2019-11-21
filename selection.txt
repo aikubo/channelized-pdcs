@@ -5,5 +5,5 @@
 /home/akubo/myprojects/7_INFLOW/BVY7
 /home/akubo/myprojects/7_INFLOW/CVY7
 /home/akubo/myprojects/4_INFLOW/BVX4
-/home/akubomyprojects/4_INFLOW/BVZ4
+/home/akubo/myprojects/4_INFLOW/BVZ4
 /home/akubo/myprojects/4_INFLOW/ANY4
