@@ -547,7 +547,9 @@ module massdist
 
         subroutine transectsfromchannel
         implicit none 
-        integer:: zc1, zc2
+        integer:: zc1, zc2, IJK
+        double precision:: XLOC
+
         t =8 
         do rc=2,RMAX-2
                 XLOC= dble(rc)*3.0
@@ -557,13 +559,14 @@ module massdist
                 zc2= int(edge1/3.0)
                 yc = int(top/3.0)+6
                 call FUNIJK(rc,yc,zc2,IJK)
+                print*,IJK
 
-                if (abs(W_G1(IJK,t)) .gt. 0.0000) then 
+               ! if (abs(W_G1(IJK,t)) .gt. 0.0000) then 
                         do zc= zc2, zc1
                                 call FUNIJK(rc,yc,zc2,IJK)
-                                write(*,*) zc2-zc, EP_P(IJK,t), T_G1(IJK,t), DPU(IJK,t)
+                                write(*,*) zc2-zc, EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
                         end do 
-                end if
+               ! end if
                 !edge 2 
                 ! zc1= int(edge2/3.0)
                 ! zc2= 299
@@ -577,7 +580,7 @@ module massdist
                 !         end do 
                 ! end if
         end do 
-
+        end subroutine
 
 
        end module 
