@@ -19,6 +19,8 @@ os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
 #path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
 
+
+
 def curtains(sim,path):
     print(sim)
     fid = "_edge_vel_y.txt"
@@ -28,8 +30,9 @@ def curtains(sim,path):
     widths = [10] * 154
     temp_1=pd.read_fwf(loc, header=None, skiprows=9) #, widths=widths)
 
-    wave, amp, width, depth, inlet, vflux= labelparam(sim)
-
+    param= labelparam(sim)
+    wave=param['Wave']
+    depth = param['Depth']
     lengths= (wave/3.) *np.asarray([ 0.5, 1, 1.5, 2, 3])
     labels = ['0.5l', 'l', '1.5l', '2l', '3l']
     lengths = [x for x in lengths if x < 404]

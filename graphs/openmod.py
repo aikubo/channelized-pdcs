@@ -47,8 +47,9 @@ def opendenseaverage(labels, path):
 
 def openmassdist(labels, path):
     fid='_massinchannel.txt'
-    cols=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InCcdhannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "AvulseD"]
-    colspec=[[1,6], [17,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [193,205], [218,230], [243,255], [268, 280] ]
+    # t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut
+    cols=['time', 'Total Mass', "Mass outside", "Dense", "InChannel", "ScaleH", "Buoyant", "Avulsed", "Area"]
+    colspec=[[1,6], [17,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [193,205], [218,230] ]
     massout=openmine(labels, path, fid, cols, "Mass outside", colspec)
     avulsed=openmine(labels, path, fid, cols, "AvulseD",colspec)
     buoyant=openmine(labels, path, fid, cols, "Buoyant",colspec)
