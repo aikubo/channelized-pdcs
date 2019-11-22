@@ -25,7 +25,7 @@ double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
 simlabel='ANX4'
-printstatus=2
+printstatus=0
 
 
 allocate(isosurface(1200,4,15))

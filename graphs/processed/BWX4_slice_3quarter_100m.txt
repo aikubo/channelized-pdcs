@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191120
+  Date: 20191122
   Simulation name: BWX4 
   Filename:slice_3quarter_100m.txt                                                                                                                               
   Produced in mod-subroutine:  column.mod/slice                                                                                                                                      

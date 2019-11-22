@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191120
+  Date: 20191122
   Simulation name: AVX4 
   Filename:average_all.txt                                                                                                                                       
   Produced in mod-subroutine:  averageit.mod/average_all                                                                                                                             

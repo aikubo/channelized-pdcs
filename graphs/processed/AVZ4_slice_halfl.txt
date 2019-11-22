@@ -1,5 +1,5 @@
 !------------------------------------------------------------!
-  Date: 20191120
+  Date: 20191122
   Simulation name: AVZ4 
   Filename:slice_halfl.txt                                                                                                                                       
   Produced in mod-subroutine:  column.mod/slice                                                                                                                                      

@@ -10,7 +10,7 @@ module massdist
         subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT)
         use maketopo
         IMPLICIT NONE
-        double precision, intent(INOut):: width, depth, lambda, scaleheight,  
+        double precision, intent(INOut):: width, depth, lambda, scaleheight  
         double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         double precision::edge1, edge2, bottom, top, outsum, buoyant, current, area, topo
 
@@ -46,7 +46,7 @@ module massdist
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
 
                 IF (YYY(I,1)>bottom) THEN
-                        IF (EPP(I,t) <max_dilute .and EPP(I,t) >0.000) THEN
+                        IF (EPP(I,t) <max_dilute .and. EPP(I,t) >0.000) THEN
                                 ! total mass 
                                 tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
@@ -93,7 +93,7 @@ module massdist
                                                 IF (ZZZ(I,1) <edge2) THEN
                                                         topo=FLOOR(TOP/3.0)*3.+3.
               
-                                                        if (YYY(I,1) .eq. topo)
+                                                        if (YYY(I,1) .eq. topo) then 
                                                                 area = area+(3.*3.)
                                                         end if  
 
@@ -571,7 +571,7 @@ module massdist
                ! if (abs(W_G1(IJK,t)) .gt. 0.0000) then 
                         do zc= zc2, zc1
                                 call FUNIJK(rc,yc,zc2,IJK)
-                                write(*,*) zc2-zc, EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
+                               print*, zc2-zc, EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
                         end do 
                ! end if
                 !edge 2 
