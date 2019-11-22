@@ -2,10 +2,11 @@ import pandas as pd
 
 def openmine(labels, path2file, fid, cols, out, colspec='infer'):
     temp_all=pd.DataFrame()
-
+    
     for sim in labels: 
         pathid=path2file+sim
         loc= pathid+fid
+        print(loc)
         temp_1=pd.read_fwf(loc, header=None, skiprows=9, colspecs=colspec)
         temp_1.columns=cols
         temp_all[sim]=temp_1[out]

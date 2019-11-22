@@ -12,62 +12,43 @@ from entrainmod import *
 from pltfunc import *
 
 
-def regime(data, ylab):
-    fig,axes=plt.subplots(3)
-    setgrl(fig,axes, 6, 4)
+def regime(labels, data, param, xlab, ylab, fid):
+    fig,axes=plt.subplots()
+    setgrl(labels, fig,axes, 6, 4)
     palette=setcolorandstyle(labels)
 
     for sim in labels:
         i=labels.index(sim)
         c=palette[i]      
-        wave, width, depth, inlet, vflux = labelparam(sim)
+        initialcond = labelparam(sim)
+        X= initialcond[param]
         end = data.loc[data.index[-1], sim]
-        axes[0].scatter(wave, end, color=c)
-        axes[1].scatter(width, end, color=c)
-        axes[2].scatter(vflux, end, color=c)
+        print(X)
+        print(end)
+        axes.scatter(X, end, color=c)
 
-    for i in range(len(axes)):
-        axes[i].autoscale()
-        axes[i].set_ylabel(ylab)
-
-    axes[0].set_xlabel("Wavelength")
-    axes[1].set_xlabel("Width")
-    axes[2].set_xlabel("Volume Flux")
-    labelsubplots(axes, 'uleft')
-    plt.show()
-
-# now plot based on label 
-
-#regime(1-inchannelmass, "Avulsed Mass %")
-
-def regime2(data, ylab):
-    fig,axes=plt.subplots()
-    setgrl(fig,axes, 4,4)
-    palette=setcolorandstyle(labels)
-    lamb=[]
-    vei=[]
-    end =[] 
-
-    for sim in labels:
-        wave, width, depth, inlet, vflux = labelparam(sim)
-        end.append(data.loc[data.index[-1], sim])
-        lamb.append(wave)
-        vei.append(vflux)
-
-    vmin=min(vei)
-    vmax=max(vei)
-    cs=axes.scatter(lamb, end, s=40, c=vei, cmap=cm.jet, vmin=vmin, vmax=vmax)
-       # axes[1].scatter(width, end, color=c)
-        #axes[2].scatter(vflux, end, color=c)
-
-    plt.colorbar(cs)
-    axes.autoscale()
+    axes.set_xlabel(param)
     axes.set_ylabel(ylab)
-
-    axes.set_xlabel("Wavelength")
-    #axes[1].set_xlabel("Width")
-    #axes[2].set_xlabel("Volume Flux")
-    #labelsubplots(axes, 'uleft')
-    savefigure("regime2")
+    savefigure(fid)
 
 #regime2(avulseddense, "Avulsed Mass %")
+## MAC
+path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+## LAPTOP
+#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+
+alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4',
+            'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
+            'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'SV7', 'AWY4','AWY7','CWX7','CWZ7',
+            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',  'SW7' ] 
+
+alllabels.sort()
+
+avulsed, buoyant, massout = openmassdist(alllabels, path)
+
+regime(alllabels, avulsed, 'Amp', "Amplitude (m)", "Avulsed Mass", "regime_amp")
+regime(alllabels, avulsed, 'Amprat', "Amplitude Ratio", "Avulsed Mass", "regime_amprat")
+regime(alllabels, avulsed, 'Wave', "Wavelength (m)", "Avulsed Mass", "regime_wave")
+regime(alllabels, avulsed, 'Width', "Width (m)", "Avulsed Mass", "regime_width")
+regime(alllabels, avulsed, 'Inletrat', "Inlet Height/Depth", "Avulsed Mass", "regime_inletrat")

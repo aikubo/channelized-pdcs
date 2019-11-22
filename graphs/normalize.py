@@ -52,8 +52,17 @@ def labelparam(label):
     else :
         amp=0
 
+    results=pd.DataFrame({'Wave':[wave],
+                        'Amprat':[amp],
+                        'Amp':[amp*wave], 
+                        'Width':[width],
+                        'Depth':[depth],
+                        'Inlet':[inlet*depth],
+                        'Inletrat':[inlet], 
+                        'Vflux':[vflux]})
 
-    return wave, amp*wave, width, depth, depth*inlet, vflux
+    print(results)
+    return results
 
 def normalizebyamp(data):
     labels=data.columns
