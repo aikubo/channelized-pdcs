@@ -49,12 +49,13 @@ def openmassdist(labels, path):
     fid='_massinchannel.txt'
     # t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut
     cols=['time', 'Total Mass', "Mass outside", "Dense", "InChannel", "ScaleH", "Buoyant", "Avulsed", "Area"]
-    colspec=[[1,6], [17,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [187,205] ]
+    colspec=[[1,6], [9,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [187,205] ]
     massout=openmine(labels, path, fid, cols, "Mass outside", colspec)
     avulsed=openmine(labels, path, fid, cols, "Avulsed",colspec)
     buoyant=openmine(labels, path, fid, cols, "Buoyant",colspec)
     area=openmine(labels, path, fid, cols, "Area",colspec)
-    return avulsed, buoyant, massout, area
+    tot=openmine(labels, path, fid, cols, "Total Mass",colspec)
+    return tot, avulsed, buoyant, massout, area
 
 def openent(labels,path):
     fid='_entrainment.txt'

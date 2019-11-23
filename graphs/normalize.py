@@ -57,7 +57,7 @@ def labelparam(label):
                         'Amp':[amp*wave], 
                         'Width':[width],
                         'Depth':[depth],
-                        'Inlet':[inlet*depth],
+                        'Inlet':[math.ceil(depth*inlet/3)*3],
                         'Inletrat':[inlet], 
                         'Vflux':[vflux]})
 

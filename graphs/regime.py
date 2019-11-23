@@ -39,15 +39,23 @@ path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
 os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
 #path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
-
-alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4', 
-            'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
-            'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'SV7', 'AWY4','AWY7','CWX7','CWZ7',
-            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',  'SW7' ] 
+straight=['SW7','SV4','SW4','SV7',]
+alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4', 
+            'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4', 
+            'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'AWY4','AWY7','CWX7','CWZ7',
+            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',   ] 
 
 alllabels.sort()
 
-avulsed, buoyant, massout, area = openmassdist(alllabels, path)
+tot, avulsed, buoyant, massout, area = openmassdist(alllabels, path)
+
+avulsed_kg=[]
+for sim in alllabels:
+    x= avulsed[sim].max()
+    y= tot[sim].max()
+    avulsed_kg.append(x*y)
+
+
 # print(area)
 # regime(alllabels, avulsed, 'Amp', "Amplitude (m)", "Avulsed Mass", "regime_amp")
 # regime(alllabels, avulsed, 'Amprat', "Amplitude Ratio", "Avulsed Mass", "regime_amprat")
@@ -88,45 +96,72 @@ def curvat(sim):
     kappamax= kappa.max()
     return avg, kappamax
 
+def paramlists(labels, Xval, Yval):
+    Y=[]
+    X=[]
+    for sim in labels: 
+        param=labelparam(sim)
+        Y.append(param.get_value(0, Yval))
+        X.append(param.get_value(0, Xval))
+    return X, Y
+
+def interp(X,Y,Z):
+    Z=np.array(Z)
+    xmin=min(X)
+    xmax=max(X)
+    ymin=min(Y)
+    ymax=max(Y)
+    XX=np.linspace(xmin, xmax, 500)
+    YY=np.linspace(ymin, ymax, 500)
+    grid_x, grid_y= np.meshgrid(XX,YY)
+    print(grid_x)
+    print(grid_y)
+
+    grid= griddata((X,Y), Z, (grid_x, grid_y), method='linear')
+    return grid_x, grid_y, grid
+
+def regimecontour(labels, X, Y, Z, xlab, ylab, title):
+    print(X)
+    print(Y)
+    print(Z)
+    fig,ax=plt.subplots()
+    lrange=np.arange(min(Z), max(Z), (max(Z)- min(Z))/10)
+    ax.tricontour(X,Y,Z, levels=lrange, colors='k')
+    cntr= ax.tricontourf( X, Y, Z, levels=lrange, cmap="hot_r") 
+    ax.set_xlabel(xlab)
+    ax.get_xaxis().set_ticks(np.unique(X))
+    ax.set_ylabel(ylab)
+    ax.get_yaxis().set_ticks(np.unique(Y))
+    fig.colorbar(cntr)
+    plt.title(title)
+    plt.show()
+
+def interpcontour(labels, X, Y, Z, xlab, ylab, title):
+    fig,ax=plt.subplots()
+
+    ax.contour(X,Y,Z,  colors='k')
+    cntr= ax.contourf( X, Y, Z,  cmap="hot_r") 
+    ax.set_xlabel(xlab)
+    ax.set_ylabel(ylab)
+    fig.colorbar(cntr)
+    plt.title(title)
+    plt.show()
 
 
 amplitudes=['X', 'Y', 'Z']
 waves=["A", "B", "C"]
+widths= ["W", "V"]
+vol=["4", "7"]
 
 
-for amp in amplitudes:
-    labels=[ x for x in alllabels if amp in x]
-    X=[]
-    X2=[]
-    Y=[]
-    Z=[]
-    data = area
-    for sim in labels: 
-        param=labelparam(sim)
-        Y.append(param.get_value(0, 'Vflux'))
-        #avg, kappamax= curvat(sim)
-        A=param.get_value(0, 'Amprat')
-        W= param.get_value(0, 'Wave')
-        X.append(W)
-        X2.append(W)
-        avul= data[sim].max()
-        Z.append(avul/(1212*900))
+X, Y= paramlists(alllabels, 'Amp', 'Inlet' )
+Z= avulsed_kg
+regimecontour(alllabels, X, Y, Z, "Amplitude (m)", "Inlet Height", "Avulsed Mass (kg)")
 
-    fig,ax=plt.subplots()
-    xlab= "Wavelength"
-    ylab="Volume Flux"
-    lrange=np.arange(min(Z), max(Z), (max(Z)- min(Z))/10)
-    ax.tricontour(X,Y,Z, levels=lrange, colors='k')
-    cntr= ax.tricontourf( X, Y, Z, levels=lrange, cmap="hot_r") 
-    #ax.scatter(X,Y)
+X,Y,Z=interp(X,Y,Z)
+interpcontour(alllabels, X, Y, Z, "Amplitude (m)", "Inlet Height", "Avulsed Mass (kg)")
 
-    ax.set_xlabel(xlab)
-    ax.get_xaxis().set_ticks([0,300,600,900])
-    ax.set_ylabel(ylab)
-    fig.colorbar(cntr)
-    title="Avulsed Mass channel at amprat of "+ amp
-    ax.set_title(title)
-    plt.show()
+
 
 #savefigure("regime_area_innundated")
 # fig2,ax2=plt.subplots()
