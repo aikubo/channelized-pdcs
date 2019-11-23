@@ -49,11 +49,12 @@ def openmassdist(labels, path):
     fid='_massinchannel.txt'
     # t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut
     cols=['time', 'Total Mass', "Mass outside", "Dense", "InChannel", "ScaleH", "Buoyant", "Avulsed", "Area"]
-    colspec=[[1,6], [17,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [193,205], [218,230] ]
+    colspec=[[1,6], [17,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [187,205] ]
     massout=openmine(labels, path, fid, cols, "Mass outside", colspec)
-    avulsed=openmine(labels, path, fid, cols, "AvulseD",colspec)
+    avulsed=openmine(labels, path, fid, cols, "Avulsed",colspec)
     buoyant=openmine(labels, path, fid, cols, "Buoyant",colspec)
-    return avulsed, buoyant, massout
+    area=openmine(labels, path, fid, cols, "Area",colspec)
+    return avulsed, buoyant, massout, area
 
 def openent(labels,path):
     fid='_entrainment.txt'
@@ -94,11 +95,11 @@ def openall(labels,path):
     peakin, peakout, xout, xin, zout, zin = openpeakdpu(labels,path)
     froude, front = openfroude(labels, path)
     bulk_ent, med_ent, dense_ent = openent(labels,path)
-    avulseddense, buoyantelutriated, massout = openmassdist(labels, path)
+    avulseddense, buoyantelutriated, massout, area = openmassdist(labels, path)
     avgTG, avgUG, avgdpu = openaverage(labels, path)
 
 
-    return avgTG, avgUG, avgdpu, peakin, peakout, xout, xin, zout, zin,  froude, front, bulk_ent, med_ent, dense_ent, avulseddense, buoyantelutriated, massout
+    return avgTG, avgUG, avgdpu, peakin, peakout, xout, xin, zout, zin,  froude, front, bulk_ent, med_ent, dense_ent, avulseddense, buoyantelutriated, massout, area
 
 def sumovertime(labels,path, fid, cols, out, colspec='infer'):
     result=pd.DataFrame()

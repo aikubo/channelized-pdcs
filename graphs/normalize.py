@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import math
 
 
 def labelparam(label):
@@ -41,7 +41,7 @@ def labelparam(label):
         inlet=1
     rho= 1950*(0.4)
     v = 10 
-    vflux= depth*inlet*width*v*15
+    vflux= math.ceil(depth*inlet/3)*3*width*v
 
     if "X" in label:
         amp= 0.09
@@ -61,7 +61,6 @@ def labelparam(label):
                         'Inletrat':[inlet], 
                         'Vflux':[vflux]})
 
-    print(results)
     return results
 
 def normalizebyamp(data):
