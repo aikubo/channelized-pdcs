@@ -110,11 +110,11 @@ subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
           centerline = lamb*amprat*sind((360*XLOC)/lamb)+center
         end if 
 
-        edge1=centerline-wid/2
-        edge2=centerline+wid/2
+        edge1=int((centerline-wid/2)/3)*3
+        edge2=edge1+wid/2
 
-        bottom= slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep
-        top= slope*deltz*(RMAX-(XLOC/deltz)) +clearance 
+        bottom= (int((slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep)/3))*3
+        top= bottom+dep
 end subroutine
 
 subroutine FUNIJK(xl,yl,zl,IJK)

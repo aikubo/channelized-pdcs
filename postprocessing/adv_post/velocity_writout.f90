@@ -19,15 +19,16 @@ integer:: tfind=8
 
 integer::printstatus
 
-simlabel='AVY4'
+simlabel='ANX4'
+printstatus=0
 
-printstatus=1
 
+allocate(isosurface(1200,4,15))
 RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=201
+width=102
 lambda=300
 amprat=0.15
 deltat=5.0
@@ -39,11 +40,11 @@ depth = 27
 call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
-call openbin(200, 'U_G', U_G1)
+all openbin(200, 'U_G', U_G1)
 call openbin(300, 'T_G', T_G1)
 call openbin(400, 'V_G', V_G1)
 call openbin(500, 'W_G', W_G1)
-call handletopo('l300_A15_W201', XXX, YYY, ZZZ)
+call handletopo('l300_A9_W102', XXX, YYY, ZZZ)
 
 call makeUG(1200, U_G, printstatus) 
 print*, "end program"

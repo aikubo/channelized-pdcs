@@ -554,11 +554,21 @@ module massdist
 
         subroutine transectsfromchannel
         implicit none 
-        integer:: zc1, zc2, IJK
+        integer:: zc1, zc2, IJK, I,J,K
         double precision:: XLOC
+        double precision, allocatable:: transect(:,:,:,:), max_trans(:,:,:)
+        allocate(max_trans(3,ZMAX, 3))
+        allocate(transect(3,ZMAX, timesteps, 3))
 
-        t =8 
-        do rc=2,RMAX-2
+        filename= 'transect.txt'
+        description=" Transects from channel sides to edges "
+        datatype=" XXX, ZZZ, EPP, T_G, DPU"
+        call headerf(90915, filename, simlabel, routine,DESCRIPTION,datatype)
+
+
+        do t =1,timesteps 
+        do I=1,3
+                rc=100*I
                 XLOC= dble(rc)*3.0
                 call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
                 ! edge 1 
@@ -566,27 +576,52 @@ module massdist
                 zc2= int(edge1/3.0)
                 yc = int(top/3.0)+6
                 call FUNIJK(rc,yc,zc2,IJK)
-                print*,IJK
-
-               ! if (abs(W_G1(IJK,t)) .gt. 0.0000) then 
-                        do zc= zc2, zc1
+                
+                if (T_G1(IJK,t) .gt. T_amb) then 
+                        do zc= zc1, zc2
                                 call FUNIJK(rc,yc,zc2,IJK)
-                               print*, zc2-zc, EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
+                              !write(90915,format5var) dble(rc), dble(zc), EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
+                                transect(I,zc,t,1)= EPP(IJK,t)
+                                transect(I,zc,t,2)= T_G1(IJK,t)
+                                transect(I,zc,t,3)= DPU(IJK,t)
                         end do 
-               ! end if
-                !edge 2 
-                ! zc1= int(edge2/3.0)
-                ! zc2= 299
-                ! yc = int(top/3.0)
-                ! call FUNIJK(rc,yc,zc2,IJK)
+                end if
+                
+                zc1= int(edge2/3.0)
+                zc2= 299
+                call FUNIJK(rc,yc,zc2,IJK)
 
-                ! if (abs(W_G1(IJK,t)) .gt. 0.0000) then 
-                !         do zc= zc1, zc2
-                !                 call FUNIJK(rc,yc,zc2,IJK)
-                !                 write(*,*) zc1-zc, EP_P(IJK,t), T_G1(IJK,t), DPU(IJK,t)
-                !         end do 
-                ! end if
+                if (T_G1(IJK,t) .gt. T_amb) then
+                        do zc= zc1, zc2
+                                call FUNIJK(rc,yc,zc2,IJK)
+                              !write(90915,format5var) dble(rc), dble(zc),
+                              !EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
+                                transect(I,zc,t,1)= EPP(IJK,t)
+                                transect(I,zc,t,2)= T_G1(IJK,t)
+                                transect(I,zc,t,3)= DPU(IJK,t)
+                        end do
+                end if
+
+       end do 
         end do 
+
+       !print*, transect(:,:,:,:) 
+        do t=2,timesteps
+               do I=1,3
+                  do  zc=1,ZMAX 
+                        DO J=1,3
+                  
+                                max_trans(I,zc,J)= max(transect(I,zc,t,J), transect(I,zc,t-1,J))
+                                print*,transect(I,zc,t,J), transect(I,zc,t-1,J)
+                   
+              
+                       END DO 
+                   END DO 
+                END DO 
+        end do
+
+        print*, max_trans(:,:,:)
+ 
         end subroutine
 
 

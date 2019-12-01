@@ -200,12 +200,13 @@ end if
         use constants
         implicit none
         INTEGER, INTENT(IN):: fid_UG
-        LOGICAL, INTENT(IN):: ifwrite
+        INTEGER, INTENT(IN):: ifwrite
         DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::VEL
 
         print*, 'writing ep-p'
-        DO t= tstart,tstop
-                fid_U=fid_UG +t 
+        !DO t= tstart,tstop
+              open(6101, file='U_G_t08.txt')
+  
                 DO I=1,RMAX*ZMAX*YMAX
                           !------------------------ Velocity
                           !of Gas
@@ -217,12 +218,12 @@ end if
                           VEL(I,5,t) = YYY(I,1)
                           VEL(I,6,t) = ZZZ(I,1)
       
-                        if (ifwrite) then
-                        WRITE(fid_U,format6var) VEL(I,1:6,t)
+                        if (ifwrite .eq. 1) then
+                        WRITE(6101,format6var) VEL(I,1:6,8)
                         end if 
           END DO
 
-        END DO
+        !END DO
         print*, 'done writing ep-p'
 
         end subroutine makeUG
