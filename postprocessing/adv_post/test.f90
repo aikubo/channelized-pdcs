@@ -24,7 +24,7 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='AVY4'
+simlabel='ANX4'
 printstatus=0
 
 
@@ -33,7 +33,7 @@ RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=201
+width=102
 lambda=300
 amprat=0.15
 deltat=5.0
@@ -54,7 +54,7 @@ call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l300_A15_W201', XXX, YYY, ZZZ)
+call handletopo('l300_A9_W102', XXX, YYY, ZZZ)
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)

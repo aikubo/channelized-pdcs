@@ -562,7 +562,7 @@ module massdist
 
         filename= 'transect.txt'
         description=" Transects from channel sides to edges "
-        datatype=" XXX, ZZZ, EPP, T_G, DPU"
+        datatype="300 EPP, 600 EPP, 900 EPP, 300 TG, 600 TG, 900 TG, 300 DPU, 600 DPU, 900 DPu"
         call headerf(90915, filename, simlabel, routine,DESCRIPTION,datatype)
 
 
@@ -577,32 +577,15 @@ module massdist
                 yc = int(top/3.0)+6
                 call FUNIJK(rc,yc,zc2,IJK)
                 
-                if (T_G1(IJK,t) .gt. T_amb) then 
-                        do zc= zc1, zc2
-                                call FUNIJK(rc,yc,zc2,IJK)
+             
+                        do zc= 1, ZMAX
+                                call FUNIJK(rc,yc,zc,IJK)
                               !write(90915,format5var) dble(rc), dble(zc), EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
                                 transect(I,zc,t,1)= EPP(IJK,t)
                                 transect(I,zc,t,2)= T_G1(IJK,t)
                                 transect(I,zc,t,3)= DPU(IJK,t)
                         end do 
-                end if
-                
-                zc1= int(edge2/3.0)
-                zc2= 299
-                call FUNIJK(rc,yc,zc2,IJK)
-
-                if (T_G1(IJK,t) .gt. T_amb) then
-                        do zc= zc1, zc2
-                                call FUNIJK(rc,yc,zc2,IJK)
-                              !write(90915,format5var) dble(rc), dble(zc),
-                              !EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
-                                transect(I,zc,t,1)= EPP(IJK,t)
-                                transect(I,zc,t,2)= T_G1(IJK,t)
-                                transect(I,zc,t,3)= DPU(IJK,t)
-                        end do
-                end if
-
-       end do 
+             end do 
         end do 
 
        !print*, transect(:,:,:,:) 
@@ -612,7 +595,7 @@ module massdist
                         DO J=1,3
                   
                                 max_trans(I,zc,J)= max(transect(I,zc,t,J), transect(I,zc,t-1,J))
-                                print*,transect(I,zc,t,J), transect(I,zc,t-1,J)
+                               ! print*,transect(I,zc,t,J), transect(I,zc,t-1,J)
                    
               
                        END DO 
@@ -620,7 +603,12 @@ module massdist
                 END DO 
         end do
 
-        print*, max_trans(:,:,:)
+        do zc=1,ZMAX
+write(90915, formattrans) max_trans(1,zc,1),  max_trans(2,zc,1), max_trans(3,zc,1), max_trans(1,zc,2),  max_trans(2,zc,2), max_trans(3,zc,2),max_trans(1,zc,3),  max_trans(2,zc,3), max_trans(3,zc,3)
+        end do 
+
+
+
  
         end subroutine
 

@@ -4,7 +4,7 @@ echo "Making post processing script"
 here=$(pwd)
 label=${PWD##*/}
 
-rm $label*
+
 
 cp /home/akubo/myprojects/channelized-pdcs/testsub.sh $here
 sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" testsub.sh
