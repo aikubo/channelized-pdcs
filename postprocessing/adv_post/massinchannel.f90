@@ -556,43 +556,70 @@ module massdist
         implicit none 
         integer:: zc1, zc2, IJK, I,J,K
         double precision:: XLOC
+        integer:: ZLOC
         double precision, allocatable:: transect(:,:,:,:), max_trans(:,:,:)
-        allocate(max_trans(3,ZMAX, 3))
-        allocate(transect(3,ZMAX, timesteps, 3))
+        allocate(max_trans(3,ZMAX, 6))
+        allocate(transect(3,ZMAX, timesteps, 6))
 
         filename= 'transect.txt'
         description=" Transects from channel sides to edges "
         datatype="300 EPP, 600 EPP, 900 EPP, 300 TG, 600 TG, 900 TG, 300 DPU, 600 DPU, 900 DPu"
         call headerf(90915, filename, simlabel, routine,DESCRIPTION,datatype)
-
+        
+            do t=1,timesteps
+               do I=1,3
+                  do  zc=1,ZMAX
+                         DO J=1,6
+                                transect(I,zc,t,J)=0
+                         END DO 
+                  end do 
+                end do 
+             end do
 
         do t =1,timesteps 
         do I=1,3
-                rc=100*I
-                XLOC= dble(rc)*3.0
+                rc = (I+1)*0.25*lambda        
+                XLOC= dble(rc)
+
                 call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
                 ! edge 1 
                 zc1= 2 
                 zc2= int(edge1/3.0)
-                yc = int(top/3.0)+6
+                yc = int(top/3.0)+3
                 call FUNIJK(rc,yc,zc2,IJK)
                 
-             
-                        do zc= 1, ZMAX
+                !print*, zc2, zc1    
+                        do zc= zc2, zc1, -1
                                 call FUNIJK(rc,yc,zc,IJK)
+                                ZLOC= zc2-zc+1
+                                print*, "side1", ZLOC
                               !write(90915,format5var) dble(rc), dble(zc), EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
-                                transect(I,zc,t,1)= EPP(IJK,t)
-                                transect(I,zc,t,2)= T_G1(IJK,t)
-                                transect(I,zc,t,3)= DPU(IJK,t)
+                                transect(I,ZLOC,t,1)= EPP(IJK,t)
+                                transect(I,ZLOC,t,2)= T_G1(IJK,t)
+                                transect(I,ZLOC,t,3)= DPU(IJK,t)
                         end do 
+                print*, zc2
+                
+                !zc2= int(edge2/3.0)
+                       do zc= zc2, ZMAX
+                                call FUNIJK(rc,yc,zc,IJK)
+                                ZLOC= abs(zc2-zc)+1
+                                print*, "side2", zloc
+                              !write(90915,format5var) dble(rc), dble(zc),
+                              !EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
+                                transect(I,ZLOC,t,4)= EPP(IJK,t)
+                                transect(I,ZLOC,t,5)= T_G1(IJK,t)
+                                transect(I,ZLOC,t,6)= DPU(IJK,t)
+                        end do
+
              end do 
         end do 
-
+         print*, "finished loops"
        !print*, transect(:,:,:,:) 
         do t=2,timesteps
                do I=1,3
                   do  zc=1,ZMAX 
-                        DO J=1,3
+                        DO J=1,6
                   
                                 max_trans(I,zc,J)= max(transect(I,zc,t,J), transect(I,zc,t-1,J))
                                ! print*,transect(I,zc,t,J), transect(I,zc,t-1,J)
@@ -602,12 +629,20 @@ module massdist
                    END DO 
                 END DO 
         end do
-
+        print*, "finished maxx loops"
         do zc=1,ZMAX
-write(90915, formattrans) max_trans(1,zc,1),  max_trans(2,zc,1), max_trans(3,zc,1), max_trans(1,zc,2),  max_trans(2,zc,2), max_trans(3,zc,2),max_trans(1,zc,3),  max_trans(2,zc,3), max_trans(3,zc,3)
+                write(90915, formattrans) max_trans(1,zc,1),  max_trans(2,zc,1), max_trans(3,zc,1),&
+                 max_trans(1,zc,2),  max_trans(2,zc,2), max_trans(3,zc,2),&
+                 max_trans(1,zc,3),  max_trans(2,zc,3), max_trans(3,zc,3),&
+                 max_trans(1,zc,4),  max_trans(2,zc,4), max_trans(3,zc,4),&
+                 max_trans(1,zc,5),  max_trans(2,zc,5), max_trans(3,zc,5),&
+                 max_trans(1,zc,6),  max_trans(2,zc,6), max_trans(3,zc,6)
+       !  WRITE(*,FORMATTRANS) max_trans(1,zc,1), max_trans(2,zc,1), max_trans(3,zc,1), max_trans(1,zc,2),  max_trans(2,zc,2), max_trans(3,zc,2),max_trans(1,zc,3),  max_trans(2,zc,3), max_trans(3,zc,3), max_trans(1,zc,4),  max_trans(2,zc,4), max_trans(3,zc,4), max_trans(1,zc,5),max_trans(2,zc,5), max_trans(3,zc,5),max_trans(1,zc,6),  max_trans(2,zc,6), max_trans(3,zc,6)
+
+
         end do 
 
-
+        print*, "finished write"
 
  
         end subroutine
