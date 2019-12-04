@@ -1,5 +1,5 @@
 //
-// time: Mon Sep  9 02:41:11 2019
+// time: Wed Dec  4 01:24:40 2019
 //
 // version: 3.2.0 (format), 4.4.4 (DX)
 //
@@ -132,7 +132,7 @@ main_Slab_32_out_1 =
     main_Slab_32_in_4
     ) [instance: 32, cache: 1];
     // 
-    // node Map[2]: x = 741, y = 309, inputs = 4, label = Map
+    // node Map[2]: x = 713, y = 378, inputs = 4, label = Map
     //
 main_Map_2_out_1 = 
     Map(
@@ -143,7 +143,7 @@ main_Map_2_out_1 =
     ) [instance: 2, cache: 1];
     // 
     // node Colormap[1]: x = 761, y = 461, inputs = 19, label = Colormap
-    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.14285714 0.0] [0.19444444 0.26851852] [0.24603175 0.5462963] [0.28571429 0.68518519] [0.3531746 0.84259259] }
+    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.035714286 0.0] [0.18650794 0.18518519] [0.23015873 0.38888889] [0.29365079 0.65740741] [0.3531746 0.84259259] }
     // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [0.93253968 1.0] }
     // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [0.08490566 1.0] [0.56349206 1.0] [0.73015873 0.33027523] [0.99206349 0.0] }
     // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.023809524 0.98019802] [1.0 1.0] }
@@ -164,7 +164,7 @@ main_Colormap_1_out_2[cache: 2] =
     main_Colormap_1_in_3,
     main_Colormap_1_in_4,
     main_Colormap_1_in_5,
-    main_Slab_32_out_1,
+    main_Colormap_1_in_6,
     main_Colormap_1_in_7,
     main_Colormap_1_in_8,
     main_Colormap_1_in_9,
@@ -271,7 +271,7 @@ main_Collect_1_out_1 =
     // input[38]: defaulting = 0, visible = 0, type = 16777248, value = {"background", "grid", "ticks", "labels"}
     // input[41]: defaulting = 0, visible = 0, type = 32, value = "none"
     // depth: value = 24
-    // window: position = (0.0297,0.2824), size = 0.5010x0.6602, screen = 0
+    // window: position = (0.0349,0.2824), size = 0.5010x0.6602, screen = 0
     // internal caching: 1
     //
 main_Image_1_out_1,
@@ -339,7 +339,7 @@ main_Render_1_out_1 =
     ) [instance: 1, cache: 1];
     // 
     // node WriteImage[1]: x = 382, y = 917, inputs = 4, label = WriteImage
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "iso_9"
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "AVY4"
     // input[3]: defaulting = 0, visible = 1, type = 32, value = "tiff"
     //
     WriteImage(
@@ -398,11 +398,12 @@ main_Slab_32_out_1 = NULL;
 main_Map_2_in_3 = NULL;
 main_Map_2_in_4 = NULL;
 main_Map_2_out_1 = NULL;
-main_Colormap_1_in_1 = { [0.14285714 0.0] [0.19444444 0.26851852] [0.24603175 0.5462963] [0.28571429 0.68518519] [0.3531746 0.84259259] };
+main_Colormap_1_in_1 = { [0.035714286 0.0] [0.18650794 0.18518519] [0.23015873 0.38888889] [0.29365079 0.65740741] [0.3531746 0.84259259] };
 main_Colormap_1_in_2 = { [0.0 1.0] [0.93253968 1.0] };
 main_Colormap_1_in_3 = { [0.0 1.0] [0.08490566 1.0] [0.56349206 1.0] [0.73015873 0.33027523] [0.99206349 0.0] };
 main_Colormap_1_in_4 = { [0.023809524 0.98019802] [1.0 1.0] };
 main_Colormap_1_in_5 = "Colormap_1";
+main_Colormap_1_in_6 = NULL;
 main_Colormap_1_in_7 = NULL;
 main_Colormap_1_in_8 = NULL;
 main_Colormap_1_in_9 = NULL;
@@ -807,7 +808,7 @@ main_Image_1_out_1 = NULL;
 main_Image_1_out_2 = NULL;
 main_Render_1_in_3 = NULL;
 main_Render_1_out_1 = NULL;
-main_WriteImage_1_in_2 = "iso_9";
+main_WriteImage_1_in_2 = "AVY4";
 main_WriteImage_1_in_3 = "tiff";
 main_WriteImage_1_in_4 = NULL;
 Executive("product version 4 4 4");

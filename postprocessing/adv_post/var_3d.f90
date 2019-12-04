@@ -17,6 +17,9 @@ use maketopo
         do t=1,timesteps 
            do I=1,length1
                 EPP(I,t)=  -LOG10(1-EP_G1(I,t)+1e-14)
+                        !if (EP_G1(I,t) .lt. 0.01) then 
+                        !        EPP(I,t)=14.0
+                        !end if 
            end do 
         end do 
 
@@ -118,9 +121,9 @@ use maketopo
                           !------------------ Volume Fraction of Gas or
                           !Particles
                           !------------------!
-                          if (EP_G1(I,t)<0.01) THEN ! Try to make sure not to calculate infinity densities
+                          if (EP_G1(I,t)<0.000001) THEN ! Try to make sure not to calculate infinity densities
                            EP_G1(I,t)=0.0
-                                                               
+                                                        
                           end if
 
                           VOL(I,1,t) = -LOG10(1-EP_G1(I,t)+1e-14)

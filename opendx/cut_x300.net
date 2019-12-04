@@ -302,7 +302,7 @@ main_Render_1_out_1 =
     ) [instance: 1, cache: 1];
     // 
     // node WriteImage[1]: x = 382, y = 917, inputs = 4, label = WriteImage
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "cutx300_iso_9"
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "cutx300_AV4"
     // input[3]: defaulting = 0, visible = 1, type = 32, value = "tiff"
     //
     WriteImage(
@@ -762,7 +762,7 @@ main_Image_1_out_1 = NULL;
 main_Image_1_out_2 = NULL;
 main_Render_1_in_3 = NULL;
 main_Render_1_out_1 = NULL;
-main_WriteImage_1_in_2 = "cutx300_iso_9";
+main_WriteImage_1_in_2 = "cutx300_AV4";
 main_WriteImage_1_in_3 = "tiff";
 main_WriteImage_1_in_4 = NULL;
 Executive("product version 4 4 4");
