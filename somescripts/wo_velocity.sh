@@ -4,7 +4,7 @@ echo "Making post processing script"
 here=$(pwd)
 label=${PWD##*/}
 
-rm $label*
+#rm $label*
 
 cp /home/akubo/myprojects/channelized-pdcs/writeoutsub.sh $here
 sed -i.bak "4s|^.*$|#SBATCH --job-name=write_$label|" writeoutsub.sh
@@ -42,11 +42,11 @@ echo $topo
 cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 git pull
 #sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" velocity.f90
-sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" velocity.f90
-sed -i.bak "s|.*width=.*|width=$width|" velocity.f90
-sed -i.bak "s|.*lambda=.*|lambda=$wave|" velocity.f90
-sed -i.bak "s|.*depth=.*|depth=$depth|" velocity.f90
-sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" velocity.f90
+sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" dxout.f90
+sed -i.bak "s|.*width=.*|width=$width|" dxout.f90
+sed -i.bak "s|.*lambda=.*|lambda=$wave|" dxout.f90
+sed -i.bak "s|.*depth=.*|depth=$depth|" dxout.f90
+sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" dxout.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
 
@@ -70,7 +70,7 @@ ifort -c -convert big_endian column.f90
 ifort -c -convert big_endian average.f90
 ifort -c -convert big_endian richardson.f90
 
-ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o velocity.f90  -convert big_endian -o wo.exe
+ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o dxout.f90  -convert big_endian -o wo.exe
 
 
 cp wo.exe $here 

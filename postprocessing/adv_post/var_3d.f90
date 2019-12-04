@@ -167,34 +167,38 @@ end if
 
 !----------------------------------------------------------------!
 
-        subroutine makeTG(fid_tp, TEMP, ifwrite)
+        subroutine makedxtxt(filen,fid_tp, TEMP, time)
         use parampost 
         use formatmod 
         use constants 
 
         implicit none
-        INTEGER, INTENT(IN):: fid_tp
-        LOGICAL, INTENT(IN):: ifwrite
-        DOUBLE PRECISION, DIMENSION(:,:,:), INTENT(OUT)::TEMP
+        INTEGER, INTENT(IN):: fid_tp, time
+        DOUBLE PRECISION, DIMENSION(:,:), INTENT(IN)::TEMP
+        CHARACTER(LEN=10) :: str_c
+        character(LEN=10) :: x1
+        character(LEN=*), intent(in) :: filen
 
-        print*, 'writing ep-p'
-        DO t=tstart,tstop
-                fid_temp=fid_tp+t
-                DO I=1,RMAX*ZMAX*YMAX
+
+        print*, 'writing for open dx'
+        t=time
+        str_c = '(I2.2)'
+
+
+                write(x1,str_c) t
+
+                open(fid_tp, file=filen//trim(x1)//'.txt')
+
+
+
+               DO I=1,RMAX*ZMAX*YMAX
                           !------------------------ Temperature of Gas
                           !-----------------------------!
-                          TEMP(I,1,t) = T_G1(I,t)
-                          TEMP(I,2,t) = XXX(I,1)
-                          TEMP(I,3,t) = YYY(I,1)
-                          TEMP(I,4,t) = ZZZ(I,1)
-                        
-                        !if (ifwrite .EQ. .TRUE.) then
-                        !  print*, "writing"
-                          WRITE(fid_temp,format4var) TEMP(I,1:4,t)
-                        !end if
+                         
+                         WRITE(fid_tp,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
+                       
                 END DO
-        END DO 
-
+        
         end subroutine
 !----------------------------------------------------------------!
         subroutine makeUG(fid_UG, VEL, ifwrite)

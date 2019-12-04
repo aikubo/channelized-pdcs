@@ -25,8 +25,8 @@ double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
 simlabel='AVY4'
-printstatus=
 
+printstatus=1
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -61,5 +61,6 @@ call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 call makeEP(1100, EP_P, printstatus, tfind)
 call writedxtopo
  
+call makedxtxt('DPU_t', 1200, DPU, 8)
 end program
 

@@ -1115,3 +1115,5 @@
 11/22/19 14:52 BVX7 post process created 27 txt files, 0 tiff
 11/22/19 14:52 BWX7 post process created 27 txt files, 0 tiff
 11/22/19 14:52 BVZ7 post process created 27 txt files, 0 tiff
+12/03/19 16:55 ran SEPTkubo_mapptoplane.net
+12/03/19 17:36 ran SEPTkubo_mapptoplane.net
