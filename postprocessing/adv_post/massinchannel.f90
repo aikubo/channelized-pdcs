@@ -562,71 +562,88 @@ module massdist
         allocate(transect(3,ZMAX, timesteps, 6))
 
         filename= 'transect.txt'
-        description=" Transects from channel sides to edges "
+        description="Transects from channel sides to edges"
+        routine= "massdist/trnsectsfromchannel"
         datatype="300 EPP, 600 EPP, 900 EPP, 300 TG, 600 TG, 900 TG, 300 DPU, 600 DPU, 900 DPu"
         call headerf(90915, filename, simlabel, routine,DESCRIPTION,datatype)
         
             do t=1,timesteps
                do I=1,3
                   do  zc=1,ZMAX
-                         DO J=1,6
-                                transect(I,zc,t,J)=0
-                         END DO 
+                                
+                                transect(I,zc,t,1)=14.0
+                                transect(I, zc, t,2)=273.0
+                                transect(I,zc,t,3)=0
+                                transect(I,zc,t,4)=14.0
+                                transect(I, zc, t,5)=273.0
+                                transect(I,zc,t,6)=0
+
+                          
                   end do 
                 end do 
              end do
 
-        do t =1,timesteps 
+         
         do I=1,3
-                rc = (I+1)*0.25*lambda        
-                XLOC= dble(rc)
-
+                rc = floor(lambda*(I+1)*0.25/3)
+                XLOC= dble( rc*3)
+                
                 call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
                 ! edge 1 
                 zc1= 2 
-                zc2= int(edge1/3.0)
-                yc = int(top/3.0)+3
-                call FUNIJK(rc,yc,zc2,IJK)
+                zc2= int( (ceiling(edge1/3.0)))
+                yc = int( (ceiling(top/3.0) ))+6
                 
-                !print*, zc2, zc1    
-                        do zc= zc2, zc1, -1
+              
+                 
+                        do zc= zc1, zc2 !zc2, zc1, -1
                                 call FUNIJK(rc,yc,zc,IJK)
                                 ZLOC= zc2-zc+1
-                                print*, "side1", ZLOC
-                              !write(90915,format5var) dble(rc), dble(zc), EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
-                                transect(I,ZLOC,t,1)= EPP(IJK,t)
+                                print*, "side1", zc, ZLOC
+                                do t=2,timesteps             
+                                transect(I,ZLOC,t,1)=EP_G1(IJK,t)
                                 transect(I,ZLOC,t,2)= T_G1(IJK,t)
                                 transect(I,ZLOC,t,3)= DPU(IJK,t)
+                                end do 
                         end do 
-                print*, zc2
+           
                 
-                !zc2= int(edge2/3.0)
+                zc2= int( ceiling(edge2/3.0))
                        do zc= zc2, ZMAX
                                 call FUNIJK(rc,yc,zc,IJK)
-                                ZLOC= abs(zc2-zc)+1
-                                print*, "side2", zloc
-                              !write(90915,format5var) dble(rc), dble(zc),
-                              !EPP(IJK,t), T_G1(IJK,t), DPU(IJK,t)
-                                transect(I,ZLOC,t,4)= EPP(IJK,t)
+                                ZLOC= zc-zc2+1
+                                print*, "side2",zc,  zloc
+                              
+                                do t=2,timesteps
+                                transect(I,ZLOC,t,4)= EP_G1(IJK,t)
                                 transect(I,ZLOC,t,5)= T_G1(IJK,t)
                                 transect(I,ZLOC,t,6)= DPU(IJK,t)
+                                end do 
                         end do
 
-             end do 
+              
         end do 
          print*, "finished loops"
        !print*, transect(:,:,:,:) 
-        do t=2,timesteps
+       
                do I=1,3
                   do  zc=1,ZMAX 
-                        DO J=1,6
-                  
-                                max_trans(I,zc,J)= max(transect(I,zc,t,J), transect(I,zc,t-1,J))
-                               ! print*,transect(I,zc,t,J), transect(I,zc,t-1,J)
-                   
-              
-                       END DO 
-                   END DO 
+                       
+                             do t=2,timesteps 
+                                max_trans(I,zc,2)= min(transect(I,zc,t,1), max_trans(I,zc,1))
+                                max_trans(I,zc,2)= max(transect(I,zc,t,2), max_trans(I,zc,2)) 
+                                max_trans(I,zc,3)= max(transect(I,zc,t,3), max_trans(I,zc,3))
+                
+                                
+                                       ! if ( transect(I,zc,t,4) .lt. max_trans(I,zc,4) .and. transect(I,zc,t,4) .gt. dble(0.0) ) then
+                                       !         max_trans(I,zc,1)=transect(I,zc,t,1)        
+                                       ! end if
+                                 
+                                max_trans(I,zc,4)= max(transect(I,zc,t,4),max_trans(I,zc,4))
+                                max_trans(I,zc,5)= max(transect(I,zc,t,5),max_trans(I,zc,5))
+                                max_trans(I,zc,6)= max(transect(I,zc,t,6),max_trans(I,zc,6))
+
+                        eND DO 
                 END DO 
         end do
         print*, "finished maxx loops"

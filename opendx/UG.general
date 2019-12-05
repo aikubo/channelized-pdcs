@@ -5,6 +5,6 @@ format = ascii
 interleaving = field
 majority = column
 field = Volume,locations
-structure = scalar,3-vector
+structure = 3-vector,3-vector
 type = float,float
 dependency = positions,positions
