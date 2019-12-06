@@ -27,8 +27,8 @@ perpx=['Perpx']
 def openaverage(labels, path):
     fid='_average_all.txt'
     cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
-    colspec= [[1,4], [12,26], [33, 48], [57,70], [79,92], [101,114], [119,135]]
-    avgTG=openmine(labels, path, fid, cols, 'T_G', colspec)
+    colspec= [[1,4], [10,26], [33, 48], [57,70], [79,92], [101,114], [119,135]]
+    avgTG=openmine(labels, path, fid, cols, 'T_G', colspec)-273
     avgUG=openmine(labels, path, fid, cols, 'U_G', colspec)
     avgdpu=openmine(labels, path, fid, cols, 'DPU', colspec)
 
@@ -37,8 +37,8 @@ def openaverage(labels, path):
 def opendenseaverage(labels, path):
     fid='_average_dense.txt'
     cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
-    colspec= [[1,4], [12,26], [33, 48], [57,70], [79,92], [101,114], [119,135]]
-    avgTG=openmine(labels, path, fid, cols, 'T_G', colspec)
+    colspec= [[1,4], [10,30], [33, 48], [57,70], [79,92], [101,114], [119,135]]
+    avgTG=openmine(labels, path, fid, cols, 'T_G', colspec) -273
     avgUG=openmine(labels, path, fid, cols, 'U_G', colspec)
     avgdpu=openmine(labels, path, fid, cols, 'DPU', colspec)
 

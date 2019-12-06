@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as font_manager
 from matplotlib.offsetbox import (TextArea, DrawingArea, OffsetImage,
                                   AnnotationBbox)
-
+from mpl_toolkits import mplot3d
+from mpl_toolkits.mplot3d import Axes3D
 from scipy.interpolate import griddata
 from matplotlib import cm 
 import pandas as pd
@@ -35,20 +36,21 @@ def regime(labels, data, param, xlab, ylab, fid):
     savefigure(fid)
 
 ## MAC
-path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+#path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+#os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
-#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
 straight=['SW7','SV4','SW4','SV7',]
 alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4', 
             'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4', 
-            'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'AWY4','AWY7','CWX7','CWZ7',
-            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',   ] 
-
+            'AVX7', 'AVZ7',  'BVX7', 'BWY7','CVY7', 'AWY4','AWY7','CWX7','CWZ7',
+            'AVY7',  'AWX7',  'AWZ7',   'BWX7',  'BWZ7',  'CVX7', 'CWY7',   ] 
+#BVZ7 has unusally high avulsed mass
 alllabels.sort()
-
+alllabels=[ x for x in alllabels if "4" in x]
 tot, avulsed, buoyant, massout, area = openmassdist(alllabels, path)
-
+print(avulsed.max())
 avulsed_kg=[]
 for sim in alllabels:
     x= avulsed[sim].max()
@@ -129,9 +131,9 @@ def regimecontour(labels, X, Y, Z, xlab, ylab, title):
     ax.tricontour(X,Y,Z, levels=lrange, colors='k')
     cntr= ax.tricontourf( X, Y, Z, levels=lrange, cmap="hot_r") 
     ax.set_xlabel(xlab)
-    ax.get_xaxis().set_ticks(np.unique(X))
+    #ax.get_xaxis().set_ticks(np.unique(X))
     ax.set_ylabel(ylab)
-    ax.get_yaxis().set_ticks(np.unique(Y))
+    #ax.get_yaxis().set_ticks(np.unique(Y))
     fig.colorbar(cntr)
     plt.title(title)
     plt.show()
@@ -148,21 +150,59 @@ def interpcontour(labels, X, Y, Z, xlab, ylab, title):
     plt.show()
 
 
-amplitudes=['X', 'Y', 'Z']
-waves=["A", "B", "C"]
-widths= ["W", "V"]
-vol=["4", "7"]
+# amplitudes=['X', 'Y', 'Z']
+# waves=["A", "B", "C"]
+# widths= ["W", "V"]
+# vol=["4", "7"]
 
 
-X, Y= paramlists(alllabels, 'Amp', 'Inlet' )
-Z= avulsed_kg
-regimecontour(alllabels, X, Y, Z, "Amplitude (m)", "Inlet Height", "Avulsed Mass (kg)")
+amprat, wave= paramlists(alllabels, 'Amprat', 'Wave' )
+amp, vol=paramlists(alllabels, 'Amp', 'Vflux')
+width, depth= paramlists(alllabels, 'Width', 'Depth' )
+inlet, inletrat= paramlists(alllabels, 'Inlet', 'Inletrat')
 
-X,Y,Z=interp(X,Y,Z)
-interpcontour(alllabels, X, Y, Z, "Amplitude (m)", "Inlet Height", "Avulsed Mass (kg)")
+wamp= [float(x)/y for x,y in zip(amp, width)]
+avul=[]
+areas=[]
+for sim in alllabels:
+    avul.append(avulsed[sim].max())
+    areas.append(area[sim].max())
+
+sizes= ((np.array(areas)/(900*1200))**2)*20000
+print(wave)
+
+X= wave
+Y= amp
+Z= avul
+print(Y)
+fig,ax=plt.subplots()
+cm = plt.cm.get_cmap('hot_r')
+cntr = ax.scatter(wamp,Z, c=Z , cmap=cm, s=sizes)
+ax.set_xlabel('Amplitude/Width')
+ax.set_ylabel('Mass Avulsed (%)')
+fig.colorbar(cntr)
+plt.show()
+#regimecontour(alllabels, X, Y, Z, "Amp/Width", "Amp/Wave", "Avulsed Mass (kg)")
+#plt.show()
+# X,Y,Z=interp(X,Y,Z)
+#interpcontour(alllabels, X, Y, Z, "Amp/Width", "Amp/Wave", "Avulsed Mass (kg)")
+
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
+# cm = plt.cm.get_cmap('hot_r')
+# ax.scatter(amprat,wamp,Z, c=avul, s=sizes, cmap=cm)
+
+# ax.set_xlabel('Amplitude/Wavelength')
+# ax.set_ylabel('Amplitude/Width')
+# ax.set_zlabel('Avulsed Mass %')
+
+# for angle in range(0, 390*3, 90):
+#     ax.view_init(30, angle)
+#     plt.draw()
+#     plt.pause(5)
 
 
-
+#plt.show()
 #savefigure("regime_area_innundated")
 # fig2,ax2=plt.subplots()
 # xlab= "Wavelength"
@@ -179,4 +219,4 @@ interpcontour(alllabels, X, Y, Z, "Amplitude (m)", "Inlet Height", "Avulsed Mass
 # ax2.set_xlabel(xlab)
 # ax2.set_ylabel(ylab)
 # fig2.colorbar(cntr)
-# plt.show()
+#plt.show()

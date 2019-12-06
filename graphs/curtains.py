@@ -14,11 +14,11 @@ from normalize import *
 import os 
 
 ## MAC
-path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+#path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+#os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
-#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
-
+path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir("/home/akh/myprojects/channelized-pdcs/graphs/")
 
 
 def curtains(sim,path):
@@ -31,7 +31,7 @@ def curtains(sim,path):
     temp_1=pd.read_fwf(loc, header=None, skiprows=9) #, widths=widths)
 
     param= labelparam(sim)
-    wave=param['Wave']
+    wave=param.get_value(0,'Wave')
     depth = param['Depth']
     lengths= (wave/3.) *np.asarray([ 0.5, 1, 1.5, 2, 3])
     labels = ['0.5l', 'l', '1.5l', '2l', '3l']
@@ -66,4 +66,4 @@ def curtains(sim,path):
 wavelabels= [ 'AVX4', 'BVX4', 'CVX4', 'AVX7', 'BVX7' ] #, 'CVX7' ] 
 
 for sim in wavelabels:
-    curtains(sim, path )
+    curtains(sim, path)

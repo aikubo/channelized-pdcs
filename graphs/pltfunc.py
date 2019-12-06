@@ -92,7 +92,7 @@ def savefigure(name):
     path= os.getcwd()
     path+= "/figures/"
     #fid=name + '.eps'
-    fid=path + name +'.jpg'
+    fid=path + name +'.png'
     plt.savefig(fid, dpi=600)
 
 def plottogether(labels, fid, df, ylab, xlab):
@@ -107,16 +107,41 @@ def plottogether(labels, fid, df, ylab, xlab):
     
     for i in labels:
         x=df[i]
-        time=np.arange(0,5*(len(x)),5)
         j=labels.index(i)
+        time=np.arange(0,35,5)
         plt.plot(time, x, color=palette[j], label=i)
-    ax.legend(bbox_to_anchor=(1.01, 1.01))
-    ax.set_xticklabels(time)
+
+   # ax.legend(bbox_to_anchor=(1.01, 1.01))
+    ax.set_xticks(time)
     ax.set_xlabel(xlab)
     ax.set_ylabel(ylab)
     ax.set_xlim(left=0)
     plt.tight_layout()
-    savefigure(fid)
+    plt.show()
+    #savefigure(fid)
+
+def plottogether3(labels, fid, df, ylab, xlab,ticks):
+
+    fig, ax=plt.subplots()
+
+    palette=setgrl(labels, fig, ax, 5, 5)
+    print(len(palette))
+    print("plotting")
+    print(fid)
+    df.fillna(0)
+    
+    for i in labels:
+        x=df[i]
+        j=labels.index(i)
+        plt.plot(ticks, x, color=palette[j], label=i)
+   # ax.legend(bbox_to_anchor=(1.01, 1.01))
+    ax.set_xlabel(xlab)
+    ax.set_ylabel(ylab)
+    ax.set_xlim(left=0)
+    plt.tight_layout()
+    plt.show()
+    #savefigure(fid)
+
 
 def plotscatter(labels, fid, x,y, ylab, xlab, fig, ax):
     palette=setcolors(labels)
@@ -145,8 +170,6 @@ def plottogether2(labels, fid, df, x, ylab, xlab, fig, ax):
 
     ax.set_xlabel(xlab)
     ax.set_ylabel(ylab)
-
-    plt.show()
 
 def pltbytimebyx(df, t, fig, ax):
     labels=df.columns.tolist()
