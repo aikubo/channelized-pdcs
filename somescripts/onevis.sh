@@ -13,18 +13,18 @@ cp /home/akubo/myprojects/channelized-pdcs/opendx/SEPT* ./
 cp /home/akubo/myprojects/channelized-pdcs/opendx/testC.general ./
 cp /home/akubo/myprojects/channelized-pdcs/opendx/topo.general ./
 cp /home/akubo/myprojects/channelized-pdcs/opendx/topo2.general ./
-cp /home/akubo/myprojects/channelized-pdcs/opendx/dpu* ./
+#cp /home/akubo/myprojects/channelized-pdcs/opendx/dpu* ./
 
 
 sed -i "s/iso_9/$name/" SEPTkubo_maptoplane.net 
 
-name+="dpu"
-sed -i "s/iso_9/$name/" dpu.net
+#name+="_dpu"
+#sed -i "s/iso_9/$name/" dpu.net
 
 
 dx -nodisplay -execonly -script SEPTkubo_maptoplane.net
 
-dx -nodisplay -execonly -script dpu.net
+#dx -nodisplay -execonly -script dpu.net
 
 
 #mkdir ~/myprojects/graphics/visuals/$sim

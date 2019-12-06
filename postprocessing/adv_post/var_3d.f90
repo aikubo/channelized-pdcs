@@ -187,7 +187,7 @@ end if
 
                 write(x1,str_c) t
 
-                open(fid_tp, file=filen//trim(x1)//'.txt')
+                open(fid_tp+time, file=filen//trim(x1)//'.txt')
 
 
 
@@ -195,7 +195,7 @@ end if
                           !------------------------ Temperature of Gas
                           !-----------------------------!
                          
-                         WRITE(fid_tp,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
+                         WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
                        
                 END DO
         

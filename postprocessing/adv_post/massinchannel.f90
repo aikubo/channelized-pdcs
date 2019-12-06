@@ -665,4 +665,51 @@ module massdist
         end subroutine
 
 
+        subroutine buoyantplumes 
+                integer:: ytop
+                double precision, allocatable:: buoyantsum(:)
+                double precision:: mass, XLOC
+
+                filename= 'sideplume.txt'
+                description="Time averaged amount of buoyant material from 1 to zmax"
+                routine= "massdist/trnsectsfromchannel"
+                datatype="buoyant "
+                call headerf(90919, filename, simlabel, routine,DESCRIPTION,datatype)
+
+
+
+                allocate(buoyantsum(ZMAX))                
+ 
+                do t=1,timesteps 
+                        do rc=1,RMAX
+                                XLOC=dble(rc*3)
+                                call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
+                                
+                                ytop = int(ceiling(top/3)) + 6
+                                print*, "ytop", ytop
+                                do zc=1,ZMAX      
+                                       do yc=ytop,YMAX 
+                                          call FUNIJK(rc, yc, zc, IJK)
+                                          call density(IJK,t, rho_c, mass)  
+                                          !if ( EP_G1(IJK,t) .gt. 0.0 .and. EP_G1(IJK,t) .lt. 0.99999999) then
+                                          if( rho_c < rho_dry) then
+                                                  buoyantsum(zc) =buoyantsum(zc) + Volume_Unit*(1-EP_G1(IJK,t))*rho_p
+                                                  !print*, rho_c, rho_dry
+                                          end if
+                                          !end if  
+                                       end do 
+                                end do 
+                        end do 
+                end do 
+                                        
+                do rc=1,ZMAX
+                        buoyantsum(rc)=buoyantsum(rc)/timesteps
+                end do 
+
+                do rc=1,ZMAX 
+                       ! write(*,*) buoyantsum(rc)
+                       write(90919,format1var) buoyantsum(rc)
+                end do
+                end subroutine 
+
        end module 
