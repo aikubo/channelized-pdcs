@@ -57,9 +57,9 @@ def setcolorandstyle(labels):
     palette=setcolors(labels)
 
     sns.set()
-    sns.set_style("white")
+    sns.set_style("whitegrid")
     sns.set_style( "ticks",{"xtick.direction": "in","ytick.direction": "in"})
-    sns.set_context("paper")
+    sns.set_context("talk")
 
     return palette
 
@@ -69,6 +69,7 @@ def setgrl(labels, fig, axes, h,l):
     font_path="/usr/share/fonts/truetype/msttcorefonts"
     myfont= "arial.tff"
     plt.rcParams['font.family']='Arial'
+    plt.rcParams["font.size"] = "36"
     fig.set_figheight(h)
     fig.set_figwidth(l)
     return palette
@@ -91,8 +92,8 @@ def labelsubplots(axes, loc):
 def savefigure(name):
     path= os.getcwd()
     path+= "/figures/"
-    #fid=name + '.eps'
-    fid=path + name +'.png'
+    fid=name + '.eps'
+    #fid=path + name +'.png'
     plt.savefig(fid, dpi=600)
 
 def plottogether(labels, fid, df, ylab, xlab):
@@ -194,40 +195,44 @@ def horizplot(df, loc, labels):
     df1=df.fillna(df.min())
     for i in df.columns:
         j=labels.index(i)
-        loc.plot(df1[i], height, label=i, color=palette[j] )
+        loc.plot(df1[i], height, label=i, linewidth=2 )
 
-def plotallcol(labels, fid, df1, df2, df3, df4, df5):
-    fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
+def plotallcol( fig, axes, labels, fid, df1, df2, df3, df4, df5):
+    #fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
     setgrl(labels, fig, axes, 5, 8)
     df5.fillna(273.0)
+
+    for i in range(len(axes)):
+        axes[i].tick_params(labelsize=12) 
     # EPP
     loc=axes[0]
+    fonts= 16
     horizplot(df1, loc, labels)
-    axes[0].set_ylabel('Height (m)', size=9)
-    axes[0].set_xlabel('Log Volume fraction', size=9)
-    loc.set_ylim([0,150])
-    loc.set_xlim([0,8])
+    axes[0].set_ylabel('Height (m)', fontsize=fonts)
+    axes[0].set_xlabel(' -Log Volume fraction',fontsize=fonts)
+    loc.set_ylim([0,60])
+    loc.set_xlim([0.1,8])
     sns.despine()
     # UG
     loc=axes[1]
     u0=10.0
-    horizplot(df2/u0, loc, labels)
-    axes[1].set_xlabel('Velocity (U/U0)',size=9)
-    loc.set_ylim([0,150])
+    horizplot(df2, loc, labels)
+    axes[1].set_xlabel('Velocity (m/s)',fontsize=fonts)
+    loc.set_ylim([0,60])
 
     # temperature
     loc=axes[2]
     t0=800.0
     temp=df5.astype(float)
-    horizplot(temp/t0, loc, labels)
-    axes[2].set_xlabel('Temperature (T/T0)', size=9)
-    loc.set_ylim([0,150])
+    horizplot(temp-273, loc, labels)
+    axes[2].set_xlabel('Temperature (C)', fontsize=fonts)
+    loc.set_ylim([0,60])
 
     # DPU
     loc=axes[3]
     horizplot(df3, loc, labels)
-    axes[3].set_xlabel('Dynamic Pressure', size=8)
-    loc.set_ylim([0,150])
+    axes[3].set_xlabel('Dynamic Pressure (Pa)', fontsize=fonts)
+    loc.set_ylim([0,60])
 
     # Richardson Number
     # loc=axes[4]
@@ -245,9 +250,9 @@ def plotallcol(labels, fid, df1, df2, df3, df4, df5):
     #        title="Geometries",  # Title for the legend
     #        )
 
-    labelsubplots(axes, "uright")
+    #labelsubplots(axes, "uright")
 
-    savefigure(fid)
+    #savefigure(fid)
     #plt.show()
 
 def plotby(labels, fid, df1, df2, datalabel1, datalabel2):

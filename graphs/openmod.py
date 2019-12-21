@@ -1,13 +1,13 @@
 import pandas as pd
 
-def openmine(labels, path2file, fid, cols, out, colspec='infer'):
+def openmine(labels, path2file, fid, cols, out, colspec='infer', width='infer'):
     temp_all=pd.DataFrame()
     
     for sim in labels: 
         pathid=path2file+sim
         loc= pathid+fid
         print(loc)
-        temp_1=pd.read_fwf(loc, header=None, skiprows=9, colspecs=colspec)
+        temp_1=pd.read_fwf(loc, header=None, skiprows=9, colspecs=colspec, width=width)
         temp_1.columns=cols
         temp_all[sim]=temp_1[out]
     return temp_all
@@ -31,18 +31,20 @@ def openaverage(labels, path):
     avgTG=openmine(labels, path, fid, cols, 'T_G', colspec)-273
     avgUG=openmine(labels, path, fid, cols, 'U_G', colspec)
     avgdpu=openmine(labels, path, fid, cols, 'DPU', colspec)
+    avgWG=openmine(labels, path, fid, cols, 'W_G', colspec)
 
-    return avgTG, avgUG, avgdpu
+    return avgTG, avgUG, avgdpu, avgWG
 
 def opendenseaverage(labels, path):
     fid='_average_dense.txt'
     cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
-    colspec= [[1,4], [10,30], [33, 48], [57,70], [79,92], [101,114], [119,135]]
-    avgTG=openmine(labels, path, fid, cols, 'T_G', colspec) -273
-    avgUG=openmine(labels, path, fid, cols, 'U_G', colspec)
-    avgdpu=openmine(labels, path, fid, cols, 'DPU', colspec)
+  
+    avgTG=openmine(labels, path, fid, cols, 'T_G') -273
+    avgUG=openmine(labels, path, fid, cols, 'U_G')
+    avgdpu=openmine(labels, path, fid, cols, 'DPU')
+    avgWG=openmine(labels, path, fid, cols, 'W_G')
 
-    return avgTG, avgUG, avgdpu
+    return avgTG, avgUG, avgdpu, avgWG
 
 
 def openmassdist(labels, path):
@@ -60,10 +62,10 @@ def openmassdist(labels, path):
 def openent(labels,path):
     fid='_entrainment.txt'
     entcol= ['time', 'bulk', 'medium', 'dense']
-    colspec= [[2,5], [17, 26], [31, 48], [54,69]]
-    bulk_ent = openmine(labels, path, fid, entcol, 'bulk',colspec)
-    med_ent = openmine(labels, path, fid, entcol, 'medium',colspec)
-    dense_ent = openmine(labels, path, fid, entcol, 'dense',colspec)
+
+    bulk_ent = openmine(labels, path, fid, entcol, 'bulk')
+    med_ent = openmine(labels, path, fid, entcol, 'medium')
+    dense_ent = openmine(labels, path, fid, entcol, 'dense')
 
     return bulk_ent, med_ent, dense_ent
 

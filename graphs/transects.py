@@ -46,7 +46,7 @@ for sim in labels:
     TG6_2[sim]=temp.iloc[:,13]-273
     TG9_2[sim]=temp.iloc[:,14]-273
 
-avgTG, avgUG, avgdpu= opendenseaverage(labels, path)
+avgTG, avgUG, avgdpu, avgWG= opendenseaverage(labels, path)
 froude, front= openfroude(labels,path)
 dist = np.arange(0,906,3)
 
@@ -56,20 +56,29 @@ tg3= TG9_2.rolling(15, win_type=None,min_periods=1).mean()
 print(tg1)
 param= labelparam(labels)
 
+
 wave=param.get_value(0, "Wave")
 transects=[0.5*600, 0.75*600, 1*600]
 fig,ax=plt.subplots(2)
-ax[0].plot(dist, tg1)
-ax[0].plot(dist, tg2)
-ax[0].plot(dist, tg3)
-ax[0].set_ylabel('Temperature (C)')
-ax[0].set_xlabel("Distance from edge of channel (m)")
-ax[0].set_xlim([0,450])
-plottogether2(labels,  'tempfromchanel' , avgTG, front, "Temperature (C)", 'Down Valley Distance (m)', fig, ax[1])
-ax[1].scatter(transects[0],TG3_2.max())
-ax[1].scatter(transects[1], TG6_2.max())
-ax[1].scatter(transects[2], TG9_2.max())
-ax[1].set_ylim([300,600])
-plt.show()
+fig.set_figheight(6)
+fig.set_figwidth(7)
+sns.set()
 
-# print(avgTG)
+sns.set_context("talk")
+
+ax[1].plot(dist, tg1, 'r')
+ax[1].plot(dist, tg2, 'b')
+ax[1].plot(dist, tg3, 'g')
+ax[1].set_ylabel('Temperature (C)', fontsize=16)
+ax[1].set_xlabel("Distance from edge of channel (m)", fontsize=16)
+ax[1].set_xlim([0,450])
+
+
+ax[0].plot(front, avgTG, 'k')
+ax[0].set_ylabel('Temperature (C)', fontsize=16)
+ax[0].scatter(transects[0],TG3_2.max(), c= 'r')
+ax[0].scatter(transects[1], TG6_2.max(), c='b')
+ax[0].scatter(transects[2], TG9_2.max(), c='g')
+ax[0].set_ylim([300,600])
+
+plt.savefig('tempfromchannel.eps', dpi=600)

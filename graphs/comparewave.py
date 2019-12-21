@@ -16,7 +16,7 @@ import os
 
 ## still running 
 ## 'CVZ7'
-wavelabels= [ 'AVX4', 'BVX4', 'CVX4', 'AVX7', 'BVX7', 'CVX7' ] 
+wavelabels= [ 'CVX7' ] 
 labels=wavelabels
 labels.sort()
 

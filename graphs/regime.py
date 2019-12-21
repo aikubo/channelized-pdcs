@@ -11,10 +11,13 @@ import pandas as pd
 import seaborn as sns
 import math 
 
+from slength import channelvolume
+
 from openmod import *
 from entrainmod import *
 from pltfunc import *
 
+from scipy.special import ellipk
 
 def regime(labels, data, param, xlab, ylab, fid):
     fig,axes=plt.subplots()
@@ -45,10 +48,10 @@ straight=['SW7','SV4','SW4','SV7',]
 alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4', 
             'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4', 
             'AVX7', 'AVZ7',  'BVX7', 'BWY7','CVY7', 'AWY4','AWY7','CWX7','CWZ7',
-            'AVY7',  'AWX7',  'AWZ7',   'BWX7',  'BWZ7',  'CVX7', 'CWY7',   ] 
+            'AVY7', 'BVZ7', 'AWX7',  'AWZ7',   'BWX7',  'BWZ7',  'CVX7', 'CWY7',   ] 
 #BVZ7 has unusally high avulsed mass
 alllabels.sort()
-alllabels=[ x for x in alllabels if "4" in x]
+#alllabels=[ x for x in alllabels if "4" in x]
 tot, avulsed, buoyant, massout, area = openmassdist(alllabels, path)
 print(avulsed.max())
 avulsed_kg=[]
@@ -56,7 +59,14 @@ for sim in alllabels:
     x= avulsed[sim].max()
     y= tot[sim].max()
     avulsed_kg.append(x*y)
-
+P=1e5
+T=800
+R=461.5
+rho_a= P/(R*T)
+rho_p=1950
+U0=10
+mu=10e-3
+reh= (  0.4*rho_p+ 0.6*rho_a)*10/mu
 
 # print(area)
 # regime(alllabels, avulsed, 'Amp', "Amplitude (m)", "Avulsed Mass", "regime_amp")
@@ -79,24 +89,37 @@ for sim in alllabels:
 
 #printlegend(alllabels, 'regimelegend')
 
-def curvat(sim):
-    param=labelparam(sim)
-    wave = param['Wave']
-    A=param['Amprat']
-    slope= 0.18
-    X = np.arange(0,1212,3)
-    kappa=np.empty([404])
 
-    for i in range(0, len(X)):
-        t=i*3.0
+
+
+def curvat(labels):
+    kapa=[]
+    dist=[]
+    kapadist=[]
+    for sim in labels:
+        param=labelparam(sim)
+        wave = param.get_value(0,'Wave')
+        A=param.get_value(0,'Amprat')
+        amp=param.get_value(0,'Amp')
+        width=param.get_value(0,'Width')
+        slope= 0.18
+        X = wave/4
+        kapamax= 4*((np.pi)**2)*A*np.sin(2*np.pi*X/wave)
+        kapa.append(kapamax)
+        d=2*(amp+width)
+
+        d2= np.sqrt(d**2 + (wave/2)**2)
+        dist.append(d2)
+        kdist=kapamax/d2
+
+        # print("kapamax",kapamax)
+        # print( "dist", d)
+
+
+        kapadist.append(kdist)
         
-        if "S" in sim: 
-            kappa[i]=0 
-        else: 
-            kappa[i] = (((2*np.pi)**2)*A/wave)*np.sin(2*np.pi*t/wave)*(((2*np.pi)**2)*A/wave)*(np.sin(2*np.pi*t/wave))*(( slope**2 + ( 2*np.pi*A*np.cos(2*np.pi*t/wave))**2 )**(-3/2))
-    avg = kappa.mean()
-    kappamax= kappa.max()
-    return avg, kappamax
+
+    return kapa,dist, kapadist
 
 def paramlists(labels, Xval, Yval):
     Y=[]
@@ -162,27 +185,68 @@ width, depth= paramlists(alllabels, 'Width', 'Depth' )
 inlet, inletrat= paramlists(alllabels, 'Inlet', 'Inletrat')
 
 wamp= [float(x)/y for x,y in zip(amp, width)]
+
+TG, UG, dpu, avgW= opendenseaverage(alllabels, path)
+#
 avul=[]
 areas=[]
+vel=[]
+velz=[]
+kapa, dist, kdist= curvat(alllabels)
 for sim in alllabels:
     avul.append(avulsed[sim].max())
     areas.append(area[sim].max())
+    vel.append(UG[sim].max())
+    velz.append(avgW[sim].max())
 
-sizes= ((np.array(areas)/(900*1200))**2)*20000
-print(wave)
+cvol, lg,area= channelvolume(alllabels)
+rei=[float(x)*float(y)*(reh) for x,y in zip(depth,velz)]
+sizes= np.array(areas)/1212/906
+cvol2= [float(x)*float(y) for x,y in zip(sizes,cvol)]
+cvol3= [float(x)/float(y) for x,y in zip(wamp,cvol2)]
 
+capacity= [float(x)/(1212) for x in lg]
 X= wave
 Y= amp
 Z= avul
-print(Y)
+
 fig,ax=plt.subplots()
-cm = plt.cm.get_cmap('hot_r')
-cntr = ax.scatter(wamp,Z, c=Z , cmap=cm, s=sizes)
-ax.set_xlabel('Amplitude/Width')
-ax.set_ylabel('Mass Avulsed (%)')
-fig.colorbar(cntr)
+#palette=setgrl(alllabels,fig,ax, 5,5)
+# ax[0].scatter(kdist,Z)
+# ax[1].scatter(areas,Z)
+# ax[2].scatter(velz,Z)
+# ax[3].scatter(capacity,Z)
+# ax[4].scatter(cvol,Z)
+# sns.set()
+# sns.set_context('talk')
+cm = plt.cm.get_cmap('Greys')
+plt.style.use("seaborn-darkgrid")
+ax.scatter(kdist, Z)
+
+# ax.set_xlim([0,0.02])
+# ax.set_ylim([0,0.1])
+# ax.tick_params(labelsize=12) 
+
+
+ax.set_xlabel('Curvature/Meader Amplitude Metric', fontsize=16)
+ax.set_ylabel('Mass Fraction Avulsed ', fontsize=16)
+`#cbar=plt.colorbar(scat)
+# cbar.ax.tick_params(labelsize=12) 
+# cbar.ax.set_ylabel('Area Fraction Innundated ', fontsize=18)
 plt.show()
-#regimecontour(alllabels, X, Y, Z, "Amp/Width", "Amp/Wave", "Avulsed Mass (kg)")
+#savefigure('regimeAGU')
+# re = rho*ui*length/(mu)
+# mu from one of joes papers
+# cominucion jgr 2008 appendix
+# channelized turbidity currents
+
+
+# cntr = ax.scatter(wamp,Z, c=Z , cmap=cm, s=sizes)
+# ax.set_xlabel('Amplitude/Width')
+# ax.set_ylabel('Mass Avulsed (%)')
+# fig.colorbar(cntr)
+# plt.show()
+#regimecontour(alllabels, X, Y, Z, "Curvature*Distance", "Volume Flux", "Avulsed Mass %")
 #plt.show()
 # X,Y,Z=interp(X,Y,Z)
 #interpcontour(alllabels, X, Y, Z, "Amp/Width", "Amp/Wave", "Avulsed Mass (kg)")
