@@ -40,6 +40,20 @@ amp=${param[1]}
 width=${param[2]}
 
 height=${param[3]}
+if [ $width -eq 102 ]
+then 
+	depth=15
+fi
+
+if [ $width -eq 201 ]
+then    
+        depth=27
+fi
+
+if [ $width -eq 300 ]
+then    
+        depth=39
+fi
 
 topo="l$wave"
 topo+="_A"
@@ -61,6 +75,8 @@ sed -i "s/TEST/$new/" submission.sh
 echo editing init_fvar.f
 sed -i.bak "71s|^.*$|OPEN(1010101,FILE='$topo')|" init_fvars.f
 
+#-------------------------------------------------------------
+echo editing MFIX.DAT
 declare -a ch
 ch=($(awk '{ print $1 }' $topo ))
 bottom=${ch[150]}
@@ -88,8 +104,14 @@ else
         exit 1
 fi
 
-sed -i.bak "164s|^.*$|  BC_Y_s(2)=$BC1|" mfix.dat
-sed -i.bak "165s|^.*$|  BC_Y_n(2)=$BC2|" mfix.dat
+sed -i.bak "21s|^.*$|WIDTH = $width|" mfix.dat
+sed -i.bak "22s|^.*$|DEPTH = $depth|" mfix.dat
+sed -i.bak "23s|^.*$|LAMBDA = $wave|" mfix.dat
+sed -i.bak "24s|^.*$|AMP = $amp|" mfix.dat
+
+sed -i.bak "178s|^.*$|  BC_Y_s(2)=$BC1|" mfix.dat
+sed -i.bak "179s|^.*$|  BC_Y_n(2)=$BC2|" mfix.dat
+
 
 # channel width 
 
@@ -101,8 +123,8 @@ echo "$side1 $side2"
 side1=$(printf '%.2f\n' $side1)
 side2=$(printf '%.2f\n' $side2)
 
-sed -i.bak "166s|^.*$|  BC_Z_b(2)=$side1|" mfix.dat
-sed -i.bak "167s|^.*$|  BC_Z_t(2)=$side2|" mfix.dat
+sed -i.bak "180s|^.*$|  BC_Z_b(2)=$side1|" mfix.dat
+sed -i.bak "181s|^.*$|  BC_Z_t(2)=$side2|" mfix.dat
 
 
 #--------------------------------------------------------------

@@ -1,17 +1,46 @@
 #!/bin/bash 
+new="AVY0"
+echo copy topo file
+echo $new 
 
-echo editing post.f90
-if [ -s "EP_P_t08.txt" ]
+declare param=($(sh simparam.sh $new))
+wave=${param[0]}
+amp=${param[1]}
+width=${param[2]}
+
+height=${param[3]}
+
+if [ $width -eq 201 ]
 then
-   echo "EP_P_t08 exists and is not empty"
-   stat=0
- else
-   echo "EP_P_t08.txt does not exist"
-   stat=2
+        depth=27
 fi
 
+if [ $width -eq 300 ]
+then
+        depth=39
+fi
+
+echo $depth
+
+topo="l$wave"
+topo+="_A"
+topo+="$amp"
+topo+="_W"
+topo+="$width"
+echo $topo
+
+#echo editing post.f90
+#if [ -s "EP_P_t08.txt" ]
+#then
+#   echo "EP_P_t08 exists and is not empty"
+#   stat=0
+# else
+#   echo "EP_P_t08.txt does not exist"
+#   stat=2
+#fi
+
 #cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
-sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post.f90
+#sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post.f90
 #C1=$(($ch+5))
 #BC2=$(($BC1+10))
 #oldt="topo_$old"
