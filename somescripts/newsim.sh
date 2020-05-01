@@ -17,14 +17,17 @@ read new
 
 here=$(pwd)
 
-if [ -d  "$here/$new"] 
-then 
-	echo "error already exists"
-	exit 1
-fi 
-
+#if [ -d  "$here/$new"] 
+#then 
+#	echo "error already exists"
+#	exit 1
+#fi 
+mkdir $new
 echo copying
-cp -R /home/akubo/myprojects/sinchannels/SIMDIR/  $here/$new
+cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*f  $here/$new
+cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*dat  $here/$new
+cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*inc  $here/$new
+
 
 cd $here/$new
 #-------------------------------------------------------------
@@ -104,13 +107,13 @@ else
         exit 1
 fi
 
-sed -i.bak "21s|^.*$|WIDTH = $width|" mfix.dat
-sed -i.bak "22s|^.*$|DEPTH = $depth|" mfix.dat
-sed -i.bak "23s|^.*$|LAMBDA = $wave|" mfix.dat
-sed -i.bak "24s|^.*$|AMP = $amp|" mfix.dat
+#sed -i.bak "21s|^.*$|WIDTH = $width|" mfix.dat
+#sed -i.bak "22s|^.*$|DEPTH = $depth|" mfix.dat
+#sed -i.bak "23s|^.*$|LAMBDA = $wave|" mfix.dat
+#sed -i.bak "24s|^.*$|AMP = $amp|" mfix.dat
 
-sed -i.bak "178s|^.*$|  BC_Y_s(2)=$BC1|" mfix.dat
-sed -i.bak "179s|^.*$|  BC_Y_n(2)=$BC2|" mfix.dat
+sed -i.bak "s|.*BC_Y_s(2).*|  BC_Y_s(2)=$BC1|" mfix.dat
+sed -i.bak "s|.*BC_Y_n(2).*|  BC_Y_n(2)=$BC2|" mfix.dat
 
 
 # channel width 
@@ -123,8 +126,8 @@ echo "$side1 $side2"
 side1=$(printf '%.2f\n' $side1)
 side2=$(printf '%.2f\n' $side2)
 
-sed -i.bak "180s|^.*$|  BC_Z_b(2)=$side1|" mfix.dat
-sed -i.bak "181s|^.*$|  BC_Z_t(2)=$side2|" mfix.dat
+sed -i.bak "s|.*BC_Z_b(2).*|  BC_Z_b(2)=$side1|" mfix.dat
+sed -i.bak "s|.*BC_Z_t(2).*|  BC_Z_t(2)=$side2|" mfix.dat
 
 
 #--------------------------------------------------------------

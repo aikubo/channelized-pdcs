@@ -14,10 +14,8 @@ use massdist
 use averageit
 
 implicit none
-integer:: tfind=8
 
 
-integer::printstatus
 
 
 double precision, allocatable:: isosurface(:,:,:)
@@ -26,9 +24,7 @@ double precision:: scaleh=50.0
 
 simlabel='CVY7'
 
-printstatus=1
 
-allocate(isosurface(1200,4,15))
 RMAX=404
 YMAX=154
 ZMAX=302
@@ -64,6 +60,5 @@ do t=1,timesteps
 end do 
 call writedxtopo
  
-call makedxtxt('DPU_t', 1200, DPU, 8)
 end program
 

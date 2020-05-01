@@ -1,11 +1,11 @@
 //
-// time: Wed Dec  4 20:33:13 2019
+// time: Mon Apr 27 17:49:54 2020
 //
 // version: 3.2.0 (format), 4.4.4 (DX)
 //
 //
 // MODULE main
-// workspace: width = 1050, height = 979
+// workspace: width = 1050, height = 976
 // layout: snap = 0, width = 50, height = 50, align = NN
 //
 macro main(
@@ -143,10 +143,10 @@ main_Map_2_out_1 =
     ) [instance: 2, cache: 1];
     // 
     // node Colormap[1]: x = 761, y = 461, inputs = 19, label = Colormap
-    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.040114613 0.0] [0.12893983 0.2585034] [0.20630372 0.52380952] [0.28571429 0.68518519] [0.3531746 0.84259259] }
-    // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [0.93253968 1.0] }
-    // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [0.08490566 1.0] [0.56349206 1.0] [0.73015873 0.33027523] [0.99206349 0.0] }
-    // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.023809524 0.98019802] [1.0 1.0] }
+    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.075396825 0.018518519] [0.17857143 0.074074074] [0.26587302 0.17592593] [0.3452381 0.18518519] [0.42460317 0.23148148] [0.56746032 0.26851852] }
+    // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.10714286 1.0] [0.10714286 1.0] [0.21428571 1.0] [0.49603175 0.0] [0.74206349 0.0] }
+    // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 0.0] [0.13888889 1.0] [0.20238095 1.0] [0.61111111 1.0] [0.97222222 1.0] }
+    // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.01984127 1.0] [0.17857143 1.0] [0.17857143 1.0] [0.30952381 1.0] [0.68253968 1.0] [1.0 0.0] }
     // input[5]: defaulting = 0, visible = 0, type = 32, value = "Colormap_1"
     // input[7]: defaulting = 1, visible = 0, type = 5, value = -0.0
     // input[8]: defaulting = 1, visible = 0, type = 5, value = 14.000347
@@ -154,7 +154,7 @@ main_Map_2_out_1 =
     // input[12]: defaulting = 0, visible = 0, type = 16777221, value = { -0.0 14.000347 }
     // input[17]: defaulting = 0, visible = 0, type = 5, value = -0.0
     // input[18]: defaulting = 0, visible = 0, type = 5, value = 14.000347
-    // window: position = (0.1762,0.1453), size = 0.3816x0.3427, screen = 0
+    // window: position = (0.0771,0.0509), size = 0.3818x0.3426, screen = 0
     //
 main_Colormap_1_out_1[cache: 2],
 main_Colormap_1_out_2[cache: 2] = 
@@ -194,8 +194,20 @@ main_Color_4_out_1 =
     ) [instance: 4, cache: 1];
     // 
     // node ColorBar[1]: x = 609, y = 675, inputs = 16, label = ColorBar
+    // input[2]: defaulting = 0, visible = 1, type = 8, value = [0.5 1]
+    // input[3]: defaulting = 0, visible = 1, type = 8, value = [300 25]
+    // input[4]: defaulting = 0, visible = 1, type = 3, value = 1
+    // input[5]: defaulting = 0, visible = 0, type = 1, value = NULL
     // input[6]: defaulting = 0, visible = 0, type = 5, value = 0.0
     // input[7]: defaulting = 0, visible = 0, type = 5, value = 5.0
+    // input[8]: defaulting = 0, visible = 1, type = 32, value = "-LOG VOLUME FRACTION"
+    // input[9]: defaulting = 0, visible = 0, type = 16777248, value = {"black"}
+    // input[10]: defaulting = 0, visible = 0, type = 16777248, value = NULL
+    // input[11]: defaulting = 0, visible = 0, type = 5, value = NULL
+    // input[12]: defaulting = 0, visible = 0, type = 32, value = "roman_s"
+    // input[13]: defaulting = 0, visible = 0, type = 16777221, value = { 1.0 2.0 3.0 4.0 5.0 }
+    // input[15]: defaulting = 0, visible = 0, type = 3, value = 1
+    // input[16]: defaulting = 0, visible = 0, type = 1, value = 14
     //
 main_ColorBar_1_out_1 = 
     ColorBar(
@@ -217,7 +229,17 @@ main_ColorBar_1_out_1 =
     main_ColorBar_1_in_16
     ) [instance: 1, cache: 1];
     // 
-    // node Color[5]: x = 552, y = 531, inputs = 5, label = Color
+    // node Collect[1]: x = 370, y = 659, inputs = 4, label = Collect
+    //
+main_Collect_1_out_1 = 
+    Collect(
+    main_Color_4_out_1,
+    main_ColorBar_1_out_1,
+    main_Collect_1_in_3,
+    main_Collect_1_in_4
+    ) [instance: 1, cache: 1];
+    // 
+    // node Color[5]: x = 460, y = 482, inputs = 5, label = Color
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "blue"
     // input[3]: defaulting = 0, visible = 1, type = 5, value = .1
     //
@@ -230,24 +252,14 @@ main_Color_5_out_1 =
     main_Color_5_in_5
     ) [instance: 5, cache: 1];
     // 
-    // node Collect[1]: x = 374, y = 726, inputs = 4, label = Collect
-    //
-main_Collect_1_out_1 = 
-    Collect(
-    main_Color_4_out_1,
-    main_ColorBar_1_out_1,
-    main_Collect_1_in_3,
-    main_Color_5_out_1
-    ) [instance: 1, cache: 1];
-    // 
     // node Image[1]: x = 501, y = 763, inputs = 49, label = Image
     // input[1]: defaulting = 0, visible = 0, type = 67108863, value = "Image_1"
     // input[4]: defaulting = 0, visible = 0, type = 1, value = 1
     // input[5]: defaulting = 0, visible = 0, type = 8, value = [603 231.467 459]
     // input[6]: defaulting = 0, visible = 0, type = 8, value = [603 4260.11 459]
     // input[7]: defaulting = 0, visible = 0, type = 5, value = 2158.95
-    // input[8]: defaulting = 0, visible = 0, type = 1, value = 1269
-    // input[9]: defaulting = 0, visible = 0, type = 5, value = 0.705
+    // input[8]: defaulting = 0, visible = 0, type = 1, value = 1201
+    // input[9]: defaulting = 0, visible = 0, type = 5, value = 0.56
     // input[10]: defaulting = 0, visible = 0, type = 8, value = [0 0 -1]
     // input[11]: defaulting = 1, visible = 0, type = 5, value = 30.0001
     // input[12]: defaulting = 0, visible = 0, type = 1, value = 0
@@ -271,7 +283,7 @@ main_Collect_1_out_1 =
     // input[38]: defaulting = 0, visible = 0, type = 16777248, value = {"background", "grid", "ticks", "labels"}
     // input[41]: defaulting = 0, visible = 0, type = 32, value = "none"
     // depth: value = 24
-    // window: position = (0.0297,0.3131), size = 0.5012x0.6601, screen = 0
+    // window: position = (0.0297,0.2898), size = 0.6328x0.6602, screen = 0
     // internal caching: 1
     //
 main_Image_1_out_1,
@@ -338,8 +350,8 @@ main_Render_1_out_1 =
     main_Render_1_in_3
     ) [instance: 1, cache: 1];
     // 
-    // node WriteImage[1]: x = 383, y = 917, inputs = 4, label = WriteImage
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "CVX7_t4"
+    // node WriteImage[1]: x = 382, y = 917, inputs = 4, label = WriteImage
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "AVY7"
     // input[3]: defaulting = 0, visible = 1, type = 32, value = "tiff"
     //
     WriteImage(
@@ -398,10 +410,10 @@ main_Slab_32_out_1 = NULL;
 main_Map_2_in_3 = NULL;
 main_Map_2_in_4 = NULL;
 main_Map_2_out_1 = NULL;
-main_Colormap_1_in_1 = { [0.040114613 0.0] [0.12893983 0.2585034] [0.20630372 0.52380952] [0.28571429 0.68518519] [0.3531746 0.84259259] };
-main_Colormap_1_in_2 = { [0.0 1.0] [0.93253968 1.0] };
-main_Colormap_1_in_3 = { [0.0 1.0] [0.08490566 1.0] [0.56349206 1.0] [0.73015873 0.33027523] [0.99206349 0.0] };
-main_Colormap_1_in_4 = { [0.023809524 0.98019802] [1.0 1.0] };
+main_Colormap_1_in_1 = { [0.075396825 0.018518519] [0.17857143 0.074074074] [0.26587302 0.17592593] [0.3452381 0.18518519] [0.42460317 0.23148148] [0.56746032 0.26851852] };
+main_Colormap_1_in_2 = { [0.10714286 1.0] [0.10714286 1.0] [0.21428571 1.0] [0.49603175 0.0] [0.74206349 0.0] };
+main_Colormap_1_in_3 = { [0.0 0.0] [0.13888889 1.0] [0.20238095 1.0] [0.61111111 1.0] [0.97222222 1.0] };
+main_Colormap_1_in_4 = { [0.01984127 1.0] [0.17857143 1.0] [0.17857143 1.0] [0.30952381 1.0] [0.68253968 1.0] [1.0 0.0] };
 main_Colormap_1_in_5 = "Colormap_1";
 main_Colormap_1_in_6 = NULL;
 main_Colormap_1_in_7 = NULL;
@@ -422,29 +434,29 @@ main_Colormap_1_out_2 = NULL;
 main_Color_4_in_4 = NULL;
 main_Color_4_in_5 = NULL;
 main_Color_4_out_1 = NULL;
-main_ColorBar_1_in_2 = NULL;
-main_ColorBar_1_in_3 = NULL;
-main_ColorBar_1_in_4 = NULL;
+main_ColorBar_1_in_2 = [0.5 1];
+main_ColorBar_1_in_3 = [300 25];
+main_ColorBar_1_in_4 = 1;
 main_ColorBar_1_in_5 = NULL;
 main_ColorBar_1_in_6 = 0.0;
 main_ColorBar_1_in_7 = 5.0;
-main_ColorBar_1_in_8 = NULL;
-main_ColorBar_1_in_9 = NULL;
+main_ColorBar_1_in_8 = "-LOG VOLUME FRACTION";
+main_ColorBar_1_in_9 = {"black"};
 main_ColorBar_1_in_10 = NULL;
 main_ColorBar_1_in_11 = NULL;
-main_ColorBar_1_in_12 = NULL;
-main_ColorBar_1_in_13 = NULL;
+main_ColorBar_1_in_12 = "roman_s";
+main_ColorBar_1_in_13 = { 1.0 2.0 3.0 4.0 5.0 };
 main_ColorBar_1_in_14 = NULL;
-main_ColorBar_1_in_15 = NULL;
-main_ColorBar_1_in_16 = NULL;
+main_ColorBar_1_in_15 = 1;
+main_ColorBar_1_in_16 = 14;
 main_ColorBar_1_out_1 = NULL;
+main_Collect_1_in_3 = NULL;
+main_Collect_1_in_4 = NULL;
+main_Collect_1_out_1 = NULL;
 main_Color_5_in_2 = "blue";
 main_Color_5_in_3 = .1;
 main_Color_5_in_4 = NULL;
 main_Color_5_in_5 = NULL;
-main_Color_5_out_1 = NULL;
-main_Collect_1_in_3 = NULL;
-main_Collect_1_out_1 = NULL;
 macro Image(
         id,
         object,
@@ -763,8 +775,8 @@ main_Image_1_in_4 = 1;
 main_Image_1_in_5 = [603 231.467 459];
 main_Image_1_in_6 = [603 4260.11 459];
 main_Image_1_in_7 = 2158.95;
-main_Image_1_in_8 = 1269;
-main_Image_1_in_9 = 0.705;
+main_Image_1_in_8 = 1201;
+main_Image_1_in_9 = 0.56;
 main_Image_1_in_10 = [0 0 -1];
 main_Image_1_in_11 = NULL;
 main_Image_1_in_12 = 0;
@@ -808,7 +820,7 @@ main_Image_1_out_1 = NULL;
 main_Image_1_out_2 = NULL;
 main_Render_1_in_3 = NULL;
 main_Render_1_out_1 = NULL;
-main_WriteImage_1_in_2 = "CVX7_t4";
+main_WriteImage_1_in_2 = "AVY7";
 main_WriteImage_1_in_3 = "tiff";
 main_WriteImage_1_in_4 = NULL;
 Executive("product version 4 4 4");

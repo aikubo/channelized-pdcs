@@ -29,6 +29,9 @@ topo+="_W"
 topo+="$width"
 echo $topo
 
+amp=$(echo "$amp/100" | bc -l)
+
+echo $amp
 #echo editing post.f90
 #if [ -s "EP_P_t08.txt" ]
 #then

@@ -24,8 +24,8 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='AVY4'
-printstatus=
+simlabel='DVX7'
+printstatus=2
 
 
 allocate(isosurface(1200,4,15))
@@ -34,8 +34,8 @@ YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
 width=201
-lambda=300
-amprat=0.15
+lambda=1200
+amprat=.09000000000000000000
 deltat=5.0
 timesteps=8
 tstart=3
@@ -54,7 +54,7 @@ call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l300_A15_W201', XXX, YYY, ZZZ)
+call handletopo('l1200_A9_W201', XXX, YYY, ZZZ)
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
