@@ -39,3 +39,4 @@
 /home/akubo/myprojects/7_INFLOW/CWX7
 /home/akubo/myprojects/4_INFLOW/ANY4
 /home/akubo/myprojects/4_INFLOW/ANX4
+/home/akubo/myprojects/7_INFLOW/DVX7

@@ -1131,3 +1131,344 @@
 12/04/19 14:06 ran SEPTkubo_mapptoplane.net
  visco Submitted batch job 10600450
  visco Submitted batch job 10600739
+12/05/19 19:27 visco ISSUE only  0 timesteps
+12/06/19 01:16 ran SEPTkubo_mapptoplane.net
+ passivetracers Submitted batch job 11447728
+ passivetracers Submitted batch job 11447918
+ passivetracers Submitted batch job 11447962
+03/25/20 17:24 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11452196
+03/26/20 12:50 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11452218
+03/26/20 13:08 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11452225
+03/26/20 13:18 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11452231
+03/26/20 13:35 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11452268
+03/26/20 13:49 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11454057
+ passivetracers Submitted batch job 11454977
+ passivetracers Submitted batch job 11455035
+03/30/20 13:44 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11455037
+03/30/20 13:51 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11455039
+03/30/20 14:08 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11455047
+03/30/20 14:25 passivetracers ISSUE only  0 timesteps
+ passivetracers Submitted batch job 11455053
+03/30/20 14:57 passivetracers ISSUE only  0 timesteps
+ passivetracers Submitted batch job 11455057
+03/30/20 21:33 passivetracers ISSUE only  0 timesteps
+ passivetracers Submitted batch job 11456503
+03/31/20 14:49 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11456526
+03/31/20 14:57 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11456529
+03/31/20 15:03 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11456571
+03/31/20 15:11 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11460273
+04/02/20 00:18 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11460277
+04/02/20 00:52 passivetracers ISSUE only   timesteps
+ test Submitted batch job 11460278
+04/02/20 01:19 test ISSUE only   timesteps
+04/02/20 21:12 passivetracers ISSUE only  0 timesteps
+ passivetracers Submitted batch job 11466615
+04/04/20 23:24 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466618
+04/04/20 23:38 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466619
+04/04/20 23:41 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466621
+04/04/20 23:44 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466622
+04/04/20 23:46 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466623
+04/04/20 23:56 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466624
+04/04/20 23:59 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466625
+04/05/20 00:04 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466626
+04/05/20 00:24 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466627
+04/05/20 00:32 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466628
+04/05/20 00:45 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466629
+04/05/20 00:53 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466630
+04/05/20 01:01 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11466811
+04/05/20 17:49 passivetracers ISSUE only  0 timesteps
+ passivetracers Submitted batch job 11467280
+ passivetracers Submitted batch job 11467283
+ passivetracers Submitted batch job 11467284
+ passivetracers Submitted batch job 11467296
+ passivetracers Submitted batch job 11467299
+ passivetracers Submitted batch job 11467300
+04/06/20 04:32 passivetracers ISSUE only  0 timesteps
+ passivetracers Submitted batch job 11467610
+ passivetracers Submitted batch job 11467640
+ passivetracers Submitted batch job 11467655
+ passivetracers Submitted batch job 11467667
+ passivetracers Submitted batch job 11468020
+04/07/20 00:45 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468069
+04/07/20 00:57 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468089
+04/07/20 01:04 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468090
+04/07/20 01:13 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468092
+04/07/20 01:19 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468098
+04/07/20 01:24 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468103
+04/07/20 01:30 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468108
+04/07/20 01:36 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468109
+04/07/20 01:42 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468110
+04/07/20 01:44 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468112
+04/07/20 01:51 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468114
+04/07/20 01:58 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468115
+04/07/20 02:14 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468116
+04/07/20 02:18 passivetracers ISSUE only   timesteps
+ passivetracers Submitted batch job 11468119
+ passivetracers Submitted batch job 11468120
+ highres_AVY7 Submitted batch job 11468121
+ highres_BVY7 Submitted batch job 11468122
+ passivetracers Submitted batch job 11468123
+04/08/20 15:02 highres_BVY7 ISSUE only  5 timesteps
+ passivetracers Submitted batch job 11479284
+04/09/20 00:59 highres_AVY7 ISSUE only  7 timesteps
+ passivetracers Submitted batch job 11479655
+ passivetracers Submitted batch job 11479656
+ passivetracers Submitted batch job 11479661
+ passivetracers Submitted batch job 11479696
+ passivetracers Submitted batch job 11479738
+ passivetracers Submitted batch job 11480723
+ passivetracers Submitted batch job 11480850
+ passivetracers Submitted batch job 11481199
+ passivetracers Submitted batch job 11481200
+ passivetracers Submitted batch job 11481254
+ passivetracers Submitted batch job 11481277
+ passivetracers Submitted batch job 11481444
+ passivetracers Submitted batch job 11481446
+ passivetracers Submitted batch job 11481448
+ passivetracers Submitted batch job 11481467
+ passivetracers Submitted batch job 11481475
+ passivetracers Submitted batch job 11481539
+ passivetracers Submitted batch job 11481541
+ passivetracers Submitted batch job 11484035
+ passivetracers Submitted batch job 11487882
+ passivetracers Submitted batch job 11488244
+ passivetracers Submitted batch job 11489098
+ passivetracers Submitted batch job 11491500
+ passivetracers Submitted batch job 11491706
+ passivetracers Submitted batch job 11492523
+ passivetracers Submitted batch job 11493642
+ passivetracers Submitted batch job 11493939
+ passivetracers Submitted batch job 11494165
+ passivetracers Submitted batch job 11494614
+ passivetracers Submitted batch job 11495529
+ passivetracers Submitted batch job 11495677
+ passivetracers Submitted batch job 11495955
+ passivetracers Submitted batch job 11496519
+ passivetracers Submitted batch job 11496881
+ passivetracers Submitted batch job 11498480
+ passivetracers Submitted batch job 11498549
+ passivetracers Submitted batch job 11498715
+ passivetracers Submitted batch job 11499059
+ passivetracers Submitted batch job 11499287
+ passivetracers Submitted batch job 11522704
+ passivetracers Submitted batch job 11522773
+ passivetracers Submitted batch job 11522774
+ passivetracers Submitted batch job 11522777
+ passivetracers Submitted batch job 11522780
+ passivetracers Submitted batch job 11522798
+ passivetracers Submitted batch job 11525423
+ passivetracers Submitted batch job 11525458
+ passivetracers Submitted batch job 11527927
+ passivetracers Submitted batch job 11527928
+ passivetracers Submitted batch job 11527929
+ passivetracers Submitted batch job 11527930
+ passivetracers Submitted batch job 11527931
+ passivetracers Submitted batch job 11527932
+ passivetracers Submitted batch job 11527933
+ passivetracers Submitted batch job 11527935
+ passivetracers Submitted batch job 11527937
+ passivetracers Submitted batch job 11527938
+ passivetracers Submitted batch job 11527939
+ passivetracers Submitted batch job 11527940
+ passivetracers Submitted batch job 11527941
+ passivetracers Submitted batch job 11527942
+ passivetracers Submitted batch job 11527943
+ passivetracers Submitted batch job 11527944
+ passivetracers Submitted batch job 11527947
+ passivetracers Submitted batch job 11527948
+ passivetracers Submitted batch job 11532109
+ passivetracers Submitted batch job 11532666
+ passivetracers Submitted batch job 11532667
+ passivetracers Submitted batch job 11532672
+ passivetracers Submitted batch job 11532674
+ passivetracers Submitted batch job 11532676
+ passivetracers Submitted batch job 11532679
+ passivetracers Submitted batch job 11532681
+ passivetracers Submitted batch job 11532682
+ passivetracers Submitted batch job 11532684
+ passivetracers Submitted batch job 11532685
+ passivetracers Submitted batch job 11532686
+ passivetracers Submitted batch job 11532687
+ passivetracers Submitted batch job 11532688
+ passivetracers Submitted batch job 11532691
+ passivetracers Submitted batch job 11532692
+ passivetracers Submitted batch job 11532693
+ passivetracers Submitted batch job 11532708
+ passivetracers Submitted batch job 11532713
+ passivetracers Submitted batch job 11533226
+ passivetracers Submitted batch job 11533249
+ passivetracers Submitted batch job 11533251
+ passivetracers Submitted batch job 11533256
+ passivetracers Submitted batch job 11533263
+ passivetracers Submitted batch job 11533268
+ passivetracers Submitted batch job 11533273
+ passivetracers Submitted batch job 11533280
+ passivetracers Submitted batch job 11533282
+ passivetracers Submitted batch job 11533286
+ passivetracers Submitted batch job 11533287
+ passivetracers Submitted batch job 11533297
+ passivetracers Submitted batch job 11533298
+ passivetracers Submitted batch job 11533299
+ passivetracers Submitted batch job 11533316
+ passivetracers Submitted batch job 11533319
+ passivetracers Submitted batch job 11533327
+ passivetracers Submitted batch job 11533329
+ passivetracers Submitted batch job 11533330
+ passivetracers Submitted batch job 11533332
+ passivetracers Submitted batch job 11534954
+ passivetracers Submitted batch job 11534955
+ passivetracers Submitted batch job 11534964
+ passivetracers Submitted batch job 11534965
+ passivetracers Submitted batch job 11534966
+ passivetracers Submitted batch job 11534967
+ passivetracers Submitted batch job 11534969
+ passivetracers Submitted batch job 11534970
+ passivetracers Submitted batch job 11534971
+ passivetracers Submitted batch job 11534972
+ passivetracers Submitted batch job 11534974
+ passivetracers Submitted batch job 11534976
+ passivetracers Submitted batch job 11534977
+ passivetracers Submitted batch job 11534978
+ passivetracers Submitted batch job 11534980
+ passivetracers Submitted batch job 11534981
+ passivetracers Submitted batch job 11534982
+ passivetracers Submitted batch job 11534983
+ passivetracers Submitted batch job 11534984
+ passivetracers Submitted batch job 11534985
+ passivetracers Submitted batch job 11534987
+ passivetracers Submitted batch job 11534988
+ passivetracers Submitted batch job 11534989
+ passivetracers Submitted batch job 11534990
+ passivetracers Submitted batch job 11534998
+ passivetracers Submitted batch job 11534999
+ passivetracers Submitted batch job 11535000
+ passivetracers Submitted batch job 11535001
+ passivetracers Submitted batch job 11535002
+ passivetracers Submitted batch job 11535003
+ tracers_DIVIDEZERO Submitted batch job 11539978
+ tracers_DIVIDEZERO Submitted batch job 11539979
+ tracers_DIVIDEZERO Submitted batch job 11539980
+ tracers_DIVIDEZERO Submitted batch job 11539981
+ passivetracers Submitted batch job 11539994
+ passivetracers Submitted batch job 11540001
+ passivetracers Submitted batch job 11540003
+ passivetracers Submitted batch job 11540032
+ passivetracers Submitted batch job 11540035
+ passivetracers Submitted batch job 11540039
+ passivetracers Submitted batch job 11540041
+ passivetracers Submitted batch job 11540042
+ passivetracers Submitted batch job 11540043
+ passivetracers Submitted batch job 11540045
+ passivetracers Submitted batch job 11540047
+ passivetracers Submitted batch job 11540069
+ passivetracers Submitted batch job 11540074
+ passivetracers Submitted batch job 11540078
+ passivetracers Submitted batch job 11540080
+ passivetracers Submitted batch job 11540081
+ passivetracers Submitted batch job 11540087
+ passivetracers Submitted batch job 11540088
+ passivetracers Submitted batch job 11540136
+ passivetracers Submitted batch job 11540141
+ passivetracers Submitted batch job 11540226
+ passivetracers Submitted batch job 11540231
+ passivetracers Submitted batch job 11540232
+ passivetracers Submitted batch job 11540404
+ passivetracers Submitted batch job 11540407
+ TRACE_AVY7 Submitted batch job 11543181
+ TRACE_AVY7 Submitted batch job 11543896
+04/26/20 03:51 TRACE_AVY7 completed 9 timesteps
+04/26/20 15:50 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 15:53 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 15:54 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 15:55 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 17:19 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 17:19 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 17:20 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 17:24 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 17:25 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 17:27 AVY7 error post process created 5 txt files, 0 tiff
+04/26/20 17:37 AVY7 error post process created 6 txt files, 0 tiff
+04/26/20 17:40 AVY7 error post process created 6 txt files, 0 tiff
+04/26/20 17:40 AVY7 error post process created 6 txt files, 0 tiff
+04/26/20 17:41 AVY7 error post process created 6 txt files, 0 tiff
+04/26/20 17:45 AVY7 error post process created 6 txt files, 0 tiff
+ passivetracers Submitted batch job 11559251
+ passivetracers Submitted batch job 11559256
+ passivetracers Submitted batch job 11559261
+ passivetracers Submitted batch job 11559382
+ passivetracers Submitted batch job 11559447
+ passivetracers Submitted batch job 11559461
+ passivetracers Submitted batch job 11559465
+04/28/20 00:28 DVX7 Submitted batch job 11566393
+04/28/20 00:32 DVX7 ISSUE only   timesteps
+04/28/20 00:34 DVX7 error post process created 7 txt files, 1 tiff
+ DVX7 Submitted batch job 11566396
+04/28/20 00:36 DVX7 ISSUE only   timesteps
+04/28/20 00:36 DVX7 error post process created 1 txt files, 1 tiff
+ DVX7 Submitted batch job 11566398
+04/28/20 00:39 DVX7 ISSUE only   timesteps
+04/28/20 00:39 DVX7 error post process created 1 txt files, 1 tiff
+ DVX7 Submitted batch job 11566400
+04/28/20 00:45 DVX7 ISSUE only   timesteps
+04/28/20 00:45 DVX7 error post process created 1 txt files, 1 tiff
+04/28/20 00:52 DVY7 prepared to run
+ DVY7 Submitted batch job 11566403
+04/28/20 00:59 DVY7 ISSUE only   timesteps
+04/28/20 00:59 DVY7 error post process created 1 txt files, 1 tiff
+ DVY7 Submitted batch job 11566405
+04/28/20 01:01 DVY7 ISSUE only   timesteps
+04/28/20 01:02 DVY7 error post process created 1 txt files, 1 tiff
+ DVY7 Submitted batch job 11566407
+04/28/20 01:05 DVY7 ISSUE only   timesteps
+04/28/20 01:05 DVY7 error post process created 1 txt files, 1 tiff
+ DVY7 Submitted batch job 11566409
+04/28/20 01:18 DVX7 Submitted batch job 11566411
+04/28/20 13:44 DVZ7 prepared to run
+ DVZ7 Submitted batch job 11571522
+04/30/20 00:21 DWX7 Submitted batch job 11585382
+04/30/20 00:24 DWY7 Submitted batch job 11585383
+04/30/20 00:41 BVY1 error post process created 1 txt files, 0 tiff
+04/30/20 10:50 DVX7 completed 9 timesteps
+04/30/20 10:53 DVX7 post process created 25 txt files, 1 tiff
+ AVY7 Submitted batch job 11585501
+ AVY7 Submitted batch job 11585596
