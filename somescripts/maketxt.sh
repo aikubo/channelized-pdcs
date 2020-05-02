@@ -58,12 +58,12 @@ echo editing post.f90
 cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 git pull
 #sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post.f90
-sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post.f90
-sed -i.bak "s|.*width=.*|width=$width|" post.f90
-sed -i.bak "s|.*lambda=.*|lambda=$wave|" post.f90
-sed -i.bak "s|.*depth=.*|depth=$depth|" post.f90
-sed -i.bak "s|.*amprat=.*|amprat=$amp|" post.f90
-sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" post.f90
+sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" dx_writeout.f90
+sed -i.bak "s|.*width=.*|width=$width|" dx_writeout.f90
+sed -i.bak "s|.*lambda=.*|lambda=$wave|" dx_writeout.f90
+sed -i.bak "s|.*depth=.*|depth=$depth|" dx_writeout.f90
+sed -i.bak "s|.*amprat=.*|amprat=$amp|" dx_writeout.f90
+sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" dx_writeout.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
 
@@ -91,7 +91,7 @@ ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.o richardson.o
 
 
 cp post.exe $here 
-cp post.f90 $here
+cp dx_writeout.f90 $here
 cd $here 
 
 echo "submit to run"

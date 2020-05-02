@@ -22,7 +22,7 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='CVY7'
+simlabel='SV7'
 
 
 RMAX=404
@@ -30,8 +30,8 @@ YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
 width=201
-lambda=900
-amprat=0.15
+lambda=0
+amprat=0
 deltat=5.0
 timesteps=8
 tstart=3
@@ -50,7 +50,7 @@ call openbin(100, 'EP_G', EP_G1)
 !call openbin(700, 'W_S1', W_S1)
 !call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l900_A15_W201', XXX, YYY, ZZZ)
+call handletopo('l0_A0_W201', XXX, YYY, ZZZ)
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
