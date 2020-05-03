@@ -1503,3 +1503,24 @@
 05/02/20 01:36 BVY7 error post process created 11 txt files, 19 tiff
 05/02/20 02:41 BVY7 error post process created 11 txt files, 20 tiff
 05/02/20 08:19 AVY7 ISSUE only  1 timesteps
+05/02/20 15:45 BVY7 error post process created 11 txt files, 20 tiff
+05/02/20 15:46 BVY1 error post process created 9 txt files, 0 tiff
+05/02/20 15:47 BVY4 post process created 37 txt files, 4 tiff
+05/02/20 15:50 BVY7 error post process created 11 txt files, 20 tiff
+05/02/20 16:07 BVY7 error post process created 11 txt files, 20 tiff
+05/02/20 16:20 BVY7 error post process created 11 txt files, 20 tiff
+05/02/20 23:14 BVY7 error post process created 11 txt files, 20 tiff
+ passivetracers Submitted batch job 11608642
+ passivetracers Submitted batch job 11608646
+05/02/20 23:24 BVY7 error post process created 11 txt files, 20 tiff
+05/02/20 23:35 AVY7 error post process created 6 txt files, 1 tiff
+05/02/20 23:36 AVY7 error post process created 6 txt files, 1 tiff
+05/02/20 23:50 AVY7 error post process created 6 txt files, 1 tiff
+05/02/20 23:54 AVY7 error post process created 6 txt files, 1 tiff
+05/03/20 00:01 AVY7 error post process created 6 txt files, 1 tiff
+05/03/20 00:04 AVY7 error post process created 7 txt files, 1 tiff
+05/03/20 00:05 AVY7 error post process created 7 txt files, 1 tiff
+05/03/20 00:13 AVY7 error post process created 7 txt files, 1 tiff
+05/03/20 00:25 BVY7 error post process created 11 txt files, 21 tiff
+05/03/20 00:46 BVY7 error post process created 11 txt files, 21 tiff
+05/03/20 01:20 BVY7 error post process created 11 txt files, 21 tiff

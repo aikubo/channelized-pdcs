@@ -29,18 +29,17 @@ amprat=.15000000000000000000
 call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
-!call openbin(100, 'EP_G', EP_G1)
+call openbin(100, 'EP_G', EP_G1)
 !call openbin(400, 'V_G', V_G1)
 !call openbin(500, 'W_G', W_G1)
-
+call  logvolfrc(EP_G1, EPP)
 call handletopo('l600_A15_W201', XXX, YYY, ZZZ)
 
-call writedxtopo
+!call writedxtopo
 
-!call sinuousplane(dble(450))
+call sinuousplane
 
 
-!call  logvolfrc(EP_G1, EPP)
 
 !call openascii(1100, 'EP_P_t')
 !call makeEP(1100, EP_P, printstatus)

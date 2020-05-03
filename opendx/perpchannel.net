@@ -1,17 +1,17 @@
 //
-// time: Sat May  2 23:39:58 2020
+// time: Sun May  3 00:07:12 2020
 //
 // version: 3.2.0 (format), 4.4.4 (DX)
 //
 //
 // MODULE main
-// page assignment: image	order=5, windowed=0, showing=0
+// page assignment: image	order=5, windowed=0, showing=1
 // page assignment: import	order=4, windowed=0, showing=0
 // page assignment: jsosurf	order=3, windowed=0, showing=0
-// page assignment: sinplane	order=2, windowed=0, showing=1
+// page assignment: sinplane	order=2, windowed=0, showing=0
 // page assignment: slice	order=6, windowed=0, showing=0
 // page assignment: topo	order=7, windowed=0, showing=0
-// workspace: width = 611, height = 792
+// workspace: width = 183, height = 522
 // layout: snap = 0, width = 50, height = 50, align = NN
 //
 macro main(
@@ -453,10 +453,19 @@ main_Color_6_out_1 =
     main_Color_6_in_5
     ) [instance: 6, cache: 1];
     // 
-    // node Transmitter[10]: x = 423, y = 730, inputs = 1, label = sinplane
+    // node Collect[3]: x = 208, y = 688, inputs = 2, label = Collect
     // page group: sinplane
     //
-sinplane = main_Color_6_out_1;
+main_Collect_3_out_1 = 
+    Collect(
+    main_Color_6_out_1,
+    main_Collect_3_in_2
+    ) [instance: 3, cache: 1];
+    // 
+    // node Transmitter[10]: x = 374, y = 724, inputs = 1, label = sinplane
+    // page group: sinplane
+    //
+sinplane = main_Collect_3_out_1;
     // 
     // node Receiver[10]: x = 10, y = 100, inputs = 1, label = sinplane
     // page group: image
@@ -555,16 +564,17 @@ main_Map_4_out_1 =
     main_Map_4_in_4
     ) [instance: 4, cache: 1];
     // 
-    // node Collect[2]: x = 129, y = 460, inputs = 2, label = Collect
+    // node Remove[2]: x = 196, y = 378, inputs = 2, label = Remove
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "normals"
     // page group: slice
     //
-main_Collect_2_out_1 = 
-    Collect(
+main_Remove_2_out_1 = 
+    Remove(
     main_Map_4_out_1,
-    main_Collect_2_in_2
+    main_Remove_2_in_2
     ) [instance: 2, cache: 1];
     // 
-    // node Colormap[3]: x = 199, y = 460, inputs = 19, label = Colormap
+    // node Colormap[3]: x = 284, y = 441, inputs = 19, label = Colormap
     // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 0.0] [0.071428571 0.0] [0.13888889 0.21296296] [0.14285714 0.51851852] [0.32936508 0.56481481] [0.54761905 0.61111111] }
     // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [0.10714286 1.0] [0.14285714 0.0] [0.21428571 1.0] [0.93253968 1.0] }
     // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 0.0] [0.067460317 1.0] [0.20238095 1.0] [0.5 0.0] [0.99206349 0.0] }
@@ -601,12 +611,12 @@ main_Colormap_3_out_2[cache: 2] =
     main_Colormap_3_in_19
     ) [instance: 3, cache: 1];
     // 
-    // node Color[5]: x = 181, y = 550, inputs = 5, label = Color
+    // node Color[5]: x = 109, y = 474, inputs = 5, label = Color
     // page group: slice
     //
 main_Color_5_out_1 = 
     Color(
-    main_Collect_2_out_1,
+    main_Remove_2_out_1,
     main_Colormap_3_out_1,
     main_Colormap_3_out_2,
     main_Color_5_in_4,
@@ -744,6 +754,34 @@ main_Color_7_out_1 =
     main_Color_7_in_5
     ) [instance: 7, cache: 1];
     // 
+    // node ColorBar[1]: x = 523, y = 432, inputs = 16, label = ColorBar
+    // input[5]: defaulting = 1, visible = 1, type = 1, value = NULL
+    // input[6]: defaulting = 0, visible = 0, type = 5, value = 0.0
+    // input[7]: defaulting = 0, visible = 0, type = 5, value = 8.0
+    // input[8]: defaulting = 0, visible = 1, type = 32, value = "-LOG VOLUME FRACTION"
+    // input[14]: defaulting = 1, visible = 0, type = 16777248, value = NULL
+    // page group: sinplane
+    //
+main_ColorBar_1_out_1 = 
+    ColorBar(
+    main_Colormap_4_out_1,
+    main_ColorBar_1_in_2,
+    main_ColorBar_1_in_3,
+    main_ColorBar_1_in_4,
+    main_ColorBar_1_in_5,
+    main_ColorBar_1_in_6,
+    main_ColorBar_1_in_7,
+    main_ColorBar_1_in_8,
+    main_ColorBar_1_in_9,
+    main_ColorBar_1_in_10,
+    main_ColorBar_1_in_11,
+    main_ColorBar_1_in_12,
+    main_ColorBar_1_in_13,
+    main_ColorBar_1_in_14,
+    main_ColorBar_1_in_15,
+    main_ColorBar_1_in_16
+    ) [instance: 1, cache: 1];
+    // 
     // node Integer[1]: x = 92, y = 10, inputs = 11, label = Integer
     // input[1]: defaulting = 0, visible = 0, type = 32, value = "Integer_1"
     // input[3]: defaulting = 0, visible = 0, type = 1, value = 140 
@@ -839,7 +877,7 @@ main_Compute_3_out_1 =
     // input[41]: defaulting = 0, visible = 0, type = 32, value = "none"
     // page group: image
     // depth: value = 24
-    // window: position = (0.0191,0.1227), size = 0.5949x0.7489, screen = 0
+    // window: position = (0.0191,0.1185), size = 0.5949x0.7489, screen = 0
     // internal caching: 1
     //
 main_Image_1_out_1,
@@ -1078,6 +1116,8 @@ main_Colormap_4_out_2 = NULL;
 main_Color_6_in_4 = NULL;
 main_Color_6_in_5 = NULL;
 main_Color_6_out_1 = NULL;
+main_Collect_3_in_2 = NULL;
+main_Collect_3_out_1 = NULL;
 main_Transmitter_10_out_1 = NULL;
 main_Receiver_10_out_1 = NULL;
 main_Isosurface_5_in_2 = -15.0;
@@ -1110,8 +1150,8 @@ main_Slab_59_out_1 = NULL;
 main_Map_4_in_3 = NULL;
 main_Map_4_in_4 = NULL;
 main_Map_4_out_1 = NULL;
-main_Collect_2_in_2 = NULL;
-main_Collect_2_out_1 = NULL;
+main_Remove_2_in_2 = "normals";
+main_Remove_2_out_1 = NULL;
 main_Colormap_3_in_1 = { [0.0 0.0] [0.071428571 0.0] [0.13888889 0.21296296] [0.14285714 0.51851852] [0.32936508 0.56481481] [0.54761905 0.61111111] };
 main_Colormap_3_in_2 = { [0.0 1.0] [0.10714286 1.0] [0.14285714 0.0] [0.21428571 1.0] [0.93253968 1.0] };
 main_Colormap_3_in_3 = { [0.0 0.0] [0.067460317 1.0] [0.20238095 1.0] [0.5 0.0] [0.99206349 0.0] };
@@ -1176,6 +1216,21 @@ main_Color_7_in_2 = "red";
 main_Color_7_in_3 = 1.0;
 main_Color_7_in_4 = NULL;
 main_Color_7_in_5 = NULL;
+main_ColorBar_1_in_2 = NULL;
+main_ColorBar_1_in_3 = NULL;
+main_ColorBar_1_in_4 = NULL;
+main_ColorBar_1_in_5 = NULL;
+main_ColorBar_1_in_6 = 0.0;
+main_ColorBar_1_in_7 = 8.0;
+main_ColorBar_1_in_8 = "-LOG VOLUME FRACTION";
+main_ColorBar_1_in_9 = NULL;
+main_ColorBar_1_in_10 = NULL;
+main_ColorBar_1_in_11 = NULL;
+main_ColorBar_1_in_12 = NULL;
+main_ColorBar_1_in_13 = NULL;
+main_ColorBar_1_in_14 = NULL;
+main_ColorBar_1_in_15 = NULL;
+main_ColorBar_1_in_16 = NULL;
 main_Integer_1_in_1 = "Integer_1";
 main_Integer_1_in_2 = NULL;
 main_Integer_1_in_3 = 140 ;
