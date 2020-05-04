@@ -14,6 +14,10 @@ use massdist
 use sinplane 
 
 implicit none
+integer:: tsinplane 
+
+
+tsinplane=04
 RMAX=404
 YMAX=154
 ZMAX=302
@@ -37,7 +41,7 @@ call handletopo('l600_A15_W201', XXX, YYY, ZZZ)
 
 !call writedxtopo
 
-call sinuousplane
+call sinuousplane(tsinplane)
 
 
 

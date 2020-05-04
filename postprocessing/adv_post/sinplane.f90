@@ -7,16 +7,15 @@ use parampost
 
         contains 
 
-        subroutine sinuousplane
+        subroutine sinuousplane(tout)
                 double precision, allocatable:: sinplane(:)
                 double precision, allocatable:: isocut(:), isocut2(:)
                 double precision, allocatable:: edge2iso(:)
                 double precision:: XLOC, sinecenter
                 double precision:: centercut
-                integer:: tout 
+                integer, intent(in):: tout 
         centercut=(ZMAX*3.0)/2
 
-        tout=8 
         write(*,*) "entering sinplane"
         allocate(sinplane(length1))
         allocate(isocut(length1))
@@ -51,7 +50,7 @@ DO zc=1,ZMAX
                 XLOC=rc*DX(1)
                 centerline = lambda*amprat*sind((360*XLOC)/lambda)+centercut
                 sinplane(I)= (centerline-zc*(3.0))
-                edge2= lambda*amprat*sind((360*XLOC)/lambda)+centercut+width/2 - yc*3.0
+                edge2= lambda*amprat*sind((360*XLOC)/lambda)+centercut+width/2 - zc*3.0
 
                 if (sinplane(I) .gt. 0) then 
                          isocut(I)=EPP(I,tout)
@@ -78,12 +77,19 @@ DO zc=1,ZMAX
 
 end do 
 write(*,*) "writing "
+
+if (tout .eq. 1) then
         open(8888, file='sinplane')
+end if 
         open(8889, file="isocut")
         open(8890, file="mapcut")
         open(8891, file="edge2iso")
-      do I=1,length1 
+      do I=1,length1
+
+        if (tout .eq. 1) then  
          write(8888,format4var) sinplane(I), XXX(I,1),YYY(I,1),ZZZ(I,1)
+        end if 
+
          write(8889,format4var) isocut(I), XXX(I,1),YYY(I,1),ZZZ(I,1)
          write(8890,format4var) isocut2(I), XXX(I,1),YYY(I,1),ZZZ(I,1)
          write(8891, format4var) edge2iso(I), XXX(I,1),YYY(I,1),ZZZ(I,1)

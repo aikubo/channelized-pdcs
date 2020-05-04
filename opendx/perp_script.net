@@ -313,7 +313,7 @@ main_Isosurface_4_out_1 =
     ) [instance: 4, cache: 1];
     // 
     // node Import[1]: x = 113, y = 10, inputs = 6, label = Import
-    // input[1]: defaulting = 0, visible = 1, type = 32, value = "testC.general"
+    // input[1]: defaulting = 0, visible = 1, type = 32, value = "testC2temp.general"
     // input[2]: defaulting = 0, visible = 1, type = 32, value = "Volume"
     // page group: import
     //
@@ -914,7 +914,7 @@ main_Render_1_out_1 =
     ) [instance: 1, cache: 1];
     // 
     // node WriteImage[1]: x = 81, y = 460, inputs = 4, label = WriteImage
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "iso_9"
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "BVY707perpchannel"
     // input[3]: defaulting = 0, visible = 1, type = 32, value = "tiff"
     // page group: image
     //
@@ -1028,7 +1028,7 @@ main_Isosurface_4_in_4 = NULL;
 main_Isosurface_4_in_5 = NULL;
 main_Isosurface_4_in_6 = NULL;
 main_Isosurface_4_out_1 = NULL;
-main_Import_1_in_1 = "testC.general";
+main_Import_1_in_1 = "testC2temp.general";
 main_Import_1_in_2 = "Volume";
 main_Import_1_in_3 = NULL;
 main_Import_1_in_4 = NULL;
@@ -1560,7 +1560,7 @@ main_Image_1_out_1 = NULL;
 main_Image_1_out_2 = NULL;
 main_Render_1_in_3 = NULL;
 main_Render_1_out_1 = NULL;
-main_WriteImage_1_in_2 = "iso_9";
+main_WriteImage_1_in_2 = "BVY707perpchannel";
 main_WriteImage_1_in_3 = "tiff";
 main_WriteImage_1_in_4 = NULL;
 Executive("product version 4 4 4");

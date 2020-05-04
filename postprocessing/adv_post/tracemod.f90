@@ -63,7 +63,8 @@ double precision, allocatable:: TRACERSON(:,:,:)
         allocate(TRACERSON(ttrace+1, sum_on, 4))
         kk=1
         do ii=1,maxtracers 
-                if (TRACERS(ttrace+1, ii,2) .eq. dble(1.0)) then 
+                if (TRACERS(ttrace+1, ii,3) .eq. dble(1.0)) then
+                        write(*,*) ii 
                         do jj=1, ttrace+1
                                 TRACERSON(jj,kk,1)=TRACERS(jj,kk,8)
                                 TRACERSON(jj,kk,2)=TRACERS(jj,kk,4)
@@ -78,6 +79,7 @@ double precision, allocatable:: TRACERSON(:,:,:)
         do jj=1,ttrace+1
         do ii=1,sum_on 
                 write(66668, 200) TRACERSON(jj,ii,1), TRACERSON(jj,ii,2),TRACERSON(jj,ii,3), TRACERSON(jj,ii,4)
+                !write(*,*) TRACERSON(jj,ii,1), TRACERSON(jj,ii,2),TRACERSON(jj,ii,3), TRACERSON(jj,ii,4)
         end do 
         END DO 
         
