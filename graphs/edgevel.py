@@ -65,7 +65,7 @@ for sim in labels:
 nmass=normalizebymass(massR)
 
 #fid= "_edge_vel1.txt"
-#edgevel2=openmine(labels, path, fid, cols, out)
+
 
 #evel= edgevel1/edgevel2
 fid="edgevel_comparewave"
