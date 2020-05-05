@@ -11,42 +11,40 @@ use findhead
 use find_richardson 
 use entrainment 
 use massdist
+use sinplane 
+
 implicit none
-integer:: tfind=8
-double precision:: ZLOC=450.0
-logical::printstatus 
-double precision:: width, lambda
-double precision, allocatable:: isosurface(:,:,:)
-double precision, dimension(:):: current(4)
-double precision:: scaleh=50.0
-allocate(isosurface(1200,4,15))
+integer:: tsinplane 
+
+
+tsinplane=04
 RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
 width=201
-lambda=0
-printstatus=.false.
+lambda=600
 timesteps=8
 tstart=3
 tstop=timesteps
 depth = 27
+amprat=.15000000000000000000
 
 call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
-!call openbin(100, 'EP_G', EP_G1)
-!call openbin(200, 'U_G', U_G1)
-!call openbin(300, 'T_G', T_G1)
+call openbin(100, 'EP_G', EP_G1)
 !call openbin(400, 'V_G', V_G1)
 !call openbin(500, 'W_G', W_G1)
+call  logvolfrc(EP_G1, EPP)
+call handletopo('l600_A15_W201', XXX, YYY, ZZZ)
 
-call handletopo('l0_w201', XXX, YYY, ZZZ)
+!call writedxtopo
 
-call writedxtopo
-!call  logvolfrc(EP_G1, EPP)
+call sinuousplane(tsinplane)
 
-!print*, ZZZ(:,1)
+
+
 !call openascii(1100, 'EP_P_t')
 !call makeEP(1100, EP_P, printstatus)
 !call makeUG(1200, U_G, printstatus) 

@@ -4,7 +4,6 @@ echo "Making post processing script"
 here=$(pwd)
 label=${PWD##*/}
 
-rm $label*
 
 cp /home/akubo/myprojects/channelized-pdcs/postsub.sh $here
 sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
@@ -24,12 +23,10 @@ topo+="_W"
 topo+="$width"
 echo $topo
 
-amp=$(echo "$amp/100"  | bc -l)
+amp=$(echo "$amp/100" | bc -l)
 
 cp /home/akubo/myprojects/channelized-pdcs/topo/topofiles/$topo ./
 # check topo 
-
-
 if [ -s "$topo" ]
 then
    echo " $topo file exists and is not empty "
@@ -57,13 +54,14 @@ fi
 
 cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 git pull
-sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post.f90
-sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post.f90
-sed -i.bak "s|.*width=.*|width=$width|" post.f90
-sed -i.bak "s|.*lambda=.*|lambda=$wave|" post.f90
-sed -i.bak "s|.*depth=.*|depth=$depth|" post.f90
-sed -i.bak "s|.*amprat=.*|amprat=$amp|" post.f90
-sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" post.f90
+#sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post_trace.f90
+sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post_trace.f90
+sed -i.bak "s|.*width=.*|width=$width|" post_trace.f90
+sed -i.bak "s|.*lambda=.*|lambda=$wave|" post_trace.f90
+sed -i.bak "s|.*depth=.*|depth=$depth|" post_trace.f90
+sed -i.bak "s|.*amprat=.*|amprat=$amp|" post_trace.f90
+
+#sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" post_trace.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
 
@@ -86,8 +84,9 @@ ifort -c -convert big_endian massinchannel.f90
 ifort -c -convert big_endian column.f90
 ifort -c -convert big_endian average.f90
 ifort -c -convert big_endian richardson.f90
+ifort -c -convert big_endian tracemod.f90
 
-ifort var_3d.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post.f90  -convert big_endian -o post.exe
+ifort var_3d.o postmod.o formatmod.o tracemod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post_trace.f90  -convert big_endian -o post.exe
 
 
 cp post.exe $here 

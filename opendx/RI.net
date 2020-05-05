@@ -316,7 +316,7 @@ main_Render_1_out_1 =
     ) [instance: 1, cache: 1];
     // 
     // node WriteImage[1]: x = 382, y = 917, inputs = 4, label = WriteImage
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "AVY4_Ri"
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "AVY7_Ri"
     // input[3]: defaulting = 0, visible = 1, type = 32, value = "tiff"
     //
     WriteImage(

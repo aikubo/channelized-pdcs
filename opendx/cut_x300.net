@@ -1,5 +1,5 @@
 //
-// time: Wed Dec  4 12:14:14 2019
+// time: Wed Sep 18 16:09:15 2019
 //
 // version: 3.2.0 (format), 4.4.4 (DX)
 //
@@ -116,15 +116,15 @@ main_Slab_33_out_1 =
     ) [instance: 33, cache: 1];
     // 
     // node Colormap[2]: x = 305, y = 437, inputs = 19, label = Colormap
-    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.047738693 0.0] [0.17063492 0.22222222] [0.24603175 0.5462963] [0.30952381 0.75925926] }
-    // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 0.046052632] [0.0050251256 0.96052632] [0.93253968 1.0] }
-    // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.015075377 1.0] [0.08490566 1.0] [0.56349206 1.0] [0.73015873 0.33027523] [0.99206349 0.0] }
-    // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 0.0] [0.010050251 1.0] [0.67474048 1.0] [1.0 0.0] }
+    // input[1]: defaulting = 0, visible = 0, type = 16777224, value = { [0.10726644 0.0] [0.17063492 0.22222222] [0.24603175 0.5462963] [0.30952381 0.75925926] }
+    // input[2]: defaulting = 0, visible = 0, type = 16777224, value = { [0.041522491 0.054054054] [0.044982699 0.98198198] [0.93253968 1.0] }
+    // input[3]: defaulting = 0, visible = 0, type = 16777224, value = { [0.0 1.0] [0.08490566 1.0] [0.56349206 1.0] [0.73015873 0.33027523] [0.99206349 0.0] }
+    // input[4]: defaulting = 0, visible = 0, type = 16777224, value = { [0.023809524 0.98019802] [0.67474048 1.0] [1.0 0.0] }
     // input[5]: defaulting = 0, visible = 0, type = 32, value = "Colormap_2"
     // input[7]: defaulting = 1, visible = 0, type = 5, value = -0.0
-    // input[8]: defaulting = 1, visible = 0, type = 5, value = 14.0003
+    // input[8]: defaulting = 1, visible = 0, type = 5, value = 14.000347
     // input[9]: defaulting = 1, visible = 0, type = 1, value = 20
-    // input[12]: defaulting = 0, visible = 0, type = 16777221, value = { -0.0 14.0003 }
+    // input[12]: defaulting = 0, visible = 0, type = 16777221, value = { -0.0 14.000347 }
     // input[17]: defaulting = 0, visible = 0, type = 5, value = -0.0
     // input[18]: defaulting = 0, visible = 0, type = 5, value = 14.000347
     // window: position = (0.3637,0.2793), size = 0.3934x0.3822, screen = 0
@@ -137,7 +137,7 @@ main_Colormap_2_out_2[cache: 2] =
     main_Colormap_2_in_3,
     main_Colormap_2_in_4,
     main_Colormap_2_in_5,
-    main_Colormap_2_in_6,
+    main_Slab_33_out_1,
     main_Colormap_2_in_7,
     main_Colormap_2_in_8,
     main_Colormap_2_in_9,
@@ -302,7 +302,7 @@ main_Render_1_out_1 =
     ) [instance: 1, cache: 1];
     // 
     // node WriteImage[1]: x = 382, y = 917, inputs = 4, label = WriteImage
-    // input[2]: defaulting = 0, visible = 1, type = 32, value = "cutx300_AV4"
+    // input[2]: defaulting = 0, visible = 1, type = 32, value = "cutx300_AV7"
     // input[3]: defaulting = 0, visible = 1, type = 32, value = "tiff"
     //
     WriteImage(
@@ -358,18 +358,17 @@ main_Color_1_out_1 = NULL;
 main_Slab_33_in_2 = "y";
 main_Slab_33_in_4 = NULL;
 main_Slab_33_out_1 = NULL;
-main_Colormap_2_in_1 = { [0.047738693 0.0] [0.17063492 0.22222222] [0.24603175 0.5462963] [0.30952381 0.75925926] };
-main_Colormap_2_in_2 = { [0.0 0.046052632] [0.0050251256 0.96052632] [0.93253968 1.0] };
-main_Colormap_2_in_3 = { [0.015075377 1.0] [0.08490566 1.0] [0.56349206 1.0] [0.73015873 0.33027523] [0.99206349 0.0] };
-main_Colormap_2_in_4 = { [0.0 0.0] [0.010050251 1.0] [0.67474048 1.0] [1.0 0.0] };
+main_Colormap_2_in_1 = { [0.10726644 0.0] [0.17063492 0.22222222] [0.24603175 0.5462963] [0.30952381 0.75925926] };
+main_Colormap_2_in_2 = { [0.041522491 0.054054054] [0.044982699 0.98198198] [0.93253968 1.0] };
+main_Colormap_2_in_3 = { [0.0 1.0] [0.08490566 1.0] [0.56349206 1.0] [0.73015873 0.33027523] [0.99206349 0.0] };
+main_Colormap_2_in_4 = { [0.023809524 0.98019802] [0.67474048 1.0] [1.0 0.0] };
 main_Colormap_2_in_5 = "Colormap_2";
-main_Colormap_2_in_6 = NULL;
 main_Colormap_2_in_7 = NULL;
 main_Colormap_2_in_8 = NULL;
 main_Colormap_2_in_9 = NULL;
 main_Colormap_2_in_10 = NULL;
 main_Colormap_2_in_11 = NULL;
-main_Colormap_2_in_12 = { -0.0 14.0003 };
+main_Colormap_2_in_12 = { -0.0 14.000347 };
 main_Colormap_2_in_13 = NULL;
 main_Colormap_2_in_14 = NULL;
 main_Colormap_2_in_15 = NULL;
@@ -763,7 +762,7 @@ main_Image_1_out_1 = NULL;
 main_Image_1_out_2 = NULL;
 main_Render_1_in_3 = NULL;
 main_Render_1_out_1 = NULL;
-main_WriteImage_1_in_2 = "cutx300_AV4";
+main_WriteImage_1_in_2 = "cutx300_AV7";
 main_WriteImage_1_in_3 = "tiff";
 main_WriteImage_1_in_4 = NULL;
 Executive("product version 4 4 4");

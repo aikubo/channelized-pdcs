@@ -65,7 +65,7 @@ DO zc=1,ZMAX
                 y_boundary=0.0
                      IF (rc>2 .and. rc<RMAX-2) THEN
                          IF (zc>1 .and. zc<ZMAX-1) THEN
-                                y_boundary=channel_topo(rc-2,zc-1)-2.*DY(1)
+                                y_boundary=channel_topo(rc-2,zc-1) !-2.*DY(1)
                          END IF
                      END IF
                 topography(I)=y_boundary-y(yc)

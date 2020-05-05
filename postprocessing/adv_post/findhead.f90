@@ -12,7 +12,6 @@ use filehead
 ! 
 !  isosurf writes out 3 files currenthead.txt, nose.txt, and froude.txt
 ! it takes width, and lambda in form double precision 
-! and sintrue which is a logical as its inputs 
 ! 
 ! it finds the isosurface of 6-7 -log(vol fraction) for all the width
 ! in the channel 
