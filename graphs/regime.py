@@ -46,8 +46,8 @@ def regime(labels, data, param, xlab, ylab, fid):
 #path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
 #os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
-path = "/home/akh/myprojects/channelized-pdcs/graphs/processed/"
-os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
+#path = "/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+#os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
 straight = [
     'SW7',
     'SV4',
@@ -251,9 +251,9 @@ areas_norm = [float(x) / float(y)/ float(z) for x, y, z in zip(areas, inlet, wid
 dist_norm = [float(x) / float(y) for x, y in zip(dist, zdist)]
 
 kdist_norm= [float(x) * float(y) *float(z)  for x, y, z in zip(kdist, areas, wave)]
-#scat = ax.scatter(dist_norm, areas_norm, c=wave, cmap=cm)
+scat = ax.scatter(dist_norm, areas_norm, c=wave, cmap=cm)
 mass_norm=[float(x) * float(y) /float(z)  for x, y, z in zip(Z, inlet, wave)]
-scat=ax.scatter(kdist, mass_norm, c=inletrat, cmap=cm)
+#scat=ax.scatter(kdist, mass_norm, c=inletrat, cmap=cm)
 
 
 #plt.xscale("log")
