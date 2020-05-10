@@ -24,9 +24,9 @@ here=$(pwd)
 #fi 
 mkdir $new
 echo copying
-cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*f  $here/$new
-cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*dat  $here/$new
-cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*inc  $here/$new
+cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*.f  $here/$new
+cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*.dat  $here/$new
+cp -R /home/akubo/myprojects/7_INFLOW/BVY7/*.inc  $here/$new
 
 
 cd $here/$new
