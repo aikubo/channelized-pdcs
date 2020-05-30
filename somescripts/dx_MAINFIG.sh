@@ -20,7 +20,7 @@ STR="0"
 echo $STR
 echo "The value is " $STR
 
-for i in `seq 4 5`
+for i in `seq 1 8`
 do
 
    if [ $i -lt 10 ]
@@ -40,13 +40,13 @@ do
 
 cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 
-sed -i.bak "s|.*tsinplane=.*|tsinplane=$var|" topoonly.f90
+sed -i.bak "s|.*tsinplane=.*|tsinplane=$i|" topoonly.f90
 
 cd $here 
 
 maketopo.sh 
 
-sleep 4m 
+sleep 6m 
 
 name1="$name$var"
 
