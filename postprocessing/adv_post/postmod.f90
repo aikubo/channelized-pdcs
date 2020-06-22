@@ -22,6 +22,7 @@ DOUBLE PRECISION,ALLOCATABLE::EP_P(:,:,:),Iso_6(:,:,:), dpu(:,:), dpv(:,:,:)
 DOUBLE PRECISION,ALLOCATABLE::Iso_3(:,:,:),four_point_Iso3(:,:,:),four_point(:,:,:)
 DOUBLE PRECISION, ALLOCATABLE :: T_G(:,:,:),U_G(:,:,:),VEL_6(:,:,:),VEL_3(:,:,:),VEL_ALL(:,:,:), VEL_temp(:,:), VEL_temp2(:,:),Richardson(:,:,:)
 DOUBLE PRECISION, ALLOCATABLE :: Ri_Dense(:,:,:),char_dense(:), char_dilute(:),VEL_DENSE(:,:),VEL_DILUTE(:,:)
+double precision, allocatable:: THETA_S(:,:), MU_G1(:,:), MU_S(:,:), TAU_G(:,:), TAU_S(:,:), TAU_RATIO(:,:)
 
 double precision, allocatable:: Ri_all(:,:,:)
 double precision:: gstar, gstar2, gstar1, froude, rho_c

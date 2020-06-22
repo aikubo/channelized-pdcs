@@ -18,6 +18,12 @@
         ALLOCATE( Ri(length1, timesteps))
         ALLOCATE( ROP_S1(length1,timesteps))
         ALLOCATE(W_S1(length1, timesteps))
+        ALLOCATE(MU_S(length1, timesteps))
+        ALLOCATE(MU_G1(length1, timesteps))
+        ALLOCATE(THETA_S(length1, timesteps))
+        ALLOCATE(TAU_G(length1, timesteps))
+        ALLOCATE(TAU_S(length1, timesteps))
+        allocate(TAU_RATIO(length1, timesteps))
 
         ALLOCATE( XXX(length1,1))
         ALLOCATE( topography(length1))
