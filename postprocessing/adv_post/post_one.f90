@@ -12,6 +12,7 @@ use find_richardson
 use entrainment 
 use massdist
 use averageit
+use grangass
 
 implicit none
 integer:: tfind=8
@@ -19,7 +20,7 @@ integer:: tfind=8
 
 integer::printstatus
 
-logical:: slices, froude, rigrad, ent, massalloc, xstream, ave, energy, tau
+logical:: slices, fd, rigrad, ent, massalloc, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
@@ -28,14 +29,14 @@ simlabel='DVZ4'
 printstatus=2
 
 slices=.FALSE.
-froude=.FALSE. 
+fd=.FALSE. 
 rigrad=.FALSE.
 ent=.FALSE.
 massalloc=.FALSE.
 xstream=.FALSE.
 ave=.FALSE.
 energy=.FALSE.
-tau=.FALSE.
+tau=.TRUE.
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -46,7 +47,7 @@ width=201
 lambda=1200
 amprat=.20000000000000000000
 deltat=5.0
-timesteps=8
+timesteps=4
 tstart=3
 tstop=timesteps
 depth = 27
@@ -80,7 +81,7 @@ call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 
 print*, "finding froude"
 
-if (froude) call isosurf(width, lambda, scaleh)
+if (fd) call isosurf(width, lambda, scaleh)
 print*, "finding richardson gradient"
 if (rigrad) call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"
@@ -90,7 +91,7 @@ if (massalloc) call massinchannel(width, depth, lambda, scaleh)
 print*, "calculating dominant velocities"
 if (xstream) call crossstream
 print*, "granular to gas stress"
-if (tau) then call calc_tau
+if (tau .or. slices) call calc_tau
 print*, "finding veritical column"
 if (slices) call slices2
 print*, "averaging"

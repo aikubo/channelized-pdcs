@@ -10,10 +10,10 @@ module grangass
         contains 
                 subroutine calc_tau 
                 double precision:: dtheta
-                call openbin(9901, 'MU_G1', MU_G1)
+                call openbin(9901, 'MU_G', MU_G1)
                 call openbin(9902, 'MU_S1',MU_S)
-                call openbin(9904, 'THETA_S1', THETA_S) 
-                open(89098,file='TAU_RATIO_t08')
+                call openbin(9904, 'THETA_M1', THETA_S) 
+                open(89098,file='TAU_RATIO_t08.txt')
 
                 do t=1,timesteps
                 ! NOW THE VELOCITIES ARE CORRECT FOR THE CALCULATION OF GRADIENT
