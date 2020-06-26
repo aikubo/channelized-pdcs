@@ -20,7 +20,8 @@ integer:: tfind=8
 
 integer::printstatus
 
-logical:: slices, fd, rigrad, ent, massalloc, xstream, ave, energy, tau
+logical:: EPPdx8, slices, topo, fd, rigrad, ent, massalloc
+logical:: UGdx8, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
@@ -28,6 +29,10 @@ double precision:: scaleh=50.0
 simlabel='DVZ4'
 printstatus=2
 
+EPPdx8=.FALSE.
+TGdx8=.FALSE.
+UGdx8=.FALSE.
+topo=.FALSE.
 slices=.FALSE.
 fd=.FALSE. 
 rigrad=.FALSE.
@@ -70,20 +75,35 @@ call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 
 !print*, ZZZ(:,1)
-!call openascii(1100, 'EP_P_t')
-!call makeEP(1100, EP_P, printstatus, tfind)
-!call writedxtopo
- 
-!call makeUG(1200, U_G, printstatus) 
+if (UGdx8) then 
+       do t=1,timesteps 
+                call makedxtxt('UG_t',2000, U_G1, t)
+       end do  
+end if
 
-!call makeTG(1300, T_G, printstatus)
+if (EPPdx8) then
+       do t=1,timesteps
+                call makedxtxt('EP_P_t',1000, EPP, t)
+       end do
+end if
+
+if (TGdx8) then
+       do t=1,timesteps
+                call makedxtxt('T_G_t',3000, T_G1, t)
+       end do
+end if
+
+
+ 
+if (topo) call writedxtopo
+ 
 
 
 print*, "finding froude"
 
 if (fd) call isosurf(width, lambda, scaleh)
 print*, "finding richardson gradient"
-if (rigrad) call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
+if (rigrad .or. slices) call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"
 if (ent) call bulkent(EP_G1) 
 print*, "calculating mass in channel"

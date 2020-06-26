@@ -27,8 +27,8 @@ module grangass
                              I       = 1 + (yc-1) +(rc-1)*(YMAX-1+1) +  (zc-1)*(YMAX-1+1)*(RMAX-1+1)
                              I_yp1   = 1 + (yc+1-1) +(rc-1)*(YMAX-1+1) + (zc-1)*(YMAX-1+1)*(RMAX-1+1) !Cell above
                              I_ym1   = 1 + (yc-1-1) +(rc-1)*(YMAX-1+1) +(zc-1)*(YMAX-1+1)*(RMAX-1+1) !Cell above
-                             dtheta=(THETA_S(I_yp1,t)-THETA_S(I_ym1,t))/DY(1) 
-                             
+                             dtheta=(THETA_S(I_yp1,t)-THETA_S(I_ym1,t))/(6.0) 
+                             write(*,*) "dtheta", dtheta  
                              TAU_G(I,t)=(1/MU_G1(I,t))*SHUY(I,t)
                              TAU_S(I,t)=(1/MU_S(I,t))*dtheta   
 
@@ -43,6 +43,9 @@ module grangass
 
 
                 do i=1,length1
+                        write(*,*) "mu", MU_G1(I,8), MU_S(I,8) 
+                        
+                        write(*,*) TAU_G(I,t), TAU_S(I,t), SHUY(I,t), TAU_RATIO(I,8) 
                         write(89098, format4var) TAU_RATIO(I,8), XXX(I,1), YYY(I,1), ZZZ(I,1)
                 end do 
 
