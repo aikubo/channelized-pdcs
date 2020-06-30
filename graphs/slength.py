@@ -27,11 +27,11 @@ def channelvolume(labels):
 
         if "S" not in sim:
             param=labelparam(sim)
-            wave = float(param.get_value(0,'Wave'))
-            A=float(param.get_value(0,'Amprat'))
-            amp=float(param.get_value(0,'Amp'))
-            width=float(param.get_value(0,'Width'))
-            depth=float(param.get_value(0,'Depth'))
+            wave = float(param.at[0,'Wave'])
+            A=float(param.at[0,'Amprat'])
+            amp=float(param.at[0,'Amp'])
+            width=float(param.at[0,'Width'])
+            depth=float(param.at[0,'Depth'])
             oldi=0
             olds=0
             length=0

@@ -13,8 +13,8 @@ def load_xml(xml):
 	try:
 		xmldoc = etree.parse(xml)
 	except IOError as e:
-		print 'The input file is invalid. It must be a colormap xml file. Go to https://sciviscolor.org/home/colormaps/ for some good options'
-		print 'Go to https://sciviscolor.org/matlab-matplotlib-pv44/ for an example use of this script.'
+		print('The input file is invalid. It must be a colormap xml file. Go to https://sciviscolor.org/home/colormaps/ for some good options')
+		print('Go to https://sciviscolor.org/matlab-matplotlib-pv44/ for an example use of this script.')
 		sys.exit()
 	data_vals=[]
 	color_vals=[]
@@ -49,14 +49,14 @@ def make_cmap(xml):
 ## Print MATLAB compatible matrix
 def print_cmap_matrix(colormap):
 	c = 0
-	print ''
-	print 'matlab-colormap = [',
+	print('')
+	print('matlab-colormap = [',)
 	while c <= 255:
 		if c == 0: pass
-		else: print ''
-		print str(colormap(c)[0:3]).replace('(','').replace(')',''),
+		else: print('')
+		print(str(colormap(c)[0:3]).replace('(','').replace(')',''),)
 		c = c + 1
-	print '];'
+	print('];')
 	
 ## This is a quick example plotting the 8 by 1 gradient of the colormap 
 ## with Matplotlib
@@ -91,10 +91,10 @@ if __name__ == '__main__':
 
 	## construct the colormap
 	mycmap = make_cmap(args.path)
-	print 'converted successfully!'
+	print('converted successfully!')
 
 	## mycmap is matplotlib compatible object. to query color value out of it:
-	print 'example rgba value for data value 0 is: ' + str(mycmap(0.0))
+	print( 'example rgba value for data value 0 is: ' + str(mycmap(0.0)))
 
 	## MATLAB Users: This fuction will output a RGB matrix to use in MATLAB
 	if args.matrix == True:

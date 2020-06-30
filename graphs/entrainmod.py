@@ -12,15 +12,16 @@ from pltfunc import *
 from normalize import *
 
 def entrain(labels, data):
-    print('hello entrainment')
-    deltaV=pd.DataFrame(columns=labels)
+
+    deltaV=pd.DataFrame()
     for sim in labels:
-        print(sim)
         vol=data[sim]
-        dv=[0]
+        dv=[]
+        dv.append(0)
         for i in range(1,8):
             ent=vol[i]-vol[i-1]
             dv.append(ent)
+
         deltaV[sim]=dv
 
     return deltaV
