@@ -55,11 +55,11 @@ DO zc=1,ZMAX
                 if (sinplane(I) .gt. 0) then 
                          isocut(I)=EPP(I,tout)
                          isocut2(I)=0
-                        if (EPP(I,8) .eq. dble(0.0)) then 
-                                isocut(I)=14
+                        if (EPP(I,8) .le. dble(0.10)) then 
+                                isocut(I)=dble(14)
                         end if 
                 else   
-                         isocut(I)=14
+                         isocut(I)=dble(14)
                          isocut2(I)=EPP(I,tout)       
                 end if 
                 

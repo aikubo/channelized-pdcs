@@ -55,3 +55,6 @@
 /home/akubo/myprojects/7_INFLOW/DVX7
 /home/akubo/myprojects/7_INFLOW/DVZ7
 /home/akubo/myprojects/7_INFLOW/DWY7
+/home/akubo/myprojects/DWX7
+/home/akubo/myprojects/unconf_V7
+/home/akubo/myprojects/unconfV7

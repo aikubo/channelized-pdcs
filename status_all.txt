@@ -1688,3 +1688,41 @@
  unconf_V7 Submitted batch job 12336428
 06/26/20 16:01 BVY1 post process created 33 txt files, 29 tiff
 06/26/20 16:02 BVY4 post process created 40 txt files, 4 tiff
+06/27/20 01:33 BVY7 post process created 17 txt files, 26 tiff
+06/27/20 02:04 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 02:17 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 02:25 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 02:37 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 02:50 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 03:00 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 03:10 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 03:39 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 03:49 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 04:01 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 04:12 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 04:24 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 04:35 BVY7 post process created 17 txt files, 27 tiff
+06/27/20 22:42 DWX7 completed 9 timesteps
+06/27/20 22:44 DWX7 post process created 19 txt files, 0 tiff
+06/28/20 17:55 unconf_V7 completed 9 timesteps
+06/29/20 18:21 CVZ7 prepared to run
+ CVZ7 Submitted batch job 12354356
+06/29/20 18:25 CVZ7 ISSUE only   timesteps
+06/29/20 18:25 CVZ7 error post process created 1 txt files, 0 tiff
+ CVZ7 Submitted batch job 12354409
+06/29/20 20:17 AVY7 post process created 36 txt files, 20 tiff
+06/29/20 20:23 unconf_V7 post process created 19 txt files, 0 tiff
+06/29/20 20:24 AVY7 post process created 36 txt files, 20 tiff
+06/29/20 20:28 unconfV7 error post process created 0 txt files, 0 tiff
+06/29/20 20:30 unconfV7 error post process created 1 txt files, 0 tiff
+06/29/20 20:31 AVY7 post process created 36 txt files, 20 tiff
+06/29/20 20:32 unconfV7 post process created 19 txt files, 0 tiff
+06/29/20 20:39 AVY7 post process created 36 txt files, 20 tiff
+06/29/20 20:47 AVY7 post process created 36 txt files, 20 tiff
+06/29/20 20:55 AVY7 post process created 36 txt files, 20 tiff
+06/29/20 21:03 AVY7 post process created 36 txt files, 20 tiff
+06/29/20 21:10 AVY7 post process created 36 txt files, 20 tiff
+06/30/20 01:38 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 01:43 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 01:49 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 01:55 unconfV7 post process created 19 txt files, 0 tiff

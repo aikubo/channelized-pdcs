@@ -64,8 +64,8 @@ echo "1"
 
 #now make a copy of single write dx script
 
-cp kubo_pretty_may.net temp2.net
-cp kubo_pretty_may.cfg kubo_pretty_script.cfg
+cp ~/myprojects/7_INFLOW/BVY7/kubo_pretty_may.net ./temp2.net
+cp ~/myprojects/7_INFLOW/BVY7/kubo_pretty_may.cfg ./kubo_pretty_script.cfg
 
 
 echo "2"
@@ -83,8 +83,8 @@ echo "4"
 
 
 
-cp perpchannel.net temp3.net
-cp perpchannel.cfg perp_script.cfg
+cp ~/myprojects/7_INFLOW/BVY7/perpchannel.net temp3.net
+cp ~/myprojects/7_INFLOW/BVY7/perpchannel.cfg ./perp_script.cfg
 
 name1+="perpchannel"
 echo "5"
@@ -96,13 +96,13 @@ sed -i "s#iso_9#${name1}#g" perp_script.net
 
 echo "6"
 
-dx -nodisplay -execonly -script perp_script.net
+#dx -nodisplay -execonly -script perp_script.net
 
 echo "7"
 
 
-cp cut_200.net temp4.net
-cp cut_200.cfg cut_script.cfg
+cp ~/myprojects/7_INFLOW/BVY7/cut_200.net temp4.net
+cp ~/myprojects/7_INFLOW/BVY7/cut_200.cfg cut_script.cfg
 
 echo "8" 
 name1+="cut"
@@ -111,7 +111,7 @@ sed -i "s#iso_9#${name1}#g" cut_script.net
 
 echo "9"
 
-dx -nodisplay -execonly -script cut_script.net
+#dx -nodisplay -execonly -script cut_script.net
 
 
 done

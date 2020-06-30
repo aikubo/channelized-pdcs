@@ -101,7 +101,7 @@ if (topo) call writedxtopo
 
 print*, "finding froude"
 
-if (fd) call isosurf(width, lambda, scaleh)
+if (fd) call isosurf(scaleh)
 print*, "finding richardson gradient"
 if (rigrad .or. slices) call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"

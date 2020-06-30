@@ -6,7 +6,7 @@ use maketopo
 use filehead
         contains 
 
-        subroutine isosurf(width, lambda, averagehead)
+        subroutine isosurf(averagehead)
 !-----------------------------------------------------------------------!
 ! Written by AKubo September 2019 
 ! 
@@ -33,7 +33,6 @@ use filehead
 !
 !-----------------------------------------------------------------------!
                 implicit none 
-                double precision, intent(IN):: width, lambda 
                 double precision, intent(Out):: averagehead
                ! local variables ! 
                 integer:: countslope
@@ -106,6 +105,10 @@ use filehead
 
 
                     !print*, ztrace
+                    if ( width .eq. dble(0.0)) then     
+                        width=201
+                    end if  
+
                     IF( ZZZ(I,1) .GT. ztrace-width/2 & 
                         .and. ZZZ(I,1) .lt.ztrace+width/2 ) THEN
                     VOLFR=-(LOG10(1-EP_G1(I,t)+1e-14))
