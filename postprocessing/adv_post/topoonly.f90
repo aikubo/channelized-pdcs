@@ -17,7 +17,7 @@ implicit none
 integer:: tsinplane 
 
 
-tsinplane=4
+tsinplane=1
 RMAX=404
 YMAX=154
 ZMAX=302
