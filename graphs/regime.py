@@ -187,7 +187,7 @@ for sim in alllabels:
     UGmax.append(UG[sim].max())
     dpumax.append(dpu[sim].max())
     velz.append(avgW[sim].max())
-    phoenix.append(buoyant[sim].max())
+
 
 cvol, lg, area = channelvolume(alllabels)
 
@@ -270,11 +270,11 @@ ax[1][0].tick_params(labelsize=8)
 ax[1][0].set_ylabel('Mass Avulsed', fontsize=8)
 ax[1][0].set_xlabel('Curvature*(Meander Amplitude + Width)', fontsize=8)
 
-scat=ax[1][1].scatter(kdist_norm, phoenix, c=inletrat, cmap=cm)
-ax[1][1].set_ylim([0,0.007])
+scat=ax[1][1].scatter(kdist_norm, bulkent, c=inletrat, cmap=cm)
+#ax[1][1].set_ylim([-0.001,0.007])
 #ax[1][1].set_xlim([500,3600])
 ax[1][1].tick_params(labelsize=8)
-ax[1][1].set_ylabel('Buoyant Mass Outside Channel', fontsize=8)
+ax[1][1].set_ylabel('Bulk Entrainment', fontsize=8)
 ax[1][1].set_xlabel('Curvature*(Meander Amplitude + Width)', fontsize=8)
 
 plt.show()
