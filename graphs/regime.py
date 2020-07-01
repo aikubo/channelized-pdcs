@@ -21,11 +21,11 @@ from curv import curvat
 from matplotlib import rcParams
 
 ## MAC
-#path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-#os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
-path = "/home/akh/myprojects/channelized-pdcs/graphs/processed/"
-os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
+#path = "/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+#os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
 
 import cm_xml_to_matplotlib as cm
 
@@ -64,10 +64,10 @@ alllabels = [
     'DVX4', 'DVY4', 'DVZ4', 'DWX4', 'DWY4', 'DWZ4',
     'AVX7', 'AVZ7', 'AVY7', 'AWY7', 'AWX7', 'AWZ7',
     'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
-    'CVX7', 'CVY7', 'CWX7', 'CWZ7', 'CWY7',
+    'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
     'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7'
 ]
-#'CVZ7', not done 
+#, not done 
 
 alllabels.sort()
 print(alllabels)
@@ -215,7 +215,7 @@ Z = avul
 #cm = plt.cm.get_cmap('Greys')
 #cm=plt.cm.get_cmap('jet')
 plt.style.use("seaborn-darkgrid")
-cm = cm.make_cmap('/home/akh/myprojects/channelized-pdcs/graphs/4-section-discrete-vanEyck.xml')
+cm = cm.make_cmap('4-section-discrete-vanEyck.xml')
 #cm = cm.make_cmap('red-2.xml')
 
 #volcvol = [float(x) * float(y) for x, y in zip(volcvol, inlet)]
@@ -228,32 +228,51 @@ for i in alllabels:
 areas_norm = [float(x) / float(y)/ float(z) for x, y, z in zip(areas, inlet, width)]
 dist_norm = [float(x) / float(y) for x, y in zip(dist, zdist)]
 dist_norm2 = [float(x) / float(y) for x, y in zip(dist, inlet)]
-kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, areas)]
-mass_norm=[float(x) * float(y) /float(z)  for x, y, z in zip(Z, inlet, wave)]
+kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, inlet)]
+mass_norm=[float(x) * float(y) /float(z)  for x, y, z in zip(Z, inlet, amp)]
 front_norm=[float(x) / float(y) for x, y in zip(frontend, xdist)]
 si=[float(x) / float(y) for x, y in zip(lg, xdist)]
 amp_norm=[float(x) / (float(y)+float(x)) for x, y in zip(amp, width)]
+ent_norm=[float(x) / (float(y)+float(x)) for x, y in zip(bulkent, cvol)]
 ## regime figure
 
-rcParams['font.sans-serif'] = ['Helvetica']
+def cm2inch(*tupl):
+    inch = 2.54
+    if isinstance(tupl[0], tuple):
+        return tuple(i/inch for i in tupl[0])
+    else:
+        return tuple(i/inch for i in tupl)
+    
+
+#rcParams['font.sans-serif'] = ['Helvetica']
 fig, ax =plt.subplots(2,2)
-fig.set_size_inches(11,8.5)
+
+# full page 190X230mm 
+# 1/4 page 95mm x 115m 
+
+#half page
+fig.set_size_inches(cm2inch(19.0, 11.5))
 
 # ## normalized meander distance vs areas normalized
 # # Meander distance = Meander dist (m)/ Z dist(m)
 # # Area innudated = 
 
-scat = ax[0][0].scatter(dist_norm, areas_norm, c=wave, cmap=cm)
+size=((np.array(vol)/1000000)**2)*10
+
+scat = ax[0][0].scatter(dist_norm, areas_norm, c='k', s=size)
 ax[0][0].set_ylim([0,50])
 ax[0][0].tick_params(labelsize=8)
 ax[0][0].set_xlabel('Meander Amplitude+Width', fontsize=8)
 ax[0][0].set_ylabel('Area Innudated', fontsize=8)
 
+leg=ax[0][0].legend(scat.legend_elements("sizes", num=6))
+ax[0][0].add_artist(leg)
+
 ## Front location vs meander width
-scat = ax[0][1].scatter(amp_norm, front_norm, c=wave, cmap=cm)
-cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
-cbar.ax.tick_params(labelsize=8)
-#ax[0][1].set_ylim([0,50])
+scat = ax[0][1].scatter(amp_norm, front_norm, c='k', s=size)
+#cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
+#cbar.ax.tick_params(labelsize=8)
+ax[0][1].set_ylim([0.2,1])
 ax[0][1].tick_params(labelsize=8)
 ax[0][1].set_xlabel('Meander Amplitude/Width', fontsize=8)
 ax[0][1].set_ylabel('Front Location', fontsize=8)
@@ -263,39 +282,52 @@ ax[0][1].set_ylabel('Front Location', fontsize=8)
 # curvature = k*meander distance
 
 
-scat=ax[1][0].scatter(kdist_norm, mass_norm, c=inletrat, cmap=cm)
-ax[1][0].set_ylim([-0.001,0.007])
-ax[1][0].set_xlim([500,3600])
+scat=ax[1][0].scatter(kdist_norm, mass_norm, c='k', s=size)
+massylim=[-0.001,0.035]
+ax[1][0].set_ylim(massylim)
+#ax[1][0].set_xlim([500,3600])
 ax[1][0].tick_params(labelsize=8)
-ax[1][0].set_ylabel('Mass Avulsed', fontsize=8)
-ax[1][0].set_xlabel('Curvature*(Meander Amplitude + Width)', fontsize=8)
+ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
+ax[1][0].set_xlabel('Curvature*(Inlet Height)', fontsize=8)
+# interestingly area innudated does not corelate with entrainment 
+# but mass overspilled does
 
-scat=ax[1][1].scatter(kdist_norm, bulkent, c=inletrat, cmap=cm)
-#ax[1][1].set_ylim([-0.001,0.007])
-#ax[1][1].set_xlim([500,3600])
+
+scat=ax[1][1].scatter(ent_norm, mass_norm, c='k', s=size)
+ax[1][1].set_ylim(massylim)
+ax[1][1].set_xlim([0.01,0.065])
 ax[1][1].tick_params(labelsize=8)
-ax[1][1].set_ylabel('Bulk Entrainment', fontsize=8)
-ax[1][1].set_xlabel('Curvature*(Meander Amplitude + Width)', fontsize=8)
+ax[1][1].set_xlabel('Bulk Entrainment', fontsize=8)
+ax[1][1].set_ylabel('Mass Overspilled', fontsize=8)
+plt.tight_layout()
+#savefigure("regimeJULY")
 
-plt.show()
 
-fig, ax =plt.subplots(2,2)
-fig.set_size_inches(11,8.5)
-ax[0][0].scatter(amp_norm, UGmax, c=wave, cmap=cm)
-ax[0][0].set_ylabel('Maximum Average Velocity', fontsize=8)
-ax[0][0].set_xlabel('(MeanderAmp)/(MeanderAmp+Width)', fontsize=8)
+#######
 
-ax[0][1].scatter(UGmax, velz, c=wave, cmap=cm)
-ax[0][1].set_ylabel('Maximum Average CrossStream Velocity', fontsize=8)
-ax[0][1].set_xlabel('Maximum Average Velocity', fontsize=8)
-
-ax[1][1].scatter(velz, mass_norm, c=wave, cmap=cm)
-ax[1][1].set_ylabel('Mass Avulsed', fontsize=8)
-ax[1][1].set_xlabel('Cross Stream Velocity', fontsize=8)
-ax[1][1].set_ylim([-0.0001,.0070])
-
-ax[1][0].scatter(amp_norm, mass_norm, c=wave, cmap=cm)
-ax[1][0].set_ylabel('Maximum Average CrossStream Velocity', fontsize=8)
-ax[1][0].set_xlabel('(MeanderAmp)/(MeanderAmp+Width)', fontsize=8)
-ax[1][0].set_ylim([-0.0001,.0070])
-
+#fig, ax =plt.subplots(2,2)
+#fig.set_size_inches(cm2inch(19.0, 11.5))
+#
+#ax[0][0].scatter(amp_norm, UGmax, c=wave, cmap=cm)
+#ax[0][0].tick_params(labelsize=8)
+#ax[0][0].set_ylabel('Maximum Average Velocity', fontsize=8)
+#ax[0][0].set_xlabel('(MeanderAmp)/(MeanderAmp+Width)', fontsize=8)
+#
+#ax[0][1].scatter(UGmax, velz, c=wave, cmap=cm)
+#ax[0][1].set_ylabel('Maximum Average CrossStream Velocity', fontsize=8)
+#ax[0][1].set_xlabel('Maximum Average Velocity', fontsize=8)
+#ax[0][1].tick_params(labelsize=8)
+#
+#ax[1][1].scatter(velz, mass_norm, c=wave, cmap=cm)
+#ax[1][1].set_ylabel('Mass Avulsed', fontsize=8)
+#ax[1][1].set_xlabel('Cross Stream Velocity', fontsize=8)
+#ax[1][1].set_ylim([-0.0001,.0070])
+#ax[1][1].tick_params(labelsize=8)
+#
+#ax[1][0].scatter(amp_norm, mass_norm, c=wave, cmap=cm)
+#ax[1][0].set_ylabel('Maximum Average CrossStream Velocity', fontsize=8)
+#ax[1][0].set_xlabel('(MeanderAmp)/(MeanderAmp+Width)', fontsize=8)
+#ax[1][0].set_ylim([-0.0001,.0070])
+#ax[1][0].tick_params(labelsize=8)
+#
+#savefigure("VELregimeJULY")

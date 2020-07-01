@@ -16,8 +16,8 @@ from entrainmod import *
 from pltfunc import *
 
 ## LAPTOP
-path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
-os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
+#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+#os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
 
 def curvat(labels):
     kapa = []
