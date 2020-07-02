@@ -41,7 +41,7 @@ def labelparam(label):
         inlet=1
     rho= 1950*(0.4)
     v = 10 
-    vflux= math.ceil(depth*inlet/3)*3*width*v*15
+    vflux= math.ceil(depth*inlet/3)*3*width*v
 
     if "X" in label:
         amp= 0.09

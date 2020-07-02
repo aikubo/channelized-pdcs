@@ -75,7 +75,7 @@ def setgrl(labels, fig, axes, h,l):
     return palette
 
 def labelsubplots(axes, loc):
-    alpha=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    alpha=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     if loc in "uleft":
         xy = (0.05, 0.8)
     elif loc == "lleft":
@@ -86,7 +86,7 @@ def labelsubplots(axes, loc):
         xy = (0.85, 0.85)
 
     for i in range(len(axes)):
-        text = axes[i].annotate(alpha[i], weight='bold', size=12, xy=xy, xycoords="axes fraction")
+        text = axes[i].annotate(alpha[i], weight='bold', size=10, xy=xy, xycoords="axes fraction")
 
 
 def savefigure(name):
