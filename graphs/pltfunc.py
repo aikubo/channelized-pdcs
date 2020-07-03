@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
-import seaborn as sns 
 import matplotlib.patches as mpatches
 import os 
+from matplotlib.ticker import (MultipleLocator, FormatStrFormatter, AutoMinorLocator)
+import matplotlib.ticker
 
 def setcolors(labels):
     length=len(labels)
@@ -59,7 +60,7 @@ def setcolorandstyle(labels):
     sns.set()
     sns.set_style("whitegrid")
     sns.set_style( "ticks",{"xtick.direction": "in","ytick.direction": "in"})
-    sns.set_context("talk")
+    sns.set_context("paper")
 
     return palette
 
@@ -190,49 +191,97 @@ def horizplot(df, loc, labels):
     maxy=(len(df))
     top=3*maxy
     height = np.arange(0,top,3)
-    palette=setcolorandstyle(labels)
+    #palette=setcolorandstyle(labels)
 
     df1=df.fillna(df.min())
     for i in df.columns:
         j=labels.index(i)
         loc.plot(df1[i], height, label=i, linewidth=2 )
 
+def cm2inch(*tupl):
+    inch = 2.54
+    if isinstance(tupl[0], tuple):
+        return tuple(i/inch for i in tupl[0])
+    else:
+        return tuple(i/inch for i in tupl)
+
 def plotallcol( fig, axes, labels, fid, df1, df2, df3, df4, df5):
     #fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
-    setgrl(labels, fig, axes, 5, 8)
+    #setgrl(labels, fig, axes, 5, 8)
     df5.fillna(273.0)
 
     for i in range(len(axes)):
-        axes[i].tick_params(labelsize=12) 
+        axes[i].tick_params(labelsize=8) 
     # EPP
     loc=axes[0]
-    fonts= 16
-    horizplot(df1, loc, labels)
+    fonts= 8
+    EPP=10**(-1*df1)
+    horizplot(EPP, loc, labels)
+    loc.set(xscale='log')
     axes[0].set_ylabel('Height (m)', fontsize=fonts)
-    axes[0].set_xlabel(' -Log Volume fraction',fontsize=fonts)
-    loc.set_ylim([0,60])
-    loc.set_xlim([0.1,8])
-    sns.despine()
+    axes[0].set_xlabel('Volume  Fraction',fontsize=fonts)
+    loc.set_ylim([0,50])
+    loc.set_xlim([10**-6, 1])
+    loc.set_xticks([ 10**-5, 10**-3, 10**-1])
+    locmin=matplotlib.ticker.LogLocator(base=10.0, subs=(0.4,0.8), numticks=12)
+    loc.xaxis.set_minor_locator(locmin)
+    loc.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+
+    loc.spines['right'].set_color('none')
+    loc.spines['top'].set_color('none')
+    loc.spines['left'].set_position(('outward', 5))
     # UG
     loc=axes[1]
     u0=10.0
     horizplot(df2, loc, labels)
     axes[1].set_xlabel('Velocity (m/s)',fontsize=fonts)
-    loc.set_ylim([0,60])
+    loc.set_ylim([0,50])
+    loc.set_xlim([-7,30])
+    loc.spines['right'].set_color('none')
+    loc.spines['top'].set_color('none')
+    loc.spines['left'].set_position(('outward', 5))
+    loc.set_xticks([0,10, 20,30])
+    loc.xaxis.set_minor_locator(MultipleLocator(2))
+    loc.tick_params(which='both')
 
     # temperature
     loc=axes[2]
     t0=800.0
     temp=df5.astype(float)
+    print(temp-273)
     horizplot(temp-273, loc, labels)
     axes[2].set_xlabel('Temperature (C)', fontsize=fonts)
-    loc.set_ylim([0,60])
+    loc.set_ylim([0,50])
+    loc.set_xticks([100,300,500])
+    loc.spines['right'].set_color('none')
+    loc.spines['top'].set_color('none')
+    loc.spines['left'].set_position(('outward', 5))
+    loc.xaxis.set_minor_locator(MultipleLocator(50))
+    loc.tick_params(which='both')
 
     # DPU
     loc=axes[3]
-    horizplot(df3, loc, labels)
-    axes[3].set_xlabel('Dynamic Pressure (Pa)', fontsize=fonts)
-    loc.set_ylim([0,60])
+    #dpu=np.log10(df3+(10**-5))
+    loc.set(xscale='log')
+    horizplot(df3/1000, loc, labels)
+    axes[3].set_xlabel('Dynamic Pressure (kPa)', fontsize=fonts)
+    loc.get_xaxis().get_major_formatter().labelOnlyBase=False
+    loc.set_xticks([1, 10, 10**2])
+    loc.spines['right'].set_color('none')
+    loc.spines['top'].set_color('none')
+    loc.spines['left'].set_position(('outward', 5))
+    locmin=matplotlib.ticker.LogLocator(base=10.0, subs=(0.4,0.6,0.8), numticks=12)
+    #locmaj=matplotlib.ticker.LogLocator(base=10.0)
+    loc.xaxis.set_minor_locator(locmin)
+    #loc.xaxis.set_major_locator(locmaj)
+    #loc.xaxis.set_major_formatter(matplotlib.ticker.NullFormatter())
+
+    #loc.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+   
+
+    loc.set_ylim([0,50])
+    loc.set_xlim([.1,10**2.5])
+    
 
     # Richardson Number
     # loc=axes[4]

@@ -236,12 +236,7 @@ amp_norm=[float(x) / (float(y)+float(x)) for x, y in zip(amp, width)]
 ent_norm=[float(x) / (float(y)+float(x)) for x, y in zip(bulkent, cvol)]
 ## regime figure
 
-def cm2inch(*tupl):
-    inch = 2.54
-    if isinstance(tupl[0], tuple):
-        return tuple(i/inch for i in tupl[0])
-    else:
-        return tuple(i/inch for i in tupl)
+
     
 
 #rcParams['font.sans-serif'] = ['Helvetica']

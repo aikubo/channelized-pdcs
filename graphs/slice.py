@@ -1,16 +1,22 @@
 import os
 
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 import numpy as np
 import pandas as pd
 
 from pltfunc import *
+
+
+from matplotlib.ticker import (MultipleLocator, FormatStrFormatter, AutoMinorLocator)
+
+
 ## MAC
-path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+#path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+#os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
-#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
-#os.chdir("/home/akh/myprojects/channelized-pdcs/graphs/")
+path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir("/home/akh/myprojects/channelized-pdcs/graphs/")
 ## still running 
 ## 'CVZ7'
 # #alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4',
@@ -159,37 +165,45 @@ def opensliceavg(path2file, labels, loc):
 
     return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
 
-slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= opensliceavg(path, labels,  'in')
-sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= opensliceavg(path, labels, 'one')
-sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= opensliceavg(path, labels, 'half')
-sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= opensliceavg(path, labels, 'quart')
+# slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= opensliceavg(path, labels,  'in')
+# sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= opensliceavg(path, labels, 'one')
+# sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= opensliceavg(path, labels, 'half')
+# sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= opensliceavg(path, labels, 'quart')
+
+slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(path, labels, 7,  'in')
+sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(path, labels, 7, 'one')
+sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= openslicet(path, labels, 7, 'half')
+sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= openslicet(path, labels, 7, 'quart')
 
 fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
-fig.set_figheight(6)
-fig.set_figwidth(7)
-plt.ion()
-plt.show()
+fig.set_size_inches(cm2inch(19*3/4, 11.5*2/3))
+
 
 fid="col_all_paper"
 # fid = 'col_onel_comparewave'
-plotallcol(fig, axes, labels, fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
-plt.draw()
-plt.pause(15)
+#plotallcol(fig, axes, labels, fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
 # blue one l
 
 #fid = 'col_half_comparewave'
+## BLUE
 plotallcol(fig, axes, labels, fid, sliceouth_EPP, sliceouth_UG, sliceouth_DPU, sliceouth_Ri, sliceouth_TG)
-plt.draw()
-plt.pause(15)
+
 
 
 
 #fid = 'col_quart_comparewave'
+## orange
 plotallcol(fig, axes, labels, fid, sliceoutq_EPP, sliceoutq_UG, sliceoutq_DPU, sliceoutq_Ri, sliceoutq_TG)
-plt.draw()
-plt.pause(15)
+
+#plt.pause(15)
 #fid = 'col_in_comparewave'
+###GREEEN
 plotallcol(fig, axes, labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
-plt.draw()
-plt.pause(20)
-plt.savefig('slicesPAPERALL_AVERAGE.eps', dpi=600)
+#plt.draw()
+#plt.pause(20)
+#plt.savefig('slicesPAPERALL_AVERAGE.eps', dpi=600)
+
+
+plt.tight_layout()
+
+plt.savefig('SLICES_JULY_t7_smaller.eps', dpi=300)
