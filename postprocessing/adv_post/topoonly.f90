@@ -6,29 +6,29 @@ use openbinary
 use maketopo 
 use makeascii
 use var_3d
-use column
-use findhead 
-use find_richardson 
-use entrainment 
-use massdist
+!use column
+!use findhead 
+!use find_richardson 
+!use entrainment 
+!use massdist
 use sinplane 
 
 implicit none
 integer:: tsinplane 
 
 
-tsinplane=1
+tsinplane=8
 RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=0
-lambda=0
+width=300
+lambda=1200
 timesteps=8
 tstart=3
 tstop=timesteps
 depth = 27
-amprat=0
+amprat=.09000000000000000000
 
 call ALLOCATE_ARRAYS
 
@@ -37,7 +37,7 @@ call openbin(100, 'EP_G', EP_G1)
 !call openbin(400, 'V_G', V_G1)
 !call openbin(500, 'W_G', W_G1)
 call  logvolfrc(EP_G1, EPP)
-call handletopo('l0_A0_W0', XXX, YYY, ZZZ)
+call handletopo('l1200_A9_W300', XXX, YYY, ZZZ)
 
 !call writedxtopo
 

@@ -73,7 +73,7 @@ echo "which of the following subroutines would you like to turn on?"
 echo "froude, rigrad, ent, massalloc, xstream, ave, energy, tau"
 echo " dx write outs: topo, EPPdx8, TGdx8, UGdx8"
 read -p 'Subroutine: ' subroutine1
-sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one.f90
+sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one_temp.f90
 
 echo "would you like to turn on another? y/[N]"
 read REPLY
@@ -97,14 +97,14 @@ ifort -c -convert big_endian handletopo.f90
 ifort -c -convert big_endian openascii.f90
 ifort -c -convert big_endian var_3d.f90
 ifort -c -convert big_endian findhead.f90
-ifort -c -convert big_endian entrainment.f90
+ifort -c -convert big_endian -traceback entrainment.f90
 ifort -c -convert big_endian massinchannel.f90
 ifort -c -convert big_endian column.f90
 ifort -c -convert big_endian average.f90
 ifort -c -convert big_endian richardson.f90
 ifort -c -convert big_endian grangass.f90 
 
-ifort var_3d.o grangass.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post_one_temp.f90  -convert big_endian -o post.exe
+ifort var_3d.o grangass.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post_one_temp.f90  -convert big_endian -traceback -o post.exe
 
 
 cp post_one_temp.f90 $here/post_one.f90

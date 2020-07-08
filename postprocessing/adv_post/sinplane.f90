@@ -51,6 +51,11 @@ DO zc=1,ZMAX
                 centerline = lambda*amprat*sind((360*XLOC)/lambda)+centercut
                 sinplane(I)= (centerline-zc*(3.0))
                 edge2= lambda*amprat*sind((360*XLOC)/lambda)+centercut+width/2 - zc*3.0
+                
+                if (lambda .eq. 0) then 
+                        sinplane(I)=(ZMAX/2)*3
+                end if 
+
 
                 if (sinplane(I) .gt. 0) then 
                          isocut(I)=EPP(I,tout)

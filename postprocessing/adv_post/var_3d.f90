@@ -178,8 +178,8 @@ end if
         CHARACTER(LEN=10) :: str_c
         character(LEN=10) :: x1
         character(LEN=*), intent(in) :: filen
-
-
+        character(len=6):: eppfile
+        eppfile="EP_P_t"
         print*, 'writing for open dx'
         t=time
         str_c = '(I2.2)'
@@ -194,9 +194,18 @@ end if
                DO I=1,RMAX*ZMAX*YMAX
                           !------------------------ Temperature of Gas
                           !-----------------------------!
-                         
+
+                        if ( TEMP(I,t) .eq. EPP(I,t) ) then 
+                            if (TEMP(I,time) .le. dble(0.10)) then
+                                WRITE(fid_tp+time,format4var) dble(14), XXX(I,1),YYY(I,1), ZZZ(I,1)
+    
+                            else 
+                                WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
+
+                            end if 
+                        else  
                          WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
-                       
+                       end if
                 END DO
         
         end subroutine
