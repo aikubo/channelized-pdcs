@@ -45,14 +45,14 @@ module massdist
         DO I=1, length1
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
 
-                IF (YYY(I,1)>bottom) THEN
-                        IF (EPP(I,t) <max_dilute .and. EPP(I,t) >0.000) THEN
-                                
-                                if (YYY(I,1) .eq. topo) then 
-                                        area = area+(3.*3.)
-                                end if  
 
-                                ! total mass 
+                IF (EPP(I,t) <max_dilute .and. EPP(I,t) >0.000) THEN
+                        if (YYY(I,1) .eq. topo) then 
+                                area = area+(3.*3.)
+                        end if  
+
+                IF (YYY(I,1)>bottom) THEN
+                ! total mass 
                                 tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
                                 ! MASS ABOVE CERTAIN SCALE HEIGHTS
