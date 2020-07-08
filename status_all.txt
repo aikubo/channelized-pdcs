@@ -1726,3 +1726,74 @@
 06/30/20 01:43 unconfV7 post process created 19 txt files, 0 tiff
 06/30/20 01:49 unconfV7 post process created 19 txt files, 0 tiff
 06/30/20 01:55 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:06 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:11 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:17 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:23 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:29 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:36 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:42 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:48 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 02:58 unconfV7 post process created 19 txt files, 0 tiff
+06/30/20 03:02 BVY7 post process created 17 txt files, 26 tiff
+06/30/20 03:06 BVY7 post process created 17 txt files, 26 tiff
+06/30/20 03:10 BVY7 post process created 17 txt files, 26 tiff
+06/30/20 03:12 BVY7 post process created 17 txt files, 26 tiff
+07/01/20 00:40 CVZ7 completed 9 timesteps
+07/01/20 00:42 CVZ7 post process created 19 txt files, 0 tiff
+07/01/20 13:47 BVY7 post process created 17 txt files, 26 tiff
+07/01/20 13:50 BVY7 post process created 17 txt files, 26 tiff
+07/01/20 13:56 BVY7 post process created 17 txt files, 26 tiff
+07/01/20 13:58 BVY7 post process created 17 txt files, 26 tiff
+07/01/20 14:04 BVY7 post process created 17 txt files, 26 tiff
+07/01/20 16:12 BVY7 post process created 17 txt files, 26 tiff
+07/01/20 16:15 BVY7 post process created 17 txt files, 26 tiff
+07/01/20 16:19 BVY7 post process created 17 txt files, 26 tiff
+07/02/20 16:48 BVY7 post process created 17 txt files, 26 tiff
+07/02/20 16:58 BVY7 post process created 17 txt files, 27 tiff
+07/02/20 17:09 BVY7 post process created 17 txt files, 28 tiff
+07/02/20 17:21 BVY7 post process created 17 txt files, 29 tiff
+07/02/20 17:33 BVY7 post process created 17 txt files, 30 tiff
+07/02/20 17:45 BVY7 post process created 17 txt files, 31 tiff
+07/02/20 19:29 BVY7 post process created 17 txt files, 31 tiff
+07/02/20 19:37 BVY7 post process created 17 txt files, 31 tiff
+07/02/20 19:44 BVY7 post process created 17 txt files, 32 tiff
+07/02/20 19:52 BVY7 post process created 17 txt files, 33 tiff
+07/02/20 20:42 unconfV7 post process created 19 txt files, 0 tiff
+07/02/20 20:51 unconfV7 post process created 19 txt files, 0 tiff
+07/02/20 20:51 unconfV7 post process created 19 txt files, 0 tiff
+07/02/20 20:56 unconfV7 post process created 19 txt files, 1 tiff
+07/03/20 01:16 unconfV7 post process created 19 txt files, 1 tiff
+07/03/20 01:18 SV7 post process created 35 txt files, 12 tiff
+07/03/20 01:24 SV7 post process created 35 txt files, 12 tiff
+07/03/20 01:30 unconfV7 post process created 19 txt files, 2 tiff
+07/03/20 01:41 unconfV7 post process created 19 txt files, 2 tiff
+07/03/20 01:46 unconfV7 post process created 19 txt files, 2 tiff
+07/03/20 01:48 SV7 post process created 35 txt files, 12 tiff
+07/03/20 02:04 unconfV7 post process created 19 txt files, 2 tiff
+07/03/20 02:11 unconfV7 post process created 19 txt files, 2 tiff
+07/03/20 02:18 unconfV7 post process created 19 txt files, 0 tiff
+07/03/20 02:33 SV7 post process created 35 txt files, 12 tiff
+07/03/20 02:35 unconfV7 post process created 23 txt files, 0 tiff
+07/03/20 02:43 SV7 post process created 35 txt files, 12 tiff
+07/03/20 02:46 SV7 post process created 35 txt files, 12 tiff
+07/03/20 02:55 SV7 post process created 35 txt files, 12 tiff
+07/03/20 03:33 SV7 error post process created 11 txt files, 2 tiff
+07/03/20 03:50 SV7 error post process created 11 txt files, 2 tiff
+07/07/20 12:25 DWX7 error post process created 10 txt files, 0 tiff
+07/07/20 12:30 DWX7 error post process created 10 txt files, 0 tiff
+07/07/20 12:37 DWX7 error post process created 10 txt files, 1 tiff
+07/07/20 12:44 DWX7 error post process created 10 txt files, 2 tiff
+07/07/20 12:49 DWX7 error post process created 10 txt files, 2 tiff
+07/07/20 12:55 DWX7 error post process created 10 txt files, 2 tiff
+07/07/20 13:03 DWX7 error post process created 10 txt files, 2 tiff
+07/07/20 13:10 DWX7 error post process created 10 txt files, 3 tiff
+07/07/20 13:18 DWX7 error post process created 10 txt files, 4 tiff
+07/07/20 13:22 DWX7 error post process created 12 txt files, 1 tiff
+07/07/20 13:23 CVZ7 post process created 18 txt files, 0 tiff
+07/07/20 13:25 DWX7 error post process created 12 txt files, 1 tiff
+07/07/20 13:30 CVZ7 post process created 25 txt files, 0 tiff
+07/07/20 13:34 DWX7 error post process created 10 txt files, 0 tiff
+07/07/20 13:34 DWX7 error post process created 10 txt files, 0 tiff
+07/07/20 13:40 DWX7 error post process created 10 txt files, 1 tiff
+07/08/20 12:37 DWX7 post process created 33 txt files, 0 tiff
