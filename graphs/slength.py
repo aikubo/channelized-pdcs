@@ -55,3 +55,33 @@ def channelvolume(labels):
         lg.append(length)
     return cvolume, lg, a
 
+
+def sinlength(labels, front):
+    slen=[]
+    for i in range(len(labels)):
+        sim=labels[i]
+        if "S" not in sim:
+            param=labelparam(sim)
+            wave = float(param.at[0,'Wave'])
+            A=float(param.at[0,'Amprat'])
+            amp=float(param.at[0,'Amp'])
+            width=float(param.at[0,'Width'])
+            depth=float(param.at[0,'Depth'])
+            oldi=0
+            olds=0
+            length=0
+            for i in range(0,int(front[i]),1):
+                sinuous= (amp)*np.sin( 2*np.pi *(i)/wave)
+                dist = np.sqrt( (i-oldi)**2 + (sinuous-olds)**2)
+                olds=sinuous
+                oldi=i
+                length= dist+length
+        else:
+            length=front[i]
+        #     for k in range(0,900,3):
+        #         k1=sinuous-(width/2)
+        #         k2=sinuous+(width/2) 
+        #         if k1 < k < k2:
+        #             area=area+3e)
+        slen.append(length)
+    return slen

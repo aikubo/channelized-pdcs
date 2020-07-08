@@ -11,7 +11,7 @@ import pandas as pd
 import seaborn as sns
 import math
 
-from slength import channelvolume
+from slength import *
 
 from openmod import *
 from entrainmod import *
@@ -225,16 +225,24 @@ for i in alllabels:
     xdist.append(1212)
     zdist.append(906)
 
-areas_norm = [float(x) / float(y)/ float(z) for x, y, z in zip(areas, inlet, width)]
-dist_norm = [float(x) / float(y) for x, y in zip(dist, zdist)]
+slen=sinlength(alllabels,frontend)
+areas_norm = [float(x) / (float(y)*float(z)) for x, y, z in zip(areas,xdist,zdist)]
+area_channel=[ float(x) *(float(y)+float(z)) for x, y, z in zip(wave, width, amp)]
+
+dist_norm = [float(x) / float(y) for x, y in zip(dist,zdist)]
 dist_norm2 = [float(x) / float(y) for x, y in zip(dist, inlet)]
-kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, inlet)]
+kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, width)]
+kdist_norm2= [float(x) * float(y) for x, y in zip(kdist, wave)]
 mass_norm=[float(x) * float(y) /float(z)  for x, y, z in zip(Z, inlet, amp)]
-front_norm=[float(x) / float(y) for x, y in zip(frontend, xdist)]
+front_norm=[float(x) / float(y) for x, y in zip(frontend, slen)]
 si=[float(x) / float(y) for x, y in zip(lg, xdist)]
-amp_norm=[float(x) / (float(y)+float(x)) for x, y in zip(amp, width)]
-ent_norm=[float(x) / (float(y)+float(x)) for x, y in zip(bulkent, cvol)]
+amp_norm=[ float(x)/ (float(x)+float(y)) for x, y in zip(amp,width)]
+ent_norm=[float(x) / (float(y)) for x, y in zip(bulkent, cvol)]
+
+slen_norm=[float(x) / float(y) for x, y in zip(slen, frontend)]
+
 ## regime figure
+
 
 
     
@@ -246,62 +254,64 @@ fig, ax =plt.subplots(2,2)
 # 1/4 page 95mm x 115m 
 
 # #half page
-# fig.set_size_inches(cm2inch(19.0, 11.5))
+fig.set_size_inches(cm2inch(19.0, 11.5))
 
 # # ## normalized meander distance vs areas normalized
 # # # Meander distance = Meander dist (m)/ Z dist(m)
 # # # Area innudated = 
 
 size=((np.array(vol)/10000)**2)*0.5
+x=amp_norm
+
+scat = ax[0][0].scatter(area_channel, areas_norm, c=wave, s=size)
+#ax[0][0].set_ylim([0,50])
+ax[0][0].tick_params(labelsize=8)
+ax[0][0].set_xlabel('Meander Amplitude+Width', fontsize=8)
+ax[0][0].set_ylabel('Area Innudated', fontsize=8)
 
 
-# scat = ax[0][0].scatter(dist_norm, areas_norm, c='k', s=size)
-# ax[0][0].set_ylim([0,50])
-# ax[0][0].tick_params(labelsize=8)
-# ax[0][0].set_xlabel('Meander Amplitude+Width', fontsize=8)
-# ax[0][0].set_ylabel('Area Innudated', fontsize=8)
-
-
-# kw=dict(prop="sizes", num=3, func= lambda s: 2*(np.sqrt(s)))
-# leg=ax[0][1].legend(*scat.legend_elements(**kw), )
+# kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
+# leg=ax[0][0].legend(*scat.legend_elements(**kw), )
 # leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
-# ax[0][1].add_artist(leg)
+# ax[0][0].add_artist(leg)
 
-# ## Front location vs meander width
-# scat = ax[0][1].scatter(amp_norm, front_norm, c='k', s=size)
-# #cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
-# #cbar.ax.tick_params(labelsize=8)
-# ax[0][1].set_ylim([0,1])
-# ax[0][1].tick_params(labelsize=8)
-# ax[0][1].set_xlabel('Meander Amplitude/Width', fontsize=8)
-# ax[0][1].set_ylabel('Front Location', fontsize=8)
+## Front location vs meander width
+scat = ax[0][1].scatter(x, front_norm, c=wave, s=size)
+#cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
+#cbar.ax.tick_params(labelsize=8)
+#ax[0][1].set_ylim([0,1])
+#ax[0][1].set_xlim([0, 0.006])width
+ax[0][1].tick_params(labelsize=8)
+ax[0][1].set_xlabel('Curvature*Amprat', fontsize=8)
+ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
 
 # ### mass avulsed vs curvature metric
 # # mass = mass avuled/total mass *inlet/wave
 # # curvature = k*meander distance
 
 
-# scat=ax[1][0].scatter(kdist_norm, mass_norm, c='k', s=size)
+scat=ax[1][0].scatter(x, mass_norm, c=wave, s=size)
 massylim=[-0.001,0.035]
-# ax[1][0].set_ylim(massylim)
-# #ax[1][0].set_xlim([500,3600])
-# ax[1][0].tick_params(labelsize=8)
-# ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
-# ax[1][0].set_xlabel('Curvature*(Inlet Height)', fontsize=8)
-# # interestingly area innudated does not corelate with entrainment 
-# # but mass overspilled does
+ax[1][0].set_ylim(massylim)
+#ax[1][0].set_xlim([0, 0.006])
+#ax[1][0].set_xlim([500,3600])
+ax[1][0].tick_params(labelsize=8)
+ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
+ax[1][0].set_xlabel('Curvature*(Inlet Height)', fontsize=8)
+# interestingly area innudated does not corelate with entrainment 
+# but mass overspilled does
 
 
-# scat=ax[1][1].scatter(ent_norm, mass_norm, c='k', s=size)
-# ax[1][1].set_ylim(massylim)
-# ax[1][1].set_xlim([0.01,0.065])
-# ax[1][1].tick_params(labelsize=8)
-# ax[1][1].set_xlabel('Bulk Entrainment', fontsize=8)
-# ax[1][1].set_ylabel('Mass Overspilled', fontsize=8)
+scat=ax[1][1].scatter(ent_norm, mass_norm, c=wave, s=size)
+ax[1][1].set_ylim(massylim)
+ax[1][1].set_xlim([0.01,0.065])
+ax[1][1].tick_params(labelsize=8)
+ax[1][1].set_xlabel('Bulk Entrainment', fontsize=8)
+ax[1][1].set_ylabel('Mass Overspilled', fontsize=8)
 
-# #labelsubplots(ax, 'uleft')
+#labelsubplots(ax, 'uleft')
 
-# plt.tight_layout()
+plt.tight_layout()
 
 
 # savefigure("regimeJULY")
@@ -309,32 +319,31 @@ massylim=[-0.001,0.035]
 
 #######
 
-fig, ax =plt.subplots(1,3)
-fig.set_size_inches(cm2inch(19.0, 11.5*2/3))
+# fig, ax =plt.subplots(1,3)
+# fig.set_size_inches(cm2inch(19.0, 11.5*2/3))
 
-scat=ax[0].scatter(amp_norm, UGmax, c='k', s=size)
-ax[0].tick_params(labelsize=8)
-ax[0].set_ylabel('Maximum Average Velocity', fontsize=8)
-ax[0].set_xlabel('(MeanderAmp)/(MeanderAmp+Width)', fontsize=8)
-
-
-ax[1].scatter(UGmax, velz,  c='k', s=size)
-ax[1].set_ylabel('Maximum Average CrossStream Velocity', fontsize=8)
-ax[1].set_xlabel('Maximum Average Velocity', fontsize=8)
-ax[1].tick_params(labelsize=8)
+# scat=ax[0].scatter(amp_norm, UGmax, c='k', s=size)
+# ax[0].tick_params(labelsize=8)
+# ax[0].set_ylabel('Maximum Average Velocity', fontsize=8)
+# ax[0].set_xlabel('(MeanderAmp)/(MeanderAmp+Width)', fontsize=8)
 
 
-ax[2].scatter(velz, mass_norm,  c='k', s=size)
-ax[2].set_ylabel('Mass Avulsed', fontsize=8)
-ax[2].set_xlabel('Cross Stream Velocity', fontsize=8)
-ax[2].set_ylim(massylim)
-ax[2].tick_params(labelsize=8)
+# ax[1].scatter(UGmax, velz,  c='k', s=size)
+# ax[1].set_ylabel('Maximum Average CrossStream Velocity', fontsize=8)
+# ax[1].set_xlabel('Maximum Average Velocity', fontsize=8)
+# ax[1].tick_params(labelsize=8)
 
-kw=dict(prop="sizes", num=3, func= lambda s: 2*(np.sqrt(s)))
-leg=ax[2].legend(*scat.legend_elements(**kw), )
-leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
-ax[2].add_artist(leg)
 
-plt.tight_layout()
+# ax[2].scatter(velz, mass_norm,  c='k', s=size)
+# ax[2].set_ylabel('Mass Avulsed', fontsize=8)
+# ax[2].set_xlabel('Cross Stream Velocity', fontsize=8)
+# ax[2].set_ylim(massylim)
+# ax[2].tick_params(labelsize=8)
 
-savefigure("VELregimeJULY")
+# kw=dict(prop="sizes", num=3, func= lambda s: 2*(np.sqrt(s)))
+# leg=ax[2].legend(*scat.legend_elements(**kw), )
+# leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
+# ax[2].add_artist(leg)
+
+# plt.tight_layout()
+# plt.savefig("VELregimeJULY.png", dpi=300)

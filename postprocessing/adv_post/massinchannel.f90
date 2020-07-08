@@ -47,6 +47,11 @@ module massdist
 
                 IF (YYY(I,1)>bottom) THEN
                         IF (EPP(I,t) <max_dilute .and. EPP(I,t) >0.000) THEN
+                                
+                                if (YYY(I,1) .eq. topo) then 
+                                        area = area+(3.*3.)
+                                end if  
+
                                 ! total mass 
                                 tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
@@ -92,10 +97,6 @@ module massdist
                                         IF (ZZZ(I,1) >edge1) THEN
                                                 IF (ZZZ(I,1) <edge2) THEN
                                                         topo=FLOOR(TOP/3.0)*3.+3.
-              
-                                                        if (YYY(I,1) .eq. topo) then 
-                                                                area = area+(3.*3.)
-                                                        end if  
 
                                                         outsum= outsum +(1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         rho_c=rho_p*(1-EP_G1(I,t))+(P_const/(R_dryair*T_G1(I,t)))*(EP_G1(I,t))
