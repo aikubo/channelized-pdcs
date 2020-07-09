@@ -12,8 +12,8 @@ module massdist
         IMPLICIT NONE
         double precision, intent(INOut):: width, depth, lambda, scaleheight  
         double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
-        double precision::edge1, edge2, bottom, top, outsum, buoyant, current, area, topo
-
+        double precision::edge1, edge2, bottom, top, outsum, buoyant, current, area, topo, areatot
+        real, allocatable:: areamat(:,:)
         print*, 'mass in channel'
         filename='massinchannel.txt'
 
@@ -23,7 +23,7 @@ module massdist
         filename='massinchannel.txt'
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
      !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
-
+        allocate(areamat(RMAX,ZMAX))
         print *, "Done writing 3D variables"
 
       DO t= 1,timesteps
@@ -49,6 +49,7 @@ module massdist
                 IF (EPP(I,t) <max_dilute .and. EPP(I,t) >0.000) THEN
                         if (YYY(I,1) .eq. topo) then 
                                 area = area+(3.*3.)
+                                areamat(int(XXX(I,1)), int(ZZZ(I,1)))=9
                         end if  
 
                 IF (YYY(I,1)>bottom) THEN
@@ -125,8 +126,9 @@ module massdist
          scalemass1= scalemass1/tmass
          buoyant= buoyant/tmass
          current=current/tmass     
+         areatot=sum(areamat)
         
-         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, area
+         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, area, areatot
         END DO
         !! done !!
         print*, 'mass in channel done'
