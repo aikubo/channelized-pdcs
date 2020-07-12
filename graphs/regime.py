@@ -227,19 +227,19 @@ for i in alllabels:
 
 slen=sinlength(alllabels,frontend)
 areas_norm = [float(x) / (float(y)*float(z)) for x, y, z in zip(areas,xdist,zdist)]
-area_channel=[ float(x) *(float(y)+float(z)) for x, y, z in zip(wave, width, amp)]
+area_channel=[ float(x) *(float(y)+float(z)) for x, y, z in zip(area, width, inlet)]
 
 dist_norm = [float(x) / float(y) for x, y in zip(dist,zdist)]
 dist_norm2 = [float(x) / float(y) for x, y in zip(dist, inlet)]
-kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, width)]
-kdist_norm2= [float(x) * float(y) for x, y in zip(kdist, wave)]
-mass_norm=[float(x) * float(y) /float(z)  for x, y, z in zip(Z, inlet, amp)]
+kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, wave)]
+kdist_norm2= [float(x) * (float(y)) *(float(z)) for x, y, z in zip(kdist, wave, inletrat)]
+mass_norm=[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, xdist, wave)]
 front_norm=[float(x) / float(y) for x, y in zip(frontend, slen)]
 si=[float(x) / float(y) for x, y in zip(lg, xdist)]
-amp_norm=[ float(x)/ (float(x)+float(y)) for x, y in zip(amp,width)]
+amp_norm=[ float(x)/ (float(y)) for x, y in zip(amp, width)]
 ent_norm=[float(x) / (float(y)) for x, y in zip(bulkent, cvol)]
 
-slen_norm=[float(x) / float(y) for x, y in zip(slen, frontend)]
+slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
 
 ## regime figure
 
@@ -253,19 +253,33 @@ fig, ax =plt.subplots(2,2)
 # full page 190X230mm 
 # 1/4 page 95mm x 115m 
 
+def plotandR(x,y, loc, col, size):
+    scat=loc.scatter(x,y, c=col, s=size)
+    loc.tick_params(labelsize=8)
+    rang=max(x)-min(x)
+    cl=rang*0.05
+    loc.set_xlim([min(x)-cl, max(x)+cl])
+    rang=max(y)-min(y)
+    cl=rang*0.05
+    loc.set_ylim([min(y)-cl, max(y)+cl])
+    correlation_matrix = np.corrcoef(x, y)
+    correlation_xy = correlation_matrix[0,1]
+    r_squared.append(correlation_xy**2)
+    return scat
+
 # #half page
 fig.set_size_inches(cm2inch(19.0, 11.5))
-
+r_squared=[]
 # # ## normalized meander distance vs areas normalized
 # # # Meander distance = Meander dist (m)/ Z dist(m)
 # # # Area innudated = 
 
 size=((np.array(vol)/10000)**2)*0.5
-x=amp_norm
+x=dist_norm
+y=areas_norm
 
-scat = ax[0][0].scatter(area_channel, areas_norm, c=wave, s=size)
-#ax[0][0].set_ylim([0,50])
-ax[0][0].tick_params(labelsize=8)
+
+scat = plotandR(x,y, ax[0][0], wave, size)
 ax[0][0].set_xlabel('Meander Amplitude+Width', fontsize=8)
 ax[0][0].set_ylabel('Area Innudated', fontsize=8)
 
@@ -274,46 +288,58 @@ ax[0][0].set_ylabel('Area Innudated', fontsize=8)
 # leg=ax[0][0].legend(*scat.legend_elements(**kw), )
 # leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
 # ax[0][0].add_artist(leg)
-
-## Front location vs meander width
-scat = ax[0][1].scatter(x, front_norm, c=wave, s=size)
 #cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
 #cbar.ax.tick_params(labelsize=8)
-#ax[0][1].set_ylim([0,1])
-#ax[0][1].set_xlim([0, 0.006])width
-ax[0][1].tick_params(labelsize=8)
-ax[0][1].set_xlabel('Curvature*Amprat', fontsize=8)
+
+## Front location vs meander width
+scat = plotandR(kdist_norm, slen_norm, ax[0][1], wave, size)
+ax[0][1].set_xlabel('Curvature*Wavelength', fontsize=8)
 ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
+x4=[]
+x7=[]
+y4=[]
+y7=[]
+for i in range(len(alllabels)):
+    sim=alllabels[i]
+    if "W" in sim:
+        x4.append(dist_norm[i])
+        y4.append(slen_norm[i])
+    if "V" in sim:
+        x7.append(dist_norm[i])
+        y7.append(slen_norm[i])
+        
+correlation_matrix = np.corrcoef(x4, y4)
+correlation_xy = correlation_matrix[0,1]
+#r_squared.append(correlation_xy**2)
+
+correlation_matrix = np.corrcoef(x7, y7)
+correlation_xy = correlation_matrix[0,1]
+#r_squared.append(correlation_xy**2)
+
+
 
 # ### mass avulsed vs curvature metric
 # # mass = mass avuled/total mass *inlet/wave
 # # curvature = k*meander distance
 
-
-scat=ax[1][0].scatter(x, mass_norm, c=wave, s=size)
-massylim=[-0.001,0.035]
-ax[1][0].set_ylim(massylim)
-#ax[1][0].set_xlim([0, 0.006])
-#ax[1][0].set_xlim([500,3600])
-ax[1][0].tick_params(labelsize=8)
+scat=plotandR(kdist_norm2, Z ,ax[1][0], wave, size)
 ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
-ax[1][0].set_xlabel('Curvature*(Inlet Height)', fontsize=8)
+ax[1][0].set_xlabel('Curvature*Wavelength', fontsize=8)
+                    
+                    
+
 # interestingly area innudated does not corelate with entrainment 
 # but mass overspilled does
 
+mass_norm
+scat=plotandR(Z, ent_norm, ax[1][1], wave, size)
+ax[1][1].set_ylabel('Bulk Entrainment', fontsize=8)
+ax[1][1].set_xlabel('Mass Overspilled', fontsize=8)
 
-scat=ax[1][1].scatter(ent_norm, mass_norm, c=wave, s=size)
-ax[1][1].set_ylim(massylim)
-ax[1][1].set_xlim([0.01,0.065])
-ax[1][1].tick_params(labelsize=8)
-ax[1][1].set_xlabel('Bulk Entrainment', fontsize=8)
-ax[1][1].set_ylabel('Mass Overspilled', fontsize=8)
-
-#labelsubplots(ax, 'uleft')
 
 plt.tight_layout()
 
-
+print(r_squared)
 # savefigure("regimeJULY")
 
 

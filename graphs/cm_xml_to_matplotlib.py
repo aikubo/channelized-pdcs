@@ -25,26 +25,28 @@ def load_xml(xml):
 
 ## source of this function: http://schubert.atmos.colostate.edu/~cslocum/custom_cmap.html#code
 def make_cmap(xml):
-	vals = load_xml(xml)
-	colors = vals['color_vals']
-	position = vals['data_vals']
-	if len(position) != len(colors):
-		sys.exit('position length must be the same as colors')
-        cdict = {'red':[], 'green':[], 'blue':[]}
-        if position[0] != 0:
-		cdict['red'].append((0, colors[0][0], colors[0][0]))
-		cdict['green'].append((0, colors[0][1], colors[0][1]))
-		cdict['blue'].append((0, colors[0][2], colors[0][2]))
-	for pos, color in zip(position, colors):
-		cdict['red'].append((pos, color[0], color[0]))
-		cdict['green'].append((pos, color[1], color[1]))
-		cdict['blue'].append((pos, color[2], color[2]))
-        if position[-1] != 1:
-		cdict['red'].append((1, colors[-1][0], colors[-1][0]))
-		cdict['green'].append((1, colors[-1][1], colors[-1][1]))
-		cdict['blue'].append((1, colors[-1][2], colors[-1][2]))
-        cmap = mpl.colors.LinearSegmentedColormap('my_colormap',cdict,256)
-	return cmap
+    vals = load_xml(xml)
+    colors = vals['color_vals']
+    position = vals['data_vals']
+    if len(position) != len(colors):
+        sys.exit('position length must be the same as colors')
+    cdict = {'red':[], 'green':[], 'blue':[]}
+    if position[0] != 0:
+        cdict['red'].append((0, colors[0][0], colors[0][0]))
+        cdict['green'].append((0, colors[0][1], colors[0][1]))
+        cdict['blue'].append((0, colors[0][2], colors[0][2]))
+    for pos, color in zip(position, colors):
+       cdict['red'].append((pos, color[0], color[0]))
+       cdict['green'].append((pos, color[1], color[1]))
+       cdict['blue'].append((pos, color[2], color[2]))
+       if position[-1] != 1:
+           cdict['red'].append((1, colors[-1][0], colors[-1][0]))
+           cdict['green'].append((1, colors[-1][1], colors[-1][1]))
+           cdict['blue'].append((1, colors[-1][2], colors[-1][2]))
+           
+       cmap = mpl.colors.LinearSegmentedColormap('my_colormap',cdict,256)
+       
+       return cmap
 
 ## Print MATLAB compatible matrix
 def print_cmap_matrix(colormap):
