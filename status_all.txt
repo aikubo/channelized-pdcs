@@ -1797,3 +1797,153 @@
 07/07/20 13:34 DWX7 error post process created 10 txt files, 0 tiff
 07/07/20 13:40 DWX7 error post process created 10 txt files, 1 tiff
 07/08/20 12:37 DWX7 post process created 33 txt files, 0 tiff
+07/08/20 12:48 AVY4 post process created 28 txt files, 8 tiff
+07/08/20 12:48 AWX4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 SV7 post process created 34 txt files, 2 tiff
+07/08/20 12:48 AWY4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 SW7 post process created 27 txt files, 0 tiff
+07/08/20 12:48 AVX4 post process created 27 txt files, 1 tiff
+07/08/20 12:48 AWZ4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 BVY4 post process created 38 txt files, 3 tiff
+07/08/20 12:48 CWY7 post process created 27 txt files, 0 tiff
+07/08/20 12:48 BWX4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 CVY4 post process created 27 txt files, 1 tiff
+07/08/20 12:48 AVZ4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 SV4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 CWX4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 SW4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 CWY4 post process created 27 txt files, 0 tiff
+07/08/20 12:48 CWZ4 post process created 27 txt files, 0 tiff
+07/08/20 12:49 BVX4 post process created 27 txt files, 1 tiff
+07/08/20 12:49 AVY7 post process created 34 txt files, 3 tiff
+07/08/20 12:49 unconfV7 post process created 29 txt files, 0 tiff
+07/08/20 12:49 AWY7 post process created 27 txt files, 0 tiff
+07/08/20 12:49 BVZ4 post process created 27 txt files, 0 tiff
+07/08/20 12:49 BVY7 post process created 40 txt files, 26 tiff
+07/08/20 12:49 BWZ4 post process created 27 txt files, 0 tiff
+07/08/20 12:49 BWY7 post process created 27 txt files, 0 tiff
+07/08/20 12:49 CVY7 post process created 35 txt files, 9 tiff
+07/08/20 12:49 BWY4 post process created 27 txt files, 0 tiff
+07/08/20 12:49 CVX4 post process created 27 txt files, 0 tiff
+07/08/20 12:49 CVZ4 post process created 27 txt files, 0 tiff
+07/08/20 12:49 CVZ7 post process created 25 txt files, 0 tiff
+07/08/20 12:49 AVX7 post process created 27 txt files, 0 tiff
+07/08/20 12:49 AVZ7 post process created 27 txt files, 0 tiff
+07/08/20 12:49 DVZ7 post process created 25 txt files, 1 tiff
+07/08/20 12:49 BVY1 post process created 33 txt files, 29 tiff
+07/08/20 12:49 AWX7 post process created 27 txt files, 0 tiff
+07/08/20 12:49 AWZ7 post process created 27 txt files, 0 tiff
+07/08/20 12:49 BVX7 post process created 27 txt files, 0 tiff
+07/08/20 12:49 DWY7 post process created 25 txt files, 1 tiff
+07/08/20 12:49 DWY7 post process created 25 txt files, 1 tiff
+07/08/20 12:50 BVZ7 post process created 27 txt files, 1 tiff
+07/08/20 12:50 BWX7 post process created 27 txt files, 0 tiff
+07/08/20 12:50 CVX7 post process created 35 txt files, 10 tiff
+07/08/20 12:50 BWZ7 post process created 27 txt files, 0 tiff
+07/08/20 12:50 CWZ7 post process created 27 txt files, 0 tiff
+07/08/20 12:50 CWX7 post process created 27 txt files, 0 tiff
+07/08/20 12:50 DVX7 post process created 25 txt files, 1 tiff
+07/08/20 13:35 BVY7 post process created 40 txt files, 26 tiff
+07/08/20 13:51 BVY7 post process created 40 txt files, 26 tiff
+07/08/20 14:00 BVY7 post process created 40 txt files, 28 tiff
+07/08/20 14:09 BVY7 post process created 40 txt files, 30 tiff
+07/08/20 14:19 BVY7 post process created 40 txt files, 32 tiff
+07/08/20 14:28 BVY7 post process created 40 txt files, 34 tiff
+07/08/20 14:37 BVY7 post process created 40 txt files, 36 tiff
+07/08/20 14:47 BVY7 post process created 40 txt files, 38 tiff
+07/08/20 14:56 BVY7 post process created 40 txt files, 40 tiff
+07/08/20 15:04 AVY4 error post process created 6 txt files, 8 tiff
+07/08/20 15:04 AWX4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 AWY4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 AVX4 error post process created 5 txt files, 1 tiff
+07/08/20 15:05 AWZ4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 BVY4 post process created 16 txt files, 3 tiff
+07/08/20 15:05 BWX4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 CVY4 error post process created 5 txt files, 1 tiff
+07/08/20 15:05 CWX4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 CWY4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 CWZ4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 SV4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 SW4 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 AVY7 error post process created 12 txt files, 3 tiff
+07/08/20 15:05 AWY7 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 BVY7 post process created 18 txt files, 26 tiff
+07/08/20 15:05 BWY7 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 CVY7 error post process created 13 txt files, 9 tiff
+07/08/20 15:05 CWY7 error post process created 5 txt files, 0 tiff
+07/08/20 15:05 SV7 error post process created 12 txt files, 2 tiff
+07/08/20 15:05 SW7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 AVZ4 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 BVX4 error post process created 5 txt files, 1 tiff
+07/08/20 15:06 BVZ4 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 BWY4 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 BWZ4 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 CVX4 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 CVZ4 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 AVX7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 AVZ7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 AWX7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 AWZ7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 BVX7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 BVZ7 error post process created 5 txt files, 1 tiff
+07/08/20 15:06 BWX7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 BWZ7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 CVX7 error post process created 13 txt files, 10 tiff
+07/08/20 15:06 CWZ7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 CWX7 error post process created 5 txt files, 0 tiff
+07/08/20 15:06 DVX7 error post process created 3 txt files, 1 tiff
+07/08/20 15:06 DVZ7 error post process created 3 txt files, 1 tiff
+07/08/20 15:07 BVY1 error post process created 11 txt files, 29 tiff
+07/08/20 15:07 DWY7 error post process created 3 txt files, 1 tiff
+07/08/20 15:07 unconfV7 post process created 29 txt files, 0 tiff
+07/08/20 15:07 DWY7 error post process created 3 txt files, 1 tiff
+07/08/20 15:07 CVZ7 error post process created 3 txt files, 0 tiff
+07/08/20 21:57 BVY7 post process created 18 txt files, 26 tiff
+07/08/20 22:02 BVY7 post process created 18 txt files, 26 tiff
+07/08/20 22:09 BVY7 post process created 18 txt files, 26 tiff
+07/08/20 22:13 AVY4 error post process created 6 txt files, 8 tiff
+07/08/20 22:13 AWX4 error post process created 5 txt files, 0 tiff
+07/08/20 22:13 AWY4 error post process created 5 txt files, 0 tiff
+07/08/20 22:13 AVX4 error post process created 5 txt files, 1 tiff
+07/08/20 22:13 AWZ4 error post process created 5 txt files, 0 tiff
+07/08/20 22:13 BVY4 post process created 16 txt files, 3 tiff
+07/08/20 22:14 BWX4 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 CVY4 error post process created 5 txt files, 1 tiff
+07/08/20 22:14 CWX4 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 CWY4 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 SV4 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 CWZ4 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 SW4 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 AVY7 error post process created 12 txt files, 3 tiff
+07/08/20 22:14 AWY7 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 BVY7 post process created 18 txt files, 26 tiff
+07/08/20 22:14 BWY7 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 SV7 error post process created 12 txt files, 2 tiff
+07/08/20 22:14 CWY7 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 CVY7 error post process created 13 txt files, 9 tiff
+07/08/20 22:14 SW7 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 AVZ4 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 BVX4 error post process created 5 txt files, 1 tiff
+07/08/20 22:14 BVZ4 error post process created 5 txt files, 0 tiff
+07/08/20 22:14 BWY4 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 BWZ4 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 CVX4 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 CVZ4 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 AVX7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 AVZ7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 AWX7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 AWZ7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 BVX7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 BVZ7 error post process created 5 txt files, 1 tiff
+07/08/20 22:15 BWX7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 BWZ7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 CVX7 error post process created 13 txt files, 10 tiff
+07/08/20 22:15 CWZ7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 CWX7 error post process created 5 txt files, 0 tiff
+07/08/20 22:15 DVX7 error post process created 3 txt files, 1 tiff
+07/08/20 22:15 DVZ7 error post process created 3 txt files, 1 tiff
+07/08/20 22:15 BVY1 error post process created 11 txt files, 29 tiff
+07/08/20 22:15 unconfV7 post process created 29 txt files, 0 tiff
+07/08/20 22:15 DWY7 error post process created 3 txt files, 1 tiff
+07/08/20 22:15 CVZ7 error post process created 3 txt files, 0 tiff
+07/08/20 22:15 DWY7 error post process created 3 txt files, 1 tiff
