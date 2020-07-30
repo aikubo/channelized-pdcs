@@ -196,13 +196,14 @@ end if
                           !-----------------------------!
 
                         if ( TEMP(I,t) .eq. EPP(I,t) ) then 
-                            if (TEMP(I,time) .le. dble(0.10)) then
+                            if (TEMP(I,t) .le. dble(0.000010)) then
                                 WRITE(fid_tp+time,format4var) dble(14), XXX(I,1),YYY(I,1), ZZZ(I,1)
-    
-                            else 
-                                WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
-
                             end if 
+ 
+                            if (TEMP(I,t) .gt. dble(0.000010)) then  
+                                WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
+                            end if 
+
                         else  
                          WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
                        end if

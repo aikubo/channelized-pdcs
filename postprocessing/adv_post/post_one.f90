@@ -21,7 +21,7 @@ integer:: tfind=8
 integer::printstatus
 
 logical:: ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc
-logical:: UGdx8, TGdx8, xstream, ave, energy, tau
+logical:: UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
@@ -29,8 +29,9 @@ double precision:: scaleh=50.0
 simlabel='DVZ4'
 printstatus=2
 
+spill=.FALSE.
 ecoef=.FALSE.
-EPPdx8=.TRUE.
+EPPdx8=.FALSE.
 TGdx8=.FALSE.
 UGdx8=.FALSE.
 topo=.FALSE.
@@ -134,7 +135,12 @@ if (energy) then
         call dpupeak
 end if 
 
+if (spill) call overspill
+
+
 print*, "end program"
+
+
 
 end program
 

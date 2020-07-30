@@ -4,7 +4,7 @@ echo "Making post processing script"
 here=$(pwd)
 label=${PWD##*/}
 
-rm $label*
+#rm $label*
 
 cp /home/akubo/myprojects/channelized-pdcs/postsub.sh $here
 sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
@@ -70,7 +70,7 @@ sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" pos
 
 while true; do 
 echo "which of the following subroutines would you like to turn on?"
-echo "froude, rigrad, ent, massalloc, xstream, ave, energy, tau"
+echo "spill, froude, rigrad, ent, massalloc, xstream, ave, energy, tau"
 echo " dx write outs: topo, EPPdx8, TGdx8, UGdx8"
 read -p 'Subroutine: ' subroutine1
 sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one_temp.f90
@@ -113,7 +113,7 @@ rm post_one_temp.f90
 cd $here
 
 echo "submit to run"
-#sbatch postsub.sh
+sbatch postsub.sh
 echo "running"
 
 echo done!

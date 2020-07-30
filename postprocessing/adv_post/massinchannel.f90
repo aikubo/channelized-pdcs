@@ -11,7 +11,7 @@ module massdist
         use maketopo
         IMPLICIT NONE
         double precision, intent(INOut):: width, depth, lambda, scaleheight  
-        double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
+        double precision:: slopel, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         double precision::edge1, edge2, bottom, top, outsum, buoyant, current, area, topo, areatot
         real, allocatable:: areamat(:,:)
         print*, 'mass in channel'
@@ -23,10 +23,12 @@ module massdist
         filename='massinchannel.txt'
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
      !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
-        allocate(areamat(RMAX,ZMAX))
         print *, "Done writing 3D variables"
-
-      DO t= 1,timesteps
+        areatot=906*(1231.462516382) ! 906 * 1212/dcos(10.2)
+        allocate(areamat( RMAX,ZMAX))
+        cellarea=3.0*(3.0/0.98419560796)
+  
+     DO t= 1,timesteps
         chmass = 0
         tmass = 0
         chmassd = 0
@@ -46,10 +48,13 @@ module massdist
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
 
 
-                IF (EPP(I,t) <max_dilute .and. EPP(I,t) >0.000) THEN
-                        if (YYY(I,1) .eq. topo) then 
-                                area = area+(3.*3.)
-                                areamat(int(XXX(I,1)), int(ZZZ(I,1)))=9
+                IF (EPP(I,t) < max_dilute .and. EPP(I,t) >0.000) THEN
+                        if (YYY(I,1) .gt. top-4 .and. YYY(I,1) .lt. top+4 ) then 
+                                area = area+cellarea
+                                
+                                if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
+                                        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
+                                end if
                         end if  
 
                 IF (YYY(I,1)>bottom) THEN
@@ -126,7 +131,6 @@ module massdist
          scalemass1= scalemass1/tmass
          buoyant= buoyant/tmass
          current=current/tmass     
-         areatot=sum(areamat)
         
          WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, area, areatot
         END DO
@@ -715,4 +719,89 @@ module massdist
                 end do
                 end subroutine 
 
-       end module 
+
+
+       subroutine overspill 
+        double precision:: mass 
+
+          filename= 'overspill_avg.txt'
+          description="Average values in overspilled current"
+          routine= "massdist/ovespill"
+          datatype=" t   T_G   U_G   V_G   W_G   U_S1   DPU "
+          call headerf(7487, filename, simlabel, routine,DESCRIPTION,datatype)
+
+
+
+        
+        do t=1,timesteps
+                sum_1 = 0
+                sum_2 = 0
+                sum_3 = 0
+                avgt = 0
+                avgt2 = 0
+                avgt3 = 0
+                avgu = 0
+                avgu2 = 0
+                avgu3 = 0
+                avgv = 0
+                avgv2 = 0
+                avgv3 = 0
+                avgus = 0
+                avgus2 = 0
+                avgus3 = 0
+                avgw = 0
+                avgw2 = 0
+                avgw3 = 0
+                avgdpu =0
+                avgdpu3=0
+                avgdpu2=0
+
+
+            DO I=1,length1
+                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom,top)
+                if (YYY(I,1) .gt. top) then 
+                        
+                 call density(I,t, rho_c, mass)
+                        if( rho_c < rho_dry) then
+
+                                IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. max_dilute) THEN
+                               sum_1 = sum_1 +1
+                               avgt = T_G1(I,t) + avgt
+                               avgu = U_G1(I,t) + avgu
+                               avgv = U_G1(I,t) + avgv
+                               avgw = V_G1(I,t) + avgw
+                               avgus = U_S1(I,t) + avgus
+                               avgdpu = DPU(I,t) + avgdpu
+                        END IF
+
+                        IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. min_dilute) THEN
+                               sum_2 = sum_2 +1
+                               avgt2 = T_G1(I,t) + avgt2
+                               avgu2 = U_G1(I,t) + avgu2
+                               avgv2 = V_G1(I,t) + avgv2
+                               avgw2 = W_G1(I,t) + avgw2
+                               avgus2 = U_S1(I,t) + avgus2
+                               avgdpu2 = dpu(I,t) + avgdpu2
+
+                        END IF
+
+                        IF (EPP(I,t) .Gt. max_dense .and. EPP(I,t) .lt. min_dilute) THEN
+                               sum_3 = sum_3 +1
+                               avgt3 = T_G1(I,t) + avgt3
+                               avgu3 = U_G1(I,t) + avgu3
+                               avgv3 = V_G1(I,t) + avgv3
+                               avgw3 = W_G1(I,t) + avgw3
+                               avgus3 = U_S1(I,t) + avgus3
+                               avgdpu3 = dpu(I,t) + avgdpu3
+                               write(*,*) sum_3
+                        END IF
+
+                        end if
+                    end if  
+                END DO
+
+                     print*, "writing average"
+                     WRITE(7487, formatavgx2) t, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgdpu/sum_1, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgdpu2/sum_2
+                end do 
+        end subroutine
+        end module                         
