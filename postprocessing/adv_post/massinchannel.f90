@@ -19,7 +19,7 @@ module massdist
 
         routine="massdist/massinchannel"
         description="Calculate mass distribution in different parts of the channel"
-        datatype=" t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut"
+        datatype=" t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut Area Areat"
         filename='massinchannel.txt'
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
      !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
@@ -49,7 +49,8 @@ module massdist
 
 
                 IF (EPP(I,t) < max_dilute .and. EPP(I,t) >0.000) THEN
-                        if (YYY(I,1) .gt. top-4 .and. YYY(I,1) .lt. top+4 ) then 
+                        
+                       if (YYY(I,1) .gt. top-4  .and. YYY(I,1) .lt. top+4 ) then 
                                 area = area+cellarea
                                 
                                 if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
@@ -132,7 +133,7 @@ module massdist
          buoyant= buoyant/tmass
          current=current/tmass     
         
-         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, area, areatot
+         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, area/areatot, areatot
         END DO
         !! done !!
         print*, 'mass in channel done'
