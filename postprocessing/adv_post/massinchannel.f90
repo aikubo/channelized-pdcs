@@ -12,22 +12,40 @@ module massdist
         IMPLICIT NONE
         double precision, intent(INOut):: width, depth, lambda, scaleheight  
         double precision:: slopel, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
-        double precision::edge1, edge2, bottom, top, outsum, buoyant, current, area, topo, areatot
-        real, allocatable:: areamat(:,:)
+        double precision::edge1, carea,  areaout, edge2, bottom, top, outsum, buoyant, current, area, topo, areatot
+        real, allocatable:: areamat(:,:,:)
         print*, 'mass in channel'
         filename='massinchannel.txt'
 
         routine="massdist/massinchannel"
-        description="Calculate mass distribution in different parts of the channel"
-        datatype=" t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut Area Areat"
+        description="Calculate mass distribution in different parts of the channel. Total area is 1115705"
+        datatype=" t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut Areat AreaC Area Aout"
         filename='massinchannel.txt'
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
      !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
         print *, "Done writing 3D variables"
         areatot=906*(1231.462516382) ! 906 * 1212/dcos(10.2)
-        allocate(areamat( RMAX,ZMAX))
+     !   allocate(areamat( RMAX,ZMAX))
         cellarea=3.0*(3.0/0.98419560796)
-  
+        carea=0 
+        allocate(areamat(RMAX, YMAX, ZMAX))
+        do zc=1,ZMAX 
+        do rc=1,RMAX
+        do yc=1,YMAX        
+                call edges(width, lambda, depth, dble(rc*3), edge1, edge2, bottom, top)
+                if ( dble(zc*3) .gt. edge1  .and. dble(zc*3) .lt. edge2  ) then 
+                        if ( dble(yc*3.) .eq. 120  )then
+                        carea=carea+cellarea
+                        write(*,*) edge1, edge2
+                        areamat(rc, yc, zc)=cellarea
+                        end if 
+                end if
+               end do  
+           end do 
+        end do
+
+       write(*,*) carea, sum(areamat), width*1231.46
+
      DO t= 1,timesteps
         chmass = 0
         tmass = 0
@@ -43,6 +61,7 @@ module massdist
         current=0 
         outsum=0
         area=0
+        areaout=0
        
         DO I=1, length1
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
@@ -52,10 +71,14 @@ module massdist
                         
                        if (YYY(I,1) .gt. top-4  .and. YYY(I,1) .lt. top+4 ) then 
                                 area = area+cellarea
+                       if (ZZZ(I,1) .lt. edge1  .or. ZZZ(I,1) .gt. edge2) then 
+                                areaout=areaout+cellarea
                                 
-                                if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
-                                        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
-                                end if
+                                !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
+                                !        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
+                                !end if
+
+                        end if
                         end if  
 
                 IF (YYY(I,1)>bottom) THEN
@@ -133,7 +156,7 @@ module massdist
          buoyant= buoyant/tmass
          current=current/tmass     
         
-         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, area/areatot, areatot
+         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, area/areatot, areaout/(areatot-carea)
         END DO
         !! done !!
         print*, 'mass in channel done'

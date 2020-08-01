@@ -111,7 +111,7 @@ subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
         end if 
 
         edge1=int((centerline-wid/2)/3)*3
-        edge2=edge1+wid/2
+        edge2=int((centerline+wid/2)/3)*3
 
         bottom= (int((slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep)/3))*3
         top= bottom+dep
