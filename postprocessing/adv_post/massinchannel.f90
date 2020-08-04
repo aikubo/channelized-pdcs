@@ -11,7 +11,7 @@ module massdist
         use maketopo
         IMPLICIT NONE
         double precision, intent(INOut):: width, depth, lambda, scaleheight  
-        double precision:: slopel, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
+        double precision:: slopel, atest, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         double precision::edge1, carea,  areaout, edge2, bottom, top, outsum, buoyant, current, area, topo, areatot
         real, allocatable:: areamat(:,:,:)
         print*, 'mass in channel'
@@ -33,11 +33,9 @@ module massdist
         do rc=1,RMAX
         do yc=1,YMAX        
                 call edges(width, lambda, depth, dble(rc*3), edge1, edge2, bottom, top)
-                if ( dble(zc*3) .gt. edge1  .and. dble(zc*3) .lt. edge2  ) then 
-                        if ( dble(yc*3.) .eq. 120  )then
+                if ( dble(zc*3) .ge. edge1  .and. dble(zc*3) .le. edge2  ) then 
+                        if ( dble(yc*3.) .eq. bottom  )then
                         carea=carea+cellarea
-                        write(*,*) edge1, edge2
-                        areamat(rc, yc, zc)=cellarea
                         end if 
                 end if
                end do  
@@ -62,24 +60,44 @@ module massdist
         outsum=0
         area=0
         areaout=0
-       
+        atest=0
+
         DO I=1, length1
                 call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
 
+                       if ( abs( YYY(I,1)-top) .lt. 3) then 
+                        if ( XXX(I,1) .lt. 300) then
+                                atest=atest+cellarea
+                        end if
+                       end if 
 
-                IF (EPP(I,t) < max_dilute .and. EPP(I,t) >0.000) THEN
+                IF (EPP(I,t) < max_dilute .and. EPP(I,t) >0.001) THEN
+                      !  if (ZZZ(I,1) .lt. edge1  .or. ZZZ(I,1) .gt. edge2) then
+                      !          if (YYY(I,1) .ge. top-3 .and. YYY(I,1) .lt. top+3) then
+                      !                   areaout=areaout+cellarea
+                      !          end if 
+                      !  end if 
+ 
+                      !  if ( ZZZ(I,1) .gt. edge1  .and. ZZZ(I,1) .lt. edge2) then 
+                      !         if (YYY(I,1) .ge. bottom-3 .and. YYY(I,1) .lt. bottom+3) then
+                      !                   area=area+cellarea
+                      !          end if
+
+                      !  end if 
+
+                     !! test 
+
                         
-                       if (YYY(I,1) .gt. top-4  .and. YYY(I,1) .lt. top+4 ) then 
+ 
+                        if ( abs(YYY(I,1)- (top+5)) .lt. dble(3) ) then 
                                 area = area+cellarea
-                       if (ZZZ(I,1) .lt. edge1  .or. ZZZ(I,1) .gt. edge2) then 
-                                areaout=areaout+cellarea
                                 
                                 !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
                                 !        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
                                 !end if
 
-                        end if
-                        end if  
+                       end if
+                    !end if  
 
                 IF (YYY(I,1)>bottom) THEN
                 ! total mass 
@@ -156,7 +174,8 @@ module massdist
          buoyant= buoyant/tmass
          current=current/tmass     
         
-         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, area/areatot, areaout/(areatot-carea)
+         write(*,*) atest, "true: 277346"
+         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, (area)/areatot, areaout/(areatot-carea)
         END DO
         !! done !!
         print*, 'mass in channel done'

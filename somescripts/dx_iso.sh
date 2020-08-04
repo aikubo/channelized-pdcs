@@ -20,7 +20,7 @@ STR="0"
 echo $STR
 echo "The value is " $STR
 
-for i in `seq 8 8`
+for i in `seq 1 8`
 do
 
    if [ $i -lt 10 ]
@@ -44,7 +44,7 @@ do
 
 
 name1="$name$var"
-name1+='map'
+name1+='iso2'
 echo $name2
 #now update general file
 
@@ -60,25 +60,21 @@ echo "1"
 
 #now make a copy of single write dx script
 
-#cp ~/myprojects/7_INFLOW/BVY7/kubo_pretty_may_map.net ./temp2.net
-#cp ~/myprojects/7_INFLOW/BVY7/kubo_pretty_may_map.cfg ./kubo_pretty_script.cfg
+cp ~/myprojects/7_INFLOW/BVY7/kubo_pretty_may_iso.net ./temp2.net
+cp ~/myprojects/7_INFLOW/BVY7/kubo_pretty_may_iso.cfg ./kubo_pretty_script.cfg
 
-cp kubo_pretty_may_map.cfg kubo_pretty_script.cfg
+
 echo "2"
 #replace the integer 9988 with actual timestep in script. run script.
 #cat temp2.net | sed "s/iso_9/$name1/"  > kubo_script_temp.net
-cat kubo_pretty_may_map.net | sed "s/testC.general/testC2temp.general/" > kubo_pretty_script.net
-sed -i "s|iso_9|$name1|g" kubo_pretty_script.net
+cat temp2.net | sed "s/testC.general/testC2temp.general/" > kubo_pretty_script.net
+sed -i "s#iso_9#${name1}#g" kubo_pretty_script.net
 #cat temp2.cfg | sed s/9988/$i/ > PlumeEP.cfg
 
 echo "3"
 
 dx -nodisplay -execonly -script kubo_pretty_script.net
-
-sleep 1m 
-
-rm tempEPG.general
-done 
+done
 echo "4"
 currentdate=$(date +”%m/%d/%Y”)
 echo -e "$currentdate ran may figures \n" > status.txt
