@@ -63,7 +63,7 @@ module massdist
         atest=0
 
         DO I=1, length1
-                call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
+                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
 
                        if ( abs( YYY(I,1)-top) .lt. 3) then 
                         if ( XXX(I,1) .lt. 300) then
@@ -801,7 +801,7 @@ module massdist
 
 
             DO I=1,length1
-               call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
+               call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
                 if (YYY(I,1) .gt. top) then 
                         
                  call density(I,t, rho_c, mass)
