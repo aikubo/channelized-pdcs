@@ -1,16 +1,98 @@
 !! test module 
 
 module test 
+use parampost 
+use constants
+use formatmod
+use 
+
 implicit none
-subroutine createtestdata(X,Y,Z)
+subroutine createtestdata(X,Y,Z, data2)
     integer, intent(in):: X,Y,Z 
     integer:: midx, midy, midz
+    real: slopeang
+    double precision, allocatable:: data(:,:,:)
+    double precision, allocatable, intent(out):: data2(:,:)
+    allocate(data(X,Y,Z))
     
     midx=X/2 
     midy=y/2
     midz=z/2
+    ! 4 x 4 x 4 
+    ! make topography 
+    do rc =1,X 
+        do zc=1,Z
+            do yc=1,Y 
+                data(rc, yc, zc)=1.0 
+            end do 
+        end do
+    end do   
     
+    do rc =1,midx
+        do zc=midz-width, midz+width   
+            do yc=midy+1,Yls
+                data(rc,yc,zc)=0.99
+            end do 
+        end do 
+    end do 
     
-    for i=1,X*Y*Z:
+    do t=1,timesteps
+        do rc=1,X
+            do yc=1,Y
+                do zc=1,Z
+                    call FUNIJK(xl,yl,zl,IJK)
+                    
+                    data2(IJK,t)=data(rc,yc,zc)
+                end do 
+            end do 
+        end do
+    end do 
+                    
+    end subroutine 
+   
+    subroutine testtopo(OUTX,OUTY,OUTZ)
+        DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTX
+        DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTY
+        DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTZ
+                DX(1)=3.0
+            x(1)=DX(1)
+            DO rc=2,RMAX
+            DX(rc)=DX(rc-1)
+            x(rc)=DX(rc)+x(rc-1)
+            END DO
+            DY(1)=3.0!0.375
+            y(1)=DY(1)
+            DO zc=2,YMAX
+             DY(zc)=DY(zc-1)
+              y(zc)=DY(zc)+y(zc-1)
+            END DO
+            DZ(1)=3.0
+            !z(1)=2240. !Z is in reverse compared to X & Y
+            DO zc=2,ZMAX
+           
+             DZ(zc)=DZ(zc-1)
+             z(zc)=DY(zc)+x(zc-1)
+            END DO
+            !! end create spatial deltas!!
+    
+            !------------------------------ Create grid matrices of length
+            !RMAX*ZMAX*YMAX ----------------------------!
+            I=1
+            DO zc=1,ZMAX
+                 DO rc=1,RMAX
+                      DO yc=1,YMAX
+                            XX(rc,yc,zc)=x(rc)
+                            OUTX(I,1)=XX(rc,yc,zc)
+                            YY(rc,yc,zc)=y(yc)
+                            OUTY(I,1)=YY(rc,yc,zc)
+                            ZZ(rc,yc,zc)=z(zc)
+                            OUTZ(I,1)=ZZ(rc,yc,zc)
+                            I=I+1
+                      END DO
+                 END DO
+            END DO
+            
+    end subroutine 
+        
         
     

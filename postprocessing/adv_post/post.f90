@@ -41,6 +41,7 @@ timesteps=8
 tstart=3
 tstop=timesteps
 depth = 27
+slope=0.18
 
 call ALLOCATE_ARRAYS
 
