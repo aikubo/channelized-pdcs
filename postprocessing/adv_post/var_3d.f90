@@ -80,7 +80,7 @@ use maketopo
                 maxdpuin=0
                 maxdpuout=0
                 do I=1,length1
-                call edges(width, lambda, depth, XXX(I,1), edge1, edge2,bottom, top)
+                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2,bottom, top)
 
                 if ( YYY(I,1) .lt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0 ) then
                         if (DPU(I,t) .gt. maxdpuin ) then 
