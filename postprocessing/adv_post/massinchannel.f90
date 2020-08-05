@@ -24,9 +24,9 @@ module massdist
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
      !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
         print *, "Done writing 3D variables"
-        areatot=906*(1231.462516382) ! 906 * 1212/dcos(10.2)
+        areatot=3*ZMAX*(RMAX*3*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
      !   allocate(areamat( RMAX,ZMAX))
-        cellarea=3.0*(3.0/0.98419560796)
+        cellarea=3.0*(3.0*sqrt(slope**2+1))
         carea=0 
         allocate(areamat(RMAX, YMAX, ZMAX))
         do zc=1,ZMAX 
@@ -64,11 +64,11 @@ module massdist
 
         DO I=1, length1
                 call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
-
+                 write(*,*) XXX(I,1), top
                        if ( abs( YYY(I,1)-top) .lt. 3) then 
-                        if ( XXX(I,1) .lt. 300) then
+                        
                                 atest=atest+cellarea
-                        end if
+                      
                        end if 
 
                 IF (EPP(I,t) < max_dilute .and. EPP(I,t) >0.001) THEN
@@ -89,9 +89,9 @@ module massdist
 
                         
  
-                        if ( abs(YYY(I,1)- (top+5)) .lt. dble(3) ) then 
+                        if ( abs(YYY(I,1)- (top)) .lt. dble(3) ) then 
                                 area = area+cellarea
-                                
+                                write(*,*) "inflow", I 
                                 !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
                                 !        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
                                 !end if
@@ -174,7 +174,8 @@ module massdist
          buoyant= buoyant/tmass
          current=current/tmass     
         
-         write(*,*) atest, "true: 277346"
+         write(*,*) atest, "true: ", 3*3*RMAX*ZMAX
+         write(*,*) area
          WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, (area)/areatot, areaout/(areatot-carea)
         END DO
         !! done !!
@@ -289,7 +290,7 @@ module massdist
 
                         do I=1,length1
 
-                                call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
+                                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
                                 edge1= FLOOR(edge1/3.)*3. + 6.
                                 edge2= FLOOR(edge2/3.)*3. - 6.
                                 bottom= FLOOR(bottom/3.)*3. !- 6   
@@ -382,7 +383,7 @@ module massdist
                         end do 
 
                         do I=1,length1
-                                call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
+                                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
                                 J= int(XXX(I,1))/3
                                 edge1= FLOOR(edge1/3.)*3.
                                 edge2= FLOOR(edge2/3.)*3.
@@ -522,7 +523,7 @@ module massdist
 
         do I=1,length1
 
-                call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
+                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
                 if ( EP_G1(I,t) .gt. 0.00) then
                 if( YYY(I,1) .gt. bottom .and. YYY(I,1) .lt. top) then 
                        ux= U_G1(I,t)
