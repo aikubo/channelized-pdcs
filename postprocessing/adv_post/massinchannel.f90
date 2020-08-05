@@ -32,7 +32,7 @@ module massdist
         do zc=1,ZMAX 
         do rc=1,RMAX
         do yc=1,YMAX        
-                call edges(width, lambda, depth, dble(rc*3), edge1, edge2, bottom, top)
+                call edges(width, lambda, depth, dble(rc*3), slope edge1, edge2, bottom, top)
                 if ( dble(zc*3) .ge. edge1  .and. dble(zc*3) .le. edge2  ) then 
                         if ( dble(yc*3.) .eq. bottom  )then
                         carea=carea+cellarea
@@ -63,7 +63,7 @@ module massdist
         atest=0
 
         DO I=1, length1
-                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                call edges(width, lambda, depth, XLOC, slope edge1, edge2, bottom, top)
 
                        if ( abs( YYY(I,1)-top) .lt. 3) then 
                         if ( XXX(I,1) .lt. 300) then
@@ -289,7 +289,7 @@ module massdist
 
                         do I=1,length1
 
-                                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                                call edges(width, lambda, depth, XLOC, slope edge1, edge2, bottom, top)
                                 edge1= FLOOR(edge1/3.)*3. + 6.
                                 edge2= FLOOR(edge2/3.)*3. - 6.
                                 bottom= FLOOR(bottom/3.)*3. !- 6   
@@ -382,7 +382,7 @@ module massdist
                         end do 
 
                         do I=1,length1
-                                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                                call edges(width, lambda, depth, XLOC, slope edge1, edge2, bottom, top)
                                 J= int(XXX(I,1))/3
                                 edge1= FLOOR(edge1/3.)*3.
                                 edge2= FLOOR(edge2/3.)*3.
@@ -522,7 +522,7 @@ module massdist
 
         do I=1,length1
 
-                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom,top)
+                call edges(width, lambda, depth, XLOC, slope edge1, edge2, bottom, top)
                 if ( EP_G1(I,t) .gt. 0.00) then
                 if( YYY(I,1) .gt. bottom .and. YYY(I,1) .lt. top) then 
                        ux= U_G1(I,t)
@@ -638,7 +638,7 @@ module massdist
                 rc = floor(lambda*(I+1)*0.25/3)
                 XLOC= dble( rc*3)
                 
-                call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
+                call edges(width, lambda, depth, XLOC, slope edge1, edge2, bottom, top)
                 ! edge 1 
                 zc1= 2 
                 zc2= int( (ceiling(edge1/3.0)))
@@ -733,7 +733,7 @@ module massdist
                 do t=1,timesteps 
                         do rc=1,RMAX
                                 XLOC=dble(rc*3)
-                                call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
+                                call edges(width, lambda, depth, XLOC, slope edge1, edge2, bottom, top)
                                 
                                 ytop = int(ceiling(top/3)) + 6
                                 print*, "ytop", ytop
@@ -801,7 +801,7 @@ module massdist
 
 
             DO I=1,length1
-                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom,top)
+               call edges(width, lambda, depth, XLOC, slope edge1, edge2, bottom, top)
                 if (YYY(I,1) .gt. top) then 
                         
                  call density(I,t, rho_c, mass)

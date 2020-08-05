@@ -44,7 +44,7 @@ double precision, allocatable:: TRACERSON(:,:,:)
                         sum_on=sum_on+TRACERS(kk,ii,3)
                         
                         if ( TRACERS(kk,ii,3) .eq. dble(1.0) ) then 
-                                call edges( width, depth, lambda, TRACERS(kk,ii,4),  edge1, edge2, bottom, top)
+                                call edges( width, depth, lambda, TRACERS(kk,ii,4), slope, edge1, edge2, bottom, top)
                                 write(*,*) "calling edges" 
                                 if (TRACERS(kk,ii,5) .lt. top) then 
                                       !  if (TRACERS(kk,ii,6) .gt. edge1 .and. TRACERS(kk,ii,6) .lt. edge2) then 

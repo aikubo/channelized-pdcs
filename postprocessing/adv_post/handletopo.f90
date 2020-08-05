@@ -92,17 +92,18 @@ subroutine writedxtopo
 end subroutine
 
 
-subroutine edges(wid, lamb, dep, XLOC, edge1, edge2, bottom, top)
+subroutine edges(wid, lamb, dep, XLOC,slope, edge1, edge2, bottom, top)
        implicit none 
-       double precision, intent(IN):: wid, dep, lamb, XLOC
+       double precision, intent(IN):: wid, dep, lamb, XLOC, slope
        double precision, intent(OUT):: edge1, edge2, bottom, top
-       double precision:: deltz, centerline, center, clearance, slope
-        slope=0.18
+       double precision:: deltz, centerline, center, clearance
         deltz=3.0
         center = (ZMAX-2)*deltz/2 
 
         clearance = 50.
-        
+        if (simlabel == 'test')then 
+            clearance=3
+        end if 
         
         if (lamb .eq. 0) then 
         centerline = center
