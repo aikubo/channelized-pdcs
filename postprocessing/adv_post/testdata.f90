@@ -27,7 +27,7 @@ printstatus=2
 
 
 RMAX=2
-YMAX=3
+YMAX=6
 ZMAX=4
 length1=RMAX*YMAX*ZMAX
 
@@ -39,7 +39,7 @@ deltat=5.0
 timesteps=8
 tstart=3
 tstop=timesteps
-depth = 1
+depth = 0
 slope=0.5 
 
 call ALLOCATE_ARRAYS

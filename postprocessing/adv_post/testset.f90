@@ -38,8 +38,10 @@ subroutine createtestdata(X,Y,Z,slope, data2)
     !end do 
     
         data(1,3,2)=0.9
-        data(1,3,3)=0.9 
-        data(2,2,2)=0.9
+        data(1,3,3)=0.9
+        data(2,2,2)=0.9 
+        data(2,5,2)=0.9
+        data(2,4,3)=0.9
         !data(2,2,3)=0.9 
         !data(1,3,2)=0.9        
    
@@ -80,7 +82,7 @@ subroutine createtestdata(X,Y,Z,slope, data2)
             DO zc=2,ZMAX
            
              DZ(zc)=DZ(zc-1)
-             z(zc)=DY(zc)+x(zc-1)
+             z(zc)=DY(zc)+z(zc-1)
             END DO
             !! end create spatial deltas!!
     

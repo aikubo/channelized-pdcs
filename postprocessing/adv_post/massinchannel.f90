@@ -12,7 +12,7 @@ module massdist
         IMPLICIT NONE
         double precision, intent(INOut):: width, depth, lambda, scaleheight  
         double precision:: slopel, atest, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
-        double precision::edge1, carea,  areaout, edge2, bottom, top, outsum, buoyant, current, area, topo, areatot
+        double precision:: carea,  areaout, outsum, buoyant, current, area, topo, areatot
         real, allocatable:: areamat(:,:,:)
         print*, 'mass in channel'
         filename='massinchannel.txt'
@@ -26,7 +26,7 @@ module massdist
         print *, "Done writing 3D variables"
         areatot=3*ZMAX*(RMAX*3*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
      !   allocate(areamat( RMAX,ZMAX))
-        cellarea=3.0*(3.0*sqrt(slope**2+1))
+        cellarea=DZ(1)*(DX(1)*sqrt(slope**2+1))
         carea=0 
         allocate(areamat(RMAX, YMAX, ZMAX))
         do zc=1,ZMAX 
@@ -44,7 +44,7 @@ module massdist
 
        write(*,*) carea, sum(areamat), width*1231.46
 
-     DO t= 1,timesteps
+     DO t= 8,timesteps
         chmass = 0
         tmass = 0
         chmassd = 0
@@ -64,9 +64,9 @@ module massdist
 
         DO I=1, length1
                 call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
-                 write(*,*) XXX(I,1), top
-                       if ( abs( YYY(I,1)-top) .lt. 3) then 
-                        
+                ! write(*,*) "x", XXX(I,1), "y", YYY(I,1), "Z", ZZZ(I,1), "top", top
+                       if ( abs( YYY(I,1)-top) .lt. DY(1)) then 
+                     
                                 atest=atest+cellarea
                       
                        end if 
@@ -91,7 +91,7 @@ module massdist
  
                         if ( abs(YYY(I,1)- (top)) .lt. dble(3) ) then 
                                 area = area+cellarea
-                                write(*,*) "inflow", I 
+                                write(*,*) "inside flow", I 
                                 !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
                                 !        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
                                 !end if
@@ -174,7 +174,7 @@ module massdist
          buoyant= buoyant/tmass
          current=current/tmass     
         
-         write(*,*) atest, "true: ", 3*3*RMAX*ZMAX
+         write(*,*) atest, "true: ", DZ(1)*DX(1)*RMAX*ZMAX*(sqrt(slope**2+1))
          write(*,*) area
          WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, (area)/areatot, areaout/(areatot-carea)
         END DO
