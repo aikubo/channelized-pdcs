@@ -5,10 +5,10 @@ character(5):: simlabel
 character(150) :: datatype, filename, routine, description
 ! Values are LOG Volume Fraction of Particles EP_P
 !-------- Boundaries for Gradient Calculations -----------!
-DOUBLE PRECISION:: max_dense   = 2.5
-DOUBLE PRECISION:: min_dense   = 1.5
-DOUBLE PRECISION:: max_dilute  = 6.5
-DOUBLE PRECISION:: min_dilute  = 5.5
+DOUBLE PRECISION:: max_dense   = 0.5
+DOUBLE PRECISION:: min_dense   = 0.01
+DOUBLE PRECISION:: max_dilute  = 2
+DOUBLE PRECISION:: min_dilute  = 3.5
 !-------- Boundaries for Gradient Calculations -----------!
 
 !--------------------------- Constants

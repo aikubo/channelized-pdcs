@@ -14,6 +14,7 @@ module massdist
         double precision:: slopel, atest, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         double precision:: carea,  areaout, outsum, buoyant, current, area, topo, areatot
         real, allocatable:: areamat(:,:,:)
+        logical:channeltrue
         print*, 'mass in channel'
         filename='massinchannel.txt'
 
@@ -24,7 +25,7 @@ module massdist
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
      !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
         print *, "Done writing 3D variables"
-        areatot=3*ZMAX*(RMAX*3*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
+        areatot=DX(1)*ZMAX*(RMAX*DZ(1)*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
      !   allocate(areamat( RMAX,ZMAX))
         cellarea=DZ(1)*(DX(1)*sqrt(slope**2+1))
         carea=0 
@@ -63,7 +64,7 @@ module massdist
         atest=0
 
         DO I=1, length1
-                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
+                call edgesdose(width, lambda, depth, XXX(I,1), ZZZ(I,1), YYY(I,1), slope, top)
                 ! write(*,*) "x", XXX(I,1), "y", YYY(I,1), "Z", ZZZ(I,1), "top", top
                        if ( abs( YYY(I,1)-top) .lt. DY(1)) then 
                      
@@ -71,7 +72,7 @@ module massdist
                       
                        end if 
 
-                IF (EPP(I,t) < max_dilute .and. EPP(I,t) >0.001) THEN
+                IF (EP_G1(I,t) < 0.9999995 .and. EP_G1(I,t) >0.01 ) THEN
                       !  if (ZZZ(I,1) .lt. edge1  .or. ZZZ(I,1) .gt. edge2) then
                       !          if (YYY(I,1) .ge. top-3 .and. YYY(I,1) .lt. top+3) then
                       !                   areaout=areaout+cellarea
@@ -89,7 +90,7 @@ module massdist
 
                         
  
-                        if ( abs(YYY(I,1)- (top)) .lt. dble(3) ) then 
+                        if ( abs(YYY(I,1)- (top+6)) .lt. dble(3) ) then 
                                 area = area+cellarea
                                 write(*,*) "inside flow", I 
                                 !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
@@ -99,7 +100,7 @@ module massdist
                        end if
                     !end if  
 
-                IF (YYY(I,1)>bottom) THEN
+                IF (YYY(I,1)>top) THEN
                 ! total mass 
                                 tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
@@ -129,23 +130,19 @@ module massdist
 
 
                                 ! MASS IN THE CHANNEL
-                                IF (YYY(I,1)<top) THEN
+                                IF (inchannel) THEN
+                                  
                                         !print*, top
                                         inchannel = inchannel + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if 
 
                                 ! MASS WITHIN THE WIDTH OF THE CHANNEL INCLUDING ABOVE IT
-                                IF (ZZZ(I,1) >edge1) THEN
-                                        IF (ZZZ(I,1) <edge2) THEN
+                                IF (inchannel) THEN
+                                      
                                                 chmass = chmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
-                                        END IF
                                 END IF
 
-                                If (YYY(I,1) > top) then 
-                                        IF (ZZZ(I,1) >edge1) THEN
-                                                IF (ZZZ(I,1) <edge2) THEN
-                                                        topo=FLOOR(TOP/3.0)*3.+3.
-
+                                If (inchannel .eq. .FALSE.) then 
                                                         outsum= outsum +(1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         rho_c=rho_p*(1-EP_G1(I,t))+(P_const/(R_dryair*T_G1(I,t)))*(EP_G1(I,t))
                                                         
@@ -155,10 +152,7 @@ module massdist
                                                         elseif (rho_c > rho_dry) then
                                                                 current = current + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         end if
-
-                                                end if        
-                                        end if
-                                end if 
+                               end if 
 
                         END IF
                 END IF

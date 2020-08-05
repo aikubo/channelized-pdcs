@@ -118,13 +118,14 @@ subroutine edges(wid, lamb, dep, XLOC,slope, edge1, edge2, bottom, top)
         top= bottom+dep
 end subroutine
 
-subroutine edgedose(wid, lamb, dep, XLOC,ZLOC, slope,top)
+subroutine edgesdose(wid, lamb, dep, XLOC,ZLOC,YLOC, slope,top,inchannel)
        implicit none
        double precision, intent(IN):: wid, dep, lamb, XLOC,ZLOC, slope
        double precision, intent(OUT):: top
-       double precision:: deltz, centerline, center, clearance
-        deltz=3.0
-        center = (ZMAX-2)*deltz/2
+       logical, intent(out):: inchannel
+       double precision:: topchannel, bottochannel, deltz, centerline, center, clearance
+        deltz=DZ(1)
+        center = (ZMAX)*deltz/2
 
         clearance = 50.
         if (simlabel == 'test')then
@@ -137,14 +138,18 @@ subroutine edgedose(wid, lamb, dep, XLOC,ZLOC, slope,top)
           centerline = lamb*amprat*sind((360*XLOC)/lamb)+center
         end if
 
-        edge1=int((centerline-wid/2)/3)*3
-        edge2=int((centerline+wid/2)/3)*3
-        bottom= (int((slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep)/3))*3
-
+        edge1=int((centerline-wid/2)/deltz)*deltz
+        edge2=int((centerline+wid/2)/deltz)*deltz
+        bottochannel = int(ceiling((slope*deltz*(RMAX-(XLOC/deltz))+clearance-dep)/deltz))*deltz
+        topchannel=bottochannel-dep
         if (ZLOC .gt. edge1 .and. ZLOC .lt. edge2) then 
-        top= int(ceiling((slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep)/deltz))*deltz
+                top= int(ceiling((slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep)/deltz))*deltz
+                if (YYY(I,1) .lt. topchannel) then 
+                inchannel=.TRUE.
+                end if
         else 
-        top= bottom+dep
+                top= bottom+dep
+                inchannel=.FALSE.
 
         end if 
 
