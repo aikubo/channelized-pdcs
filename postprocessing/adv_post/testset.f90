@@ -37,11 +37,12 @@ subroutine createtestdata(X,Y,Z,slope, data2)
     !    end do 
     !end do 
     
-        data(1,3,2)=0.9
-        data(1,3,3)=0.9
-        data(2,2,2)=0.9 
-        data(2,5,2)=0.9
-        data(2,4,3)=0.9
+        data(1,4,2)=0.9
+        data(1,4,3)=0.99
+        data(2,4,2)=0.9 
+        data(2,4,3)=0.999
+        data(3,3,3)=0.9999
+        data(4,3,2)=0.9
         !data(2,2,3)=0.9 
         !data(1,3,2)=0.9        
    

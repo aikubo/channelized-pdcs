@@ -21,12 +21,12 @@ integer:: tfind=8
 integer::printstatus
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
-
+double precision:: tarea, cellarea
 simlabel='test'
 printstatus=2
 
 
-RMAX=2
+RMAX=4
 YMAX=6
 ZMAX=4
 length1=RMAX*YMAX*ZMAX
@@ -60,10 +60,12 @@ call testtopo(XXX,YYY,ZZZ)
 
 call logvolfrc(EP_G1, EPP)
 !call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
-
+cellarea=DX(1)*DZ(1)*sqrt(1+slope**2)
+tarea=0
 do I=1,length1 
         if (EP_G1(I,1)  .ne. 1) then 
         write(*,*) XXX(I,1), YYY(I,1), ZZZ(I,1), EP_G1(i,1)
+        tarea=tarea+cellarea
         end if 
 end do
 !print*, ZZZ(:,1)
@@ -72,32 +74,9 @@ end do
 !call writedxtopo
  
 !call makeUG(1200, U_G, printstatus) 
-
-!call makeTG(1300, T_G, printstatus)
-print*, "finding froude"
-!call isosurf(scaleh)
-print*, "finding richardson gradient"
-!call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
-print*, "calculating entrainment"
-!call bulkent(EP_G1) 
 print*, "calculating mass in channel"
 call massinchannel(width, depth, lambda, scaleh)
-print*, "calculating dominant velocities"
-!call crossstream
-print*, "finding veritical column"
-!call slices2
-print*, "averaging"
-!call average_all
-print*, "velocity at the edges"
-!call edgevelocity
-print*, "mass by xxx"
-!call massbyxxx
-print*, "peak dpu"
-!call dpupeak
-print*, "int mass in channel"
-!call integratemass
-print*, "energy potential"
-!call energypotential
+write(*,*) "True area", tarea
 print*, "end program"
 
 end program
