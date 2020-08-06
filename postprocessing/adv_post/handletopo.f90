@@ -118,40 +118,45 @@ subroutine edges(wid, lamb, dep, XLOC,slope, edge1, edge2, bottom, top)
         top= bottom+dep
 end subroutine
 
-subroutine edgesdose(wid, lamb, dep, XLOC,ZLOC,YLOC, slope,top,inchannel)
+subroutine edgesdose(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,top,inchannel)
        implicit none
-       double precision, intent(IN):: wid, dep, lamb, XLOC,ZLOC, slope
+       double precision, intent(IN):: wid, dep, lamb, XLOC,ZLOC, YLOC, slope
        double precision, intent(OUT):: top
        logical, intent(out):: inchannel
        double precision:: topchannel, bottochannel, deltz, centerline, center, clearance
-        deltz=DZ(1)
-        center = (ZMAX)*deltz/2
+       double precision:: mid 
+        deltz=dble(DX(3))
+        mid=dble(ZMAX)
+        !write(*,*) ZMAX, mid
+        center = mid/2.0*deltz
 
         clearance = 50.
         if (simlabel == 'test')then
-            clearance=DX(1)
+            clearance=2
         end if
-
+        !write(*,*) clearance, center
         if (lamb .eq. 0) then
-        centerline = center
+                centerline = center
         else
           centerline = lamb*amprat*sind((360*XLOC)/lamb)+center
         end if
 
-        edge1=int((centerline-wid/2)/deltz)*deltz
-        edge2=int((centerline+wid/2)/deltz)*deltz
-        bottochannel = int(ceiling((slope*deltz*(RMAX-(XLOC/deltz))+clearance-dep)/deltz))*deltz
-        topchannel=bottochannel-dep
-        if (ZLOC .gt. edge1 .and. ZLOC .lt. edge2) then 
-                top= int(ceiling((slope*deltz*(RMAX-(XLOC/deltz)) +clearance -dep)/deltz))*deltz
-                if (YYY(I,1) .lt. topchannel) then 
-                inchannel=.TRUE.
-                end if
-        else 
-                top= bottom+dep
-                inchannel=.FALSE.
+       ! write(*,*) centerline
 
+        inchannel=.FALSE.
+        edge1=dble(ceiling((centerline-wid/2)/deltz)*deltz)-deltz
+        edge2=dble(ceiling((centerline+wid/2)/deltz)*deltz)-deltz
+        bottochannel = dble(ceiling((slope*deltz*(RMAX-(XLOC/deltz))+clearance-dep)/deltz))*deltz
+        topchannel=bottochannel+dep
+        top=topchannel
+        if (ZLOC .ge. edge1 .and. ZLOC .le. edge2) then 
+                top=bottochannel 
+                if (YLOC .le. topchannel .and. YLOC .ge. bottochannel) then 
+                      inchannel=.TRUE.
+                     ! write(*,*) "inside", XLOC, YLOC, ZLOC, top
+                end if
         end if 
+        !write(*,*) XLOC, YLOC, ZLOC, top, edge1, edge2, bottochannel, topchannel       
 
 end subroutine
 

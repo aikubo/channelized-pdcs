@@ -7,14 +7,14 @@ module massdist
          
         contains
 
-        subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT)
+        subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT, area)
         use maketopo
         IMPLICIT NONE
-        double precision, intent(INOut):: width, depth, lambda, scaleheight  
+        double precision, intent(INOut):: area, width, depth, lambda, scaleheight  
         double precision:: slopel, atest, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
-        double precision:: carea,  areaout, outsum, buoyant, current, area, topo, areatot
+        double precision:: carea,  areaout, outsum, buoyant, current,  topo, areatot
         real, allocatable:: areamat(:,:,:)
-        logical:channeltrue
+        logical::channeltrue
         print*, 'mass in channel'
         filename='massinchannel.txt'
 
@@ -27,23 +27,16 @@ module massdist
         print *, "Done writing 3D variables"
         areatot=DX(1)*ZMAX*(RMAX*DZ(1)*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
      !   allocate(areamat( RMAX,ZMAX))
-        cellarea=DZ(1)*(DX(1)*sqrt(slope**2+1))
+        cellarea=DX(3)*(DX(3)*sqrt(slope**2+1))
         carea=0 
         allocate(areamat(RMAX, YMAX, ZMAX))
-        do zc=1,ZMAX 
-        do rc=1,RMAX
-        do yc=1,YMAX        
-                call edges(width, lambda, depth, dble(rc*3), slope, edge1, edge2, bottom, top)
-                if ( dble(zc*3) .ge. edge1  .and. dble(zc*3) .le. edge2  ) then 
-                        if ( dble(yc*3.) .eq. bottom  )then
+        do I=1,length1 
+                call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, top, channeltrue)
+                        if ( channeltrue .and. YYY(I,1) .eq. top )then
                         carea=carea+cellarea
                         end if 
-                end if
-               end do  
-           end do 
         end do
 
-       write(*,*) carea, sum(areamat), width*1231.46
 
      DO t= 8,timesteps
         chmass = 0
@@ -64,7 +57,7 @@ module massdist
         atest=0
 
         DO I=1, length1
-                call edgesdose(width, lambda, depth, XXX(I,1), ZZZ(I,1), YYY(I,1), slope, top)
+                call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, top, channeltrue)
                 ! write(*,*) "x", XXX(I,1), "y", YYY(I,1), "Z", ZZZ(I,1), "top", top
                        if ( abs( YYY(I,1)-top) .lt. DY(1)) then 
                      
@@ -90,9 +83,9 @@ module massdist
 
                         
  
-                        if ( abs(YYY(I,1)- (top+6)) .lt. dble(3) ) then 
+                        if ( abs(YYY(I,1)- (top)) .lt. DX(3) ) then 
                                 area = area+cellarea
-                                write(*,*) "inside flow", I 
+                               ! write(*,*) "inside flow", I 
                                 !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
                                 !        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
                                 !end if
@@ -130,19 +123,19 @@ module massdist
 
 
                                 ! MASS IN THE CHANNEL
-                                IF (inchannel) THEN
+                                IF (channeltrue) THEN
                                   
                                         !print*, top
                                         inchannel = inchannel + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if 
 
                                 ! MASS WITHIN THE WIDTH OF THE CHANNEL INCLUDING ABOVE IT
-                                IF (inchannel) THEN
+                                IF (channeltrue) THEN
                                       
                                                 chmass = chmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 END IF
 
-                                If (inchannel .eq. .FALSE.) then 
+                                If (channeltrue .eq. .FALSE.) then 
                                                         outsum= outsum +(1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         rho_c=rho_p*(1-EP_G1(I,t))+(P_const/(R_dryair*T_G1(I,t)))*(EP_G1(I,t))
                                                         
@@ -168,7 +161,7 @@ module massdist
          buoyant= buoyant/tmass
          current=current/tmass     
         
-         write(*,*) atest, "true: ", DZ(1)*DX(1)*RMAX*ZMAX*(sqrt(slope**2+1))
+         write(*,*) carea, "true: ", DX(1)*DX(1)*RMAX*3*(sqrt(slope**2+1))
          write(*,*) area
          WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, (area)/areatot, areaout/(areatot-carea)
         END DO

@@ -13,7 +13,7 @@ DOUBLE PRECISION:: min_dilute  = 3.5
 
 !--------------------------- Constants
 !------------------------------------------!
-DOUBLE PRECISION, PARAMETER:: Volume_Unit = 2.*2.*2.  !From your 3D grid dx, dy, dz
+DOUBLE PRECISION, PARAMETER:: Volume_Unit =3.*3.*3.  !From your 3D grid dx, dy, dz
 DOUBLE PRECISION, PARAMETER:: gravity = 9.81 !m^2/s
 DOUBLE PRECISION, PARAMETER:: P_const = 1.0e5 !Pa
 DOUBLE PRECISION, PARAMETER::R_vapor = 461.5 !J/kg K
