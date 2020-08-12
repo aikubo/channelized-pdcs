@@ -25,6 +25,7 @@ logical:: UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
+double precision:: area 
 
 simlabel='DVZ4'
 printstatus=2
@@ -113,7 +114,7 @@ print*, "calculating mass in channel"
 if (ecoef) print*, "ENT COEFFICIENT"
 if (ecoef) call entcoef
 
-if (massalloc) call massinchannel(width, depth, lambda, scaleh)
+if (massalloc) call massinchannel(width, depth, lambda, scaleh, area)
 print*, "calculating dominant velocities"
 if (xstream) call crossstream
 print*, "granular to gas stress"

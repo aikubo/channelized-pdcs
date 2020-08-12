@@ -64,19 +64,19 @@ subroutine createtestdata(X,Y,Z,slope, data2)
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTX
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTY
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTZ
-                DX(1)=1.0
+                DX(1)=3.0
             x(1)=DX(1)
             DO rc=2,RMAX
             DX(rc)=DX(rc-1)
             x(rc)=DX(rc)+x(rc-1)
             END DO
-            DY(1)=1.0!0.375
+            DY(1)=DX(1)!0.375
             y(1)=DY(1)
             DO zc=2,YMAX
              DY(zc)=DY(zc-1)
               y(zc)=DY(zc)+y(zc-1)
             END DO
-            !DZ(1)=1.0
+            !DZ(1)=3.0
             !z(1)=2240. !Z is in reverse compared to X & Y
             z(1)=DZ(1)
             DO zc=2,ZMAX

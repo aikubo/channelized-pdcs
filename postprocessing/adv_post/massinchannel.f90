@@ -28,17 +28,26 @@ module massdist
         areatot=DX(1)*ZMAX*(RMAX*DZ(1)*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
      !   allocate(areamat( RMAX,ZMAX))
         cellarea=DX(3)*(DX(3)*sqrt(slope**2+1))
+        write(*,*) cellarea
         carea=0 
-        allocate(areamat(RMAX, YMAX, ZMAX))
-        do I=1,length1 
-                call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, top, channeltrue)
-                        if ( channeltrue .and. YYY(I,1) .eq. top )then
-                        carea=carea+cellarea
+        !allocate(areamat(RMAX, YMAX, ZMAX))
+        do zc=2,ZMAX-1
+                do rc=3,RMAX-2
+                        do yc=3,YMAX-2
+                !write(*,*) I 
+                        call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, topo, channeltrue)
+                       ! write(*,*) XXX(I,1), YYY(I,1),ZZZ(I,1), top
+                        if ( channeltrue ) then !.and. abs(YYY(I,1)-topo) .lt. DX(1) )then
+                                carea=carea+cellarea
                         end if 
+                        
+                        I=I+1
+                        end do 
+                end do 
         end do
+        write(*,*) "done with carea", carea
 
-
-     DO t= 8,timesteps
+     DO t= 6, 6  !timesteps
         chmass = 0
         tmass = 0
         chmassd = 0
@@ -55,11 +64,13 @@ module massdist
         area=0
         areaout=0
         atest=0
-
-        DO I=1, length1
-                call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, top, channeltrue)
+        I=1
+           do zc=2,ZMAX-1
+                do rc=3,RMAX-2
+                        do yc=3,YMAX-2
+                call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, topo, channeltrue)
                 ! write(*,*) "x", XXX(I,1), "y", YYY(I,1), "Z", ZZZ(I,1), "top", top
-                       if ( abs( YYY(I,1)-top) .lt. DY(1)) then 
+                       if ( abs( YYY(I,1)-topo) .lt. DY(1)) then 
                      
                                 atest=atest+cellarea
                       
@@ -83,7 +94,7 @@ module massdist
 
                         
  
-                        if ( abs(YYY(I,1)- (top)) .lt. DX(3) ) then 
+                        if (  YYY(I,1) .eq. topo) then 
                                 area = area+cellarea
                                ! write(*,*) "inside flow", I 
                                 !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
@@ -93,7 +104,7 @@ module massdist
                        end if
                     !end if  
 
-                IF (YYY(I,1)>top) THEN
+                IF (YYY(I,1) .ge. topo) THEN
                 ! total mass 
                                 tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
@@ -149,6 +160,12 @@ module massdist
 
                         END IF
                 END IF
+                
+
+
+                I=I+1
+                end do 
+             end do 
 
         END DO
         !  elumass=elumass/tmass
@@ -161,7 +178,7 @@ module massdist
          buoyant= buoyant/tmass
          current=current/tmass     
         
-         write(*,*) carea, "true: ", DX(1)*DX(1)*RMAX*3*(sqrt(slope**2+1))
+         write(*,*) carea, "true: ", (width+DX(1))*DX(1)*RMAX*(sqrt(slope**2+1))
          write(*,*) area
          WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, (area)/areatot, areaout/(areatot-carea)
         END DO
