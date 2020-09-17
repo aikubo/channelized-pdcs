@@ -14,18 +14,25 @@ from normalize import *
 import os 
 
 ## MAC
-path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
-os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
+#path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
+#os.chdir("/Users/akubo/myprojects/channelized-pdcs/graphs/")
 ## LAPTOP
-#path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
-#os.chdir("/home/akh/myprojects/channelized-pdcs/graphs/")
+path ="/home/akh/myprojects/channelized-pdcs/graphs/processed/"
+os.chdir("/home/akh/myprojects/channelized-pdcs/graphs/")
 
 ## still running 
 ## 'CVZ7' "CWY7"
-alllabels= [ 'AVX4',  'AVZ4',    'BVX4',  'BVZ4',  'BWY4',  'CVX4',  'CVZ4',  'CWY4',  'SW4',
-            'AVY4' , 'AWX4',  'AWZ4',  'BVY4',  'BWX4',  'BWZ4',  'CVY4',  'CWX4',  'CWZ4',  'SV4', 
-            'AVX7', 'AVZ7',  'BVX7', 'BVZ7','BWY7','CVY7', 'SV7', 'AWY4','AWY7','CWX7','CWZ7',
-            'AVY7',  'AWX7',  'AWZ7',  'BVY7',  'BWX7',  'BWZ7',  'CVX7', 'CWY7',  'SW7' ] 
+alllabels = [
+    'AVX4', 'AVZ4', 'AVY4', 'AWX4', 'AWZ4', 'AWY4', 
+    'BVX4', 'BVZ4', 'BVY4', 'BWY4', 'BWX4', 'BWZ4', 
+    'CVX4', 'CVZ4', 'CWY4', 'CVY4', 'CWX4', 'CWZ4',
+    'DVX4', 'DVY4', 'DVZ4', 'DWX4', 'DWY4', 'DWZ4',
+    'AVX7', 'AVZ7', 'AVY7', 'AWY7', 'AWX7', 'AWZ7',
+    'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
+    'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
+    'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7',  
+    'SW7', 'SV4','SW4','SV7', 'uncon']
+
 labels= ['AVX4', 'BVX4', 'CVX4' ] #,'AVY7',  'CVY7',  'BVY7'] # #alllabels
 time= [1,2,3,4,5,6,7,8]
 

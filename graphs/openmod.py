@@ -22,6 +22,21 @@ pex=['Potential']
 kex=['Kinetic']
 perpx=['Perpx']
 
+def openspillavg(labels, path):
+    fid='_overspill_avg.txt'
+    cols=['time', 'T_G','U_G','V_G','W_G','DPU', 'dT_G','dU_G','dV_G','dW_G','dDPU' ]
+    colspec= [[1,4], [10,26], [33, 48], [57,70], [79,92], [101,114], [119,135],
+              [140, 155], [160, 175], [180,195], [200,215]]
+    spillTG=openmine(labels, path, fid, cols, 'T_G', colspec)-273
+    spillUG=openmine(labels, path, fid, cols, 'U_G', colspec)
+    spilldpu=openmine(labels, path, fid, cols, 'DPU', colspec)
+    spillWG=openmine(labels, path, fid, cols, 'W_G', colspec)
+    dspillTG=openmine(labels, path, fid, cols, 'dT_G', colspec)
+    dspillWG=openmine(labels, path, fid, cols, 'dW_G', colspec)
+    dspillUG=openmine(labels, path, fid, cols, 'dU_G', colspec)
+    dspilldpu=openmine(labels, path, fid, cols, 'dDPU', colspec)
+
+    return spillTG, spillUG, spilldpu, spillWG, dspillTG, dspillWG, dspillUG, dspilldpu
       
 
 def openaverage(labels, path):
@@ -44,20 +59,22 @@ def opendenseaverage(labels, path):
     avgdpu=openmine(labels, path, fid, cols, 'DPU')
     avgWG=openmine(labels, path, fid, cols, 'W_G')
 
-    return avgTG, avgUG, avgdpu, avgWG
+    return avgTG, avgUG, avgdpu, avgWG, 
 
 
 def openmassdist(labels, path):
     fid='_massinchannel.txt'
     # t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut
-    cols=['time', 'Total Mass', "Mass outside", "Dense", "InChannel", "ScaleH", "Buoyant", "Avulsed", "Area"]
-    colspec=[[1,6], [9,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [187,205] ]
-    massout=openmine(labels, path, fid, cols, "Mass outside", colspec)
+    cols=['time', 'Total Mass', "Mass outside", "Dense", "InChannel", "ScaleH", "Buoyant", "Avulsed", "Areat", "Carea", "Area", "AreaOut"]
+    colspec=[[1,6], [9,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [185,205], [212,230], [242,255], [267,279] ]
+    massout=1-openmine(labels, path, fid, cols, "InChannel", colspec)
     avulsed=openmine(labels, path, fid, cols, "Avulsed",colspec)
     buoyant=openmine(labels, path, fid, cols, "Buoyant",colspec)
     area=openmine(labels, path, fid, cols, "Area",colspec)
     tot=openmine(labels, path, fid, cols, "Total Mass",colspec)
-    return tot, avulsed, buoyant, massout, area
+    areaout=openmine(labels, path, fid, cols, "AreaOut", colspec)
+
+    return tot, avulsed, buoyant, massout, area, areaout
 
 def openent(labels,path):
     fid='_entrainment.txt'

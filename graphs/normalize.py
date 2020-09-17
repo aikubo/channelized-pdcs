@@ -19,13 +19,13 @@ def labelparam(label):
         wave = 0 
 
     if "N" in label: 
-        width = 100
+        width = 102
         depth = 15 
     elif "W" in label: 
         width=300
         depth = 39
     elif "V" in label: 
-        width = 200 
+        width = 201 
         depth= 27
     else :
         width=0 
@@ -42,7 +42,6 @@ def labelparam(label):
     rho= 1950*(0.4)
     v = 10 
     vflux= math.ceil(depth*inlet/3)*3*width*v
-
     if "X" in label:
         amp= 0.09
     elif "Y" in label: 

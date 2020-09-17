@@ -23,15 +23,13 @@ def channelvolume(labels):
     lg=[]
     a=[]
     for sim in labels:
-
-
-        if "S" not in sim:
-            param=labelparam(sim)
-            wave = float(param.at[0,'Wave'])
-            A=float(param.at[0,'Amprat'])
-            amp=float(param.at[0,'Amp'])
-            width=float(param.at[0,'Width'])
-            depth=float(param.at[0,'Depth'])
+        param=labelparam(sim)
+        wave = float(param.at[0,'Wave'])
+        A=float(param.at[0,'Amprat'])
+        amp=float(param.at[0,'Amp'])
+        width=float(param.at[0,'Width'])
+        depth=float(param.at[0,'Depth'])
+        if wave > 1:
             oldi=0
             olds=0
             length=0
@@ -41,6 +39,8 @@ def channelvolume(labels):
                 olds=sinuous
                 oldi=i
                 length= dist+length
+        elif width < 1:
+            length=0
         else:
             length=1212
         #     for k in range(0,900,3):
@@ -60,13 +60,13 @@ def sinlength(labels, front):
     slen=[]
     for i in range(len(labels)):
         sim=labels[i]
-        if "S" not in sim:
-            param=labelparam(sim)
-            wave = float(param.at[0,'Wave'])
-            A=float(param.at[0,'Amprat'])
-            amp=float(param.at[0,'Amp'])
-            width=float(param.at[0,'Width'])
-            depth=float(param.at[0,'Depth'])
+        param=labelparam(sim)
+        wave = float(param.at[0,'Wave'])
+        A=float(param.at[0,'Amprat'])
+        amp=float(param.at[0,'Amp'])
+        width=float(param.at[0,'Width'])
+        depth=float(param.at[0,'Depth'])
+        if wave > 1:
             oldi=0
             olds=0
             length=0
@@ -76,6 +76,8 @@ def sinlength(labels, front):
                 olds=sinuous
                 oldi=i
                 length= dist+length
+        elif width <1 :
+            length=0
         else:
             length=front[i]
         #     for k in range(0,900,3):
@@ -85,3 +87,15 @@ def sinlength(labels, front):
         #             area=area+3e)
         slen.append(length)
     return slen
+
+
+def deltah(labels, front):
+    dh=[]
+    for i in range(len(labels)):
+        sim=labels[i]
+        param=labelparam(sim)
+        depth=float(param.at[0,'Depth'])
+        slope=0.18 
+        dh1=slope*front[i]
+        dh.append(dh1)
+    return dh

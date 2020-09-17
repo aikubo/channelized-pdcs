@@ -223,7 +223,7 @@ def plotallcol( fig, axes, labels, fid, df1, df2, df3, df4, df5):
     loc.set_ylim([0,50])
     loc.set_xlim([10**-6, 1])
     loc.set_xticks([ 10**-5, 10**-3, 10**-1])
-    locmin=matplotlib.ticker.LogLocator(base=10.0, subs=(0.4,0.8), numticks=12)
+    locmin=matplotlib.ticker.LogLocator(base=10.0, subs=(0.1,0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), numticks=12)
     loc.xaxis.set_minor_locator(locmin)
     loc.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
 

@@ -29,15 +29,21 @@ def curvat(labels):
         A = param.at[0, 'Amprat']
         amp = param.at[0, 'Amp']
         width = param.at[0, 'Width']
-        slope = 0.18
-        X = wave / 4
-        kapamax = 4 * ((np.pi)**2) * A * np.sin(2 * np.pi * X / wave)
-        kapa.append(kapamax)
-        d = (amp + width)
-
-        d2 = np.sqrt(d**2 + (wave / 2)**2)
+        
+        if wave < 1:
+            kapamax=1200
+            d=0
+            kdist=0
+        else:
+            X = wave / 4
+            kapamax = 4 * ((np.pi)**2) * A * np.sin(2 * np.pi * X / wave)
+            kapa.append(kapamax)
+            d = (amp + width)
+    
+            d2 = np.sqrt(d**2 + (wave / 2)**2)
+            kdist = kapamax / d
         dist.append(d)
-        kdist = kapamax / d
+        
         # print("kapamax",kapamax)
         # print( "dist", d)
 

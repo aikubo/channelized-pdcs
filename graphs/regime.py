@@ -65,34 +65,74 @@ alllabels = [
     'AVX7', 'AVZ7', 'AVY7', 'AWY7', 'AWX7', 'AWZ7',
     'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
     'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
-    'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7'
-]
-#, not done 
+    'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7',  
+    'SW7', 'SV4','SW4','SV7', 'uncon']
 
+Schan= ['SV4', 'SV7'] #['SV4', 'SW4', 'SW7', 'SV7']
+
+froudefid='_froude.txt'
+frcols= ['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
 alllabels.sort()
 print(alllabels)
 
 #alllabels=[ x for x in alllabels if "4" in x]
-tot, avulsed, buoyant, massout, area = openmassdist(alllabels, path)
+tot, avulsed, buoyant, massout, area, areaout= openmassdist(alllabels, path)
+stot, savulsed, sbuoyant, smassout, sarea, sareaout= openmassdist(Schan, path)
+sfront=openmine(Schan, path, froudefid, frcols, 'Front')
+sTG, sUG, sdpu, savgW= openaverage(Schan, path)
+#
+svulsed=[]
+sdist=[]
+sa=[]
+sU=[]
 
-froudefid='_froude.txt'
-frcols= ['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
+for sim in Schan: 
+    svulsed.append(savulsed[sim].max())
+    sdist.append(sfront[sim].max())
+    sa.append(sareaout[sim].max())
+    sU.append(sUG[sim].max())
+    
+    
+sa=np.average(sa)
+sdist=np.average(sdist)
+svulsed=np.average(svulsed)
+sU=np.average(sU)
+
 front=openmine(alllabels, path, froudefid, frcols, 'Front')
 bulk_ent, med_ent, dense_ent = openent(alllabels,path)
 avgTG, avgUG, avgdpu, avgWG=openaverage(alllabels, path)
 ent= entrain(alllabels, bulk_ent)
 
+cvol, lg, a = channelvolume(alllabels)
+
 avulsed_kg = []
 
 frontend=[]
 bulkent=[]
+totalmass=[]
+out=[]
+
+
 for sim in alllabels:
     bulkent.append(ent[sim].max())
     x = avulsed[sim].max()
     y = tot[sim].max()
     frontend.append(front[sim].max())
-    
+    totalmass.append(y)
     avulsed_kg.append(x * y)
+    out.append(massout[sim].max())
+    
+def justmax(data):
+    labels=data.columns
+    x=[]
+    for sim in labels:
+        x.append(data[sim].max())
+        
+    return x 
+
+
+out2=[float(x)/float(y) for x,y in zip(out,totalmass)]
+
 P = 1e5
 T = 800
 R = 461.5
@@ -111,50 +151,6 @@ def paramlists(labels, Xval, Yval):
         X.append(param.at[0, Xval])
     return X, Y
 
-
-def interp(X, Y, Z):
-    Z = np.array(Z)
-    xmin = min(X)
-    xmax = max(X)
-    ymin = min(Y)
-    ymax = max(Y)
-    XX = np.linspace(xmin, xmax, 500)
-    YY = np.linspace(ymin, ymax, 500)
-    grid_x, grid_y = np.meshgrid(XX, YY)
-    print(grid_x)
-    print(grid_y)
-
-    grid = griddata((X, Y), Z, (grid_x, grid_y), method='linear')
-    return grid_x, grid_y, grid
-
-
-def regimecontour(labels, X, Y, Z, xlab, ylab, title):
-    print(X)
-    print(Y)
-    print(Z)
-    fig, ax = plt.subplots()
-    lrange = np.arange(min(Z), max(Z), (max(Z) - min(Z)) / 10)
-    ax.tricontour(X, Y, Z, levels=lrange, colors='k')
-    cntr = ax.tricontourf(X, Y, Z, levels=lrange, cmap="hot_r")
-    ax.set_xlabel(xlab)
-    #ax.get_xaxis().set_ticks(np.unique(X))
-    ax.set_ylabel(ylab)
-    #ax.get_yaxis().set_ticks(np.unique(Y))
-    fig.colorbar(cntr)
-    plt.title(title)
-    plt.show()
-
-
-def interpcontour(labels, X, Y, Z, xlab, ylab, title):
-    fig, ax = plt.subplots()
-
-    ax.contour(X, Y, Z, colors='k')
-    cntr = ax.contourf(X, Y, Z, cmap="hot_r")
-    ax.set_xlabel(xlab)
-    ax.set_ylabel(ylab)
-    fig.colorbar(cntr)
-    plt.title(title)
-    plt.show()
 
 
 # amplitudes=['X', 'Y', 'Z']
@@ -175,11 +171,13 @@ TG, UG, dpu, avgW= openaverage(alllabels, path)
 #
 avul = []
 areas = []
+aout=[]
 vel = []
 velz = []
 UGmax=[]
 dpumax=[]
 phoenix=[]
+mout=[]
 kapa, dist, kdist = curvat(alllabels)
 for sim in alllabels:
     avul.append(avulsed[sim].max())
@@ -187,16 +185,17 @@ for sim in alllabels:
     UGmax.append(UG[sim].max())
     dpumax.append(dpu[sim].max())
     velz.append(avgW[sim].max())
+    aout.append(areaout[sim].max())
+    mout.append(massout[sim].min())
 
 
-cvol, lg, area = channelvolume(alllabels)
 
-volcvol = [float(x) / float(y) for x, y in zip(vol, cvol)]
+#volcvol = [float(x) / float(y) for x, y in zip(vol, cvol)]
 
-rei = [float(x) * float(y) * (reh) for x, y in zip(depth, velz)]
+
 sizes = np.array(areas) / 1212 / 906
-cvol2 = [float(x) * float(y) for x, y in zip(sizes, cvol)]
-cvol3 = [float(x) / float(y) for x, y in zip(wamp, cvol2)]
+#cvol2 = [float(x) * float(y) for x, y in zip(sizes, cvol)]
+#cvol3 = [float(x) / float(y) for x, y in zip(wamp, cvol2)]
 
 capacity = [float(x) / (1212) for x in lg]
 X = wave
@@ -226,21 +225,22 @@ for i in alllabels:
     zdist.append(906)
 
 slen=sinlength(alllabels,frontend)
-areas_norm = [float(x) / (float(y)*float(z)) for x, y, z in zip(areas,xdist,zdist)]
-area_channel=[ float(x) *(float(y)+float(z)) for x, y, z in zip(area, width, inlet)]
 
-dist_norm = [float(x) / float(y) for x, y in zip(dist,zdist)]
-dist_norm2 = [float(x) / float(y) for x, y in zip(dist, inlet)]
-kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, wave)]
-kdist_norm2= [float(x) * (float(y)) *(float(z)) for x, y, z in zip(kdist, wave, inletrat)]
-mass_norm=[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, xdist, wave)]
-front_norm=[float(x) / float(y) for x, y in zip(frontend, slen)]
-si=[float(x) / float(y) for x, y in zip(lg, xdist)]
-amp_norm=[ float(x)/ (float(y)) for x, y in zip(amp, width)]
-ent_norm=[float(x) / (float(y)) for x, y in zip(bulkent, cvol)]
+# area_channel=[ float(x)*float(y) for x, y in zip(areas, aout)]
 
-slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
+# dist_norm = [float(x) / float(y) for x, y in zip(dist,zdist)]
+# dist_norm2 = [float(x) / float(y) for x, y in zip(dist, inlet)]
 
+# kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, wave)]
+# kdist_norm2= [float(x) * (float(y)) *(float(z)) for x, y, z in zip(kdist, wave, inletrat)]
+# mass_norm=[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, xdist, wave)]
+# front_norm=[float(x) / float(y) for x, y in zip(frontend, slen)]
+# si=[float(x) / float(y) for x, y in zip(lg, xdist)]
+# amp_norm=[ float(x)/ (float(y)) for x, y in zip(amp, zdist)]
+# ent_norm=[float(x) / (float(y)) for x, y in zip(bulkent, cvol)]
+
+# slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
+# ugnorm=[float(x)/10 for x in UGmax]
 ## regime figure
 
 
@@ -248,13 +248,13 @@ slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
     
 
 #rcParams['font.sans-serif'] = ['Helvetica']
-fig, ax =plt.subplots(2,2)
+#fig, ax =plt.subplots(2,2)
 
 # full page 190X230mm 
 # 1/4 page 95mm x 115m 
 
 def plotandR(x,y, loc, col, size):
-    scat=loc.scatter(x,y, c=col, s=size)
+    
     loc.tick_params(labelsize=8)
     rang=max(x)-min(x)
     cl=rang*0.05
@@ -262,114 +262,119 @@ def plotandR(x,y, loc, col, size):
     rang=max(y)-min(y)
     cl=rang*0.05
     loc.set_ylim([min(y)-cl, max(y)+cl])
+    #loc.hlines(hline, min(x)-cl, max(x)+cl, 'r' )
+    scat=loc.scatter(x,y, c=col, s=size)
     correlation_matrix = np.corrcoef(x, y)
     correlation_xy = correlation_matrix[0,1]
     r_squared.append(correlation_xy**2)
     return scat
 
-# #half page
-fig.set_size_inches(cm2inch(19.0, 11.5))
+dh=deltah(alllabels, frontend)
+
+
+columns=['Width (m)', 'Depth (m)', 'Wavelength (m)', 'Amplitude (m)', 'H0 (m)', 
+             'Distance Traveled (m)', 'Mass Fraction in Channel',
+             'Mass Overspilled', 'Area Fraction Innundated','Area Out of Channel', 
+             'Max Depth Averaged Downstream Velocity (m/s)', 'Bulk Entrainment (m^3)', 'dH', 'Volume (m^3)']
+
+"""
+0 'Width', 
+1 'Depth', 
+2 'Wavelength',
+3 'Amplitude', 
+4 'H0', 
+5 'Distance Traveled ', 
+6 'Mass Fraction in Channel',
+7 "Mass Overspilled", 
+8 'Area Fraction Innundated', 
+9 'Area out of Channel Innundated'
+10 "Max Depth Averaged Downstream Velocity"
+11 "Bulk Entrainment"
+12 "dH"
+"""
+
+sup=np.empty( (len(alllabels), len(columns)))
+for i in range(len(alllabels)):
+    sup[i][0]=width[i]
+    sup[i][1]=depth[i]
+    sup[i][2]=wave[i]
+    sup[i][3]=amp[i]
+    sup[i][4]=inlet[i]
+    sup[i][5]=slen[i]
+    sup[i][6]=1-mout[i]
+    sup[i][7]=Z[i]
+    sup[i][8]=areas[i]
+    sup[i][9]=aout[i]
+    sup[i][10]=UGmax[i]
+    sup[i][11]=bulkent[i]
+    sup[i][12]=dh[i]
+    sup[i][13]=vol[i]*15
+supcsv=pd.DataFrame(sup,  index=alllabels, columns=columns)
+supcsv.to_csv("/home/akh/myprojects/channelized-pdcs/graphs/supcsv.csv")
+# # #half page
+#fig.set_size_inches(cm2inch(19.0, 11.5))
 r_squared=[]
-# # ## normalized meander distance vs areas normalized
-# # # Meander distance = Meander dist (m)/ Z dist(m)
-# # # Area innudated = 
-
+# # # ## normalized meander distance vs areas normalized
+# # # # Meander distance = Meander dist (m)/ Z dist(m)
+# # # # Area innudated = i
 size=((np.array(vol)/10000)**2)*0.5
-x=dist_norm
-y=areas_norm
+# x=dist_norm
 
 
-scat = plotandR(x,y, ax[0][0], wave, size)
-ax[0][0].set_xlabel('Meander Amplitude+Width', fontsize=8)
-ax[0][0].set_ylabel('Area Innudated', fontsize=8)
+# kdist_norm=kdist_norm
+# #wave='k'
 
+# areas_norm=np.array(aout)/np.array(inletrat)
+# scat = plotandR(kdist_norm, areas_norm,  svulsed/sa, ax[0][0], 'k', size)
+# ax[0][0].set_xlabel('Curvature', fontsize=8)
+# ax[0][0].set_ylabel('Area Innudated', fontsize=8)
+
+
+
+# ## Front location vs meander width
+# scat = plotandR(kdist_norm, slen_norm, sdist/1212, ax[0][1], 'k', size)
+# ax[0][1].set_xlabel('Normalized Curvature', fontsize=8)
+# ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
 
 # kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
-# leg=ax[0][0].legend(*scat.legend_elements(**kw), )
+# leg=ax[0][1].legend(*scat.legend_elements(**kw), )
 # leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
-# ax[0][0].add_artist(leg)
-#cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
-#cbar.ax.tick_params(labelsize=8)
+# # ax[0][1].add_artist(leg)
+# # cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
+# # cbar.ax.tick_params(labelsize=8)
 
-## Front location vs meander width
-scat = plotandR(kdist_norm, slen_norm, ax[0][1], wave, size)
-ax[0][1].set_xlabel('Curvature*Wavelength', fontsize=8)
-ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
-x4=[]
-x7=[]
-y4=[]
-y7=[]
-for i in range(len(alllabels)):
-    sim=alllabels[i]
-    if "W" in sim:
-        x4.append(dist_norm[i])
-        y4.append(slen_norm[i])
-    if "V" in sim:
-        x7.append(dist_norm[i])
-        y7.append(slen_norm[i])
-        
-correlation_matrix = np.corrcoef(x4, y4)
-correlation_xy = correlation_matrix[0,1]
-#r_squared.append(correlation_xy**2)
-
-correlation_matrix = np.corrcoef(x7, y7)
-correlation_xy = correlation_matrix[0,1]
-#r_squared.append(correlation_xy**2)
+# # ### mass avulsed vs curvature metric
+# # # mass = mass avuled/total mass *inlet/wave
+# # # curvature = k*meander distance
 
 
-
-# ### mass avulsed vs curvature metric
-# # mass = mass avuled/total mass *inlet/wave
-# # curvature = k*meander distance
-
-scat=plotandR(kdist_norm2, Z ,ax[1][0], wave, size)
-ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
-ax[1][0].set_xlabel('Curvature*Wavelength', fontsize=8)
+# scat=plotandR(kdist_norm, mass_norm, svulsed, ax[1][0], 'k', size)
+# ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
+# ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
                     
                     
 
-# interestingly area innudated does not corelate with entrainment 
-# but mass overspilled does
+# # interestingly area innudated does not corelate with entrainment 
+# # but mass overspilled does
 
-mass_norm
-scat=plotandR(Z, ent_norm, ax[1][1], wave, size)
-ax[1][1].set_ylabel('Bulk Entrainment', fontsize=8)
-ax[1][1].set_xlabel('Mass Overspilled', fontsize=8)
+# scat=plotandR(kdist_norm, ugnorm, sU/10, ax[1][1],'k', size)
+# ax[1][1].set_ylabel('Downstream Velocity', fontsize=8)
+# ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
 
-
-plt.tight_layout()
-
-print(r_squared)
-# savefigure("regimeJULY")
-
-
-#######
-
-# fig, ax =plt.subplots(1,3)
-# fig.set_size_inches(cm2inch(19.0, 11.5*2/3))
-
-# scat=ax[0].scatter(amp_norm, UGmax, c='k', s=size)
-# ax[0].tick_params(labelsize=8)
-# ax[0].set_ylabel('Maximum Average Velocity', fontsize=8)
-# ax[0].set_xlabel('(MeanderAmp)/(MeanderAmp+Width)', fontsize=8)
-
-
-# ax[1].scatter(UGmax, velz,  c='k', s=size)
-# ax[1].set_ylabel('Maximum Average CrossStream Velocity', fontsize=8)
-# ax[1].set_xlabel('Maximum Average Velocity', fontsize=8)
-# ax[1].tick_params(labelsize=8)
-
-
-# ax[2].scatter(velz, mass_norm,  c='k', s=size)
-# ax[2].set_ylabel('Mass Avulsed', fontsize=8)
-# ax[2].set_xlabel('Cross Stream Velocity', fontsize=8)
-# ax[2].set_ylim(massylim)
-# ax[2].tick_params(labelsize=8)
-
-# kw=dict(prop="sizes", num=3, func= lambda s: 2*(np.sqrt(s)))
-# leg=ax[2].legend(*scat.legend_elements(**kw), )
-# leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
-# ax[2].add_artist(leg)
 
 # plt.tight_layout()
-# plt.savefig("VELregimeJULY.png", dpi=300)
+
+# print(r_squared)
+# savefigure("regimeJULY_WITHS")
+
+
+
+## AREA CORRELATES WITH ENTRAINMENT
+
+# fig, ax=plt.subplots()
+# fig.set_size_inches(cm2inch(9.5, 6))
+# plotandR(areas, bulkent, ax, 'k',  size)
+# ax.set_xlabel('Areas Innundated', fontsize=8)
+# ax.set_ylabel('Bulk Entrainment', fontsize=8)
+# savefigure("regime_ENTRAINMENT")
+

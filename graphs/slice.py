@@ -60,9 +60,8 @@ def openslicet(path2file, labels, twant, loc):
         fid=path2file+sim
         loc=fid + slicefid
         slice_temp=pd.read_table(loc, header=None, sep= '\s+', skiprows=9)
+        slice_temp.columns = ['time', 'YYY',  'EPP', 'UG', 'DPU', 'TG', 'Ri', 'TAU' ]
         col = ['UG', 'DPU', 'TG', 'Ri' ]
-        slice_temp.columns = ['time', 'YYY',  'EPP', 'UG', 'DPU', 'TG', 'Ri' ]
-
         for i in col:
             slicet=slice_temp[slice_temp['time']== twant]
         slicet.reset_index(drop=True, inplace=True)
@@ -170,10 +169,10 @@ def opensliceavg(path2file, labels, loc):
 # sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= opensliceavg(path, labels, 'half')
 # sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= opensliceavg(path, labels, 'quart')
 
-slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(path, labels, 7,  'in')
-sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(path, labels, 7, 'one')
-sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= openslicet(path, labels, 7, 'half')
-sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= openslicet(path, labels, 7, 'quart')
+slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(path, labels, 8,  'in')
+sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(path, labels, 8, 'one')
+sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= openslicet(path, labels, 8, 'half')
+sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= openslicet(path, labels, 8, 'quart')
 
 fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
 fig.set_size_inches(cm2inch(19*3/4, 11.5*2/3))
