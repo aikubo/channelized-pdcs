@@ -17,18 +17,18 @@ implicit none
 integer:: tsinplane 
 
 
-tsinplane=8
+tsinplane=5
 RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=300
-lambda=1200
+width=201
+lambda=600
 timesteps=8
 tstart=3
 tstop=timesteps
 depth = 27
-amprat=.09000000000000000000
+amprat=.15000000000000000000
 
 call ALLOCATE_ARRAYS
 
@@ -37,7 +37,7 @@ call openbin(100, 'EP_G', EP_G1)
 !call openbin(400, 'V_G', V_G1)
 !call openbin(500, 'W_G', W_G1)
 call  logvolfrc(EP_G1, EPP)
-call handletopo('l1200_A9_W300', XXX, YYY, ZZZ)
+call handletopo('l600_A15_W201', XXX, YYY, ZZZ)
 
 !call writedxtopo
 

@@ -70,27 +70,27 @@ contains
         double precision:: ZLOC, XLOC 
         print*, "slices"
         XLOC=300
-        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+        call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
         ZLOC=floor((edge2-width/2)/3)*3  ! mid line 
         print*, XLOC, ZLOC
         CALL SLICE(width, depth, lambda, XLOC, ZLOC, 'middle',  10001)
         print*, XLOC, ZLOC 
         XLOC=floor((lambda)*(0.5)/3)*3
-        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+        call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
         ZLOC=floor((edge2+6)/3)*3
         print*, XLOC, ZLOC
 
         call slice(width, depth, lambda, XLOC, ZLOC, 'halfl', 10002)        
 
         XLOC=floor((lambda)/3)*3
-        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+        call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
         ZLOC=floor((edge2+6)/3)*3
         print*, XLOC, ZLOC
         call slice(width, depth, lambda, XLOC, ZLOC, 'onel', 10003)
 
 
         XLOC=floor((lambda)*(0.75)/3)*3
-        call edges(width, lambda, depth, XLOC, edge1, edge2, bottom, top)
+        call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
         ZLOC=floor((edge2+100)/3)*3
         print*, XLOC, ZLOC
 

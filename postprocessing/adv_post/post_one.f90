@@ -21,16 +21,18 @@ integer:: tfind=8
 integer::printstatus
 
 logical:: ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc
-logical:: UGdx8, TGdx8, xstream, ave, energy, tau
+logical:: UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
+double precision:: area 
 
 simlabel='DVZ4'
 printstatus=2
 
+spill=.FALSE.
 ecoef=.FALSE.
-EPPdx8=.TRUE.
+EPPdx8=.FALSE.
 TGdx8=.FALSE.
 UGdx8=.FALSE.
 topo=.FALSE.
@@ -57,7 +59,7 @@ timesteps=8
 tstart=3
 tstop=timesteps
 depth = 27
-
+slope=0.18
 call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
@@ -112,7 +114,7 @@ print*, "calculating mass in channel"
 if (ecoef) print*, "ENT COEFFICIENT"
 if (ecoef) call entcoef
 
-if (massalloc) call massinchannel(width, depth, lambda, scaleh)
+if (massalloc) call massinchannel(width, depth, lambda, scaleh, area)
 print*, "calculating dominant velocities"
 if (xstream) call crossstream
 print*, "granular to gas stress"
@@ -134,7 +136,12 @@ if (energy) then
         call dpupeak
 end if 
 
+if (spill) call overspill
+
+
 print*, "end program"
+
+
 
 end program
 

@@ -7,26 +7,47 @@ module massdist
          
         contains
 
-        subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT)
+        subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT, area)
         use maketopo
         IMPLICIT NONE
-        double precision, intent(INOut):: width, depth, lambda, scaleheight  
-        double precision:: elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
-        double precision::edge1, edge2, bottom, top, outsum, buoyant, current, area, topo, areatot
-        real, allocatable:: areamat(:,:)
+        double precision, intent(INOut):: area, width, depth, lambda, scaleheight  
+        double precision:: slopel, atest, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
+        double precision:: carea,  areaout, outsum, buoyant, current,  topo, areatot
+        real, allocatable:: areamat(:,:,:)
+        logical::channeltrue
         print*, 'mass in channel'
         filename='massinchannel.txt'
 
         routine="massdist/massinchannel"
-        description="Calculate mass distribution in different parts of the channel"
-        datatype=" t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut"
+        description="Calculate mass distribution in different parts of the channel. Total area is 1115705"
+        datatype=" t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut Areat AreaC Area Aout"
         filename='massinchannel.txt'
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
      !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
-        allocate(areamat(RMAX,ZMAX))
         print *, "Done writing 3D variables"
+        areatot=DX(1)*ZMAX*(RMAX*DZ(1)*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
+     !   allocate(areamat( RMAX,ZMAX))
+        cellarea=DX(3)*(DX(3)*sqrt(slope**2+1))
+        write(*,*) cellarea
+        carea=0 
+        !allocate(areamat(RMAX, YMAX, ZMAX))
+        do zc=2,ZMAX-1
+                do rc=3,RMAX-2
+                        do yc=3,YMAX-2
+                !write(*,*) I 
+                        call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, topo, channeltrue)
+                       ! write(*,*) XXX(I,1), YYY(I,1),ZZZ(I,1), top
+                        if ( channeltrue ) then !.and. abs(YYY(I,1)-topo) .lt. DX(1) )then
+                                carea=carea+cellarea
+                        end if 
+                        
+                        I=I+1
+                        end do 
+                end do 
+        end do
+        write(*,*) "done with carea", carea
 
-      DO t= 1,timesteps
+     DO t= 6, 6  !timesteps
         chmass = 0
         tmass = 0
         chmassd = 0
@@ -41,18 +62,49 @@ module massdist
         current=0 
         outsum=0
         area=0
-       
-        DO I=1, length1
-                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+        areaout=0
+        atest=0
+        I=1
+           do zc=2,ZMAX-1
+                do rc=3,RMAX-2
+                        do yc=3,YMAX-2
+                call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, topo, channeltrue)
+                ! write(*,*) "x", XXX(I,1), "y", YYY(I,1), "Z", ZZZ(I,1), "top", top
+                       if ( abs( YYY(I,1)-topo) .lt. DY(1)) then 
+                     
+                                atest=atest+cellarea
+                      
+                       end if 
 
+                IF (EP_G1(I,t) < 0.9999995 .and. EP_G1(I,t) >0.01 ) THEN
+                      !  if (ZZZ(I,1) .lt. edge1  .or. ZZZ(I,1) .gt. edge2) then
+                      !          if (YYY(I,1) .ge. top-3 .and. YYY(I,1) .lt. top+3) then
+                      !                   areaout=areaout+cellarea
+                      !          end if 
+                      !  end if 
+ 
+                      !  if ( ZZZ(I,1) .gt. edge1  .and. ZZZ(I,1) .lt. edge2) then 
+                      !         if (YYY(I,1) .ge. bottom-3 .and. YYY(I,1) .lt. bottom+3) then
+                      !                   area=area+cellarea
+                      !          end if
 
-                IF (EPP(I,t) <max_dilute .and. EPP(I,t) >0.000) THEN
-                        if (YYY(I,1) .eq. topo) then 
-                                area = area+(3.*3.)
-                                areamat(int(XXX(I,1)), int(ZZZ(I,1)))=9
-                        end if  
+                      !  end if 
 
-                IF (YYY(I,1)>bottom) THEN
+                     !! test 
+
+                        
+ 
+                        if (  YYY(I,1) .eq. topo) then 
+                                area = area+cellarea
+                               ! write(*,*) "inside flow", I 
+                                !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
+                                !        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
+                                !end if
+
+                       end if
+                    !end if  
+
+                IF (YYY(I,1) .ge. topo) THEN
                 ! total mass 
                                 tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
@@ -82,23 +134,19 @@ module massdist
 
 
                                 ! MASS IN THE CHANNEL
-                                IF (YYY(I,1)<top) THEN
+                                IF (channeltrue) THEN
+                                  
                                         !print*, top
                                         inchannel = inchannel + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if 
 
                                 ! MASS WITHIN THE WIDTH OF THE CHANNEL INCLUDING ABOVE IT
-                                IF (ZZZ(I,1) >edge1) THEN
-                                        IF (ZZZ(I,1) <edge2) THEN
+                                IF (channeltrue) THEN
+                                      
                                                 chmass = chmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
-                                        END IF
                                 END IF
 
-                                If (YYY(I,1) > top) then 
-                                        IF (ZZZ(I,1) >edge1) THEN
-                                                IF (ZZZ(I,1) <edge2) THEN
-                                                        topo=FLOOR(TOP/3.0)*3.+3.
-
+                                If (channeltrue .eq. .FALSE.) then 
                                                         outsum= outsum +(1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         rho_c=rho_p*(1-EP_G1(I,t))+(P_const/(R_dryair*T_G1(I,t)))*(EP_G1(I,t))
                                                         
@@ -108,13 +156,16 @@ module massdist
                                                         elseif (rho_c > rho_dry) then
                                                                 current = current + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         end if
-
-                                                end if        
-                                        end if
-                                end if 
+                               end if 
 
                         END IF
                 END IF
+                
+
+
+                I=I+1
+                end do 
+             end do 
 
         END DO
         !  elumass=elumass/tmass
@@ -126,9 +177,10 @@ module massdist
          scalemass1= scalemass1/tmass
          buoyant= buoyant/tmass
          current=current/tmass     
-         areatot=sum(areamat)
         
-         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, area, areatot
+         write(*,*) carea, "true: ", (width+DX(1))*DX(1)*RMAX*(sqrt(slope**2+1))
+         write(*,*) area
+         WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, (area)/areatot, areaout/(areatot-carea)
         END DO
         !! done !!
         print*, 'mass in channel done'
@@ -242,7 +294,7 @@ module massdist
 
                         do I=1,length1
 
-                                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
                                 edge1= FLOOR(edge1/3.)*3. + 6.
                                 edge2= FLOOR(edge2/3.)*3. - 6.
                                 bottom= FLOOR(bottom/3.)*3. !- 6   
@@ -335,7 +387,7 @@ module massdist
                         end do 
 
                         do I=1,length1
-                                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom, top)
+                                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
                                 J= int(XXX(I,1))/3
                                 edge1= FLOOR(edge1/3.)*3.
                                 edge2= FLOOR(edge2/3.)*3.
@@ -475,7 +527,7 @@ module massdist
 
         do I=1,length1
 
-                call edges(width, lambda, depth, XXX(I,1), edge1, edge2, bottom,top)
+                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
                 if ( EP_G1(I,t) .gt. 0.00) then
                 if( YYY(I,1) .gt. bottom .and. YYY(I,1) .lt. top) then 
                        ux= U_G1(I,t)
@@ -591,7 +643,7 @@ module massdist
                 rc = floor(lambda*(I+1)*0.25/3)
                 XLOC= dble( rc*3)
                 
-                call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
+                call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
                 ! edge 1 
                 zc1= 2 
                 zc2= int( (ceiling(edge1/3.0)))
@@ -686,7 +738,7 @@ module massdist
                 do t=1,timesteps 
                         do rc=1,RMAX
                                 XLOC=dble(rc*3)
-                                call edges(width, lambda, depth, XLOC, edge1, edge2, bottom,top)
+                                call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
                                 
                                 ytop = int(ceiling(top/3)) + 6
                                 print*, "ytop", ytop
@@ -715,4 +767,89 @@ module massdist
                 end do
                 end subroutine 
 
-       end module 
+
+
+       subroutine overspill 
+        double precision:: mass 
+
+          filename= 'overspill_avg.txt'
+          description="Average values in overspilled current"
+          routine= "massdist/ovespill"
+          datatype=" t   T_G   U_G   V_G   W_G   U_S1   DPU "
+          call headerf(7487, filename, simlabel, routine,DESCRIPTION,datatype)
+
+
+
+        
+        do t=1,timesteps
+                sum_1 = 0
+                sum_2 = 0
+                sum_3 = 0
+                avgt = 0
+                avgt2 = 0
+                avgt3 = 0
+                avgu = 0
+                avgu2 = 0
+                avgu3 = 0
+                avgv = 0
+                avgv2 = 0
+                avgv3 = 0
+                avgus = 0
+                avgus2 = 0
+                avgus3 = 0
+                avgw = 0
+                avgw2 = 0
+                avgw3 = 0
+                avgdpu =0
+                avgdpu3=0
+                avgdpu2=0
+
+
+            DO I=1,length1
+               call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2, bottom, top)
+                if (YYY(I,1) .gt. top) then 
+                        
+                 call density(I,t, rho_c, mass)
+                        if( rho_c < rho_dry) then
+
+                                IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. max_dilute) THEN
+                               sum_1 = sum_1 +1
+                               avgt = T_G1(I,t) + avgt
+                               avgu = U_G1(I,t) + avgu
+                               avgv = U_G1(I,t) + avgv
+                               avgw = V_G1(I,t) + avgw
+                               avgus = U_S1(I,t) + avgus
+                               avgdpu = DPU(I,t) + avgdpu
+                        END IF
+
+                        IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. min_dilute) THEN
+                               sum_2 = sum_2 +1
+                               avgt2 = T_G1(I,t) + avgt2
+                               avgu2 = U_G1(I,t) + avgu2
+                               avgv2 = V_G1(I,t) + avgv2
+                               avgw2 = W_G1(I,t) + avgw2
+                               avgus2 = U_S1(I,t) + avgus2
+                               avgdpu2 = dpu(I,t) + avgdpu2
+
+                        END IF
+
+                        IF (EPP(I,t) .Gt. max_dense .and. EPP(I,t) .lt. min_dilute) THEN
+                               sum_3 = sum_3 +1
+                               avgt3 = T_G1(I,t) + avgt3
+                               avgu3 = U_G1(I,t) + avgu3
+                               avgv3 = V_G1(I,t) + avgv3
+                               avgw3 = W_G1(I,t) + avgw3
+                               avgus3 = U_S1(I,t) + avgus3
+                               avgdpu3 = dpu(I,t) + avgdpu3
+                               write(*,*) sum_3
+                        END IF
+
+                        end if
+                    end if  
+                END DO
+
+                     print*, "writing average"
+                     WRITE(7487, formatavgx2) t, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgdpu/sum_1, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgdpu2/sum_2
+                end do 
+        end subroutine
+        end module                         

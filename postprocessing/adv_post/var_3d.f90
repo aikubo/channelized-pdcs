@@ -80,7 +80,7 @@ use maketopo
                 maxdpuin=0
                 maxdpuout=0
                 do I=1,length1
-                call edges(width, lambda, depth, XXX(I,1), edge1, edge2,bottom, top)
+                call edges(width, lambda, depth, XXX(I,1), slope, edge1, edge2,bottom, top)
 
                 if ( YYY(I,1) .lt. top .and. EPP(I,t) .gt. 1.0 .and. EPP(I,t) .lt. 8.0 ) then
                         if (DPU(I,t) .gt. maxdpuin ) then 
@@ -196,13 +196,14 @@ end if
                           !-----------------------------!
 
                         if ( TEMP(I,t) .eq. EPP(I,t) ) then 
-                            if (TEMP(I,time) .le. dble(0.10)) then
+                            if (TEMP(I,t) .le. dble(0.000010)) then
                                 WRITE(fid_tp+time,format4var) dble(14), XXX(I,1),YYY(I,1), ZZZ(I,1)
-    
-                            else 
-                                WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
-
                             end if 
+ 
+                            if (TEMP(I,t) .gt. dble(0.000010)) then  
+                                WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
+                            end if 
+
                         else  
                          WRITE(fid_tp+time,format4var) TEMP(I,t), XXX(I,1),YYY(I,1), ZZZ(I,1)
                        end if

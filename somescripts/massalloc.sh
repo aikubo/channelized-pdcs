@@ -68,21 +68,9 @@ sed -i.bak "s|.*amprat=.*|amprat=$amp|" post_one_temp.f90
 sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" post_one_temp.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
-while true; do 
-echo "which of the following subroutines would you like to turn on?"
-echo "spill, froude, rigrad, ent, massalloc, xstream, ave, energy, tau"
-echo " dx write outs: topo, EPPdx8, TGdx8, UGdx8"
-read -p 'Subroutine: ' subroutine1
+subroutine1="massalloc"
 sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one_temp.f90
-
-echo "would you like to turn on another? y/[N]"
-read REPLY
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-	continue
-else [[ $REPLY =~ ^[Nn]$ ]]
-	break
-fi
-done 
+ 
 
 echo start compliling 
 

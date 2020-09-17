@@ -25,7 +25,7 @@ module entrainment
                 sum_p2 = 0.0
                 sum_p3 = 0.0
                   DO I=1,RMAX*ZMAX*YMAX
-                     IF (EP_G1(I,t) < 0.99999 .AND. EP_G1(I,t) .GT. 0.0000) THEN
+                     IF (EP_G1(I,t) < 0.9999999 .AND. EP_G1(I,t) .GT. 0.0000) THEN
                      sum_p1 = sum_p1 + 1.0
                      END IF
 

@@ -24,8 +24,8 @@ double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 
-simlabel='DWX7'
-printstatus=0
+simlabel='CVZ7'
+printstatus=2
 
 
 allocate(isosurface(1200,4,15))
@@ -33,14 +33,15 @@ RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=300
-lambda=1200
-amprat=.09000000000000000000
+width=201
+lambda=900
+amprat=.20000000000000000000
 deltat=5.0
 timesteps=8
 tstart=3
 tstop=timesteps
 depth = 27
+slope=0.18
 
 call ALLOCATE_ARRAYS
 
@@ -54,7 +55,7 @@ call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l1200_A9_W300', XXX, YYY, ZZZ)
+call handletopo('l900_A20_W201', XXX, YYY, ZZZ)
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
@@ -68,29 +69,29 @@ call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 
 !call makeTG(1300, T_G, printstatus)
 print*, "finding froude"
-call isosurf(scaleh)
+!call isosurf(scaleh)
 print*, "finding richardson gradient"
-call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
+!call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"
-call bulkent(EP_G1) 
+!call bulkent(EP_G1) 
 print*, "calculating mass in channel"
 call massinchannel(width, depth, lambda, scaleh)
 print*, "calculating dominant velocities"
-call crossstream
+!call crossstream
 print*, "finding veritical column"
-call slices2
+!call slices2
 print*, "averaging"
-call average_all
+!call average_all
 print*, "velocity at the edges"
-call edgevelocity
+!call edgevelocity
 print*, "mass by xxx"
-call massbyxxx
+!call massbyxxx
 print*, "peak dpu"
-call dpupeak
+!call dpupeak
 print*, "int mass in channel"
-call integratemass
+!call integratemass
 print*, "energy potential"
-call energypotential
+!call energypotential
 print*, "end program"
 
 end program

@@ -29,7 +29,7 @@ contains
     
         ! assign Y & Z locations of tracers based on starting location
         do n=1,tracers
-            call edges(width, lambda, depth, start(n), edge1, edge2, bottom, top)
+            call edges(width, lambda, depth, start(n), slope,  edge1, edge2, bottom, top)
             print*, "edges and bottom" 
             print*, edge1, edge2, bottom
  

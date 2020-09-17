@@ -42,7 +42,7 @@ DOUBLE PRECISION::c_pos1, c_pos2, c_min1, c_min2, delta_V1, delta_V3,shear_v,del
 INTEGER:: ios, int_temp,int_check,int_pos1,int_min1,int_pos2,int_min2
 !DOUBLE PRECISION:: tmass, chmass, chmassd, inchannelw, inchanneld
 !REAL:: M
-DOUBLE PRECISION:: lambda, width
+DOUBLE PRECISION:: lambda, width, slope
 !DOUBLE PRECISION:: D, U0, ROP_0, gstar, Hstar, stokest, stokesv
 DOUBLE PRECISION:: edge1, edge2
 DOUBLE PRECISION:: avgt, avgt2, avgt3, avgu, avgu2, avgu3, avgv, avgv2,avgv3, avgw, avgw2, avgw3, avgus, avgus2, avgus3, sum_1, sum_2, sum_3
