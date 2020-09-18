@@ -14,12 +14,8 @@ CHARACTER(LEN=10)::format5var='(5F22.10)'
 CHARACTER(LEN=30)::formatmassxxx='(i3, i5, 3F20.9)'
 CHARACTER(LEN=30)::formatmass='(i4,11F25.10)'
 character(len=10)::formatchar='(A117)'
-<<<<<<< HEAD
 CHARACTER(LEN=20)::formatavg='(i3,7F22.10)'
-=======
-CHARACTER(LEN=20)::formatavg='(i3,6F22.10)'
 CHARACTER(LEN=20)::formatavgx2='(i3,10F22.10)'
->>>>>>> 3650a4aaab1ab75bd66a76f575eed339856bf9c1
 CHARACTER(LEN=20)::formatcurtain='(154F10.5)'
 CHARACTER(LEN=20)::formattrans='(18F15.5)'
 
