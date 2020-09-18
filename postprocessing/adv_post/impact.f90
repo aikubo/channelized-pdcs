@@ -32,9 +32,9 @@ printstatus=2
 
 spill=.FALSE.
 ecoef=.FALSE.
-EPPdx8=.FALSE.
+EPPdx8=.TRUE.
 TGdx8=.FALSE.
-UGdx8=.FALSE.
+UGdx8=.TRUE.
 topo=.FALSE.
 slices=.FALSE.
 fd=.FALSE. 
@@ -47,21 +47,22 @@ energy=.FALSE.
 tau=.FALSE.
 
 allocate(isosurface(1200,4,15))
-RMAX=404
-YMAX=154
+RMAX=204
+YMAX=104
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=201
-lambda=1200
+width=40
+depth=8
+lambda=0
 amprat=.20000000000000000000
 deltat=5.0
-timesteps=8
+timesteps=15
 tstart=3
 tstop=timesteps
 depth = 27
 slope=0
-dxi=3.0
-Volume_Unit= dxi*dxi*dxi
+dxi=0.5 
+Volume_Unit=dxi*dxi*dxi
 call ALLOCATE_ARRAYS
 
 !print*, 'testing openbin'
@@ -74,7 +75,7 @@ call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
 
-call handletopo('l1200_A20_W201', dxi, XXX, YYY, ZZZ)
+call handletopo('impact50cm', dxi, XXX, YYY, ZZZ)
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
@@ -108,7 +109,7 @@ print*, "finding froude"
 
 if (fd) call isosurf(scaleh)
 print*, "finding richardson gradient"
-if (rigrad .or. slices) call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
+!if (rigrad .or. slices) call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"
 if (ent) call bulkent(EP_G1) 
 print*, "calculating mass in channel"

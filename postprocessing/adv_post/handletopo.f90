@@ -5,15 +5,15 @@ use constants
 use formatmod
 
 contains
-subroutine handletopo(filename, OUTX, OUTY, OUTZ)
-
+subroutine handletopo(filename, dxi2, OUTX, OUTY, OUTZ)
+        use parampost
         
         implicit none 
         character(LEN=*), INTENT(IN):: filename 
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTX
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTY
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTZ
-        
+        double precision, intent(IN):: dxi2
 
 
 
@@ -28,19 +28,19 @@ subroutine handletopo(filename, OUTX, OUTY, OUTZ)
         !-------------------------------READ TOPOGRAPHY----------------------------------!
         !print*, 'begin spatial deltas'
 
-        DX(1)=3.0
+        DX(1)=dxi2
         x(1)=DX(1)
         DO rc=2,RMAX
         DX(rc)=DX(rc-1)
         x(rc)=DX(rc)+x(rc-1)
         END DO
-        DY(1)=3.0!0.375
+        DY(1)=dxi2 !0.375
         y(1)=DY(1)
         DO zc=2,YMAX
          DY(zc)=DY(zc-1)
           y(zc)=DY(zc)+y(zc-1)
         END DO
-       DZ(1)=3.0
+       DZ(1)=dxi2
         !z(1)=2240. !Z is in reverse compared to X & Y
        ! z(1)=3.0
         DO zc=2,ZMAX

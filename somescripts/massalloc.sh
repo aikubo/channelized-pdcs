@@ -92,7 +92,7 @@ ifort -c -convert big_endian average.f90
 ifort -c -convert big_endian richardson.f90
 ifort -c -convert big_endian grangass.f90 
 
-ifort var_3d.o grangass.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post_one_temp.f90  -convert big_endian -traceback -o post.exe
+ifort  -traceback var_3d.o grangass.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post_one_temp.f90  -convert big_endian -traceback -o post.exe
 
 
 cp post_one_temp.f90 $here/post_one.f90

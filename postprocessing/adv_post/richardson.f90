@@ -3,13 +3,13 @@ module find_richardson
         use constants
         use makeascii
         use formatmod 
-
+        use maketopo
 
         contains 
-                subroutine gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
+                subroutine gradrich(EPP, T_G1, U_G, Ri, SHUY, printstatus)
                 implicit none
                 integer, intent(IN):: printstatus
-                double precision, allocatable, intent(IN):: EP_P(:,:,:)
+                double precision, allocatable, intent(IN):: EPP(:,:)
                 double precision, allocatable, intent(INOUT)::U_G(:,:,:)
                 double precision, allocatable, intent(IN):: T_G1(:,:) 
                 double precision, allocatable, intent(INOUT):: Ri(:,:)
@@ -71,7 +71,7 @@ module find_richardson
                               
                 !             print*, I
 
-                      IF(T_G1(I_ym1,t)>272.0 .AND. EPP(I,t)<8.0 .AND. EPP(I,t)>0.0) THEN
+                      IF(T_G1(I_ym1,t)>272.0 .AND. EPP(I,t)<6.5 .AND. EPP(I,t)>0.0) THEN
                                                
                                                 !------Y-Richardson-------!
                                                    ! Current density at each position
@@ -89,6 +89,7 @@ module find_richardson
                                                 !shear_v           = sqrt(delta_V1**2+delta_V3**2)
                                                 shear_v            = delta_V1
                                                 delta_rho          =(c_pos1-c_min1)/bottom
+                                                !write(*,*) I, gravity, rho_dry, delta_rho, shear_v
                                                 Ri_grad            =((-gravity/rho_dry)*delta_rho)/(shear_v**2)
                                                ! print*, Ri_grad
 
@@ -98,13 +99,14 @@ module find_richardson
                                                 ! the
                                                 ! adjusted Ri and column 5 is the
                                                 ! original
-                                                !print*, "something off here"
-                                                if (Ri_grad>5.0) THEN
-                                                Ri(I,t) = 5.0
+                                                !print*, "something      
+
+                                                if (Ri_grad>50.0) THEN
+                                                Ri(I,t) = 50.0
                                                 !print *, "Ri", I, t, Ri
-                                                elseif (Ri_grad<-5.0) THEN
+                                                elseif (Ri_grad<-50.0) THEN
                                                 !print*, "entered elif"
-                                                Ri(I,t) = -5.0
+                                                Ri(I,t) = -50.0
                                                 !print*, "wrote ri"
                                                !print *, "Ri", I, t, Ri(I,1,t)
                                                 else

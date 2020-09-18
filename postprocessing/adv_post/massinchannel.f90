@@ -25,29 +25,29 @@ module massdist
         call headerf(4500, filename, simlabel, routine, DESCRIPTION, datatype)
      !   write(4500, formatmass) 1, 0, 0, 0, 1.0, 1.0, 1.0, 0, 0, 0, 0, 0
         print *, "Done writing 3D variables"
-        areatot=DX(1)*ZMAX*(RMAX*DZ(1)*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
+        areatot=DX(1)*ZMAX*(RMAX*DZ(1))!*sqrt(slope**2+1))! cos(slope) ! 906 * 1212/dcos(10.2)
      !   allocate(areamat( RMAX,ZMAX))
-        cellarea=DX(3)*(DX(3)*sqrt(slope**2+1))
+        cellarea=DX(3)*DX(3) !*sqrt(slope**2+1))
         write(*,*) cellarea
         carea=0 
         !allocate(areamat(RMAX, YMAX, ZMAX))
-        do zc=2,ZMAX-1
-                do rc=3,RMAX-2
-                        do yc=3,YMAX-2
-                !write(*,*) I 
+        do zc=4,ZMAX-4
+                do rc=4,RMAX-4
+                        do yc=4,YMAX-4
+                !write(*,*) I
+                        call funijk(rc, yc, zc, I) 
                         call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, topo, channeltrue)
                        ! write(*,*) XXX(I,1), YYY(I,1),ZZZ(I,1), top
-                        if ( channeltrue ) then !.and. abs(YYY(I,1)-topo) .lt. DX(1) )then
+                        if ( channeltrue .and. YYY(I,1) .eq. topo) then !.and. abs(YYY(I,1)-topo) .lt. DX(1) )then
                                 carea=carea+cellarea
                         end if 
                         
-                        I=I+1
                         end do 
                 end do 
         end do
         write(*,*) "done with carea", carea
 
-     DO t= 6, 6  !timesteps
+     DO t= 2, 8  !timesteps
         chmass = 0
         tmass = 0
         chmassd = 0
@@ -64,13 +64,14 @@ module massdist
         area=0
         areaout=0
         atest=0
-        I=1
-           do zc=2,ZMAX-1
-                do rc=3,RMAX-2
-                        do yc=3,YMAX-2
-                call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, topo, channeltrue)
-                ! write(*,*) "x", XXX(I,1), "y", YYY(I,1), "Z", ZZZ(I,1), "top", top
-                       if ( abs( YYY(I,1)-topo) .lt. DY(1)) then 
+                
+        do zc=4,ZMAX-4
+                do rc=4,RMAX-4
+                        do yc=4,YMAX-4
+                        call funijk(rc, yc, zc, I)           
+
+                        call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, topo, channeltrue)
+                       if ( YYY(I,1) .eq. topo) then 
                      
                                 atest=atest+cellarea
                       
@@ -96,6 +97,10 @@ module massdist
  
                         if (  YYY(I,1) .eq. topo) then 
                                 area = area+cellarea
+
+                                IF ( .NOT. CHANNELtrue) THEN 
+                                        areaout=areaout+cellarea
+                                end if 
                                ! write(*,*) "inside flow", I 
                                 !if ( areamat(int(XXX(I,1) * 0.98), int(ZZZ(I,1)/3.)) .ne. 9) then 
                                 !        areamat(int(XXX(I,1)/3.), int(ZZZ(I,1)/3.))=cellarea
@@ -146,7 +151,7 @@ module massdist
                                                 chmass = chmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 END IF
 
-                                If (channeltrue .eq. .FALSE.) then 
+                                If ( .NOT. channeltrue) then 
                                                         outsum= outsum +(1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         rho_c=rho_p*(1-EP_G1(I,t))+(P_const/(R_dryair*T_G1(I,t)))*(EP_G1(I,t))
                                                         
@@ -178,7 +183,7 @@ module massdist
          buoyant= buoyant/tmass
          current=current/tmass     
         
-         write(*,*) carea, "true: ", (width+DX(1))*DX(1)*RMAX*(sqrt(slope**2+1))
+         write(*,*) carea, "true: ", (width)*DX(1)*RMAX !*(sqrt(slope**2+1))
          write(*,*) area
          WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, (area)/areatot, areaout/(areatot-carea)
         END DO
@@ -852,4 +857,75 @@ module massdist
                      WRITE(7487, formatavgx2) t, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgdpu/sum_1, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgdpu2/sum_2
                 end do 
         end subroutine
-        end module                         
+        
+        
+subroutine e1vse2
+
+        double precision:: ve1, ve2, ri1, ri2, dpu1, dpu2,  massout1, massout2
+        double precision:: sume1, sume2
+        logical:: channeltrue
+        double precision:: topo, centerline
+
+          filename= 'e2vse1.txt'
+          description="Depth averages values on eitherside of centerline"
+          routine= "massdist/e1vse2"
+          datatype=" t   U_G_e1 UG_e2 UG1/UG2 Ri_1 Ri_2  DPU_1 DPU_2  "
+          call headerf(1951, filename, simlabel, routine,DESCRIPTION,datatype)
+
+
+
+        do t=1,timesteps
+        sume1=0
+        sume2=0
+        ve1=0
+        ve2=0
+        massout1=0
+        massout2=0
+        ri1=0
+        ri2=0
+        dpu2=0
+        dpu1=0
+
+          do zc=4,ZMAX-4
+                do rc=4,RMAX-4
+                        do yc=4,YMAX-4
+                        call funijk(rc, yc, zc, I)
+
+                        call edgesdose(width, lambda, depth, XXX(I,1),YYY(I,1),ZZZ(I,1),  slope, topo, channeltrue)
+                            if (EPP(I,t) .ge. 0.1 .and. EPP(I,t) .lt.min_dilute)then
+                                centerline=lamba*amprat*sind(360*dble(rc*3)/lambda)+dble(ZMAX*3/2)
+                                        if (channeltrue) then
+                                                  if ( ZZZ(I,1) .lt. centerline)then
+                                                        ve1=ve1+U_G1(I,t)
+                                                        sume1=sume1+1
+                                                        ri1=Ri(I,t) +ri1+1
+                                       
+
+                                                        DPU1=DPU(i,t)+dpu1
+                                                  else
+                                                        ve2=ve1+U_G1(I,t)
+                                                        sume2=sume2+1
+                                                        ri2=Ri(i,t)+ri2
+                                                        DPU2=DPU(i,t)+dpu2
+                                                  end if
+
+                                          end if
+                           end if
+                           if ( EPP(I,t) .ge. 0.1 .and. EPP(I,t) .lt. max_dense)then
+                                 if ( .not. channeltrue .and. ZZZ(I,1) .gt.centerline+width/2) then
+                                        massout1=massout1+(1-EP_G1(I,1))*1950*3.*3.!Volume_Unit*rho_p
+                                end if
+
+                                if ( .not. channeltrue .and. ZZZ(I,1) .lt. centerline-width/2) then
+                                        massout2=massout2+(1-EP_G1(I,1))*Volume_Unit*rho_p
+                                end if
+                          end if
+                        end do
+                end do
+           end do
+                write(1951,format8col) t, ve1/sume1, ve2/sume2, (ve1/ve2)*(sume2/sume1), ri1/sume1, ri2/sume2, dpu1/sume1, dpu2/sume2, massout1, massout2
+        end do
+end subroutine
+
+
+end module                         

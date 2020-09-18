@@ -56,7 +56,7 @@ sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" test.f90
 sed -i.bak "s|.*width=.*|width=$width|" test.f90
 sed -i.bak "s|.*lambda=.*|lambda=$wave|" test.f90
 sed -i.bak "s|.*depth=.*|depth=$depth|" test.f90
-sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" test.f90
+sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo',dxi, XXX, YYY, ZZZ)|" test.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
 
@@ -88,7 +88,8 @@ cp test.f90 $here
 cd $here 
 
 echo "submit to run"
-sbatch testsub.sh
+#sbatch testsub.sh
+./test.exe
 echo "running"
 
 echo testing!
