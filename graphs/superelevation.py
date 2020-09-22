@@ -66,7 +66,11 @@ amp, vol = paramlists(alllabels, 'Amp', 'Vflux')
 width, depth = paramlists(alllabels, 'Width', 'Depth')
 inlet, inletrat = paramlists(alllabels, 'Inlet', 'Inletrat')
 tot, avulsed, buoyant, massout, area, areaout= openmassdist(alllabels, path)
-avgTG, avgUG, avgdpu, avgWG=openaverage(alllabels, path)
+avgTG, avgUG, avgdpu, avgWG, avgEPP, avgrho=opendenseaverage(alllabels, path)
+
+cols=['t', 's1', 's2']
+fid='_super.txt'
+superel=openmine(alllabels, path, fid, cols, 's1')
 
 avgdpu=avgdpu.drop(avgdpu.index[0])
 
@@ -75,24 +79,39 @@ dpuMax=[]
 mass=[]
 mout=[]
 aream=[]
+rhoc=[]
+se=[]
+UGse=[]
 for sim in alllabels:
      UGmax.append(avgUG[sim].max())
      dpuMax.append(avgdpu[sim].max())
      mass.append(avulsed[sim].max())
      mout.append(massout[sim].max())
      aream.append(areaout[sim].max())
+     se.append(superel[sim].max())
+     r=superel[sim].idxmax(axis="columns")
+     rhoc.append(avgrho[sim].iloc[r])
+     UGse.append(avgUG[sim].iloc[r])
+     
      
 dpuMax=np.array(dpuMax)
-UGmax=np.array(UGmax)
+UG=np.array(UGse)
+rhoc=np.array(rhoc)
 kapa, dist, kdist = curvat(alllabels)
 a=1
 b=np.array(width)
-avgrho=2*a*dpuMax/(UGmax**2)
 g=9.81
-h1=1*UGmax**2/(2*g)
-drho=(avgrho-1.01)/avgrho
-h2=(a)*(b)*(UGmax**2)/(2*(1/np.array(kdist))*(drho)*g)
-h3=(UGmax**2)*(1/drho)/(2*g)
+h1=1*UG**2/(2*g)
+Ta=273
+R=287
+Pconst=1e5
+rhoa=Pconst/(R*Ta)
+drho=(rhoc-rhoa)/rhoc
+
+#centrifugal component 
+h2=(a)*(b)*(UG**2)/(2*(1/np.array(kdist))*(drho)*g)
+#runup contribution
+h3=(UG**2)*(1/drho)/(2*g)
 
 
 fig,ax=plt.subplots()
@@ -106,6 +125,15 @@ ax.scatter(aream,h1, c='b')
 ax.scatter(aream, h2, c='r')
 ax.scatter(aream, h3, c='g')
 ax.scatter(aream, h1+h2, c='k')
+
+fig,ax=plt.subplots()
+ax.scatter(se, h2, c='r')
+ax.scatter(se, h3, c='g')
+ax.plot(se, h3+h2, 'k+')
+ax.plot(se,se, 'k')
+ax.set_xlabel('Superelevation (m)')
+ax.set_ylabel('Calculated Superelevation(m)')
+
 # fig,ax=plt.subplots()
 # ax.scatter(mout,h1)
 # ax.scatter(mout, h2, c='r')

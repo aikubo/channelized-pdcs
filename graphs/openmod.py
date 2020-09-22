@@ -41,25 +41,29 @@ def openspillavg(labels, path):
 
 def openaverage(labels, path):
     fid='_average_all.txt'
-    cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
+    cols=['time',  'EP_P', 'rhoC','T_G','U_G','V_G','W_G','U_S1','DPU' ]
     colspec= [[1,4], [10,26], [33, 48], [57,70], [79,92], [101,114], [119,135]]
     avgTG=openmine(labels, path, fid, cols, 'T_G', colspec)-273
     avgUG=openmine(labels, path, fid, cols, 'U_G', colspec)
     avgdpu=openmine(labels, path, fid, cols, 'DPU', colspec)
     avgWG=openmine(labels, path, fid, cols, 'W_G', colspec)
+    avgEPP=openmine(labels, path, fid, cols, 'EP_P')
+    avgrho=openmine(labels, path, fid, cols, 'rhoC')
 
-    return avgTG, avgUG, avgdpu, avgWG
+    return avgTG, avgUG, avgdpu, avgWG, avgEPP, avgrho
 
 def opendenseaverage(labels, path):
     fid='_average_dense.txt'
-    cols=['time', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
+    cols=['time', 'EP_P', 'rhoC', 'T_G','U_G','V_G','W_G','U_S1','DPU' ]
   
     avgTG=openmine(labels, path, fid, cols, 'T_G') -273
     avgUG=openmine(labels, path, fid, cols, 'U_G')
+    avgEPP=openmine(labels, path, fid, cols, 'EP_P')
+    avgrho=openmine(labels, path, fid, cols, 'rhoC')
     avgdpu=openmine(labels, path, fid, cols, 'DPU')
     avgWG=openmine(labels, path, fid, cols, 'W_G')
 
-    return avgTG, avgUG, avgdpu, avgWG, 
+    return avgTG, avgUG, avgdpu, avgWG, avgEPP, avgrho
 
 
 def openmassdist(labels, path):
