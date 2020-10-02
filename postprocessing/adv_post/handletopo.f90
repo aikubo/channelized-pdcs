@@ -137,7 +137,7 @@ subroutine edgesdose(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchannel)
             clearance=2*deltz
         end if
         !write(*,*) clearance, center
-        if (lamb .eq. 0) then
+        if (lamb .lt. 1) then
                 centerline = center
         else
           centerline = lamb*amprat*sind((360*XLOC)/lamb)+center
@@ -169,8 +169,6 @@ subroutine edgesdose(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchannel)
         end if 
        end if
 
-        call funIJK_dble(XLOC,YLOC,ZLOC,I) 
-        !if (EP_G1(I,1) .lt. dble(0.001)) inchannel=.FALSE.
 
 
 end subroutine

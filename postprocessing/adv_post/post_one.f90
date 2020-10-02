@@ -19,17 +19,26 @@ integer:: tfind=8
 
 
 integer::printstatus
+character(8)  :: date
+character(10) :: time
+character(5)  :: zone
+integer,dimension(8) :: values
 
 logical:: ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc
-logical:: UGdx8, spill, TGdx8, xstream, ave, energy, tau
+logical:: super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
 double precision:: area 
 
+call date_and_time(date, time, zone, values)
+print*, "Runing post_one.f90"
+print*, date, time 
+
+
 simlabel='impact'
 printstatus=2
-
+super=.FALSE.
 spill=.FALSE.
 ecoef=.FALSE.
 EPPdx8=.FALSE.
@@ -58,8 +67,14 @@ deltat=5.0
 timesteps=8
 tstart=3
 tstop=timesteps
-depth = 27
-slope=0
+if (width .eq. dble(300)) then 
+        depth = 39
+elseif (width .eq. dble(201)) then 
+       depth=27   
+else 
+       depth=0
+end if 
+slope=.18
 dxi=3.0
 Volume_Unit= dxi*dxi*dxi
 call ALLOCATE_ARRAYS
@@ -73,6 +88,7 @@ call openbin(500, 'W_G', W_G1)
 call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
+call opennotbin(900, 'P_G', P_G)
 
 call handletopo('l1200_A20_W201', dxi, XXX, YYY, ZZZ)
 
@@ -108,19 +124,20 @@ print*, "finding froude"
 
 if (fd) call isosurf(scaleh)
 print*, "finding richardson gradient"
-if (rigrad .or. slices) call gradrich(EP_P, T_G1, U_G, Ri, SHUY, printstatus)
+if (rigrad .or. slices) call gradrich(EPP, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"
 if (ent) call bulkent(EP_G1) 
 print*, "calculating mass in channel"
 
 if (ecoef) print*, "ENT COEFFICIENT"
 if (ecoef) call entcoef
+if (super) call superelevation 
 
 if (massalloc) call massinchannel(width, depth, lambda, scaleh, area)
 print*, "calculating dominant velocities"
 if (xstream) call crossstream
-print*, "granular to gas stress"
-if (tau .or. slices) call calc_tau
+!print*, "granular to gas stress"
+!if (tau .or. slices) call calc_tau
 print*, "finding veritical column"
 if (slices) call slices2
 print*, "averaging"

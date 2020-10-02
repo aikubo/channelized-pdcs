@@ -3,13 +3,15 @@ USE parampost
 USE constants
 use formatmod
 use filehead
+use massdist
 contains
 SUBROUTINE AVERAGE_ALL 
 
 IMPLICIT NONE 
+double precision:: avgr, avgr2, avgr3, rc, mt, avgEP, avgEP2, avgEP3
 routine="averageit.mod/average_all"
 description=" Average of all timesteps"
-datatype=" t   T_G   U_G   V_G   W_G   U_S1   DPU"
+datatype=" t EP_G Rho  T_G   U_G   V_G   W_G   U_S1   DPU"
 filename='average_all.txt'
 call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
 
@@ -25,10 +27,6 @@ description='Average of densities between 2.5 and 1.5'
 
 call headerf(889, filename, simlabel, routine, DESCRIPTION, datatype)
 
-
-write(888, formatavg) 1, 800., 10., 0., 0., 10., 39000.
-write(887, formatavg) 1, 800., 10., 0., 0., 10., 39000.
-write(889, formatavg) 1, 800., 10., 0., 0., 10., 39000.
 
 do t= 2,timesteps
 sum_1 = 0
@@ -52,18 +50,27 @@ avgw3 = 0
 avgdpu =0
 avgdpu3=0
 avgdpu2=0
-
-
+avgr=0
+avgr2=0
+avgr3=0
+avgEP=0
+avgEP2=0
+avgEP3=0
 
 do I= 2, length1
         IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. max_dilute) THEN
                sum_1 = sum_1 +1
                avgt = T_G1(I,t) + avgt
                avgu = U_G1(I,t) + avgu
-               avgv = U_G1(I,t) + avgv
-               avgw = V_G1(I,t) + avgw
+               avgv = V_G1(I,t) + avgv
+               avgw = W_G1(I,t) + avgw
                avgus = U_S1(I,t) + avgus
                avgdpu = DPU(I,t) + avgdpu
+               avgEP= EPP(I,t) + avgEP
+                call density(I,t,rc,mt)
+                avgr=rc+avgr
+
+
         END IF
 
         IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. max_dense) THEN
@@ -74,6 +81,11 @@ do I= 2, length1
                avgw2 = W_G1(I,t) + avgw2
                avgus2 = U_S1(I,t) + avgus2
                avgdpu2 = dpu(I,t) + avgdpu2
+               avgEP2= EPP(I,t) + avgEP2
+                call density(I,t,rc,mt)
+                avgr2=rc+avgr2
+
+
 
         END IF
 
@@ -85,13 +97,18 @@ do I= 2, length1
                avgw3 = W_G1(I,t) + avgw3
                avgus3 = U_S1(I,t) + avgus3
                avgdpu3 = dpu(I,t) + avgdpu3
+               avgEP3= EPP(I,t) + avgEP3
+                call density(I,t,rc,mt)
+                avgr3=rc+avgr3
+
+
         END IF
 END DO
 
      print*, "writing average"
-     WRITE(888, formatavg) t, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1,  avgdpu/sum_1
-     Write (887, formatavg) t, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
-     write(889, formatavg) t, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
+     WRITE(888, formatavg) t, avgEP/sum_1, avgr/sum_1, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1,  avgdpu/sum_1
+     Write (887, formatavg) t, avgEP3/sum_3, avgr3/sum_3, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
+     write(889, formatavg) t, avgEP2/sum_2, avgr2/sum_2, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
 
 END DO
 RETURN 

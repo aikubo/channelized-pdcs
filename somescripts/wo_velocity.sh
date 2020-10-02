@@ -45,7 +45,7 @@ git pull
 sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" dxout.f90
 sed -i.bak "s|.*width=.*|width=$width|" dxout.f90
 sed -i.bak "s|.*lambda=.*|lambda=$wave|" dxout.f90
-sed -i.bak "s|.*depth=.*|depth=$depth|" dxout.f90
+#sed -i.bak "s|.*depth=.*|depth=$depth|" dxout.f90
 sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" dxout.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
