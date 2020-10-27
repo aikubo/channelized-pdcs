@@ -44,8 +44,7 @@ alllabels = [
     'AVX7', 'AVZ7', 'AVY7', 'AWY7', 'AWX7', 'AWZ7',
     'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
     'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
-    'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7' 
-    ]
+    'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7']
 
 Schan= ['SW7', 'SV4','SW4','SV7', 'uncon'] #['SV4', 'SW4', 'SW7', 'SV7']
 
@@ -65,15 +64,16 @@ amprat, wave = paramlists(alllabels, 'Amprat', 'Wave')
 amp, vol = paramlists(alllabels, 'Amp', 'Vflux')
 width, depth = paramlists(alllabels, 'Width', 'Depth')
 inlet, inletrat = paramlists(alllabels, 'Inlet', 'Inletrat')
+
+be_max, de_max=maxentrainment(alllabels, path)
 tot, avulsed, buoyant, massout, area, areaout= openmassdist(alllabels, path)
 avgTG, avgUG, avgdpu, avgWG, avgEPP, avgrho=opendenseaverage(alllabels, path)
-
 cols=['t', 's1', 's2']
 fid='_super.txt'
 superel=openmine(alllabels, path, fid, cols, 's1')
 
 avgdpu=avgdpu.drop(avgdpu.index[0])
-
+depth=np.array(depth)
 UGmax=[]
 dpuMax=[]
 mass=[]
@@ -82,8 +82,10 @@ aream=[]
 rhoc=[]
 se=[]
 UGse=[]
+WGmax=[]
 for sim in alllabels:
      UGmax.append(avgUG[sim].max())
+     WGmax.append(avgWG[sim].max())
      dpuMax.append(avgdpu[sim].max())
      mass.append(avulsed[sim].max())
      mout.append(massout[sim].max())
@@ -106,33 +108,60 @@ Ta=273
 R=287
 Pconst=1e5
 rhoa=Pconst/(R*Ta)
-drho=(rhoc-rhoa)/rhoc
+drho=(rhoc-rhoa)/rhoc 
 
 #centrifugal component 
 h2=(a)*(b)*(UG**2)/(2*(1/np.array(kdist))*(drho)*g)
 #runup contribution
 h3=(UG**2)*(1/drho)/(2*g)
+g_star=g*drho
+froude=UG/(np.sqrt(g_star*np.array(inlet)))
+x=np.array(kdist)*np.array(wave)
+y=(se-depth)/depth
 
+rcParams['pdf.fonttype'] = 42
+rcParams['ps.fonttype'] = 42
 
-fig,ax=plt.subplots()
-ax.scatter(mass,h1, c='b')
-ax.scatter(mass, h2, c='r')
-ax.scatter(mass, h3, c='g')
-ax.scatter(mass, h1+h2, c='k')
+size=0.5*((np.array(vol))/10000)**2
+fig,ax=plt.subplots(1,2)
+scat=ax[0].scatter(x, y, s=size, c='k')
+kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
+leg=ax[0].legend(*scat.legend_elements(**kw), )
+leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
+ax[0].set_ylabel('Normalized Splash Height')
+ax[0].set_xlabel('Normalized Curvature')
 
-fig,ax=plt.subplots()
-ax.scatter(aream,h1, c='b')
-ax.scatter(aream, h2, c='r')
-ax.scatter(aream, h3, c='g')
-ax.scatter(aream, h1+h2, c='k')
+ax[1].scatter(be_max/(depth*np.array(width)*3),y, s=size,  c='k')
+ax[1].set_xlabel('Normalized Entrainment')
+correlation_matrix = np.corrcoef(x, y)
+correlation_xy = correlation_matrix[0,1]
+print("R", correlation_xy**2)
 
-fig,ax=plt.subplots()
-ax.scatter(se, h2, c='r')
-ax.scatter(se, h3, c='g')
-ax.plot(se, h3+h2, 'k+')
-ax.plot(se,se, 'k')
-ax.set_xlabel('Superelevation (m)')
-ax.set_ylabel('Calculated Superelevation(m)')
+correlation_matrix = np.corrcoef(be_max/(depth*np.array(width)*1200) , y)
+correlation_xy = correlation_matrix[0,1]
+print("R", correlation_xy**2)
+
+plt.tight_layout()
+    
+# fig,ax=plt.subplots()
+# ax.scatter(mass,h1, c='b')
+# ax.scatter(mass, h2, c='r')
+# ax.scatter(mass, h3, c='g')
+# ax.scatter(mass, h1+h2, c='k')
+
+# fig,ax=plt.subplots()
+# ax.scatter(aream,h1, c='b')
+# ax.scatter(aream, h2, c='r')
+# ax.scatter(aream, h3, c='g')
+# ax.scatter(aream, h1+h2, c='k')
+
+# fig,ax=plt.subplots()
+# ax.scatter(se, h2, c='r')
+# ax.scatter(se, h3, c='g')
+# ax.plot(se, h3+h2, 'k+')
+# ax.plot(se,se, 'k')
+# ax.set_xlabel('Superelevation (m)')
+# ax.set_ylabel('Calculated Superelevation(m)')
 
 # fig,ax=plt.subplots()
 # ax.scatter(mout,h1)

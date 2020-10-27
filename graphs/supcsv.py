@@ -28,6 +28,27 @@ os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
 #import cm_xml_to_matplotlib as cm
 
 
+def regime(labels, data, param, xlab, ylab, fid):
+    fig, axes = plt.subplots()
+    setgrl(labels, fig, axes, 6, 4)
+    palette = setcolorandstyle(labels)
+
+    for sim in labels:
+        i = labels.index(sim)
+        c = palette[i]
+        initialcond = labelparam(sim)
+        X = initialcond[param]
+        end = data.loc[data.index[-1], sim]
+        print(X)
+        print(end)
+        axes.scatter(X, end, color=c)
+
+    axes.set_xlabel(param)
+    axes.set_ylabel(ylab)
+    savefigure(fid)
+
+
+
 straight = [
     'SW7',
     'SV4',
@@ -43,7 +64,7 @@ alllabels = [
     'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
     'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
     'DVX7', 'DVY7', 'DVZ7', 'DWY7', 'DWZ7', 'DWX7',  
-    'SW7', 'SV4','SW4','SV7']
+    'SW7', 'SV4','SW4','SV7', 'uncon']
 
 Schan= ['SV4', 'SV7'] #['SV4', 'SW4', 'SW7', 'SV7']
 
@@ -57,13 +78,6 @@ tot, avulsed, buoyant, massout, area, areaout= openmassdist(alllabels, path)
 stot, savulsed, sbuoyant, smassout, sarea, sareaout= openmassdist(Schan, path)
 sfront=openmine(Schan, path, froudefid, frcols, 'Front')
 savgTG, sUG, savgdpu, savgWG, savgEPP, savgrho = openaverage(Schan, path)
-
-cols=['t', 'Udom', 'Uepp', 'Wdom', 'Wepp', 'Vdom', 'Vepp']
-colspec= [[1,4], [10,26], [33, 48], [57,70], [79,92], [101,114], [119,135]]
-vdom=openmine(alllabels,path, "_cross_stream.txt", cols, 'Vdom', colspec)
-
-
-
 #
 svulsed=[]
 sdist=[]
@@ -161,8 +175,6 @@ UGmax=[]
 dpumax=[]
 phoenix=[]
 mout=[]
-WGmax=[]
-vdom_s=[]
 kapa, dist, kdist = curvat(alllabels)
 for sim in alllabels:
     avul.append(avulsed[sim].max())
@@ -172,13 +184,13 @@ for sim in alllabels:
     velz.append(avgW[sim].max())
     aout.append(areaout[sim].max())
     mout.append(massout[sim].min())
-    vdom_s.append(vdom[sim].max())
+
 
 
 #volcvol = [float(x) / float(y) for x, y in zip(vol, cvol)]
 
 
-#sizes = np.array(areas) / 1212 / 906
+sizes = np.array(areas) / 1212 / 906
 #cvol2 = [float(x) * float(y) for x, y in zip(sizes, cvol)]
 #cvol3 = [float(x) / float(y) for x, y in zip(wamp, cvol2)]
 
@@ -216,39 +228,27 @@ slen=sinlength(alllabels,frontend)
 # dist_norm = [float(x) / float(y) for x, y in zip(dist,zdist)]
 # dist_norm2 = [float(x) / float(y) for x, y in zip(dist, inlet)]
 
-kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, wave)]
+# kdist_norm= [float(x) * float(y)  for x, y in zip(kdist, wave)]
 # kdist_norm2= [float(x) * (float(y)) *(float(z)) for x, y, z in zip(kdist, wave, inletrat)]
-mass_norm=[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, xdist, wave)]
+# mass_norm=[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, xdist, wave)]
 # front_norm=[float(x) / float(y) for x, y in zip(frontend, slen)]
 # si=[float(x) / float(y) for x, y in zip(lg, xdist)]
 # amp_norm=[ float(x)/ (float(y)) for x, y in zip(amp, zdist)]
 # ent_norm=[float(x) / (float(y)) for x, y in zip(bulkent, cvol)]
 
-slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
-ugnorm=[float(x)/10 for x in UGmax]
+# slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
+# ugnorm=[float(x)/10 for x in UGmax]
 ## regime figure
 
 
 
     
 
-rcParams['font.sans-serif'] = ['Helvetica']
-fig, ax =plt.subplots(2,2)
+#rcParams['font.sans-serif'] = ['Helvetica']
+#fig, ax =plt.subplots(2,2)
 
 # full page 190X230mm 
 # 1/4 page 95mm x 115m 
-r_squared=[]
-
-r_sq5=[]
-def rforoverk(x,y, k):
-    x=np.array(x)
-    y=np.array(y)
-    mask=[x > k]
-    correlation_matrix = np.corrcoef(x[mask], y[mask])
-    correlation_xy = correlation_matrix[0,1]
-    r2=(correlation_xy**2)
-    return r2
-        
 
 def plotandR(x,y, loc, col, size):
     
@@ -264,59 +264,102 @@ def plotandR(x,y, loc, col, size):
     correlation_matrix = np.corrcoef(x, y)
     correlation_xy = correlation_matrix[0,1]
     r_squared.append(correlation_xy**2)
-    r2=rforoverk(x,y,5)
-    r_sq5.append(r2)
-    
     return scat
 
 dh=deltah(alllabels, frontend)
 
+
+columns=['Width (m)', 'Depth (m)', 'Wavelength (m)', 'Amplitude (m)', 'H0 (m)', 
+             'Distance Traveled (m)', 'Mass Fraction in Channel',
+             'Mass Overspilled', 'Area Fraction Innundated','Area Out of Channel', 
+             'Max Depth Averaged Downstream Velocity (m/s)', 'Bulk Entrainment (m^3)', 'dH', 'Volume (m^3)']
+
+"""
+0 'Width', 
+1 'Depth', 
+2 'Wavelength',
+3 'Amplitude', 
+4 'H0', 
+5 'Distance Traveled ', 
+6 'Mass Fraction in Channel',
+7 "Mass Overspilled", 
+8 'Area Fraction Innundated', 
+9 'Area out of Channel Innundated'
+10 "Max Depth Averaged Downstream Velocity"
+11 "Bulk Entrainment"
+12 "dH"
+"""
+
+sup=np.empty( (len(alllabels), len(columns)))
+for i in range(len(alllabels)):
+    sup[i][0]=width[i]
+    sup[i][1]=depth[i]
+    sup[i][2]=wave[i]
+    sup[i][3]=amp[i]
+    sup[i][4]=inlet[i]
+    sup[i][5]=slen[i]
+    sup[i][6]=1-mout[i]
+    sup[i][7]=Z[i]
+    sup[i][8]=areas[i]
+    sup[i][9]=aout[i]
+    sup[i][10]=UGmax[i]
+    sup[i][11]=bulkent[i]
+    sup[i][12]=dh[i]
+    sup[i][13]=vol[i]*15
+supcsv=pd.DataFrame(sup,  index=alllabels, columns=columns)
+supcsv.to_csv("/home/akh/myprojects/channelized-pdcs/graphs/supcsv.csv")
+# # #half page
+#fig.set_size_inches(cm2inch(19.0, 11.5))
+r_squared=[]
+# # # ## normalized meander distance vs areas normalized
+# # # # Meander distance = Meander dist (m)/ Z dist(m)
+# # # # Area innudated = i
+size=((np.array(vol)/10000)**2)*0.5
 # x=dist_norm
-size=0.5*((np.array(vol))/10000)**2
-
-kdist_norm=kdist_norm
-#wave='k'
-
-areas_norm=np.array(aout)/np.array(inletrat)
-scat = plotandR(kdist_norm, areas_norm, ax[0][0], 'k', size)
-ax[0][0].set_xlabel('Curvature', fontsize=8)
-ax[0][0].set_ylabel('Area Innudated', fontsize=8)
 
 
+# kdist_norm=kdist_norm
+# #wave='k'
 
-## Front location vs meander width
-scat = plotandR(kdist_norm, slen_norm, ax[0][1], 'k', size)
-ax[0][1].set_xlabel('Normalized Curvature', fontsize=8)
-ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
-
-kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
-leg=ax[0][1].legend(*scat.legend_elements(**kw), )
-leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
-# ax[0][1].add_artist(leg)
-# cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
-# cbar.ax.tick_params(labelsize=8)
-
-# ### mass avulsed vs curvature metric
-# # mass = mass avuled/total mass *inlet/wave
-# # curvature = k*meander distance
+# areas_norm=np.array(aout)/np.array(inletrat)
+# scat = plotandR(kdist_norm, areas_norm,  svulsed/sa, ax[0][0], 'k', size)
+# ax[0][0].set_xlabel('Curvature', fontsize=8)
+# ax[0][0].set_ylabel('Area Innudated', fontsize=8)
 
 
-scat=plotandR(kdist_norm, mass_norm,  ax[1][0], 'k', size)
-ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
-ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
+
+# ## Front location vs meander width
+# scat = plotandR(kdist_norm, slen_norm, sdist/1212, ax[0][1], 'k', size)
+# ax[0][1].set_xlabel('Normalized Curvature', fontsize=8)
+# ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
+
+# kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
+# leg=ax[0][1].legend(*scat.legend_elements(**kw), )
+# leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
+# # ax[0][1].add_artist(leg)
+# # cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
+# # cbar.ax.tick_params(labelsize=8)
+
+# # ### mass avulsed vs curvature metric
+# # # mass = mass avuled/total mass *inlet/wave
+# # # curvature = k*meander distance
+
+
+# scat=plotandR(kdist_norm, mass_norm, svulsed, ax[1][0], 'k', size)
+# ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
+# ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
                     
                     
 
-# interestingly area innudated does not corelate with entrainment 
-# but mass overspilled does
+# # interestingly area innudated does not corelate with entrainment 
+# # but mass overspilled does
 
-scat=plotandR(kdist_norm, velz, ax[1][1],'k', size)
-ax[1][1].set_ylabel('Cross Stream Velocity', fontsize=8)
-ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
-
-plt.tight_layout()
+# scat=plotandR(kdist_norm, ugnorm, sU/10, ax[1][1],'k', size)
+# ax[1][1].set_ylabel('Downstream Velocity', fontsize=8)
+# ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
 
 
+# plt.tight_layout()
 
 # print(r_squared)
 # savefigure("regimeJULY_WITHS")

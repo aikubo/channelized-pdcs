@@ -6,7 +6,7 @@ def openmine(labels, path2file, fid, cols, out, colspec='infer', width='infer'):
     for sim in labels: 
         pathid=path2file+sim
         loc= pathid+fid
-        print(loc)
+        print(sim,out)
         temp_1=pd.read_fwf(loc, header=None, skiprows=9, colspecs=colspec, width=width)
         temp_1.columns=cols
         temp_all[sim]=temp_1[out]
@@ -24,25 +24,39 @@ perpx=['Perpx']
 
 def openspillavg(labels, path):
     fid='_overspill_avg.txt'
-    cols=['time', 'T_G','U_G','V_G','W_G','DPU', 'dT_G','dU_G','dV_G','dW_G','dDPU' ]
-    colspec= [[1,4], [10,26], [33, 48], [57,70], [79,92], [101,114], [119,135],
-              [140, 155], [160, 175], [180,195], [200,215]]
+    cols=['time', 'EP_P', 'Rho', 'T_G','U_G','V_G','W_G','DPU',  'bEP_P', 'bRho', 'bT_G','bU_G','bV_G','bW_G','bDPU' ]
+    colspec= [[1,4], [10,26], [33, 48], [55,70], [75,92], [100,114], [119,135],
+              [140, 155], [160, 181], [187,195], [208,221], [231, 247], [253,265], [275,289], [293,305]]
     spillTG=openmine(labels, path, fid, cols, 'T_G', colspec)-273
+    spillEPP=openmine(labels, path, fid, cols, 'EP_P', colspec)
+    spillRho=openmine(labels, path, fid, cols, 'Rho', colspec)
     spillUG=openmine(labels, path, fid, cols, 'U_G', colspec)
     spilldpu=openmine(labels, path, fid, cols, 'DPU', colspec)
-    spillWG=openmine(labels, path, fid, cols, 'W_G', colspec)
-    dspillTG=openmine(labels, path, fid, cols, 'dT_G', colspec)
-    dspillWG=openmine(labels, path, fid, cols, 'dW_G', colspec)
-    dspillUG=openmine(labels, path, fid, cols, 'dU_G', colspec)
-    dspilldpu=openmine(labels, path, fid, cols, 'dDPU', colspec)
+    #spillWG=openmine(labels, path, fid, cols, 'W_G', colspec)
 
-    return spillTG, spillUG, spilldpu, spillWG, dspillTG, dspillWG, dspillUG, dspilldpu
+
+    return spillEPP, spillRho, spillTG, spillUG, spilldpu
+
+def buoyant_openspillavg(labels, path):
+    fid='_overspill_avg.txt'
+    cols=['time', 'EP_P', 'Rho', 'T_G','U_G','V_G','W_G','DPU',  'bEP_P', 'bRho', 'bT_G','bU_G','bV_G','bW_G','bDPU' ]
+    colspec= [[1,4], [10,26], [33, 48], [55,70], [75,92], [100,114], [119,135],
+              [140, 155], [160, 181], [187,195], [208,221], [231, 247], [253,265], [275,289], [293,305]]
+
+    bspillTG=openmine(labels, path, fid, cols, 'bT_G', colspec)-273
+    bspillEPP=openmine(labels, path, fid, cols, 'bEP_P', colspec)
+    bspillRho=openmine(labels, path, fid, cols, 'bRho', colspec)
+    #bspillWG=openmine(labels, path, fid, cols, 'bW_G', colspec)
+    bspillUG=openmine(labels, path, fid, cols, 'bU_G', colspec)
+    bspilldpu=openmine(labels, path, fid, cols, 'bDPU', colspec)
+
+    return bspillEPP, bspillRho, bspillTG, bspillUG, bspilldpu
       
 
 def openaverage(labels, path):
     fid='_average_all.txt'
     cols=['time',  'EP_P', 'rhoC','T_G','U_G','V_G','W_G','U_S1','DPU' ]
-    colspec= [[1,4], [10,26], [33, 48], [57,70], [79,92], [101,114], [119,135]]
+    colspec= [[1,4], [10,26], [33, 48], [57,70], [79,92], [101,114], [119,135], [143, 157], [163, 177]]
     avgTG=openmine(labels, path, fid, cols, 'T_G', colspec)-273
     avgUG=openmine(labels, path, fid, cols, 'U_G', colspec)
     avgdpu=openmine(labels, path, fid, cols, 'DPU', colspec)

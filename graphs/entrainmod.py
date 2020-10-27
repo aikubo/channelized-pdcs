@@ -26,3 +26,21 @@ def entrain(labels, data):
 
     return deltaV
 
+def entrainment(labels,path):
+    bulk_ent, med_ent, dense_ent = openent(labels,path)
+    be=entrain(labels, bulk_ent)
+    me=entrain(labels, med_ent)
+    de=entrain(labels, dense_ent)
+    
+    return be, me, de
+
+def maxentrainment(labels,path):
+    be,me,de=entrainment(labels,path)
+    
+    be_max=[]
+    de_max=[]
+    for i in labels:
+        be_max.append(be[i].max())
+        de_max.append(de[i].max())
+    
+    return be_max, de_max
