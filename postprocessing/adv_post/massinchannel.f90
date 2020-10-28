@@ -418,7 +418,7 @@ module massdist
         implicit none
         integer, intent(IN):: loc, tim
         double precision, intent(Out):: mass, rhc
-                rhc=rho_p*(1-EP_G1(loc,tim))+(P_const/(R_dryair*(T_G1(loc,tim))))*(EP_G1(loc,tim))
+                rhc=rho_p*(1-EP_G1(loc,tim))+(P_G(I,t)/(R_vapor*(T_G1(loc,tim))))*(EP_G1(loc,tim))
                 mass=3.*3.*3.*rhc
         end subroutine
 

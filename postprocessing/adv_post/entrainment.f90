@@ -63,7 +63,7 @@ module entrainment
                    sumav=0
                 
                 !do zc=1,ZMAX
-                zc=450   
+                zc=150   
                 do i=1,RMAX
                         do j=1,YMAX
                             IJK1= 1 + (j-1) +(i-1)*(YMAX-1+1) +  (zc-1)*(YMAX-1+1)*(RMAX-1+1) 
@@ -86,7 +86,7 @@ module entrainment
                     do i=2,RMAX-1
                 
                        if (q_iso(i) .le. YMAX ) then  
-                       dj=q_iso(i-1)-q_iso(i+1)
+                       dj=(q_iso(i+1)-q_iso(i-1))*3.
                        IJK1= 1 + (q_iso(i)-1) +(i-1)*(YMAX-1+1) +  (zc-1)*(YMAX-1+1)*(RMAX-1+1) 
                        mag=sqrt(6**2 + dj**2)
                        U = (/ U_G1(IJK1,t), V_G1(IJK1,t) /)
@@ -103,4 +103,64 @@ module entrainment
                 end do 
                 
             end subroutine entcoef 
+
+            subroutine superelevation 
+
+                implicit none 
+                double precision:: setop, superel, height, truetop, XLOC, YLOC, ZLOC
+                logical:: inchannel
+                integer:: l1, l2, r1, r2
+
+                routine="=entrainment/superelevation"
+                description=" CALCULATE superelevation over time in the .25l to .75l region"
+                datatype=" t  height from bottom height from top"
+                filename='super.txt'
+                call headerf(437, filename, simlabel, routine, DESCRIPTION,datatype)
+
+
+                l1= int( lambda*.25/3.0)
+                l2=int(lambda*.75/3.0)
+                r1=450-width/2-amprat*lambda
+                r2=450+width/2+amprat*lambda
+
+                if (lambda .lt. 1) then 
+                        l1=100
+                        l2=150
+                        r1=int((450-width/2+15)/3)
+                        r2=int((450+width/2-15)/3)
+                end if
+
+                do t=2,timesteps 
+                        superel=0
+                         do rc=l1,l2
+                           do zc=r1,r2
+                                do yc= 20,YMAX-4
+                                 call funijk( rc, yc, zc, I) 
+                                  call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),slope,truetop,inchannel)
+                                 
+                                   if ( EPP(I,t) .lt. 0.51 .and. EPP(I,t) .gt. 0.01) then 
+                                   if ( (YYY(I,1)-truetop+3) .gt. superel)  then 
+                                        XLOC=rc
+                                        YLOC=yc
+                                        ZLOC=zc
+                                        superel=YYY(I,1)-truetop+3
+                                        setop=truetop
+                                        
+                                        
+                                   end if 
+                                  end if 
+
+                                end do 
+                           end do 
+                        end do 
+                        call funijk(int(XLOC), int(YLOC), int(ZLOC), I)
+                        print*, "superelevation at ",t, superel, XLOC, YLOC, ZLOC, height, setop, EPP(I,t)
+                       write(437,format3var) t, superel, superel-depth                                        
+                end do
+                
+                
+                
+
+            end subroutine 
+
 end module entrainment

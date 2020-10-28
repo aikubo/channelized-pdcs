@@ -18,7 +18,7 @@ INTEGER::write_end,loop_open,fid_temp,fid_EP_P,fid_EP_G,fid_U,fid_ISO6,fid_GRAD4
 INTEGER::fid_EP_G_t,fid_U_t,fid_ISO3,fid_Ri,fid_ROP1,fid_Dot,fid_dpu,fid_dpv
 INTEGER::Z_minus,Z_plus,X_minus,Y_plus,Z_total,I_local
 
-DOUBLE PRECISION,ALLOCATABLE::EP_P(:,:,:),Iso_6(:,:,:), dpu(:,:), dpv(:,:,:)
+DOUBLE PRECISION,ALLOCATABLE::EP_P(:,:,:),Iso_6(:,:,:), dpu(:,:), dpv(:,:,:),P_G(:,:)
 DOUBLE PRECISION,ALLOCATABLE::Iso_3(:,:,:),four_point_Iso3(:,:,:),four_point(:,:,:)
 DOUBLE PRECISION, ALLOCATABLE :: T_G(:,:,:),U_G(:,:,:),VEL_6(:,:,:),VEL_3(:,:,:),VEL_ALL(:,:,:), VEL_temp(:,:), VEL_temp2(:,:),Richardson(:,:,:)
 DOUBLE PRECISION, ALLOCATABLE :: Ri_Dense(:,:,:),char_dense(:), char_dilute(:),VEL_DENSE(:,:),VEL_DILUTE(:,:)

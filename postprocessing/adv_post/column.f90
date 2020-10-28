@@ -34,7 +34,7 @@ contains
          
           routine="column.mod/slice"
           description='Veritcal column at x'//trim(xstring)//'_z'//trim(zstring)
-          datatype=" t  YYY  EPP   U_G   DPU   T_G   Ri TAU_RATIO"
+          datatype=" t  YYY  EPP   U_G   DPU   T_G   Ri   WG"
           print*, xstring, zstring
           filename='slice_'//locstring//'.txt'
           print*, "open slice file", xstring, zstring 
@@ -55,7 +55,7 @@ contains
                       IF(EPP(I,t) .GT. 0.00) THEN
                       !print*, YYY(I,1)-hill, Ri_all(I,1,t) 
                      
-                        WRITE(numunit,format8col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t), TAU_RATIO(I,t)
+                        WRITE(numunit,format8col) t, YYY(I,1), EPP(I,t), U_G1(I,t), DPU(I,t), T_G1(I,t), Ri(I,t), W_G1(I,t)
                       end if 
                  !     END IF
                    END IF

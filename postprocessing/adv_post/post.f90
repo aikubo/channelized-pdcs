@@ -40,8 +40,14 @@ deltat=5.0
 timesteps=8
 tstart=3
 tstop=timesteps
-depth = 27
 slope=0.18
+if (width .eq. dble(300)) then
+        depth = 39
+elseif (width .eq. dble(201)) then
+       depth=27
+else
+       depth=0
+end if
 
 call ALLOCATE_ARRAYS
 
