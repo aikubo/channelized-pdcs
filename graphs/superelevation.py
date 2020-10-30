@@ -72,6 +72,7 @@ cols=['t', 's1', 's2']
 fid='_super.txt'
 superel=openmine(alllabels, path, fid, cols, 's1')
 
+spillEPP, spillRho, spillTG, spillUG, spilldpu=openspillavg(alllabels, path)
 avgdpu=avgdpu.drop(avgdpu.index[0])
 depth=np.array(depth)
 UGmax=[]
@@ -83,6 +84,7 @@ rhoc=[]
 se=[]
 UGse=[]
 WGmax=[]
+eppspill=[]
 for sim in alllabels:
      UGmax.append(avgUG[sim].max())
      WGmax.append(avgWG[sim].max())
@@ -91,6 +93,7 @@ for sim in alllabels:
      mout.append(massout[sim].max())
      aream.append(areaout[sim].max())
      se.append(superel[sim].max())
+     eppspill.append(spillEPP[sim].iloc[1:8].mean())
      r=superel[sim].idxmax(axis="columns")
      rhoc.append(avgrho[sim].iloc[r])
      UGse.append(avgUG[sim].iloc[r])
@@ -99,7 +102,7 @@ for sim in alllabels:
 dpuMax=np.array(dpuMax)
 UG=np.array(UGse)
 rhoc=np.array(rhoc)
-kapa, dist, kdist = curvat(alllabels)
+kapa, dist = curvat(alllabels)
 a=1
 b=np.array(width)
 g=9.81
@@ -111,33 +114,45 @@ rhoa=Pconst/(R*Ta)
 drho=(rhoc-rhoa)/rhoc 
 
 #centrifugal component 
-h2=(a)*(b)*(UG**2)/(2*(1/np.array(kdist))*(drho)*g)
+h2=(a)*(b)*(UG**2)/(2*(1/np.array(kapa))*(drho)*g)
 #runup contribution
 h3=(UG**2)*(1/drho)/(2*g)
 g_star=g*drho
 froude=UG/(np.sqrt(g_star*np.array(inlet)))
-x=np.array(kdist)*np.array(wave)
-y=(se-depth)/depth
+x=np.array(amp)/np.array(width)
+y=(se-depth) #/depth
+mass2=(50*np.array(mass))**2
+
 
 rcParams['pdf.fonttype'] = 42
 rcParams['ps.fonttype'] = 42
-
+plt.style.use("seaborn-darkgrid")
 size=0.5*((np.array(vol))/10000)**2
-fig,ax=plt.subplots(1,2)
-scat=ax[0].scatter(x, y, s=size, c='k')
+fig,ax=plt.subplots(1,3)
+
+
+scat=ax[0].scatter(x, y, s=size, c=mass, cmap=matplotlib.cm.RdBu_r)
 kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
-leg=ax[0].legend(*scat.legend_elements(**kw), )
+leg=ax[1].legend(*scat.legend_elements(**kw), )
 leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
 ax[0].set_ylabel('Normalized Splash Height')
 ax[0].set_xlabel('Normalized Curvature')
 
-ax[1].scatter(be_max/(depth*np.array(width)*3),y, s=size,  c='k')
+ax[1].scatter(be_max/(depth*np.array(width)*3),y, s=size,  c=mass, cmap=matplotlib.cm.RdBu_r)
 ax[1].set_xlabel('Normalized Entrainment')
 correlation_matrix = np.corrcoef(x, y)
 correlation_xy = correlation_matrix[0,1]
 print("R", correlation_xy**2)
 
 correlation_matrix = np.corrcoef(be_max/(depth*np.array(width)*1200) , y)
+correlation_xy = correlation_matrix[0,1]
+print("R", correlation_xy**2)
+
+
+ax[2].scatter(eppspill,y, s=size, c=mass, cmap=matplotlib.cm.RdBu_r)
+
+ax[2].set_xlabel('Spill Volume Fraction ')
+correlation_matrix = np.corrcoef(eppspill, y)
 correlation_xy = correlation_matrix[0,1]
 print("R", correlation_xy**2)
 

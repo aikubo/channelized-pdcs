@@ -1,15 +1,15 @@
 module maketopo
 
-use parampost 
+use parampost
 use constants
 use formatmod
 
 contains
 subroutine handletopo(filename, dxi2, OUTX, OUTY, OUTZ)
         use parampost
-        
-        implicit none 
-        character(LEN=*), INTENT(IN):: filename 
+
+        implicit none
+        character(LEN=*), INTENT(IN):: filename
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTX
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTY
         DOUBLE PRECISION, DIMENSION(:,:), INTENT(INOUT):: OUTZ
@@ -81,7 +81,7 @@ print*, 'topography loaded'
 end subroutine handletopo
 
 subroutine writedxtopo
-       implicit none 
+       implicit none
        open(6010, file='topography')
        open(6011, file='topo2')
                 print *, "writing topo for dx visuals"
@@ -93,23 +93,23 @@ end subroutine
 
 
 subroutine edges(wid, lamb, dep, XLOC,slope, edge1, edge2, bottom, top)
-       implicit none 
+       implicit none
        double precision, intent(IN):: wid, dep, lamb, XLOC, slope
        double precision, intent(OUT):: edge1, edge2, bottom, top
        double precision:: deltz, centerline, center, clearance
         deltz=DX(1)
-        center = (ZMAX-2)*deltz/2 
+        center = (ZMAX-2)*deltz/2
 
         clearance = 50.
-        if (simlabel == 'test')then 
+        if (simlabel == 'test')then
             clearance=DY(1)
-        end if 
-        
-        if (lamb .eq. 0) then 
+        end if
+
+        if (lamb .eq. 0) then
         centerline = center
-        else 
+        else
           centerline = lamb*amprat*sind((360*XLOC)/lamb)+center
-        end if 
+        end if
         write(*,*) centerline
         edge1=dble(ceiling((centerline-wid/2)/deltz)*deltz)-deltz
         edge2=dble(ceiling((centerline+wid/2)/deltz)*deltz)-deltz
@@ -181,14 +181,52 @@ subroutine where_edges(wid, lamb, dep, XLOC,YLOC,ZLOC,slope,truetop,inchannel,pl
 
 end subroutine
 
-subroutine edgesdose(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchannel,plain)
+subroutine edges_count(wid, lamb, dep, XLOC,slope, midline, edge1, edge2, bottom, top)
+  implicit none
+  double precision, intent(IN):: wid, dep, lamb, XLOC, slope
+  double precision, intent(OUT):: edge1, edge2, bottom, top, midline
+  double precision:: topchannel, bottochannel, deltz, centerline, center, clearance
+  double precision:: mid, topo
+  logical:: foundtop 
+  integer:: I2
+   deltz=dble(DX(3))
+   mid=dble(ZMAX)
+   !write(*,*) ZMAX, mid
+   center = mid/2.0*deltz
+
+   clearance = 50.
+   if (simlabel == 'test')then
+       clearance=2*deltz
+   end if
+   !write(*,*) clearance, center
+   if (lamb .lt. 1) then
+           centerline = center
+   else
+     centerline = lamb*amprat*sind((360*XLOC)/lamb)+center
+   end if
+   midline=centerline
+
+   !write(*,*) centerline
+
+   inchannel=.FALSE.
+   edge1=dble(ceiling((centerline-wid/2)/deltz)*deltz)
+   edge2=dble(ceiling((centerline+wid/2)/deltz)*deltz)
+   topo = dble(ceiling((slope*deltz*(RMAX-(XLOC/deltz))+clearance)/deltz))*deltz !+6
+
+   call findtop(XLOC, topo, 24, topchannel)
+   top=topchannel
+   bottom=topchannel-dep
+
+  end subroutine
+
+subroutine edgesdose(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchannel)
        implicit none
        double precision, intent(IN):: wid, dep, lamb, XLOC,ZLOC, YLOC, slope
        double precision, intent(OUT):: truetop
        logical, intent(out):: inchannel, plain
        double precision:: topchannel, bottochannel, deltz, centerline, center, clearance
-       double precision:: mid, topo 
-       logical:: foundtop 
+       double precision:: mid, topo
+       logical:: foundtop
        integer:: I2
         deltz=dble(DX(3))
         mid=dble(ZMAX)
@@ -212,7 +250,7 @@ subroutine edgesdose(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchannel,pla
         edge1=dble(ceiling((centerline-wid/2)/deltz)*deltz)
         edge2=dble(ceiling((centerline+wid/2)/deltz)*deltz)
         topo = dble(ceiling((slope*deltz*(RMAX-(XLOC/deltz))+clearance)/deltz))*deltz !+6
-        
+
         call findtop(XLOC, topo, zloc, topchannel)
         truetop=topchannel
         call funIJK_dble(XLOC,YLOC,ZLOC,I2)
@@ -225,21 +263,22 @@ subroutine edgesdose(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchannel,pla
         end if 
 
 
-        if (EP_G1(I2,1) .ge. dble(0.001)) then 
+        call funIJK_dble(XLOC,YLOC,ZLOC,I)
+        if (EP_G1(I,1) .ge. dble(0.001)) then
         if (ZLOC .ge. edge1-6*DX(1) .and. ZLOC .le. edge2+3*DX(1) ) then
                 topo=topchannel-dep
                 call findtop(XLOC, topo, ZLOC, bottochannel)
                 truetop=bottochannel
                 !write(*,*) bottochannel, bottochannel+dep
-                if (YLOC .le. bottochannel+dep) then 
+                if (YLOC .le. bottochannel+dep) then
 
                  if ( YLOC .ge. bottochannel) then
                       inchannel=.TRUE.
                       plain=.FALSE.
                      ! write(*,*) "inside", XLOC, YLOC, ZLOC, top
-                 end if 
+                 end if
                 end if
-        end if 
+        end if
        end if
 
 
@@ -305,14 +344,14 @@ subroutine edgesdose_debug(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchann
 end subroutine
 
 subroutine FUNIJK(xl,yl,zl,IJK)
-     implicit none 
+     implicit none
      integer, intent(IN):: xl, yl, zl
      integer, intent(OUT):: IJK
      ! FUNIJK_GL (LI, LJ, LK) = 1 + (LJ - jmin3) +
      ! (LI-imin3)*(jmax3-jmin3+1) &
      ! + (LK-kmin3)*(jmax3-jmin3+1)*(imax3-imin3+1)
 
-     IJK = 1 + (yl-1) +(xl-1)*(YMAX-1+1) +  (zl-1)*(YMAX-1+1)*(RMAX-1+1) 
+     IJK = 1 + (yl-1) +(xl-1)*(YMAX-1+1) +  (zl-1)*(YMAX-1+1)*(RMAX-1+1)
 end subroutine
 
 subroutine FUNIJK_dble(xl,yl,zl,IJK)
@@ -334,63 +373,78 @@ subroutine loctoind(loc,ind)
      ind= int( floor(loc)/3)
 end subroutine
 
+<<<<<<< HEAD
 subroutine findtop(XLOC, topo, ZLOC, truetop) 
         implicit none 
         double precision, intent(IN):: XLOC, topo, ZLOC 
         double precision, intent(OUT):: truetop 
         integer:: n, hjk
         logical:: foundtop 
+=======
+subroutine findtop(XLOC, topo, ZLOC, truetop)
+        implicit none
+        double precision, intent(IN):: XLOC, topo, ZLOC
+        double precision, intent(OUT):: truetop
+        integer:: n
+        logical:: foundtop
+>>>>>>> 2b2f7a8567bfa1ee0270c49e9143abee74e489de
         double precision:: YLOC
         YLOC=topo
-       
-      
- 
- 
+
+
+
+
                foundtop=.TRUE.
-               n=1 
-                do while (n .lt. 30 .and. foundtop) 
-                
+               n=1
+                do while (n .lt. 30 .and. foundtop)
+
                 truetop=YLOC+(n-15)*DX(1)
+<<<<<<< HEAD
                 if (truetop .gt. DX(1)) then 
                         call FUNIJK_dble(xloc,  truetop, zloc, hjk)
                 if (EP_G1(hjk,1) .ge. dble(0.01)) then
+=======
+                if (truetop .gt. DX(1)) then
+                        call FUNIJK_dble(xloc,  truetop, zloc, I)
+                if (EP_G1(I,1) .ge. dble(0.01)) then
+>>>>>>> 2b2f7a8567bfa1ee0270c49e9143abee74e489de
                 !        write(*,*) "FAILED", XLOC/DX(1), topy/DX(1), "truetop",
                         foundtop=.FALSE.
                 end if
-                end if 
+                end if
                 n=n+1
-                end do 
-                
-     
-end subroutine 
+                end do
+
+
+end subroutine
 
 subroutine findtop_debug(XLOC, topo, ZLOC, truetop)
         implicit none
         double precision, intent(IN):: XLOC, topo, ZLOC
         double precision, intent(OUT):: truetop
         integer:: n
-        logical:: foundtop 
-        double precision:: YLOC, ex 
+        logical:: foundtop
+        double precision:: YLOC, ex
         YLOC=topo
         write(*,*) "starting find topo"
         write(*,*) xloc, yloc, zloc
         call FUNIJK_dble(xloc, yloc, zloc, I)
         write(*,*) I
         !truetop= YLOC
-        truetop=YLOC 
+        truetop=YLOC
         !if (EP_G1(I,1) .le. dble(0.01)) then
-                write(*,*) "starting while looP" 
+                write(*,*) "starting while looP"
 
                foundtop=.TRUE.
                n=1
-                do n=1,30 
+                do n=1,30
                 ex=YLOC+(n-15)*DX(1)
                 call FUNIJK_dble(xloc,  ex, zloc, I)
-                write(*,*) n, ex, EP_G1(I,1)                
+                write(*,*) n, ex, EP_G1(I,1)
 
                 end do
 
-                n=1 
+                n=1
                 do while (n .lt. 30 .and. foundtop)
 
                 truetop=YLOC+(n-15)*DX(1)
@@ -407,27 +461,27 @@ subroutine findtop_debug(XLOC, topo, ZLOC, truetop)
                 write(*,*) "finishing do loop"
        ! end if
 
-       
-        write(*,*) "found truetop", truetop 
+
+        write(*,*) "found truetop", truetop
 end subroutine
 
 subroutine checktop(XLOC,YLOC,ZLOC, top)
-        double precision, intent(in):: XLOC, YLOC, ZLOC 
-        logical, intent(out):: top 
+        double precision, intent(in):: XLOC, YLOC, ZLOC
+        logical, intent(out):: top
         integer:: id, iu
-      
-        call FUNIJK_dble(xloc,  yloc, zloc, I) 
+
+        call FUNIJK_dble(xloc,  yloc, zloc, I)
         call FUNIJK_dble(xloc,  yloc+DX(1), zloc, iu)
         call FUNIJK_dble(xloc,  yloc-DX(1), zloc, id)
         top=.FALSE.
                 if (EP_G1(I,1) .gt. dble (0.1)) then
-                       if (EP_G1(iu,1) .gt. dble(0.1)) then 
-                                if (EP_G1(Id,1) .le. dble(0.1)) then 
+                       if (EP_G1(iu,1) .gt. dble(0.1)) then
+                                if (EP_G1(Id,1) .le. dble(0.1)) then
 
                                     top=.TRUE.
-                                end if 
-                        end if 
-                end if   
+                                end if
+                        end if
+                end if
 
-end subroutine       
+end subroutine
 end module maketopo

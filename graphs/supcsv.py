@@ -27,28 +27,6 @@ os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
 
 #import cm_xml_to_matplotlib as cm
 
-
-def regime(labels, data, param, xlab, ylab, fid):
-    fig, axes = plt.subplots()
-    setgrl(labels, fig, axes, 6, 4)
-    palette = setcolorandstyle(labels)
-
-    for sim in labels:
-        i = labels.index(sim)
-        c = palette[i]
-        initialcond = labelparam(sim)
-        X = initialcond[param]
-        end = data.loc[data.index[-1], sim]
-        print(X)
-        print(end)
-        axes.scatter(X, end, color=c)
-
-    axes.set_xlabel(param)
-    axes.set_ylabel(ylab)
-    savefigure(fid)
-
-
-
 straight = [
     'SW7',
     'SV4',
@@ -308,70 +286,3 @@ for i in range(len(alllabels)):
     sup[i][13]=vol[i]*15
 supcsv=pd.DataFrame(sup,  index=alllabels, columns=columns)
 supcsv.to_csv("/home/akh/myprojects/channelized-pdcs/graphs/supcsv.csv")
-# # #half page
-#fig.set_size_inches(cm2inch(19.0, 11.5))
-r_squared=[]
-# # # ## normalized meander distance vs areas normalized
-# # # # Meander distance = Meander dist (m)/ Z dist(m)
-# # # # Area innudated = i
-size=((np.array(vol)/10000)**2)*0.5
-# x=dist_norm
-
-
-# kdist_norm=kdist_norm
-# #wave='k'
-
-# areas_norm=np.array(aout)/np.array(inletrat)
-# scat = plotandR(kdist_norm, areas_norm,  svulsed/sa, ax[0][0], 'k', size)
-# ax[0][0].set_xlabel('Curvature', fontsize=8)
-# ax[0][0].set_ylabel('Area Innudated', fontsize=8)
-
-
-
-# ## Front location vs meander width
-# scat = plotandR(kdist_norm, slen_norm, sdist/1212, ax[0][1], 'k', size)
-# ax[0][1].set_xlabel('Normalized Curvature', fontsize=8)
-# ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
-
-# kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
-# leg=ax[0][1].legend(*scat.legend_elements(**kw), )
-# leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
-# # ax[0][1].add_artist(leg)
-# # cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
-# # cbar.ax.tick_params(labelsize=8)
-
-# # ### mass avulsed vs curvature metric
-# # # mass = mass avuled/total mass *inlet/wave
-# # # curvature = k*meander distance
-
-
-# scat=plotandR(kdist_norm, mass_norm, svulsed, ax[1][0], 'k', size)
-# ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
-# ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
-                    
-                    
-
-# # interestingly area innudated does not corelate with entrainment 
-# # but mass overspilled does
-
-# scat=plotandR(kdist_norm, ugnorm, sU/10, ax[1][1],'k', size)
-# ax[1][1].set_ylabel('Downstream Velocity', fontsize=8)
-# ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
-
-
-# plt.tight_layout()
-
-# print(r_squared)
-# savefigure("regimeJULY_WITHS")
-
-
-
-## AREA CORRELATES WITH ENTRAINMENT
-
-# fig, ax=plt.subplots()
-# fig.set_size_inches(cm2inch(9.5, 6))
-# plotandR(areas, bulkent, ax, 'k',  size)
-# ax.set_xlabel('Areas Innundated', fontsize=8)
-# ax.set_ylabel('Bulk Entrainment', fontsize=8)
-# savefigure("regime_ENTRAINMENT")
-

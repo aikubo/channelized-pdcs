@@ -31,24 +31,26 @@ def curvat(labels):
         width = param.at[0, 'Width']
         
         if wave < 1:
-            kapamax=1200
+            kapamax=1/(10)**8
             d=0
             kdist=0
+            
         else:
-            X = wave / 4
-            kapamax = 4 * ((np.pi)**2) * A * np.sin(2 * np.pi * X / wave)
-            kapa.append(kapamax)
+            kapamax = 4 * ((np.pi)**2) * A / wave
+            
             d = (amp + width)
-    
-            d2 = np.sqrt(d**2 + (wave / 2)**2)
-            kdist = kapamax / d
+            kdist = kapamax*d
+            
+            
+        kapa.append(kapamax)
+        kapadist.append(kdist)
         dist.append(d)
         
         # print("kapamax",kapamax)
         # print( "dist", d)
 
         kapadist.append(kdist)
-    return kapa, dist, kapadist
+    return kapa, dist
 
 def curvat2(labels):
     kapa=[]
@@ -63,10 +65,10 @@ def curvat2(labels):
         width=param.at[0,'Width']
         slope= 0.18
         X = wave/4
-        kapamax= 4*((np.pi)**2)*A*np.sin(2*np.pi*X/wave)
+        kapamax= 4*((np.pi)**2)*A/wave
 
         XX=np.arange(0,1212,3)
-        kapax= 4*((np.pi)**2)*A*np.sin(2*np.pi*XX/wave)/(1+2*np.pi*A*np.cos(2*np.pi*XX/wave))**(3/2)
+        kapax= 4*((np.pi)**2)*A*np.sin(2*np.pi*XX/wave)/(1+(2*np.pi*A*np.cos(2*np.pi*XX/wave))**2)**(3/2)
         kapa.append(kapamax)
         d=2*(amp)+width
 
