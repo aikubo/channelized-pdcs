@@ -60,3 +60,4 @@
 /home/akubo/myprojects/unconfV7
 /home/akubo/myprojects/7_INFLOW/CVZ7
 /home/akubo/myprojects/1_INFLOW/BVY1
+/projects/dufeklab/shared/akubo/corner_impact4
