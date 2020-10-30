@@ -36,7 +36,7 @@ use filehead
                 double precision, intent(Out):: averagehead
                ! local variables ! 
                 integer:: countslope
-                double precision:: whatsign, currentsign
+                double precision:: whatsign, currentsign, distancetraveld
                 double precision, allocatable:: isosurface(:,:,:)
                 integer :: NUMSLOPE
                 double precision, dimension(:):: head(2)
@@ -94,6 +94,7 @@ use filehead
                 !do Q=1,traces
                 pastXXX=0.0
                 pastYYY=0.0
+                distancetraveld=0
 
                 
                 DO I=1,length1 
@@ -116,6 +117,7 @@ use filehead
                    
                     IF( VOLFR .lT. iso7 .and. VOLFR .gt. iso6) THEN
                  !       print*, 'writing'
+                        if (XXX(I,1) .gt. distancetraveld) distancetraveld=XXX(I,1) 
                         hill=slope*dx*(RMAX-(XXX(I,1)/dx)) +clearance -depth
                         height=YYY(I,1)-hill
                         dh=(pastYYY-height)/(pastXXX-XXX(I,1))
@@ -250,7 +252,7 @@ use filehead
                 print*, "Froude number"
                 print*, froude
                 
-                write(9001,format8col) t, avgU, avgEP, avgT, froude, endofhead, widthofhead, head(2)
+                write(9001,format8col) t, avgU, avgEP, avgT, froude, distancetraveld, widthofhead, head(2)
                 K=1
                 end do 
 

@@ -95,7 +95,30 @@ call handletopo('l1200_A20_W201', dxi, XXX, YYY, ZZZ)
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
-!print*, YYY(:,1)
+
+call findtop( dble(9), dble(240), dble(450), ttop)                                                                                                                                                                
+write(*,*) "topotest", dble(3), dble(240), dble(450), ttop
+call findtop( dble(9), dble(240), dble(459), ttop)
+write(*,*) "topotest", dble(3), dble(240), dble(450), ttop
+
+
+do rc=120,180
+height=0
+do yc=75,95
+        call funijk(4, yc, rc,I)
+        !write(*,*) yc*3, EPP(I,2)
+        if (EPP(I,2) .lt. .5 .and. EPP(I,2) .gt. .1) then 
+                height=height+3
+        end if 
+end do 
+        write(*,*) rc*3, height
+        hsum=height+hsum
+
+
+end do 
+write(*,*) 'avg', hsum/(60)
+
+
 !print*, ZZZ(:,1)
 if (UGdx8) then 
        do t=1,timesteps 

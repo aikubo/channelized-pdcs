@@ -89,7 +89,7 @@ do I= 2, length1
 
         END IF
 
-        IF (EPP(I,t) .Gt. max_dense .and. EPP(I,t) .lt. min_dilute) THEN
+        IF (EPP(I,t) .Gt. .51 .and. EPP(I,t) .lt. 2) THEN
                sum_3 = sum_3 +1
                avgt3 = T_G1(I,t) + avgt3
                avgu3 = U_G1(I,t) + avgu3

@@ -63,10 +63,13 @@ call handletopo('l600_A15_W201',dxi, XXX, YYY, ZZZ)
 
 ! call several spots and test if they are right 
 call logvolfrc(EP_G1, EPP)
-call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
-call gradrich(EPP, T_G1, U_G, Ri, SHUY, printstatus)
+!call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
+!call gradrich(EPP, T_G1, U_G, Ri, SHUY, printstatus)
 
-call e1vse2 
+
+
+
+!call e1vse2 
 
 !do I=1,length1 
 !        if (Ri(I,8) .ne. 0) then

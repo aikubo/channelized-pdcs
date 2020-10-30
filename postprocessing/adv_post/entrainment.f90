@@ -57,15 +57,15 @@ module entrainment
                 ! --- find zslices --!
                 write(*,*) "entering entcoef"
                 allocate(q_iso(RMAX))
-                p0=max_dense
+                p0=6.5
                 
                 do t=2,8
                    sumav=0
                 
                 !do zc=1,ZMAX
                 zc=150   
-                do i=1,RMAX
-                        do j=1,YMAX
+                do i=3,RMAX-2
+                        do j=3,YMAX-2
                             IJK1= 1 + (j-1) +(i-1)*(YMAX-1+1) +  (zc-1)*(YMAX-1+1)*(RMAX-1+1) 
                             IJK2= 1 + (j+1-1) +(i-1)*(YMAX-1+1) +  (zc-1)*(YMAX-1+1)*(RMAX-1+1) 
                             
@@ -83,7 +83,7 @@ module entrainment
                         end do 
                     END DO
                     
-                    do i=2,RMAX-1
+                    do i=3,RMAX-2
                 
                        if (q_iso(i) .le. YMAX ) then  
                        dj=(q_iso(i+1)-q_iso(i-1))*3.
@@ -107,9 +107,9 @@ module entrainment
             subroutine superelevation 
 
                 implicit none 
-                double precision:: setop, superel, height, truetop, XLOC, YLOC, ZLOC
-                logical:: inchannel
-                integer:: l1, l2, r1, r2
+                double precision:: setop, sefromcenter, flow, superel, centerh, height, truetop, XLOC, YLOC, ZLOC
+                logical:: inchannel, plain
+                integer:: l1, l2, r1, r2, yi, centerline, I3
 
                 routine="=entrainment/superelevation"
                 description=" CALCULATE superelevation over time in the .25l to .75l region"
@@ -136,7 +136,7 @@ module entrainment
                            do zc=r1,r2
                                 do yc= 20,YMAX-4
                                  call funijk( rc, yc, zc, I) 
-                                  call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),slope,truetop,inchannel)
+                                  call where_edges(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),slope,truetop,inchannel, plain, edge1, edge2)
                                  
                                    if ( EPP(I,t) .lt. 0.51 .and. EPP(I,t) .gt. 0.01) then 
                                    if ( (YYY(I,1)-truetop+3) .gt. superel)  then 
@@ -145,7 +145,18 @@ module entrainment
                                         ZLOC=zc
                                         superel=YYY(I,1)-truetop+3
                                         setop=truetop
-                                        
+                                        write(*,*) I, YYY(I,1), superel, truetop 
+                                  ! find the centerline value 
+                                       ! yi=int(truetop/3)
+                                       ! centerline=int( (edge1+width/2)/3)
+                                       ! flow=0.38
+                                       ! do while ( flow .lt. .51 .and. yi .lt. YMAX) 
+                                       !         call funijk(rc,yi,centerline,I3)
+                                       !         centerh=(YYY(I3,1) -truetop)
+                                       !         flow=EPP(I3,t)
+                                       !         yi=yi+1
+                                       ! end do 
+                                       ! sefromcenter=superel-centerh                                                    
                                         
                                    end if 
                                   end if 
@@ -154,8 +165,8 @@ module entrainment
                            end do 
                         end do 
                         call funijk(int(XLOC), int(YLOC), int(ZLOC), I)
-                        print*, "superelevation at ",t, superel, XLOC, YLOC, ZLOC, height, setop, EPP(I,t)
-                       write(437,format3var) t, superel, superel-depth                                        
+                        print*, "superelevation at ",t, superel, XLOC, YLOC, ZLOC, setop, EPP(I,t)
+                       write(437,format5var) t, superel, superel-depth, sefromcenter, centerh                                        
                 end do
                 
                 

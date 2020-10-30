@@ -14,7 +14,8 @@ module massdist
         double precision:: slopel, atest, cellarea,  elumass, medmass, densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         double precision:: carea,  areaout, outsum, buoyant, current,  topo, areatot
         real, allocatable:: areamat(:,:,:)
-        logical::channeltrue
+        logical::channeltrue, plain
+        integer:: Iold, icount
         print*, 'mass in channel'
         filename='massinchannel.txt'
 
@@ -30,23 +31,31 @@ module massdist
         cellarea=DX(3)*DX(3) !*sqrt(slope**2+1))
         write(*,*) cellarea
         carea=0 
+        icount=0
         !allocate(areamat(RMAX, YMAX, ZMAX))
         do zc=4,ZMAX-4
                 do rc=4,RMAX-4
                         do yc=4,YMAX-4
-                !write(*,*) I
+                        !write(*,*) I
                         call funijk(rc, yc, zc, I) 
-                        call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, topo, channeltrue)
+                        call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, topo, channeltrue, plain)
+                       
                        ! write(*,*) XXX(I,1), YYY(I,1),ZZZ(I,1), top
                         if ( channeltrue .and. YYY(I,1) .eq. topo) then !.and. abs(YYY(I,1)-topo) .lt. DX(1) )then
                                 carea=carea+cellarea
+                        !        write(*,*) I, topo, YYY(I,1), EPP(I,3)
                         end if 
                         
+                        !if (I .eq. Iold) then 
+                        !        write(*,*) "what I repeats", icount, "at", I 
+                        !        icount=icount+1
+                        !end if
+                        !Iold=I 
                         end do 
                 end do 
         end do
         write(*,*) "done with carea", carea
-
+        !write(*,*) "what I repeats", icount, "at", I
      DO t= 2, 8  !timesteps
         chmass = 0
         tmass = 0
@@ -65,19 +74,20 @@ module massdist
         areaout=0
         atest=0
                 
-        do zc=4,ZMAX-4
-                do rc=4,RMAX-4
-                        do yc=4,YMAX-4
+        do zc=3,ZMAX-2
+                do rc=3,RMAX-2
+                        do yc=3,YMAX-2
                         call funijk(rc, yc, zc, I)           
 
-                        call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, topo, channeltrue)
+                        call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, topo, channeltrue,plain)
                        if ( YYY(I,1) .eq. topo) then 
                      
                                 atest=atest+cellarea
                       
                        end if 
 
-                IF (EP_G1(I,t) < 0.9999995 .and. EP_G1(I,t) >0.01 ) THEN
+                IF (EPP(I,t) < 6.5 .and. EPP(I,t) >0.00001 ) THEN
+                        tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
                       !  if (ZZZ(I,1) .lt. edge1  .or. ZZZ(I,1) .gt. edge2) then
                       !          if (YYY(I,1) .ge. top-3 .and. YYY(I,1) .lt. top+3) then
                       !                   areaout=areaout+cellarea
@@ -111,10 +121,9 @@ module massdist
 
                 IF (YYY(I,1) .ge. topo) THEN
                 ! total mass 
-                                tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
                                 ! MASS ABOVE CERTAIN SCALE HEIGHTS
-                                if ( YYY(I,1) .LT. SCALEHEIGHT+bottom ) then
+                                if ( YYY(I,1) .LT. topo+depth ) then
                                   SCALEMASS= SCALEMASS + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if
 
@@ -133,7 +142,7 @@ module massdist
                                 !  end if 
 
                                 !dense mass 
-                                if (EPP(I,t) .lt. min_dense) then 
+                                if (EPP(I,t) .lt. 0.51) then 
                                         densemass = densemass + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if
 
@@ -151,7 +160,7 @@ module massdist
                                                 chmass = chmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                 END IF
 
-                                If ( .NOT. channeltrue) then 
+                                If ( plain ) then 
                                                         outsum= outsum +(1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         rho_c=rho_p*(1-EP_G1(I,t))+(P_const/(R_dryair*T_G1(I,t)))*(EP_G1(I,t))
                                                         
@@ -184,7 +193,8 @@ module massdist
          current=current/tmass     
         
          write(*,*) carea, "true: ", (width)*DX(1)*RMAX !*(sqrt(slope**2+1))
-         write(*,*) area
+         !write(*,*) area
+         write(*,*) tmass, .4*15*1950*width*18*10, tmass/(.4*15*10*1950*width*18)
          WRITE(4500, formatmass) t, tmass, outsum, densemass, inchannel, scalemass1, buoyant, current, areatot, carea, (area)/areatot, areaout/(areatot-carea)
         END DO
         !! done !!
@@ -863,7 +873,7 @@ subroutine e1vse2
 
         double precision:: ve1, ve2, ri1, ri2, dpu1, dpu2,  massout1, massout2
         double precision:: sume1, sume2
-        logical:: channeltrue
+        logical:: channeltrue, plain
         double precision:: topo, centerline
 
           filename= 'e2vse1.txt'
@@ -891,7 +901,7 @@ subroutine e1vse2
                         do yc=4,YMAX-4
                         call funijk(rc, yc, zc, I)
 
-                        call edgesdose(width, lambda, depth, XXX(I,1),YYY(I,1),ZZZ(I,1),  slope, topo, channeltrue)
+                        call edgesdose(width, lambda, depth, XXX(I,1),YYY(I,1),ZZZ(I,1),  slope, topo, channeltrue, plain)
                             if (EPP(I,t) .ge. 0.1 .and. EPP(I,t) .lt.min_dilute)then
                                 centerline=lamba*amprat*sind(360*dble(rc*3)/lambda)+dble(ZMAX*3/2)
                                         if (channeltrue) then
