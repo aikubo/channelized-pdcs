@@ -25,7 +25,7 @@ character(5)  :: zone
 integer,dimension(8) :: values
 
 logical:: ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc
-logical:: super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
+logical:: countspill, super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
@@ -54,6 +54,7 @@ xstream=.FALSE.
 ave=.FALSE.
 energy=.FALSE.
 tau=.FALSE.
+countspill=.FALSE.
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -157,6 +158,7 @@ if (energy) then
 end if 
 
 if (spill) call overspill
+if (countspill) call countspills 
 
 write(*,*) "volume", Volume_Unit
 write(*,*) "rho p", 1950

@@ -7,7 +7,7 @@ use maketopo
 use makeascii
 use var_3d
 use filehead
-
+use massdist
 contains
 !        subroutine setup_col()
 !        end subroutine setup_col
@@ -105,17 +105,19 @@ contains
 
 SUBROUTINE countspills
 implicit none
-double precision:: seg_l, XLOC, centerline, rho_c, mass
+double precision:: seg_l, XLOC, topo, centerline, rho_c, mass
 integer:: spillcount, segments,n, rstart, rstop
 logical, allocatable:: spillhere(:,:)
-logical:: channeltrue
-
+logical:: inchannel, plain
+integer:: numunit 
+double precision:: bottom, top 
+numunit=1099
 routine="column.mod/countspills"
 description='Number of spills over time'
 datatype=" t  spill count "
 filename='spillcount.txt'
 call headerf(numunit, filename, simlabel, routine, DESCRIPTION, datatype)
-seg_l=wave/4
+seg_l=lambda/4
 segments= int(floor(1200/(seg_l)))
 
 allocate(spillhere(2,segments))
@@ -130,12 +132,14 @@ do t=2,timesteps
     rstop=int((seg_l/3)*n)
     do rc=rstart, rstop
       XLOC=dble(rc*3)
-      call whereedges(wid, lamb, dep, xloc,slope, edge1, edge2, centerline, bottom, top)
-      do yc=int((top-9)/3), int((top+24)/3)
+      
+        call where_edges(width, lambda, depth, xloc,dble(240), dble(24), slope, top, inchannel, plain, edge1, edge2)
+        centerline=edge1+width/2 
+        do yc=int((top-9)/3), int((top+24)/3)
         do zc= int((edge1-24)/3), int(centerline/3)
           call funijk(rc,yc,zc, I)
-          call edgesdose(width, lambda, depth, XXX(I,1),YYY(I,1),ZZZ(I,1),  slope, topo, channeltrue)
-          if ( .NOT. channeltrue) then
+          call where_edges(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1), slope, top,inchannel, plain, edge1, edge2)
+          if ( plain ) then
             call density(I, t, rho_c, mass)
             if (rho_c .gt. rho_dry) then
               if ( .NOT. spillhere(1,n)) then
@@ -147,8 +151,8 @@ do t=2,timesteps
         end do
         do zc= int(centerline/3), int((edge2+24)/3)
           call funijk(rc,yc,zc, I)
-          call edgesdose(width, lambda, depth, XXX(I,1),YYY(I,1),ZZZ(I,1),  slope, topo, channeltrue)
-          if ( .NOT. channeltrue) then
+            call where_edges(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),slope, top,inchannel, plain, edge1, edge2)
+           if (plain) then 
             call density(I, t, rho_c, mass)
             if (rho_c .gt. rho_dry) then
               if ( .NOT. spillhere(2,n)) then
@@ -161,9 +165,9 @@ do t=2,timesteps
 
       end do
     end do
+   end do 
     write(*,*) t, spillcount
   end do
-
 
 end subroutine
 
