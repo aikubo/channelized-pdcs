@@ -54,6 +54,7 @@ alllabels=['SW7', 'SV4','SW4','SV7', 'uncon']
 froudefid='_froude.txt'
 frcols= ['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
 head=openmine(alllabels, path, froudefid, frcols, 'Height')
+fr=openmine(alllabels, path, froudefid, frcols, 'Froude')
 bulk_ent, med_ent, dense_ent = openent(alllabels,path)
 avgTG, avgUG, avgdpu, avgWG, avgEPP, avgrho=openaverage(alllabels, path)
 ent= entrain(alllabels, bulk_ent)
@@ -78,10 +79,10 @@ colors2=[(0.99609375, 0.3984375, 0.3984375),
 plt.rc('axes', prop_cycle=(cycler(color=colors2) +
                            cycler(linestyle=['-','-','-', '--', '--','--'])))
 #ax[0,0].set_prop_cycle(color=colors, lw=[])
-ax[0,0].plot(time, head)
+ax[0,0].plot(time, fr)
 
 #ax[0,1].set_prop_cycle('color', colors)
-ax[0,1].plot(head, bulk_ent)
+#ax[0,1].plot(head, bulk_ent)
 ax[0,1].plot(time2, davgUG)
 
 #ax[1,0].set_prop_cycle('color', colors)

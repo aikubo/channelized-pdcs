@@ -193,7 +193,7 @@ slen=sinlength(alllabels,frontend)
 
 kdist_norm= np.array(amp)/np.array(width)
 
-mass_norm=Z #[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, width, inlet)]
+mass_norm=Z/np.array(inlet)*np.array(wave) #[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, width, inlet)]
 
 
 slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
@@ -268,7 +268,7 @@ kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
 # # curvature = k*meander distance
 
 
-scat=plotandR(kdist_norm, mass_norm,  ax[1][0], 'k', size)
+scat=plotandR(kdist_norm, mass_norm,  ax[1][0], wave, size)
 ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
 ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
                     
