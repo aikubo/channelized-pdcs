@@ -139,7 +139,7 @@ amp, vol = paramlists(alllabels, 'Amp', 'Vflux')
 width, depth = paramlists(alllabels, 'Width', 'Depth')
 inlet, inletrat = paramlists(alllabels, 'Inlet', 'Inletrat')
 
-wamp = [float(x) / y for x, y in zip(amp, width)]
+#wamp = [float(x) / y for x, y in zip(amp, width)]
 rho = 1950
 #tmass= vol*(0.4)*rho
 
@@ -153,7 +153,7 @@ UGmax=[]
 dpumax=[]
 phoenix=[]
 mout=[]
-kapa, dist, kdist = curvat(alllabels)
+kapa, dist = curvat(alllabels)
 for sim in alllabels:
     avul.append(avulsed[sim].max())
     areas.append(area[sim].max())

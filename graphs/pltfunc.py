@@ -220,9 +220,9 @@ def plotallcol( fig, axes, labels, fid, df1, df2, df3, df4, df5):
     loc.set(xscale='log')
     axes[0].set_ylabel('Height (m)', fontsize=fonts)
     axes[0].set_xlabel('Volume  Fraction',fontsize=fonts)
-    loc.set_ylim([0,50])
-    loc.set_xlim([10**-6, 1])
-    loc.set_xticks([ 10**-5, 10**-3, 10**-1])
+    loc.set_ylim([0,35])
+    loc.set_xlim([10**-8, 1])
+    loc.set_xticks([ 10**-7, 10**-5, 10**-3, 10**-1])
     locmin=matplotlib.ticker.LogLocator(base=10.0, subs=(0.1,0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), numticks=12)
     loc.xaxis.set_minor_locator(locmin)
     loc.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
@@ -235,7 +235,7 @@ def plotallcol( fig, axes, labels, fid, df1, df2, df3, df4, df5):
     u0=10.0
     horizplot(df2, loc, labels)
     axes[1].set_xlabel('Velocity (m/s)',fontsize=fonts)
-    loc.set_ylim([0,50])
+    loc.set_ylim([0,35])
     loc.set_xlim([-7,30])
     loc.spines['right'].set_color('none')
     loc.spines['top'].set_color('none')
@@ -251,7 +251,7 @@ def plotallcol( fig, axes, labels, fid, df1, df2, df3, df4, df5):
     print(temp-273)
     horizplot(temp-273, loc, labels)
     axes[2].set_xlabel('Temperature (C)', fontsize=fonts)
-    loc.set_ylim([0,50])
+    loc.set_ylim([0,35])
     loc.set_xticks([100,300,500])
     loc.spines['right'].set_color('none')
     loc.spines['top'].set_color('none')
@@ -263,6 +263,7 @@ def plotallcol( fig, axes, labels, fid, df1, df2, df3, df4, df5):
     loc=axes[3]
     #dpu=np.log10(df3+(10**-5))
     loc.set(xscale='log')
+    loc.set_ylim([0,35])
     horizplot(df3/1000, loc, labels)
     axes[3].set_xlabel('Dynamic Pressure (kPa)', fontsize=fonts)
     loc.get_xaxis().get_major_formatter().labelOnlyBase=False

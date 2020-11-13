@@ -193,7 +193,7 @@ slen=sinlength(alllabels,frontend)
 
 kdist_norm= np.array(amp)/np.array(width)
 
-mass_norm=Z #[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, width, inlet)]
+mass_norm=Z/np.array(inlet)*np.array(wave) #[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, width, inlet)]
 
 
 slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
@@ -278,7 +278,7 @@ ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
 # but mass overspilled does
 
 scat=plotandR(kdist_norm, velz, ax[1][1],'k', size)
-ax[1][1].set_ylabel('Cross Stream Velocity', fontsize=8)
+ax[1][1].set_ylabel('Cross Stream Velocity (m/s)', fontsize=8)
 ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
 
 plt.tight_layout()
@@ -286,7 +286,8 @@ plt.tight_layout()
 
 
 print(r_squared)
-# savefigure("regimeJULY_WITHS")
+
+savefigure("regimeNOV")
 
 
 
