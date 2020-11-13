@@ -65,7 +65,7 @@ sed -i.bak "s|.*width=.*|width=$width|" post_one_temp.f90
 sed -i.bak "s|.*lambda=.*|lambda=$wave|" post_one_temp.f90
 #sed -i.bak "s|.*depth=.*|depth=$depth|" post_one_temp.f90
 sed -i.bak "s|.*amprat=.*|amprat=$amp|" post_one_temp.f90
-sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', XXX, YYY, ZZZ)|" post_one_temp.f90
+sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo', dxi, XXX, YYY, ZZZ)|" post_one_temp.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
 subroutine1="massalloc"

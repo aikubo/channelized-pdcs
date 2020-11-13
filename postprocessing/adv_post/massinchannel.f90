@@ -398,50 +398,54 @@ module massdist
 
         subroutine massbyxxx
                 implicit none 
+                double precision:: topo, centerline
+                logical:: channeltrue, plain 
                 double precision, allocatable:: out1(:), out2(:)
-                allocate(out1(3*RMAX))
-                allocate(out2(3*RMAX))
+                allocate(out1(RMAX))
+                allocate(out2(RMAX))
 
                 filename='massbyxxx.txt'
 
                 routine="massdist/massbyxxx"
-                description="Calculate mass outside the channel on leftand right by XXX"
+                description="Calculate mass total outside the channel on leftand right by XXX"
                 datatype=" t, XXX, mass on right, mass on left,totalmass"
                 call headerf(6789, filename, simlabel, routine,DESCRIPTION,datatype)
                 
 
-                do K=1, RMAX 
-                        out1(K) =0 
-                        out2(K) =0 
-                end do 
-
-                do t=1,timesteps
+                t=8
                         do K=1,RMAX 
                                 out1(K) =0 
                                 out2(K) =0 
                         end do 
 
-                        do I=1,length1
-                                call edges(width, lambda, depth,XXX(I,1), slope, edge1, edge2, bottom, top)
-                                J= int(XXX(I,1))/3
-                                edge1= FLOOR(edge1/3.)*3.
-                                edge2= FLOOR(edge2/3.)*3.
-                                top= FLOOR(top/3.)*3. 
+                        do rc=4,RMAX-4
+                                do yc=4,YMAX-4
+                                   do zc=4,ZMAX-4 
+                                        call funijk(rc, yc, zc, I) 
+                                call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, topo, channeltrue, plain)
+                                centerline= lambda*amprat*sind((360*(rc-4)*3/lambda))+450
 
-                                if (EPP(I,t) .gt. .5) then 
-                                if (YYY(I,1) .gt. top .and. ZZZ(I,1).lt. edge1) then
-                                        out1(J)= out1(J) +(1-EP_G1(I,t))*Volume_Unit*rho_p
-                                elseif (YYY(I,1) .gt. top .and. ZZZ(I,1).gt. edge2) then
-                                        out2(J)= out2(J) +(1-EP_G1(I,t))*Volume_Unit*rho_p
+                                if (EPP(I,t) .gt. 0) then 
+                                if (plain) then
+                                   if ( dble(3*zc) .lt. centerline) then 
+                                        out1(rc)= out1(rc) +(1-EP_G1(I,t))*Volume_Unit*rho_p
+                                else 
+                                        out2(rc)= out2(rc) +(1-EP_G1(I,t))*Volume_Unit*rho_p
+                                end if 
                                 end if 
                                 end if 
 
                         end do
-                        
-                        do K=1,RMAX
-                                write(6789,formatmassxxx) t, (K*3),out1(K), out2(K), out1(K)+out2(K)
-                        end do  
-                end do 
+                        end do 
+                        end do 
+                     
+                          do rc=4,RMAX-4
+                                write(6789,formatmassxxx) t, (rc-3)*3, out1(rc), out2(rc), out1(rc)+out2(rc)
+                        end do
+
+                        write(*,*) "check" 
+                        write(*,*), sum(out1), sum(out2), sum(out1)+sum(out2) 
+
         end subroutine
         
         subroutine density(loc,tim,rhc, mass)

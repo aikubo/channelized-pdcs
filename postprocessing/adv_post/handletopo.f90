@@ -224,8 +224,8 @@ subroutine edgesdose(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchannel,pla
         end if 
 
 
-        call funIJK_dble(XLOC,YLOC,ZLOC,I)
-        if (EP_G1(I,1) .ge. dble(0.001)) then
+        call funIJK_dble(XLOC,YLOC,ZLOC,I2)
+        if (EP_G1(I2,1) .ge. dble(0.001)) then
         if (ZLOC .ge. edge1-6*DX(1) .and. ZLOC .le. edge2+3*DX(1) ) then
                 topo=topchannel-dep
                 call findtop(XLOC, topo, ZLOC, bottochannel)

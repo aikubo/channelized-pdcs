@@ -25,7 +25,7 @@ character(5)  :: zone
 integer,dimension(8) :: values
 
 logical:: ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc
-logical:: countspill, super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
+logical:: countspill, massxxx,  super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
@@ -38,6 +38,8 @@ print*, date, time
 
 simlabel='impact'
 printstatus=2
+
+massxxx=.FALSE.
 super=.FALSE.
 spill=.FALSE.
 ecoef=.FALSE.
@@ -93,6 +95,12 @@ call openbin(800, 'V_S1', V_S1)
 !call opennotbin(900, 'P_G', P_G)
 
 call handletopo('l1200_A20_W201', dxi, XXX, YYY, ZZZ)
+rc=100
+zc=30
+do yc=4,YMAX-2 
+ call funijk(rc, yc, zc, I) 
+       write(*,*) yc, YYY(I,1) 
+end do 
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
@@ -156,7 +164,7 @@ if (energy) then
         print*, "find peak dpu"
         call dpupeak
 end if 
-
+if (massxxx) call massbyxxx
 if (spill) call overspill
 if (countspill) call countspills 
 

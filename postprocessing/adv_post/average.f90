@@ -10,20 +10,20 @@ SUBROUTINE AVERAGE_ALL
 IMPLICIT NONE 
 double precision:: avgr, avgr2, avgr3, rc, mt, avgEP, avgEP2, avgEP3
 routine="averageit.mod/average_all"
-description=" Average of all timesteps"
+description=" Average of EPP 0 to 6.5"
 datatype=" t EP_G Rho  T_G   U_G   V_G   W_G   U_S1   DPU"
 filename='average_all.txt'
-call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
-
-
-filename='average_medium.txt'
-description='Average of densities between 2.5 and 5'
-
 call headerf(887, filename, simlabel, routine, DESCRIPTION, datatype)
 
 
+filename='average_medium.txt'
+description='Average of densities between .5 and 2'
+
+call headerf(888, filename, simlabel, routine, DESCRIPTION, datatype)
+
+
 filename='average_dense.txt'
-description='Average of densities between 2.5 and 1.5'
+description='Average of densities between 0 and .5'
 
 call headerf(889, filename, simlabel, routine, DESCRIPTION, datatype)
 
@@ -89,7 +89,7 @@ do I= 2, length1
 
         END IF
 
-        IF (EPP(I,t) .Gt. .51 .and. EPP(I,t) .lt. 2) THEN
+        IF (EPP(I,t) .Gt. max_dense .and. EPP(I,t) .lt. min_dilute)  THEN
                sum_3 = sum_3 +1
                avgt3 = T_G1(I,t) + avgt3
                avgu3 = U_G1(I,t) + avgu3
@@ -106,8 +106,8 @@ do I= 2, length1
 END DO
 
      print*, "writing average"
-     WRITE(888, formatavg) t, avgEP/sum_1, avgr/sum_1, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1,  avgdpu/sum_1
-     Write (887, formatavg) t, avgEP3/sum_3, avgr3/sum_3, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
+     WRITE(887, formatavg) t, avgEP/sum_1, avgr/sum_1, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1,  avgdpu/sum_1
+     Write (888, formatavg) t, avgEP3/sum_3, avgr3/sum_3, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
      write(889, formatavg) t, avgEP2/sum_2, avgr2/sum_2, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
 
 END DO

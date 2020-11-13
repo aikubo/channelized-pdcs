@@ -4,6 +4,7 @@ echo "Making post processing script"
 here=$(pwd)
 label=${PWD##*/}
 
+#rm $label*
 
 cp /home/akubo/myprojects/channelized-pdcs/postsub.sh $here
 sed -i.bak "4s|^.*$|#SBATCH --job-name=conv_$label|" postsub.sh
@@ -56,17 +57,18 @@ fi
 
 cd /home/akubo/myprojects/channelized-pdcs/postprocessing/adv_post
 git pull
-#sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post.f90
-sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" topoonly.f90
-sed -i.bak "s|.*width=.*|width=$width|" topoonly.f90
-sed -i.bak "s|.*lambda=.*|lambda=$wave|" topoonly.f90
-#sed -i.bak "s|.*depth=.*|depth=$depth|" topoonly.f90
-sed -i.bak "s|.*amprat=.*|amprat=$amp|" topoonly.f90
-sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo',dble(3.0), XXX, YYY, ZZZ)|" topoonly.f90
+cp post_one.f90 post_one_temp.f90
+
+sed -i.bak "s|.*printstatus=.*|printstatus=$stat|" post_one_temp.f90
+sed -i.bak "s|.*simlabel=.*|simlabel='$label'|" post_one_temp.f90
+sed -i.bak "s|.*width=.*|width=$width|" post_one_temp.f90
+sed -i.bak "s|.*lambda=.*|lambda=$wave|" post_one_temp.f90
+#sed -i.bak "s|.*depth=.*|depth=$depth|" post_one_temp.f90
+sed -i.bak "s|.*amprat=.*|amprat=$amp|" post_one_temp.f90
+sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo',dxi, XXX, YYY, ZZZ)|" post_one_temp.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
-
-
+sed -i.bak "s|fd=.*|fd=.TRUE.|" post_one_temp.f90
 echo start compliling 
 
 echo compiling modules and subroutines
@@ -85,13 +87,15 @@ ifort -c -convert big_endian massinchannel.f90
 ifort -c -convert big_endian column.f90
 ifort -c -convert big_endian average.f90
 ifort -c -convert big_endian richardson.f90
-ifort -c -convert big_endian sinplane.f90
-ifort var_3d.o postmod.o formatmod.o headermod.o sinplane.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o topoonly.f90  -convert big_endian -o post.exe
+ifort -c -convert big_endian grangass.f90 
+
+ifort var_3d.o grangass.o postmod.o formatmod.o headermod.o average.o column.o richardson.o massinchannel.o entrainment.o findhead.o constants.o openbin.o openascii.o allocate_arrays.o handletopo.o post_one_temp.f90  -convert big_endian -traceback -o post.exe
 
 
-cp post.exe $here 
-cp post.f90 $here
-cd $here 
+cp post_one_temp.f90 $here/post_one.f90
+cp post.exe $here
+rm post_one_temp.f90
+cd $here
 
 echo "submit to run"
 sbatch postsub.sh

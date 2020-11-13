@@ -119,6 +119,7 @@ filename='spillcount.txt'
 call headerf(numunit, filename, simlabel, routine, DESCRIPTION, datatype)
 seg_l=lambda/4
 segments= int(floor(1200/(seg_l)))
+write(*,*) seg_l, segments
 
 allocate(spillhere(2,segments))
 !spill here : logical of (2 by segments)
@@ -167,6 +168,7 @@ do t=2,timesteps
     end do
    end do 
     write(*,*) t, spillcount
+        write(*,*) spillhere
   end do
 
 end subroutine
