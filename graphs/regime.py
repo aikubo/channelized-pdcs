@@ -268,7 +268,7 @@ kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
 # # curvature = k*meander distance
 
 
-scat=plotandR(kdist_norm, mass_norm,  ax[1][0], wave, size)
+scat=plotandR(kdist_norm, mass_norm,  ax[1][0], 'k', size)
 ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
 ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
                     
@@ -278,7 +278,7 @@ ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
 # but mass overspilled does
 
 scat=plotandR(kdist_norm, velz, ax[1][1],'k', size)
-ax[1][1].set_ylabel('Cross Stream Velocity', fontsize=8)
+ax[1][1].set_ylabel('Cross Stream Velocity (m/s)', fontsize=8)
 ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
 
 plt.tight_layout()
@@ -286,7 +286,8 @@ plt.tight_layout()
 
 
 print(r_squared)
-# savefigure("regimeJULY_WITHS")
+
+savefigure("regimeNOV")
 
 
 
