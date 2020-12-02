@@ -9,6 +9,7 @@ CHARACTER(LEN=30)::formatent='(I3,3F22.10)'
 CHARACTER(LEN=15)::format4var='(4F22.10)'
 CHARACTER(LEN=20)::format6col='(I3,5F22.10)'
 character(len=20)::format8col='(I4,7F22.10)'
+character(len=20)::format9col='(I4,9F22.10)'
 character(len=20)::format7col='(I3,6F22.10)'
 CHARACTER(LEN=10)::format6var='(6F22.10)'
 CHARACTER(LEN=15)::formatsum='(i3,F22.10)'
@@ -22,4 +23,3 @@ CHARACTER(LEN=20)::formatcurtain='(154F10.5)'
 CHARACTER(LEN=20)::formattrans='(18F15.5)'
 
 end module formatmod
-

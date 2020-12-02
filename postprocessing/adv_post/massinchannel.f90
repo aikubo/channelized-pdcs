@@ -918,7 +918,7 @@ subroutine e1vse2
           filename= 'e2vse1.txt'
           description="Depth averages values on eitherside ofcenterline"
           routine= "massdist/e1vse2"
-          datatype=" t   U_G_e1 UG_e2 UG1/UG2 Ri_1 Ri_2  DPU_1 DPU_2  "
+          datatype=" t   U_G_e1 UG_e2 Ri_1 Ri_2  DPU_1 DPU_2 Massout1 Massout2 "
           call headerf(1951, filename, simlabel,routine,DESCRIPTION,datatype)
 
 
@@ -972,7 +972,7 @@ subroutine e1vse2
                         end do
                 end do
            end do
-                write(1951,format8col) t, ve1/sume1, ve2/sume2, ri1/sume1, ri2/sume2, dpu1/sume1, dpu2/sume2, massout1, massout2
+                write(1951,format9col) t, ve1/sume1, ve2/sume2, ri1/sume1, ri2/sume2, dpu1/sume1, dpu2/sume2, massout1, massout2
         end do
 end subroutine
 
