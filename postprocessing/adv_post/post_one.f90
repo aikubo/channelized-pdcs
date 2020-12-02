@@ -24,7 +24,7 @@ character(10) :: time
 character(5)  :: zone
 integer,dimension(8) :: values
 
-logical:: ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc
+logical:: ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc, e1e2
 logical:: countspill, massxxx,  super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
@@ -38,7 +38,7 @@ print*, date, time
 
 simlabel='impact'
 printstatus=2
-
+e1e2=.FALSE.
 massxxx=.FALSE.
 super=.FALSE.
 spill=.FALSE.
@@ -95,12 +95,6 @@ call openbin(800, 'V_S1', V_S1)
 !call opennotbin(900, 'P_G', P_G)
 
 call handletopo('l1200_A20_W201', dxi, XXX, YYY, ZZZ)
-rc=100
-zc=30
-do yc=4,YMAX-2
- call funijk(rc, yc, zc, I)
-       write(*,*) yc, YYY(I,1)
-end do
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
@@ -133,7 +127,8 @@ if (topo) call writedxtopo
 print*, "finding froude"
 
 if (fd) call isosurf(scaleh)
-print*, "finding richardson gradient"
+
+if (rigrad .or. slices .or. e1e2) print*, "finding richardson gradient"
 if (rigrad .or. slices .or. e1e2) call gradrich(EPP, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"
 if (ent) call bulkent(EP_G1)
@@ -167,6 +162,8 @@ end if
 if (massxxx) call massbyxxx
 if (spill) call overspill
 if (countspill) call countspills
+
+if (e1e2) call e1vse2
 
 write(*,*) "volume", Volume_Unit
 write(*,*) "rho p", 1950

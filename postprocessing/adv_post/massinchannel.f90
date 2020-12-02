@@ -945,14 +945,14 @@ subroutine e1vse2
                                 centerline=lamba*amprat*sind(360*dble(rc*3)/lambda)+dble(ZMAX*3/2)
                                         if (channeltrue) then
                                                   if ( ZZZ(I,1) .lt. centerline)then
-                                                        ve1=ve1+U_G1(I,t)
+                                                        ve1=ve1+sqrt(U_G1(I,t)**2 + V_G(I,t)**2)
                                                         sume1=sume1+1
-                                                        ri1=Ri(I,t)+ri1+1
+                                                        ri1=Ri(I,t)+ri1
 
 
                                                         DPU1=DPU(i,t)+dpu1
                                                   else
-                                                        ve2=ve1+U_G1(I,t)
+                                                        ve2=ve2+sqrt(U_G1(I,t)**2 + V_G(I,t)**2)
                                                         sume2=sume2+1
                                                         ri2=Ri(i,t)+ri2
                                                         DPU2=DPU(i,t)+dpu2

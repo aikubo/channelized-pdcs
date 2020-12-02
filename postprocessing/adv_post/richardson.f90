@@ -2,25 +2,25 @@ module find_richardson
         use parampost
         use constants
         use makeascii
-        use formatmod 
+        use formatmod
         use maketopo
 
-        contains 
+        contains
                 subroutine gradrich(EPP, T_G1, U_G, Ri, SHUY, printstatus)
                 implicit none
                 integer, intent(IN):: printstatus
                 double precision, allocatable, intent(IN):: EPP(:,:)
                 double precision, allocatable, intent(INOUT)::U_G(:,:,:)
-                double precision, allocatable, intent(IN):: T_G1(:,:) 
+                double precision, allocatable, intent(IN):: T_G1(:,:)
                 double precision, allocatable, intent(INOUT):: Ri(:,:)
                 double precision, allocatable, intent(INOUT):: SHUY(:,:)
-                double precision:: Ri_grad 
+                double precision:: Ri_grad
                 print*, "Begin richardson gradient calculation"
                 open(1510, file='Richardson_t08.txt')
                 !call openascii(800, 'SHUY_t')
-                
+
                 DO t= 1,timesteps
-!                
+!
 !                     DO I=1,length1
 !                               Ri(I,1,t) = 1.000e3
 !                               Ri(I,2,t) = XXX(I,1)
@@ -68,11 +68,11 @@ module find_richardson
                              I       = 1 + (yc-1) +(rc-1)*(YMAX-1+1) +  (zc-1)*(YMAX-1+1)*(RMAX-1+1)
                              I_yp1   = 1 + (yc+1-1) +(rc-1)*(YMAX-1+1) + (zc-1)*(YMAX-1+1)*(RMAX-1+1) !Cell above
                              I_ym1   = 1 + (yc-1-1) +(rc-1)*(YMAX-1+1) +(zc-1)*(YMAX-1+1)*(RMAX-1+1) !Cell above
-                              
+
                 !             print*, I
 
                       IF(T_G1(I_ym1,t)>272.0 .AND. EPP(I,t)<6.5 .AND. EPP(I,t)>0.0) THEN
-                                               
+
                                                 !------Y-Richardson-------!
                                                    ! Current density at each position
                                                 int_pos1           = I_yp1
@@ -99,7 +99,7 @@ module find_richardson
                                                 ! the
                                                 ! adjusted Ri and column 5 is the
                                                 ! original
-                                                !print*, "something      
+                                                !print*, "something
 
                                                 if (Ri_grad>50.0) THEN
                                                 Ri(I,t) = 50.0
@@ -115,22 +115,22 @@ module find_richardson
 
                                                 !Ri(I,t) = Ri_grad
                                                 !print*, Ri(I,t)
-                                                !print*, "shearv", shear_v 
+                                                !print*, "shearv", shear_v
                                                 SHUY(I,t) = shear_v
-                                               
-                                              
-                                                
+
+
+
                                                 !------Y-Richardson-------!
                            END IF
                     END DO
-                                                                             
+
                    END DO
                   END DO
 
                  ! fid_temp =1500 +t
                  ! fid_shuy =800 +t
                 !   DO I=1,RMAX*ZMAX*YMAX
-                !     WRITE(1500,format5var) 
+                !     WRITE(1500,format5var)
                 !  !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
                 !   END DO
 
@@ -143,9 +143,9 @@ module find_richardson
                 !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
                 END DO
         print*, "done with writing"
-      !  end if 
-        
-        !print*, "Ri calculation done" 
+      !  end if
+
+        !print*, "Ri calculation done"
 
         if (printstatus .eq. 1) then
 
@@ -153,14 +153,12 @@ module find_richardson
                 open(7777, file="Ri", form='unformatted')
 
                 DO I=1,length1
-                        write(7777) Ri(I,t) 
-                end do 
-        
-        end if 
+                        write(7777) Ri(I,t)
+                end do
+
+        end if
 
         print*, "finished Ri gradient subroutine"
-                
-end subroutine gradrich 
+
+end subroutine gradrich
 end module find_richardson
-
-
