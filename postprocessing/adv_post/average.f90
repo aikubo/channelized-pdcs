@@ -5,9 +5,9 @@ use formatmod
 use filehead
 use massdist
 contains
-SUBROUTINE AVERAGE_ALL 
+SUBROUTINE AVERAGE_ALL
 
-IMPLICIT NONE 
+IMPLICIT NONE
 double precision:: avgr, avgr2, avgr3, rc, mt, avgEP, avgEP2, avgEP3
 routine="averageit.mod/average_all"
 description=" Average of EPP 0 to 6.5"
@@ -111,7 +111,7 @@ END DO
      write(889, formatavg) t, avgEP2/sum_2, avgr2/sum_2, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
 
 END DO
-RETURN 
+RETURN
 
 END SUBROUTINE AVERAGE_ALL
 

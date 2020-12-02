@@ -959,14 +959,13 @@ subroutine e1vse2
                                                   end if
 
                                           end if
-                           end if
-                           if ( EPP(I,t) .ge. 0.1 .and. EPP(I,t) .lt.max_dense)then
-                                 if ( plain .and. ZZZ(I,1).gt.centerline+width/2) then
-                                        massout1=massout1+(1-EP_G1(I,1))*1950*3.*3.!Volume_Unit*rho_p
+
+                                if ( plain .and. ZZZ(I,1).gt.centerline+width/2) then
+                                        massout1= 1+massout1 !massout1+(1-EP_G1(I,1))*1950*3.*3.!Volume_Unit*rho_p
                                 end if
 
                                 if ( plain .and. ZZZ(I,1).lt. centerline-width/2) then
-                                        massout2=massout2+(1-EP_G1(I,1))*Volume_Unit*rho_p
+                                        massout2= 1+massout2!massout2+(1-EP_G1(I,1))*Volume_Unit*rho_p
                                 end if
                           end if
                         end do

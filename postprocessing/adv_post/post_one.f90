@@ -1,15 +1,15 @@
-program post 
+program post
 use formatmod
-use parampost 
+use parampost
 use constants
-use openbinary 
-use maketopo 
+use openbinary
+use maketopo
 use makeascii
 use var_3d
 use column
-use findhead 
-use find_richardson 
-use entrainment 
+use findhead
+use find_richardson
+use entrainment
 use massdist
 use averageit
 use grangass
@@ -29,11 +29,11 @@ logical:: countspill, massxxx,  super,UGdx8, spill, TGdx8, xstream, ave, energy,
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
-double precision:: area, ttop, height, hsum 
+double precision:: area, ttop, height, hsum
 
 call date_and_time(date, time, zone, values)
 print*, "Runing post_one.f90"
-print*, date, time 
+print*, date, time
 
 
 simlabel='impact'
@@ -48,7 +48,7 @@ TGdx8=.FALSE.
 UGdx8=.FALSE.
 topo=.FALSE.
 slices=.FALSE.
-fd=.FALSE. 
+fd=.FALSE.
 rigrad=.FALSE.
 ent=.FALSE.
 massalloc=.FALSE.
@@ -70,13 +70,13 @@ deltat=5.0
 timesteps=8
 tstart=3
 tstop=timesteps
-if (width .eq. dble(300)) then 
+if (width .eq. dble(300)) then
         depth = 39
-elseif (width .eq. dble(201)) then 
-       depth=27   
-else 
+elseif (width .eq. dble(201)) then
+       depth=27
+else
        depth=0
-end if 
+end if
 slope=.18
 dxi=3.0
 Volume_Unit= dxi*dxi*dxi
@@ -97,19 +97,19 @@ call openbin(800, 'V_S1', V_S1)
 call handletopo('l1200_A20_W201', dxi, XXX, YYY, ZZZ)
 rc=100
 zc=30
-do yc=4,YMAX-2 
- call funijk(rc, yc, zc, I) 
-       write(*,*) yc, YYY(I,1) 
-end do 
+do yc=4,YMAX-2
+ call funijk(rc, yc, zc, I)
+       write(*,*) yc, YYY(I,1)
+end do
 
 call logvolfrc(EP_G1, EPP)
 call dynamicpressure(EP_G1, U_S1, V_S1, W_S1, DPU)
 !print*, YYY(:,1)
 !print*, ZZZ(:,1)
-if (UGdx8) then 
-       do t=1,timesteps 
+if (UGdx8) then
+       do t=1,timesteps
                 call makedxtxt('UG_t',2000, U_G1, t)
-       end do  
+       end do
 end if
 
 if (EPPdx8) then
@@ -125,23 +125,23 @@ if (TGdx8) then
 end if
 
 
- 
+
 if (topo) call writedxtopo
- 
+
 
 
 print*, "finding froude"
 
 if (fd) call isosurf(scaleh)
 print*, "finding richardson gradient"
-if (rigrad .or. slices) call gradrich(EPP, T_G1, U_G, Ri, SHUY, printstatus)
+if (rigrad .or. slices .or. e1e2) call gradrich(EPP, T_G1, U_G, Ri, SHUY, printstatus)
 print*, "calculating entrainment"
-if (ent) call bulkent(EP_G1) 
+if (ent) call bulkent(EP_G1)
 print*, "calculating mass in channel"
 
 if (ecoef) print*, "ENT COEFFICIENT"
 if (ecoef) call entcoef
-if (super) call superelevation 
+if (super) call superelevation
 
 if (massalloc) call massinchannel(width, depth, lambda, scaleh, area)
 print*, "calculating dominant velocities"
@@ -153,7 +153,7 @@ if (slices) call slices2
 print*, "averaging"
 if (ave) call average_all
 print*, "velocity at the edges"
-if (energy) then 
+if (energy) then
         call edgevelocity
         print*, "mass by xxx"
         call massbyxxx
@@ -163,10 +163,10 @@ if (energy) then
         call energypotential
         print*, "find peak dpu"
         call dpupeak
-end if 
+end if
 if (massxxx) call massbyxxx
 if (spill) call overspill
-if (countspill) call countspills 
+if (countspill) call countspills
 
 write(*,*) "volume", Volume_Unit
 write(*,*) "rho p", 1950
@@ -177,4 +177,3 @@ print*, "end program"
 
 
 end program
-
