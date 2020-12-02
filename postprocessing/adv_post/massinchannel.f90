@@ -1,16 +1,16 @@
 module massdist
         USE maketopo
-        USE CONSTANTS 
-        USE PARAMPOST 
+        USE CONSTANTS
+        USE PARAMPOST
         USE FORMATMOD
         USE filehead
-         
+
         contains
 
         subroutine massinchannel(WIDTH, depth, LAMBDA, SCALEHEIGHT,area)
         use maketopo
         IMPLICIT NONE
-        double precision, intent(INOut):: area, width, depth, lambda,scaleheight  
+        double precision, intent(INOut):: area, width, depth, lambda,scaleheight
         double precision:: slopel, atest, cellarea,  elumass, medmass,densemass, inchannel, SCALEMASS, scalemass1, scalemass2
         double precision:: carea,  areaout, outsum, buoyant, current, topo, areatot
         real, allocatable:: areamat(:,:,:)
@@ -32,31 +32,31 @@ module massdist
      !   allocate(areamat( RMAX,ZMAX))
         cellarea=DX(3)*DX(3) !*sqrt(slope**2+1))
         write(*,*) cellarea
-        carea=0 
+        carea=0
         icount=0
         !allocate(areamat(RMAX, YMAX, ZMAX))
         do zc=4,ZMAX-4
                 do rc=4,RMAX-4
                         do yc=4,YMAX-4
                         !write(*,*) I
-                        call funijk(rc, yc, zc, I) 
+                        call funijk(rc, yc, zc, I)
                         call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, topo, channeltrue, plain)
-                       
+
                        ! write(*,*) XXX(I,1), YYY(I,1),ZZZ(I,1), top
                         if ( channeltrue .and. YYY(I,1) .eq. topo) then
 !.and. abs(YYY(I,1)-topo) .lt. DX(1) )then
                                 carea=carea+cellarea
                         !        write(*,*) I, topo, YYY(I,1), EPP(I,3)
-                        end if 
-                        
-                        !if (I .eq. Iold) then 
+                        end if
+
+                        !if (I .eq. Iold) then
                         !        write(*,*) "what I repeats", icount,
-                        !        "at", I 
+                        !        "at", I
                         !        icount=icount+1
                         !end if
-                        !Iold=I 
-                        end do 
-                end do 
+                        !Iold=I
+                        end do
+                end do
         end do
         write(*,*) "done with carea", carea
         !write(*,*) "what I repeats", icount, "at", I
@@ -66,29 +66,29 @@ module massdist
         chmassd = 0
         elumass=0
         inchannel=0
-        densemass =0 
+        densemass =0
         inchannel=0
         scalemass=0
         scalemass2=0
         scalemass1=0
-        buoyant=0 
-        current=0 
+        buoyant=0
+        current=0
         outsum=0
         area=0
         areaout=0
         atest=0
-                
+
         do zc=3,ZMAX-2
                 do rc=3,RMAX-2
                         do yc=3,YMAX-2
-                        call funijk(rc, yc, zc, I)           
+                        call funijk(rc, yc, zc, I)
 
                         call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),  slope, topo, channeltrue,plain)
-                       if ( YYY(I,1) .eq. topo) then 
-                     
+                       if ( YYY(I,1) .eq. topo) then
+
                                 atest=atest+cellarea
-                      
-                       end if 
+
+                       end if
 
                 IF (EPP(I,t) < 6.5 .and. EPP(I,t) >0.00001 ) THEN
                         tmass = tmass + (1-EP_G1(I,t))*Volume_Unit*rho_p
@@ -97,40 +97,40 @@ module massdist
                       !          if (YYY(I,1) .ge. top-3 .and. YYY(I,1)
                       !          .lt. top+3) then
                       !                   areaout=areaout+cellarea
-                      !          end if 
-                      !  end if 
- 
+                      !          end if
+                      !  end if
+
                       !  if ( ZZZ(I,1) .gt. edge1  .and. ZZZ(I,1) .lt.
-                      !  edge2) then 
+                      !  edge2) then
                       !         if (YYY(I,1) .ge. bottom-3 .and.
                       !         YYY(I,1) .lt. bottom+3) then
                       !                   area=area+cellarea
                       !          end if
 
-                      !  end if 
+                      !  end if
 
-                     !! test 
+                     !! test
 
-                        
- 
-                        if (  YYY(I,1) .eq. topo) then 
+
+
+                        if (  YYY(I,1) .eq. topo) then
                                 area = area+cellarea
 
-                                IF ( .NOT. CHANNELtrue) THEN 
+                                IF ( .NOT. CHANNELtrue) THEN
                                         areaout=areaout+cellarea
-                                end if 
-                               ! write(*,*) "inside flow", I 
+                                end if
+                               ! write(*,*) "inside flow", I
                                 !if ( areamat(int(XXX(I,1) * 0.98),
-                                !int(ZZZ(I,1)/3.)) .ne. 9) then 
+                                !int(ZZZ(I,1)/3.)) .ne. 9) then
                                 !        areamat(int(XXX(I,1)/3.),
                                 !        int(ZZZ(I,1)/3.))=cellarea
                                 !end if
 
                        end if
-                    !end if  
+                    !end if
 
                 IF (YYY(I,1) .ge. topo) THEN
-                ! total mass 
+                ! total mass
 
                                 ! MASS ABOVE CERTAIN SCALE HEIGHTS
                                 if ( YYY(I,1) .LT. topo+depth ) then
@@ -154,48 +154,50 @@ module massdist
                                 !  EPP(I,t) .lt. min_dilute) then
                                 !         medmass= medmass +
                                 !         (1-EP_G1(I,t))*Volume_Unit*rho_p
-                                !  end if 
+                                !  end if
 
-                                !dense mass 
-                                if (EPP(I,t) .lt. 0.51) then 
+                                !dense mass
+                                if (EPP(I,t) .lt. 0.51) then
                                         densemass = densemass +(1-EP_G1(I,t))*Volume_Unit*rho_p
                                 end if
 
 
                                 ! MASS IN THE CHANNEL
                                 IF (channeltrue) THEN
-                                  
+
                                         !print*, top
                                         inchannel = inchannel +(1-EP_G1(I,t))*Volume_Unit*rho_p
-                                end if 
+                                end if
 
                                 ! MASS WITHIN THE WIDTH OF THE CHANNEL
                                 ! INCLUDING ABOVE IT
                                 IF (channeltrue) THEN
-                                      
+
                                                 chmass = chmass +(1-EP_G1(I,t))*Volume_Unit*rho_p
                                 END IF
 
-                                If ( plain ) then 
+                                If ( plain ) then
                                                         outsum= outsum+(1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         rho_c=rho_p*(1-EP_G1(I,t))+(P_const/(R_dryair*T_G1(I,t)))*(EP_G1(I,t))
-                                                        
+
                                                         if ( rho_c <rho_dry) then
                                                                 buoyant= buoyant + (1-EP_G1(I,t))*Volume_Unit*rho_p
 
                                                         elseif (rho_c >rho_dry) then
                                                                 current= current + (1-EP_G1(I,t))*Volume_Unit*rho_p
                                                         end if
-                               end if 
+
+
+                               end if
 
                         END IF
                 END IF
-                
+
 
 
                 I=I+1
-                end do 
-             end do 
+                end do
+             end do
 
         END DO
         !  elumass=elumass/tmass
@@ -206,8 +208,8 @@ module massdist
          scalemass= scalemass/tmass
          scalemass1= scalemass1/tmass
          buoyant= buoyant/tmass
-         current=current/tmass     
-        
+         current=current/tmass
+
          write(*,*) carea, "true: ", (width)*DX(1)*RMAX
 !*(sqrt(slope**2+1))
          !write(*,*) area
@@ -220,12 +222,12 @@ module massdist
 
 
         subroutine crossstream
-                implicit none 
+                implicit none
                 double precision:: dominantvel, tmass, mass, Umass, Vmass, Wmass
                 double precision:: Uepp, Vepp, Wepp, sum1, sum3, sum2
                 print*, 'cross stream'
                 filename='cross_stream.txt'
-        
+
                 routine="massdist/cross_stream"
                 description="Calculate mass distribution moving cross vs downstream"
                 datatype=" t Total Mass (Higest velocity) U W V"
@@ -243,27 +245,27 @@ module massdist
                         sum2=0
                         sum3=0
 
-                        do I=1,length1 
-                                if (EPP(I,t) .gt. 0 .and. EPP(I,t) .lt. 8) then 
+                        do I=1,length1
+                                if (EPP(I,t) .gt. 0 .and. EPP(I,t) .lt. 8) then
                                         mass =(1-EP_G1(I,t))*Volume_Unit*rho_p
                                         tmass=tmass+ mass
                                         dominantvel= max(U_G1(I,t), V_G1(I,t), W_G1(I,t))
 
-                                        if (dominantvel .eq. U_G1(I,t)) then 
+                                        if (dominantvel .eq. U_G1(I,t)) then
                                                 Umass= Umass +mass
                                                 sum1= 1 + sum1
                                                 Uepp = Uepp + EPP(I,t)
                                         elseif (dominantvel .eq. V_G1(I,t)) then
-                                                Vmass= Vmass +mass 
+                                                Vmass= Vmass +mass
                                                 sum2= 1 + sum2
                                                 Vepp = Vepp + EPP(I,t)
-                                        elseif (dominantvel .eq. W_G1(I,t)) then 
+                                        elseif (dominantvel .eq. W_G1(I,t)) then
                                                 Wmass= Wmass +mass
                                                 sum3= 1 + sum3
                                                 Wepp = Wepp + EPP(I,t)
-                                        end if 
+                                        end if
                                 end if
-                        end do 
+                        end do
 
                         Umass=Umass/tmass
                         Vmass=Vmass/tmass
@@ -273,12 +275,12 @@ module massdist
                         Wepp=Wepp/sum3
 
                         write(4510, format7col) t, Umass, Uepp, Vmass,Vepp, Wmass, Wepp
-               end do                                  
+               end do
 
         end subroutine
 
-        subroutine edgevelocity 
-                implicit none 
+        subroutine edgevelocity
+                implicit none
                 double precision:: perpvel2, perpvel1, outsum,  perpvel
                 logical, dimension(length1):: maskshapeout
                 double precision, allocatable:: curtains1(:,:),curtains2(:,:)
@@ -319,10 +321,10 @@ module massdist
                 datatype=" 2D matrix of rmax by ymax"
                 call headerf(7088, filename, simlabel, routine,DESCRIPTION, datatype)
 
-                do yc =1,YMAX 
-                        curtains1(:,yc) = 0 
-                        curtains2(:,yc) = 0 
-                end do 
+                do yc =1,YMAX
+                        curtains1(:,yc) = 0
+                        curtains2(:,yc) = 0
+                end do
                 print*, "timeloop"
                 do t= 1,timesteps
 
@@ -331,39 +333,39 @@ module massdist
                                 call edges(width, lambda, depth,XXX(I,1), slope, edge1, edge2, bottom, top)
                                 edge1= FLOOR(edge1/3.)*3. + 6.
                                 edge2= FLOOR(edge2/3.)*3. - 6.
-                                bottom= FLOOR(bottom/3.)*3. !- 6   
+                                bottom= FLOOR(bottom/3.)*3. !- 6
                                 ux= U_G1(I,t)
                                 uy= W_G1(I,t)
-        
+
                                 U = (/ ux, uy /)
-                                dx = 1.0 
+                                dx = 1.0
                                 dy =2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
                                 mag = sqrt(dy**2 + dx**2)
                                 N1=(/ dy/mag, -dx/mag /)
-                                N2=(/ -dy/mag, dx/mag /) 
-        
+                                N2=(/ -dy/mag, dx/mag /)
+
                                 vel1= dot_product(U,N1)
                                 vel2 = dot_product(U,N2)
                                 !perpvel = max(vel1,vel2)
 
-                                
+
                                 if (YYY(I,1) .gt. bottom .and. ZZZ(I,1).eq. edge1) then
                                         perpvel = vel1
                                         rc = int(XXX(I,1)/3.0)
                                         yc= int(YYY(I,1)/3.0)
                                         curtains1(rc,yc)=curtains1(rc,yc)+perpvel
-                                end if 
+                                end if
                                 if (YYY(I,1) .gt. bottom .and. ZZZ(I,1).eq. edge2) then
                                         perpvel = vel2
                                         rc = int(XXX(I,1)/3.0)
                                         yc= int(YYY(I,1)/3.0)
                                         curtains2(rc,yc)=curtains2(rc,yc)+perpvel
-                                end if 
-                        end do 
-                end do 
+                                end if
+                        end do
+                end do
                 print*, "sum over depth"
                 do rc=1,RMAX
-                        sum1=0 
+                        sum1=0
                         sum2=0
 
                         XLOC= dble(rc*3.)
@@ -372,10 +374,10 @@ module massdist
                         ! y1= FLOOR(bottom/3.)
                         ! y2= FLOOR(top/3.)
                         ! print*, y1, y2
-                        ! do yc= y1,y2 
+                        ! do yc= y1,y2
                         !         sum1=sum1+curtains1(rc,yc)
                         !         sum2=sum2+curtains2(rc,yc)
-                        ! end do 
+                        ! end do
 
                         !print*, maxval(curtains2(rc,:))
 
@@ -386,20 +388,20 @@ module massdist
                         ! depth averaged, summed over time
                         print*, edgevel1(rc), edgevel2(rc)
 
-                end do 
+                end do
 
                 do rc =1,RMAX
                         write(7088, formatcurtain) curtains1(rc,:)
-                        write(7888, format5var) rc*3.,  edgevel1(rc),edgevel2(rc), minvel1(rc), minvel2(rc) 
-                
+                        write(7888, format5var) rc*3.,  edgevel1(rc),edgevel2(rc), minvel1(rc), minvel2(rc)
+
                 end do
 
         end subroutine
 
         subroutine massbyxxx
-                implicit none 
+                implicit none
                 double precision:: topo, centerline
-                logical:: channeltrue, plain 
+                logical:: channeltrue, plain
                 double precision, allocatable:: out1(:), out2(:)
                 allocate(out1(RMAX))
                 allocate(out2(RMAX))
@@ -410,44 +412,44 @@ module massdist
                 description="Calculate mass total outside the channel on leftand right by XXX"
                 datatype=" t, XXX, mass on right, mass on left,totalmass"
                 call headerf(6789, filename, simlabel, routine,DESCRIPTION,datatype)
-                
+
 
                 t=8
-                        do K=1,RMAX 
-                                out1(K) =0 
-                                out2(K) =0 
-                        end do 
+                        do K=1,RMAX
+                                out1(K) =0
+                                out2(K) =0
+                        end do
 
                         do rc=4,RMAX-4
                                 do yc=4,YMAX-4
-                                   do zc=4,ZMAX-4 
-                                        call funijk(rc, yc, zc, I) 
+                                   do zc=4,ZMAX-4
+                                        call funijk(rc, yc, zc, I)
                                 call edgesdose(width, lambda, depth,  XXX(I,1), YYY(I,1),ZZZ(I,1), slope, topo, channeltrue, plain)
                                 centerline= lambda*amprat*sind((360*(rc-4)*3/lambda))+450
 
-                                if (EPP(I,t) .gt. 0) then 
+                                if (EPP(I,t) .gt. 0) then
                                 if (plain) then
-                                   if ( dble(3*zc) .lt. centerline) then 
+                                   if ( dble(3*zc) .lt. centerline) then
                                         out1(rc)= out1(rc) +(1-EP_G1(I,t))*Volume_Unit*rho_p
-                                else 
+                                else
                                         out2(rc)= out2(rc) +(1-EP_G1(I,t))*Volume_Unit*rho_p
-                                end if 
-                                end if 
-                                end if 
+                                end if
+                                end if
+                                end if
 
                         end do
-                        end do 
-                        end do 
-                     
+                        end do
+                        end do
+
                           do rc=4,RMAX-4
                                 write(6789,formatmassxxx) t, (rc-3)*3, out1(rc), out2(rc), out1(rc)+out2(rc)
                         end do
 
-                        write(*,*) "check" 
-                        write(*,*), sum(out1), sum(out2), sum(out1)+sum(out2) 
+                        write(*,*) "check"
+                        write(*,*), sum(out1), sum(out2), sum(out1)+sum(out2)
 
         end subroutine
-        
+
         subroutine density(loc,tim,rhc, mass)
         implicit none
         integer, intent(IN):: loc, tim
@@ -456,8 +458,8 @@ module massdist
                 mass=3.*3.*3.*rhc
         end subroutine
 
-        subroutine integratemass 
-        implicit none 
+        subroutine integratemass
+        implicit none
         double precision, allocatable:: intmass(:,:,:),currentcells(:,:)
         double precision:: mass
          filename='intmass.txt'
@@ -465,46 +467,46 @@ module massdist
         routine="massdist/energypotential"
         description="Calculate mass integral from EPP 0.5 to 8"
         datatype=" RMAX by ZMAX by time array of g"
-        call headerf(90999, filename, simlabel,routine,DESCRIPTION,datatype)     
+        call headerf(90999, filename, simlabel,routine,DESCRIPTION,datatype)
         allocate(intmass(RMAX, ZMAX, timesteps))
         allocate(currentcells(RMAX, ZMAX))
 
-        t=8 
+        t=8
         do rc=1,RMAX
                 do zc =1,ZMAX
-                        currentcells(rc,zc) = 0 
-                end do 
-        end do 
-        
+                        currentcells(rc,zc) = 0
+                end do
+        end do
+
         do I=1,length1
         !        call edges(width, lambda, depth, XXX(I,1), edge1,
         !        edge2, bottom, top)
-                if (EPP(I,t) .gt. 0.5 .and. EPP(I,t) .lt.  8) then 
+                if (EPP(I,t) .gt. 0.5 .and. EPP(I,t) .lt.  8) then
                         rc = int(XXX(I,t)/3.)
                         zc = int(ZZZ(I,t)/3.)
                         call density(I,t, rho_c, mass)
                         intmass(rc,zc,t)= intmass(rc,zc,t) +mass
                         currentcells(rc,zc) = currentcells(rc,zc) +1
 
-                end if 
-        end do 
+                end if
+        end do
 
         do rc=1,RMAX
-                do zc =1,ZMAX 
+                do zc =1,ZMAX
                         intmass(rc,zc,t)=intmass(rc,zc,t)/currentcells(rc,zc)
 
                         if ( isnan(intmass(rc, zc, t)) .eq. .FALSE.) then
                                 !print*, intmass(rc,zc,t)
                         end if
 
-                        write(90999, format1var) intmass(rc,zc,t) 
-                end do 
-        end do 
+                        write(90999, format1var) intmass(rc,zc,t)
+                end do
+        end do
 
-        
-                
 
-        end subroutine 
+
+
+        end subroutine
 
         subroutine energypotential
         implicit none
@@ -518,23 +520,23 @@ module massdist
         routine="massdist/energypotential"
         description="KE pointing out of channel"
         datatype=" RMAX by ZMAX by t  array of kinetic energy in channel(J)"
-        call headerf(90909, filename, simlabel,routine,DESCRIPTION,datatype)  
-      
+        call headerf(90909, filename, simlabel,routine,DESCRIPTION,datatype)
+
         filename= 'perpvel.txt'
         description=" RMAX by ZMAX by t perpvel (m/s)"
         datatype=" RMAX by ZMAX array of kinetic energy in channel"
         call headerf(90910, filename, simlabel,routine,DESCRIPTION,datatype)
- 
+
         filename= 'PE.txt'
         description=" Calculates potential energy necessary to overflowat each height"
         datatype=" RMAX by ZMAX by t potential energy (J)"
         call headerf(90911, filename, simlabel,routine,DESCRIPTION,datatype)
-        
+
          filename= 'perpvelbyx.txt'
         description="integrates perpvel over width "
         datatype=" RMAX by t array of perpvel in channel"
         call headerf(90912, filename, simlabel,routine,DESCRIPTION,datatype)
-     
+
         filename= 'PEbyx.txt'
         description="Integrates by width potential energy necessary to overflow at each height"
         datatype=" RMAX by t potential energy (J)"
@@ -544,7 +546,7 @@ module massdist
         description=" Integrates by width K energy necessary height"
         datatype=" RMAX by t kinetic energy (J)"
         call headerf(90914, filename, simlabel,routine,DESCRIPTION,datatype)
- 
+
 
         allocate(KPsum1(RMAX, ZMAX, timesteps))
         allocate(KPsum2(RMAX, ZMAX, timesteps))
@@ -554,85 +556,85 @@ module massdist
         allocate(perpx(RMAX,timesteps))
 
         do t=1,timesteps
-                KPsum1(:,:,t)=0 
+                KPsum1(:,:,t)=0
                 KPsum2(:,:,t)=0
                 PEsum(:,:,t)=0
                 pex(:,t)=0
-                kex(:,t)=0 
+                kex(:,t)=0
                 perpx(:,t)=0
-        end do 
+        end do
 
 
-        do t =1,timesteps 
+        do t =1,timesteps
 
         do I=1,length1
 
                 call edges(width, lambda, depth, XXX(I,1), slope, edge1,edge2, bottom, top)
                 if ( EP_G1(I,t) .gt. 0.00) then
-                if( YYY(I,1) .gt. bottom .and. YYY(I,1) .lt. top) then 
+                if( YYY(I,1) .gt. bottom .and. YYY(I,1) .lt. top) then
                        ux= U_G1(I,t)
                        uy= W_G1(I,t)
 
                        U = (/ ux, uy /)
-                       dx = 1.0 
+                       dx = 1.0
                        dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
                        mag = sqrt(dy**2 + dx**2)
                        N1=(/ dy/mag, -dx/mag /)
-                       N2=(/ -dy/mag, dx/mag /) 
+                       N2=(/ -dy/mag, dx/mag /)
 
                        vel1= dot_product(U,N1)
                        vel2 = dot_product(U,N2)
                        perpvel = max(vel1,vel2)
                        call density(I,t, rho_c, mass)
                        KP1 =  (0.5)*mass*perpvel**2
-                       !print*, N1, N2 
+                       !print*, N1, N2
                        !print*, U
                        h = depth-(YYY(I,1) - bottom)
                        PE = mass*gravity*h
 
-                      !    if ( isnan(KP1) .eq. .FALSE. ) then 
+                      !    if ( isnan(KP1) .eq. .FALSE. ) then
                       !     print*, perpvel, N1, N2, U
-                      !  end if 
+                      !  end if
                        ! if ( perpvel .gt. 30.0000) then
                        !        print*, "greater than 30"
                        !        print*, perpvel, U
-                       !        print*, "loc at " 
+                       !        print*, "loc at "
                        !        print*, XXX(I,1), ZZZ(I,1)
-                       !  end if 
-                 
+                       !  end if
+
                         rc=int(XXX(I,1)/3.0)
                         zc=int(ZZZ(I,1)/3.0)
                         PEsum(rc,zc,t) = PEsum(rc,zc,t) + PE
                         KPsum1(rc,zc,t)=KPsum1(rc,zc,t) + KP1
                         KPsum2(rc,zc,t)=KPsum2(rc,zc,t) + perpvel
 
-                  end if 
+                  end if
                 end if
-            end do 
+            end do
             !print*, "testing dim =2"
-            !print*, KPsum1(404, :, t) 
+            !print*, KPsum1(404, :, t)
             D = (depth/3.0)
             W = width/3.0
             do rc=1,RMAX
                 pex(rc,t) = SUM(PEsum(rc,:,t))/(W*D)
-                kex(rc,t) = SUM(KPsum1(rc,:,t))/(W*D) 
+                kex(rc,t) = SUM(KPsum1(rc,:,t))/(W*D)
                 perpx(rc,t)=SUM(KPsum2(rc,:,t))/(W*D)
-                
+
                 do zc=1,ZMAX
                    PEsum(rc,zc,t)= PEsum(rc,zc,t)/D
                    KPsum1(rc,zc,t) = KPsum1(rc,zc,t)/D
                    KPsum2(rc,zc,t) = KPsum2(rc,zc,t)/D
-                        
-                end do 
-            end do 
 
-                
+                end do
+            end do
+
+
             !print*, KPsum1(:,:,t)
             print*, maxval(KPsum1(:,:,t))
             print*, maxval(KPsum2(:,:,t))
-                       
-            
-             
+
+
+
             do rc=1,RMAX
                 write(90913, format1var) pex(rc,t) !
                 write(90914, format1var) kex(rc,t) !
@@ -641,14 +643,14 @@ module massdist
                         write(90909,format1var) KPsum1(rc,zc,t)
                         write(90910,format1var) KPsum2(rc,zc,t)
                         write(90911, format1var) PEsum(rc,zc,t)
-            end do 
+            end do
             end do
 
-        end do 
-        end subroutine 
+        end do
+        end subroutine
 
         subroutine transectsfromchannel
-        implicit none 
+        implicit none
         integer:: zc1, zc2, IJK, I,J,K
         double precision:: XLOC
         integer:: ZLOC
@@ -661,11 +663,11 @@ module massdist
         routine= "massdist/trnsectsfromchannel"
         datatype="300 EPP, 600 EPP, 900 EPP, 300 TG, 600 TG, 900 TG, 300 DPU, 600 DPU, 900 DPu"
         call headerf(90915, filename, simlabel,routine,DESCRIPTION,datatype)
-        
+
             do t=1,timesteps
                do I=1,3
                   do  zc=1,ZMAX
-                                
+
                                 transect(I,zc,t,1)=14.0
                                 transect(I, zc, t,2)=273.0
                                 transect(I,zc,t,3)=0
@@ -673,76 +675,76 @@ module massdist
                                 transect(I, zc, t,5)=273.0
                                 transect(I,zc,t,6)=0
 
-                          
-                  end do 
-                end do 
+
+                  end do
+                end do
              end do
 
-         
+
         do I=1,3
                 rc = floor(lambda*(I+1)*0.25/3)
                 XLOC= dble( rc*3)
-                
+
                 call edges(width, lambda, depth, XLOC, slope, edge1,edge2, bottom, top)
-                ! edge 1 
-                zc1= 2 
+                ! edge 1
+                zc1= 2
                 zc2= int( (ceiling(edge1/3.0)))
                 yc = int( (ceiling(top/3.0) ))+6
-                
-              
-                 
+
+
+
                         do zc= zc1, zc2 !zc2, zc1, -1
                                 call FUNIJK(rc,yc,zc,IJK)
                                 ZLOC= zc2-zc+1
                                 print*, "side1", zc, ZLOC
-                                do t=2,timesteps             
+                                do t=2,timesteps
                                 transect(I,ZLOC,t,1)=EP_G1(IJK,t)
                                 transect(I,ZLOC,t,2)= T_G1(IJK,t)
                                 transect(I,ZLOC,t,3)= DPU(IJK,t)
-                                end do 
-                        end do 
-           
-                
+                                end do
+                        end do
+
+
                 zc2= int( ceiling(edge2/3.0))
                        do zc= zc2, ZMAX
                                 call FUNIJK(rc,yc,zc,IJK)
                                 ZLOC= zc-zc2+1
                                 print*, "side2",zc,  zloc
-                              
+
                                 do t=2,timesteps
                                 transect(I,ZLOC,t,4)= EP_G1(IJK,t)
                                 transect(I,ZLOC,t,5)= T_G1(IJK,t)
                                 transect(I,ZLOC,t,6)= DPU(IJK,t)
-                                end do 
+                                end do
                         end do
 
-              
-        end do 
+
+        end do
          print*, "finished loops"
-       !print*, transect(:,:,:,:) 
-       
+       !print*, transect(:,:,:,:)
+
                do I=1,3
-                  do  zc=1,ZMAX 
-                       
-                             do t=2,timesteps 
+                  do  zc=1,ZMAX
+
+                             do t=2,timesteps
                                 max_trans(I,zc,2)=min(transect(I,zc,t,1), max_trans(I,zc,1))
-                                max_trans(I,zc,2)=max(transect(I,zc,t,2), max_trans(I,zc,2)) 
+                                max_trans(I,zc,2)=max(transect(I,zc,t,2), max_trans(I,zc,2))
                                 max_trans(I,zc,3)=max(transect(I,zc,t,3), max_trans(I,zc,3))
-                
-                                
+
+
                                        ! if ( transect(I,zc,t,4) .lt.
                                        ! max_trans(I,zc,4) .and.
                                        ! transect(I,zc,t,4) .gt.
                                        ! dble(0.0) ) then
-                                       !         max_trans(I,zc,1)=transect(I,zc,t,1)        
+                                       !         max_trans(I,zc,1)=transect(I,zc,t,1)
                                        ! end if
-                                 
+
                                 max_trans(I,zc,4)=max(transect(I,zc,t,4),max_trans(I,zc,4))
                                 max_trans(I,zc,5)=max(transect(I,zc,t,5),max_trans(I,zc,5))
                                 max_trans(I,zc,6)=max(transect(I,zc,t,6),max_trans(I,zc,6))
 
-                        eND DO 
-                END DO 
+                        eND DO
+                END DO
         end do
         print*, "finished maxx loops"
         do zc=1,ZMAX
@@ -761,15 +763,15 @@ module massdist
        !  max_trans(3,zc,6)
 
 
-        end do 
+        end do
 
         print*, "finished write"
 
- 
+
         end subroutine
 
 
-        subroutine buoyantplumes 
+        subroutine buoyantplumes
                 integer:: ytop
                 double precision, allocatable:: buoyantsum(:)
                 double precision:: mass, XLOC
@@ -782,19 +784,19 @@ module massdist
 
 
 
-                allocate(buoyantsum(ZMAX))                
- 
-                do t=1,timesteps 
+                allocate(buoyantsum(ZMAX))
+
+                do t=1,timesteps
                         do rc=1,RMAX
                                 XLOC=dble(rc*3)
                                 call edges(width, lambda, depth, XLOC,slope, edge1, edge2, bottom, top)
-                                
+
                                 ytop = int(ceiling(top/3)) + 6
                                 print*, "ytop", ytop
-                                do zc=1,ZMAX      
-                                       do yc=ytop,YMAX 
+                                do zc=1,ZMAX
+                                       do yc=ytop,YMAX
                                           call FUNIJK(rc, yc, zc, IJK)
-                                          call density(IJK,t, rho_c,mass)  
+                                          call density(IJK,t, rho_c,mass)
                                           !if ( EP_G1(IJK,t) .gt. 0.0
                                           !.and. EP_G1(IJK,t) .lt.
                                           !0.99999999) then
@@ -803,26 +805,26 @@ module massdist
                                                   !print*, rho_c,
                                                   !rho_dry
                                           end if
-                                          !end if  
-                                       end do 
-                                end do 
-                        end do 
-                end do 
-                                        
+                                          !end if
+                                       end do
+                                end do
+                        end do
+                end do
+
                 do rc=1,ZMAX
                         buoyantsum(rc)=buoyantsum(rc)/timesteps
-                end do 
+                end do
 
-                do rc=1,ZMAX 
+                do rc=1,ZMAX
                        ! write(*,*) buoyantsum(rc)
                        write(90919,format1var) buoyantsum(rc)
                 end do
-                end subroutine 
+                end subroutine
 
 
 
-       subroutine overspill 
-        double precision:: mass 
+       subroutine overspill
+        double precision:: mass
 
           filename= 'overspill_avg.txt'
           description="Average values in overspilled current"
@@ -832,7 +834,7 @@ module massdist
 
 
 
-        
+
         do t=1,timesteps
                 sum_1 = 0
                 sum_2 = 0
@@ -859,8 +861,8 @@ module massdist
 
             DO I=1,length1
                call edges(width, lambda, depth, XXX(I,1), slope, edge1,edge2, bottom, top)
-                if (YYY(I,1) .gt. top) then 
-                        
+                if (YYY(I,1) .gt. top) then
+
                  call density(I,t, rho_c, mass)
                         if( rho_c < rho_dry) then
 
@@ -897,15 +899,15 @@ module massdist
                         END IF
 
                         end if
-                    end if  
+                    end if
                 END DO
 
                      print*, "writing average"
                      WRITE(7487, formatavgx2) t, avgt/sum_1, avgu/sum_1,avgv/sum_1, avgw/sum_1, avgdpu/sum_1, avgt2/sum_2, avgu2/sum_2,avgv2/sum_2, avgw2/sum_2, avgdpu2/sum_2
-                end do 
+                end do
         end subroutine
-        
-        
+
+
 subroutine e1vse2
 
         double precision:: ve1, ve2, ri1, ri2, dpu1, dpu2,  massout1,massout2
@@ -946,7 +948,7 @@ subroutine e1vse2
                                                         ve1=ve1+U_G1(I,t)
                                                         sume1=sume1+1
                                                         ri1=Ri(I,t)+ri1+1
-                                       
+
 
                                                         DPU1=DPU(i,t)+dpu1
                                                   else
@@ -959,20 +961,20 @@ subroutine e1vse2
                                           end if
                            end if
                            if ( EPP(I,t) .ge. 0.1 .and. EPP(I,t) .lt.max_dense)then
-                                 if ( .not. channeltrue .and. ZZZ(I,1).gt.centerline+width/2) then
+                                 if ( plain .and. ZZZ(I,1).gt.centerline+width/2) then
                                         massout1=massout1+(1-EP_G1(I,1))*1950*3.*3.!Volume_Unit*rho_p
                                 end if
 
-                                if ( .not. channeltrue .and. ZZZ(I,1).lt. centerline-width/2) then
+                                if ( plain .and. ZZZ(I,1).lt. centerline-width/2) then
                                         massout2=massout2+(1-EP_G1(I,1))*Volume_Unit*rho_p
                                 end if
                           end if
                         end do
                 end do
            end do
-                write(1951,format8col) t, ve1/sume1, ve2/sume2,(ve1/ve2)*(sume2/sume1), ri1/sume1, ri2/sume2, dpu1/sume1, dpu2/sume2,massout1, massout2
+                write(1951,format8col) t, ve1/sume1, ve2/sume2, ri1/sume1, ri2/sume2, dpu1/sume1, dpu2/sume2, massout1, massout2
         end do
 end subroutine
 
 
-end module           
+end module
