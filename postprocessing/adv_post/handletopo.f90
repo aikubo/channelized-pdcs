@@ -304,6 +304,24 @@ subroutine edgesdose_debug(wid, lamb, dep, XLOC,YLOC,ZLOC, slope,truetop,inchann
 
 end subroutine
 
+subroutine iftop(iloc,toptrue, plaintop)
+        implicit none 
+        integer, intent(in):: iloc
+        logical, intent(out):: toptrue,plaintop 
+        logical::inchannel, plain
+        double precision:: truetop
+        toptrue=.FALSE.
+        plaintop=.FALSE. 
+
+        call edgesdose(width, lambda, depth, XXX(I,1),YYY(I,1),ZZZ(i,1), slope,truetop,inchannel,plain)
+        if (YYY(I,1) .eq. truetop) then 
+                toptrue=.TRUE. 
+                if (plain) plaintop=.TRUE.
+        end if
+
+
+end subroutine                 
+
 subroutine FUNIJK(xl,yl,zl,IJK)
      implicit none
      integer, intent(IN):: xl, yl, zl

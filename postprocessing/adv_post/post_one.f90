@@ -24,7 +24,7 @@ character(10) :: time
 character(5)  :: zone
 integer,dimension(8) :: values
 
-logical:: ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc, e1e2
+logical:: expose, ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc, e1e2
 logical:: countspill, massxxx,  super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
@@ -38,6 +38,8 @@ print*, date, time
 
 simlabel='impact'
 printstatus=0
+
+expose=.FALSE.
 e1e2=.FALSE.
 massxxx=.FALSE.
 super=.FALSE.
@@ -164,6 +166,8 @@ if (spill) call overspill
 if (countspill) call countspills
 
 if (e1e2) call e1vse2
+if (expose) call exposure 
+
 
 write(*,*) "volume", Volume_Unit
 write(*,*) "rho p", 1950

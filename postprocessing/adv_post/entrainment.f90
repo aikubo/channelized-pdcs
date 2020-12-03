@@ -208,4 +208,52 @@ module entrainment
 
             end subroutine 
 
+           subroutine exposure
+
+           !calculates time over different temperatures!
+
+           ! over 500
+           ! over 200
+           ! over 100 
+
+           double precision:: Ao500, Ao200, Ao100
+           double precision, allocatable:: To500(:), To200(:), To100(:)
+           allocate(To500(length1))
+           allocate(To200(length1))
+           allocate(To100(length1)) 
+
+          do t=2,timesteps
+                DO i=1,length1 
+                        if (T_G1(I,t) .gt. 100+273 .and. T_G1(I,t-1) .gt. 100+273) then 
+                                To100(i)=To100(i)+5
+                        end if  
+                                  if (T_G1(I,t) .gt. 200+273 .and. T_G1(I,t-1) .gt. 200+273) then 
+                                        To200(i)=To200(i)+5
+                                  end if
+
+                                        if (T_G1(I,t) .gt. 500+273 .and. T_G1(I,t) .gt. 500+273) then
+                                                To500(i)=To500(i)+5
+                                        end if   
+                        
+                end do
+         end do 
+
+         do i=1,length1
+                if (To100(I) .gt. 5) then 
+                        Ao100=Ao100+9
+                        if (To200(I) .gt. 5) then 
+                                Ao200=Ao200+9
+                                if (To500(I) .gt. 5) then 
+                                        Ao500=Ao500+9
+                                end if 
+                        end if 
+                 end if 
+          end do 
+
+        write(*,*) Ao100, Ao200, Ao500 
+        write(*,*) sum(To200)/length1
+           
+                
+ 
+        end subroutine         
 end module entrainment
