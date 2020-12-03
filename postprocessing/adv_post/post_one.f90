@@ -37,7 +37,7 @@ print*, date, time
 
 
 simlabel='impact'
-printstatus=2
+printstatus=0
 e1e2=.FALSE.
 massxxx=.FALSE.
 super=.FALSE.

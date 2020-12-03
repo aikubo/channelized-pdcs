@@ -910,15 +910,15 @@ module massdist
 
 subroutine e1vse2
 
-        double precision:: ve1, ve2, ri1, ri2, dpu1, dpu2,  massout1,massout2
-        double precision:: sume1, sume2
+        double precision:: ep1, ep2, ve1, ve2, ri1, ri2, dpu1, dpu2,  massout1,massout2
+        double precision:: sumo1, sumo2,sume1, sume2, temp1, temp2
         logical:: channeltrue, plain
         double precision:: topo, centerline
 
           filename= 'e2vse1.txt'
-          description="Depth averages values on eitherside ofcenterline"
+          description="Depth averaged values on eitherside ofcenterline"
           routine= "massdist/e1vse2"
-          datatype=" t   U_G_e1 UG_e2 Ri_1 Ri_2  DPU_1 DPU_2 Massout1 Massout2 "
+          datatype=" t  U+V 1 2 Ri_1 Ri_2  DPU_1 DPU_2 Avgtemp1 2 Massout1 Massout2 "
           call headerf(1951, filename, simlabel,routine,DESCRIPTION,datatype)
 
 
@@ -926,6 +926,8 @@ subroutine e1vse2
         do t=1,timesteps
         sume1=0
         sume2=0
+        sumo1=0
+        sumo2=0
         ve1=0
         ve2=0
         massout1=0
@@ -934,6 +936,10 @@ subroutine e1vse2
         ri2=0
         dpu2=0
         dpu1=0
+        temp1=0
+        temp2=0
+        ep1=0
+        ep2=0 
 
           do zc=4,ZMAX-4
                 do rc=4,RMAX-4
@@ -941,18 +947,18 @@ subroutine e1vse2
                         call funijk(rc, yc, zc, I)
 
                         call edgesdose(width, lambda, depth,XXX(I,1),YYY(I,1),ZZZ(I,1),  slope, topo, channeltrue, plain)
-                            if (EPP(I,t) .ge. 0.1 .and. EPP(I,t).lt.min_dilute)then
+                            if (EPP(I,t) .ge. 0.01 .and. EPP(I,t) .lt. 6.5 )then
                                 centerline=lamba*amprat*sind(360*dble(rc*3)/lambda)+dble(ZMAX*3/2)
                                         if (channeltrue) then
                                                   if ( ZZZ(I,1) .lt. centerline)then
-                                                        ve1=ve1+sqrt(U_G1(I,t)**2 + V_G(I,t)**2)
+                                                        ve1=ve1+sqrt(U_G1(I,t)**2 + V_G1(I,t)**2)
                                                         sume1=sume1+1
                                                         ri1=Ri(I,t)+ri1
 
 
                                                         DPU1=DPU(i,t)+dpu1
                                                   else
-                                                        ve2=ve2+sqrt(U_G1(I,t)**2 + V_G(I,t)**2)
+                                                        ve2=ve2+sqrt(U_G1(I,t)**2 + V_G1(I,t)**2)
                                                         sume2=sume2+1
                                                         ri2=Ri(i,t)+ri2
                                                         DPU2=DPU(i,t)+dpu2
@@ -960,18 +966,25 @@ subroutine e1vse2
 
                                           end if
 
-                                if ( plain .and. ZZZ(I,1).gt.centerline+width/2) then
-                                        massout1= 1+massout1 !massout1+(1-EP_G1(I,1))*1950*3.*3.!Volume_Unit*rho_p
+                                if ( plain .and. ZZZ(I,1).lt.centerline) then
+                                        massout1= massout1+(1-EP_G1(I,t))*1950*3.*3.!Volume_Unit*rho_p
+                                        ep1=ep1+EPP(i,t) 
+                                        temp1=T_G1(i,t)+temp1
+                                        sumo1=sumo1+1
                                 end if
 
-                                if ( plain .and. ZZZ(I,1).lt. centerline-width/2) then
-                                        massout2= 1+massout2!massout2+(1-EP_G1(I,1))*Volume_Unit*rho_p
+                                if ( plain .and. ZZZ(I,1).gt. centerline) then
+                                        massout2= massout2+(1-EP_G1(I,t))*Volume_Unit*rho_p
+                                        temp2=T_G1(i,t)+temp2
+                                        sumo2=sumo2+1
+                                        ep2=ep2+EPP(i,t)
+                                        write(*,*) T_G1(i,t)
                                 end if
                           end if
                         end do
                 end do
            end do
-                write(1951,format9col) t, ve1/sume1, ve2/sume2, ri1/sume1, ri2/sume2, dpu1/sume1, dpu2/sume2, massout1, massout2
+                write(1951,format11col) t, ep1/sumo1, ep2/sumo2, ve1/sume1, ve2/sume2, ri1/sume1, ri2/sume2, dpu1/sume1, dpu2/sume2, temp1/sumo1, temp2/sumo2, massout1, massout2
         end do
 end subroutine
 

@@ -136,14 +136,14 @@ module find_richardson
 
         END DO
 
-        !if (printstatus .ne. 0) then
+        if (printstatus .ne. 0) then
         print*, "writing to txt file"
                 DO I=1,RMAX*ZMAX*YMAX
                         WRITE(1510, format4var) Ri(I,8), XXX(I,1), YYY(I,1), ZZZ(I,1)
                 !   write(fid_shuy, format4var) SHUY(I, 1:4,t)
                 END DO
         print*, "done with writing"
-      !  end if
+        end if
 
         !print*, "Ri calculation done"
 
