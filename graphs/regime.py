@@ -281,13 +281,18 @@ scat=plotandR(kdist_norm, velz, ax[1][1],'k', size)
 ax[1][1].set_ylabel('Cross Stream Velocity (m/s)', fontsize=8)
 ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
 
+# scat=plotandR(np.array(vol)/(np.array(width)*1200*np.array(depth)),  dpumax, ax[1][1],'k', size)
+# ax[1][1].set_xlabel('Carrying Capacity', fontsize=8)
+# ax[1][1].set_ylabel('Dynamic pressure', fontsize=8)
+# ax[1][1].set_xlim([0.002, 0.008])
+
 plt.tight_layout()
 
 
 
 print(r_squared)
 
-savefigure("regimeNOV")
+#savefigure("regimeNOV")
 
 
 

@@ -11,7 +11,27 @@ def openmine(labels, path2file, fid, cols, out, colspec='infer', width='infer'):
         temp_1.columns=cols
         temp_all[sim]=temp_1[out]
     return temp_all
+def e1e2(labels, path):
+    cols=['t', 'EP1', 'EP2', 'V1', 'V2', 'Ri1', 'Ri2', 'DPU1', 'DPU2', 'T1', 'T2', 'M1', 'M2']
+    fid='_e2vse1.txt'
 
+    colspec= [[1,4], [10,26], [33, 48], [55,70], [75,95], [100,114], [119,137],
+          [140, 155], [160, 181], [185,195], [205,221], [231, 247], [253,265]]
+    EP1=openmine(labels, path, fid, cols, 'EP1', colspec)
+    EP2=openmine(labels, path, fid, cols, 'EP2', colspec)
+    V1=openmine(labels, path, fid, cols, 'V1', colspec)
+    V2=openmine(labels, path, fid, cols, 'V2', colspec)
+    R1=openmine(labels, path, fid, cols, 'Ri1', colspec)
+    R2=openmine(labels, path, fid, cols, 'Ri2', colspec)
+    DPU1=openmine(labels, path, fid, cols, 'DPU1', colspec)
+    DPU2=openmine(labels, path, fid, cols, 'DPU2', colspec)
+    T1=openmine(labels, path, fid, cols, 'T1', colspec)-273
+    T2=openmine(labels, path, fid, cols, 'T2', colspec)-273
+    M1=openmine(labels, path, fid, cols, 'M1', colspec)
+    M2=openmine(labels, path, fid, cols, 'M2', colspec)
+    
+    return EP1, EP2, V1, V2, R1, R2, DPU1, DPU2, T1, T2, M1, M2
+    
 frcols= ['time', 'AvgU','AvgEP','AvgT','Froude','Front',' Width','Height' ]
 
 masscol=['time', 'Total Mass (m^3)', "Mass outside", "Dilute", "Medium", "Dense", "InChannel", "InWidth", "LtScale", "ScaleH", "Buoyant", "AvulseD"]
