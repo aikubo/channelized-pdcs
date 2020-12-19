@@ -215,13 +215,27 @@ module entrainment
            ! over 500
            ! over 200
            ! over 100 
+           logical:: toploc, plainloc 
 
-           double precision:: Ao500, Ao200, Ao100
+           ! area over TEMP for X seconds
+           double precision:: Ao5005, Ao2005, Ao1005
+           double precision:: Ao50015, Ao20015, Ao10015
+           double precision:: Ao50030, Ao20030, Ao100300
+           !whole domain record of time over temp (for all timesteps) 
+
            double precision, allocatable:: To500(:), To200(:), To100(:)
+
+           routine="=entrainment/exposure"
+           description="Area over 100, 200, 500 C for 5, 15, 30s "
+           datatype="rows are exposure times, columns are temperatures(100,200,500)"
+           filename='exposure.txt'
+           call headerf(467, filename, simlabel, routine, DESCRIPTION,datatype)
+
+
            allocate(To500(length1))
            allocate(To200(length1))
            allocate(To100(length1)) 
-
+           open(7989, file="To100.txt")
           do t=2,timesteps
                 DO i=1,length1 
                         if (T_G1(I,t) .gt. 100+273 .and. T_G1(I,t-1) .gt. 100+273) then 
@@ -238,22 +252,43 @@ module entrainment
                 end do
          end do 
 
-         do i=1,length1
-                if (To100(I) .gt. 5) then 
-                        Ao100=Ao100+9
-                        if (To200(I) .gt. 5) then 
-                                Ao200=Ao200+9
-                                if (To500(I) .gt. 5) then 
-                                        Ao500=Ao500+9
+         do rc=3,RMAX-2
+         do yc=3,YMAX-2
+         do zc=3,ZMAX-2 
+                call funijk(rc,yc,zc,I)
+                call iftop(I, toploc, plainloc)
+
+                if (toploc) then  
+                if (To100(I) .ge. 5) then 
+                        Ao1005=Ao1005+9
+                        if (To100(I) .ge. 15) Ao10015=Ao10015+9
+                        if (To100(I) .ge. 30) Ao10030=Ao10030+9        
+                        if (To200(I) .ge. 5) then 
+                                Ao2005=Ao2005+9
+                                if (To200(I) .ge. 15) Ao20015=Ao20015+9
+                                if (To200(I) .ge. 30) Ao20030=Ao20030+9
+
+                                if (To500(I) .ge. 5) then 
+                                        Ao5005=Ao5005+9
+                                        if (To500(I) .ge. 15) Ao50015=Ao50015+9
+                                        if (To500(I) .ge. 30) Ao50030=Ao50030+9
                                 end if 
                         end if 
                  end if 
+                end if 
+
+          end do 
+          end do 
           end do 
 
-        write(*,*) Ao100, Ao200, Ao500 
         write(*,*) sum(To200)/length1
            
-                
+        do I=1,length1 
+               write(7989, format4var) To100(I), XXX(I,1), YYY(I,1), ZZZ(I,1) 
+        end do         
  
+        write(467, formatexp) Ao1005, Ao2005, Ao5005 
+        write(467, formatexp) Ao10015, Ao20015, Ao50015 
+        write(467, formatexp) Ao10030, Ao20030, Ao50030
         end subroutine         
 end module entrainment

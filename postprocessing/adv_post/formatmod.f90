@@ -1,5 +1,6 @@
 module formatmod
 character(len=20)::formatzmax='(302F20.9)'
+character(len=20)::formatexp='(3F20.2)'
 character(len=20)::format1var='(F20.10)'
 character(len=20)::format3var='(i3, 2F20.10)'
 character(len=15)::formatnose='(I3,2F22.10)'
