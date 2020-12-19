@@ -939,7 +939,7 @@ subroutine e1vse2
         temp1=0
         temp2=0
         ep1=0
-        ep2=0 
+        ep2=0
 
           do zc=4,ZMAX-4
                 do rc=4,RMAX-4
@@ -968,7 +968,7 @@ subroutine e1vse2
 
                                 if ( plain .and. ZZZ(I,1).lt.centerline) then
                                         massout1= massout1+(1-EP_G1(I,t))*1950*3.*3.!Volume_Unit*rho_p
-                                        ep1=ep1+EPP(i,t) 
+                                        ep1=ep1+EPP(i,t)
                                         temp1=T_G1(i,t)+temp1
                                         sumo1=sumo1+1
                                 end if
@@ -986,6 +986,40 @@ subroutine e1vse2
            end do
                 write(1951,format11col) t, ep1/sumo1, ep2/sumo2, ve1/sume1, ve2/sume2, ri1/sume1, ri2/sume2, dpu1/sume1, dpu2/sume2, temp1/sumo1, temp2/sumo2, massout1, massout2
         end do
+end subroutine
+
+subroutine alongchannel
+
+        double precision, dimension(2)::N1, N2, U
+        double precision:: dy, dx, mag, ux, uy, vel1, vel2, mass, rhoC
+        double precision:: massalong, massc
+        do t =1,timesteps
+
+                do I=1,length1
+
+                        call edges(width, lambda, depth, XXX(I,1), slope, edge1,edge2, bottom, top)
+                        if ( EP_G1(I,t) .gt. 0.00) then
+                                if( channel) then
+                                       ux= U_G1(I,t)
+                                       uy= W_G1(I,t)
+
+                                       U = (/ ux, uy /)
+                                       dx = 1.0
+                                       dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
+                                       mag = sqrt(dy**2 + dx**2)
+                                       N1=(/ dx, dy /)
+                                       vel1=dot(U,N1)/mag
+                                       vel2=vel1/(sqrt(ux**2 + uy**2))
+
+                                       call density(I,t, mass, rhoC)
+                                       massalong=mass*vel2+massalong
+                                       massc=massc+mass
+                                end if
+                       end if
+                end do
+                write(*,*) t, massc
+        end do
+
 end subroutine
 
 

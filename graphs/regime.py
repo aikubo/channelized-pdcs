@@ -27,23 +27,13 @@ os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
 
 #import cm_xml_to_matplotlib as cm
 
-
 straight = [
     'SW7',
     'SV4',
     'SW4',
     'SV7',
 ]
-alllabels = [
-    'AVX4', 'AVZ4', 'AVY4', 'AWX4', 'AWZ4', 'AWY4', 
-    'BVX4', 'BVZ4', 'BVY4', 'BWY4', 'BWX4', 'BWZ4', 
-    'CVX4', 'CVZ4', 'CWY4', 'CVY4', 'CWX4', 'CWZ4',
-    'DVX4', 'DVY4', 'DVZ4', 'DWX4', 'DWY4', 'DWZ4',
-    'AVX7', 'AVZ7', 'AVY7', 'AWY7', 'AWX7', 'AWZ7',
-    'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
-    'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
-    'DVX7', 'DVY7', 'DVZ7', 'DWY7', 'DWZ7', 'DWX7',  
-    'SW7', 'SV4','SW4','SV7']
+v
 
 Schan= ['SV4', 'SV7'] #['SV4', 'SW4', 'SW7', 'SV7']
 
