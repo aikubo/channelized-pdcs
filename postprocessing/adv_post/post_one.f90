@@ -25,7 +25,7 @@ character(5)  :: zone
 integer,dimension(8) :: values
 
 logical:: expose, ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc, e1e2
-logical:: countspill, massxxx,  super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
+logical:: along, countspill, massxxx,  super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
 double precision:: scaleh=50.0
@@ -39,6 +39,7 @@ print*, date, time
 simlabel='impact'
 printstatus=0
 
+along=.FALSE.
 expose=.FALSE.
 e1e2=.FALSE.
 massxxx=.FALSE.
@@ -94,7 +95,7 @@ call openbin(500, 'W_G', W_G1)
 call openbin(600, 'U_S1', U_S1)
 call openbin(700, 'W_S1', W_S1)
 call openbin(800, 'V_S1', V_S1)
-!call opennotbin(900, 'P_G', P_G)
+call opennotbin(900, 'P_G', P_G)
 
 call handletopo('l1200_A20_W201', dxi, XXX, YYY, ZZZ)
 
@@ -167,7 +168,7 @@ if (countspill) call countspills
 
 if (e1e2) call e1vse2
 if (expose) call exposure 
-
+if (along) call alongchannel
 
 write(*,*) "volume", Volume_Unit
 write(*,*) "rho p", 1950

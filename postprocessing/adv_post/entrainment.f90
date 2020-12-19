@@ -221,6 +221,12 @@ module entrainment
            double precision:: Ao5005, Ao2005, Ao1005
            double precision:: Ao50015, Ao20015, Ao10015
            double precision:: Ao50030, Ao20030, Ao100300
+
+            ! area over TEMPT for X seconds outside channel
+           double precision:: oAo5005, oAo2005, oAo1005
+           double precision:: oAo50015, oAo20015, oAo10015
+           double precision:: oAo50030, oAo20030, oAo100300
+
            !whole domain record of time over temp (for all timesteps) 
 
            double precision, allocatable:: To500(:), To200(:), To100(:)
@@ -231,23 +237,28 @@ module entrainment
            filename='exposure.txt'
            call headerf(467, filename, simlabel, routine, DESCRIPTION,datatype)
 
+           routine="=entrainment/exposure"
+           description="Area over 100, 200, 500 C for 5, 15, 30s OUTSIDE CHANNEL"
+           datatype="rows are exposure times, columns are temperatures(100,200,500)"
+           filename='exposure_outside.txt'
+           call headerf(468, filename, simlabel, routine, DESCRIPTION,datatype)
 
            allocate(To500(length1))
            allocate(To200(length1))
            allocate(To100(length1)) 
-           open(7989, file="To100.txt")
+           !open(7989, file="To100.txt")
           do t=2,timesteps
                 DO i=1,length1 
-                        if (T_G1(I,t) .gt. 100+273 .and. T_G1(I,t-1) .gt. 100+273) then 
+                        if (T_G1(I,t) .ge. 100+273 .and. T_G1(I,t-1) .ge. 100+273) then 
                                 To100(i)=To100(i)+5
                         end if  
-                                  if (T_G1(I,t) .gt. 200+273 .and. T_G1(I,t-1) .gt. 200+273) then 
-                                        To200(i)=To200(i)+5
-                                  end if
+                        if (T_G1(I,t) .ge. 200+273 .and. T_G1(I,t-1) .ge. 200+273) then 
+                                      To200(i)=To200(i)+5
+                        end if
 
-                                        if (T_G1(I,t) .gt. 500+273 .and. T_G1(I,t) .gt. 500+273) then
-                                                To500(i)=To500(i)+5
-                                        end if   
+                       if (T_G1(I,t) .ge. 500+273 .and. T_G1(I,t-1) .ge. 500+273) then
+                                To500(i)=To500(i)+5
+                       end if   
                         
                 end do
          end do 
@@ -262,19 +273,20 @@ module entrainment
                 if (To100(I) .ge. 5) then 
                         Ao1005=Ao1005+9
                         if (To100(I) .ge. 15) Ao10015=Ao10015+9
-                        if (To100(I) .ge. 30) Ao10030=Ao10030+9        
-                        if (To200(I) .ge. 5) then 
+                        if (To100(I) .ge. 30) Ao10030=Ao10030+9
+                end if 
+        
+                if (To200(I) .ge. 5) then 
                                 Ao2005=Ao2005+9
                                 if (To200(I) .ge. 15) Ao20015=Ao20015+9
                                 if (To200(I) .ge. 30) Ao20030=Ao20030+9
-
-                                if (To500(I) .ge. 5) then 
+                end if 
+                 
+               if (To500(I) .ge. 5) then 
                                         Ao5005=Ao5005+9
                                         if (To500(I) .ge. 15) Ao50015=Ao50015+9
                                         if (To500(I) .ge. 30) Ao50030=Ao50030+9
-                                end if 
-                        end if 
-                 end if 
+                end if 
                 end if 
 
           end do 
@@ -283,12 +295,51 @@ module entrainment
 
         write(*,*) sum(To200)/length1
            
-        do I=1,length1 
-               write(7989, format4var) To100(I), XXX(I,1), YYY(I,1), ZZZ(I,1) 
-        end do         
- 
+        !do I=1,length1 
+        !       write(7989, format4var) To500(I), XXX(I,1), YYY(I,1), ZZZ(I,1) 
+        !end do         
+        write(*,*) "writing area" 
         write(467, formatexp) Ao1005, Ao2005, Ao5005 
         write(467, formatexp) Ao10015, Ao20015, Ao50015 
         write(467, formatexp) Ao10030, Ao20030, Ao50030
+        
+       do rc=3,RMAX-2
+         do yc=3,YMAX-2
+         do zc=3,ZMAX-2
+                call funijk(rc,yc,zc,I)
+                call iftop(I, toploc, plainloc)
+               
+                if (plainloc) then
+
+                if (To100(I) .ge. 5) then
+                        oAo1005=oAo1005+9
+                        if (To100(I) .ge. 15) oAo10015=oAo10015+9
+                        if (To100(I) .ge. 30) oAo10030=oAo10030+9
+                end if
+
+                if (To200(I) .ge. 5) then        
+                                oAo2005=oAo2005+9
+                                if (To200(I) .ge. 15) oAo20015=oAo20015+9
+                                if (To200(I) .ge. 30) oAo20030=oAo20030+9
+                end if
+
+               if (To500(I) .ge. 5) then
+                                        oAo5005=oAo5005+9
+                                        if (To500(I) .ge. 15) oAo50015=oAo50015+9
+                                        if (To500(I) .ge. 30) oAo50030=oAo50030+9
+                end if                
+
+               end if
+
+          end do
+          end do
+          end do
+        write(*,*) "writing outside area"
+        write(468, formatexp) oAo1005, oAo2005, oAo5005
+        write(468, formatexp) oAo10015, oAo20015,oAo50015
+        write(468, formatexp) oAo10030, oAo20030, oAo50030
+
+
+
         end subroutine         
 end module entrainment

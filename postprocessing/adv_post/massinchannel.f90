@@ -992,13 +992,18 @@ subroutine alongchannel
 
         double precision, dimension(2)::N1, N2, U
         double precision:: dy, dx, mag, ux, uy, vel1, vel2, mass, rhoC
-        double precision:: massalong, massc
-        do t =1,timesteps
+        double precision::truetop, massalong, massc
+        logical:: channel, plain
+        do t =2,timesteps
+                massalong=0
+                massc=0
+                do rc=3,RMAX-3
+                do yc=3,YMAX-3
+                do zc=3,ZMAX-3 
 
-                do I=1,length1
-
-                        call edges(width, lambda, depth, XXX(I,1), slope, edge1,edge2, bottom, top)
-                        if ( EP_G1(I,t) .gt. 0.00) then
+                        call funijk(rc, yc, zc, I)
+                        call edgesdose(width, lambda, depth,XXX(I,1),YYY(I,1),ZZZ(i,1), slope,truetop,channel,plain)
+                        if ( EPP(I,t) .gt. 0.01) then
                                 if( channel) then
                                        ux= U_G1(I,t)
                                        uy= W_G1(I,t)
@@ -1008,16 +1013,19 @@ subroutine alongchannel
                                        dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
                                        mag = sqrt(dy**2 + dx**2)
                                        N1=(/ dx, dy /)
-                                       vel1=dot(U,N1)/mag
-                                       vel2=vel1/(sqrt(ux**2 + uy**2))
+                                       vel1=dot_product(U,N1)/mag
+                                       vel2=vel1 !(sqrt(ux**2 + uy**2))
 
-                                       call density(I,t, mass, rhoC)
-                                       massalong=mass*vel2+massalong
-                                       massc=massc+mass
+                                       call density(I,t,rhoC,mass)
+                                       massalong=mass*vel2**2+massalong
+                                       massc=mass*(sqrt(ux**2 + uy**2))**2+massc
                                 end if
                        end if
                 end do
-                write(*,*) t, massc
+                end do 
+                end do
+                write(*,*) rc, yc, zc, I, ux, uy, U, dx, dy, mag, vel1, vel2, mass 
+                write(*,*) t, massalong/massc
         end do
 
 end subroutine

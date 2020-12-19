@@ -50,6 +50,12 @@ use filehead
                 double precision:: ztrace, dh, widthofhead 
                 double precision:: Usum, tsum, avgt, EPsum, sum1, avgEP, avgU
 
+                if ( width .le. dble(0.0)) then
+                        width=201
+                end if
+
+
+
                 traces= int(width/3)+1
 
                 allocate(isosurface(1212, 4, 304))
@@ -96,19 +102,13 @@ use filehead
                 pastYYY=0.0
                 distancetraveld=0
 
-                
+
                 DO I=1,length1 
                     IF (lambda .ne. 0.0) then
                     ztrace= lambda*.15*(sind(360*(XXX(I,1)/lambda)))+450
                     else
                     ztrace=450 
                     end if 
-
-
-                    !print*, ztrace
-                    if ( width .eq. dble(0.0)) then     
-                        width=201
-                    end if  
 
                     IF( ZZZ(I,1) .GT. ztrace-width/2 & 
                         .and. ZZZ(I,1) .lt.ztrace+width/2 ) THEN
