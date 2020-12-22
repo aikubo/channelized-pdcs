@@ -990,13 +990,29 @@ end subroutine
 
 subroutine alongchannel
 
-        double precision, dimension(2)::N1, N2, U
-        double precision:: dy, dx, mag, ux, uy, vel1, vel2, mass, rhoC
-        double precision::truetop, massalong, massc
+        double precision, dimension(2)::N1, N2, U, NC 
+        double precision:: dy, dx, ycomp, mag, ux, uy, vel1, vel2, mass, rhoC, pvel1
+        double precision:: pvel2, pervel, moutperp, mo1, mo2
+        double precision::truetop, massalong, massc, massc2, massout
+        double precision:: momentumout
         logical:: channel, plain
+
+          filename= 'momentum_avg.txt'
+          description="Fraction of momentum Along Channel, Along Channel Outside, Going out of the channel"
+          routine= "massdist/alongchannel"
+          datatype=" t   Alongchannel, Along Channel Outside, Out of the channel  "
+          call headerf(7488, filename, simlabel,routine,DESCRIPTION,datatype)
+
         do t =2,timesteps
                 massalong=0
                 massc=0
+                momentumout=0 
+                massout=0
+                massc2=0
+                moutperp=0 
+                mo1=0
+                mo2=0
+
                 do rc=3,RMAX-3
                 do yc=3,YMAX-3
                 do zc=3,ZMAX-3 
@@ -1004,28 +1020,48 @@ subroutine alongchannel
                         call funijk(rc, yc, zc, I)
                         call edgesdose(width, lambda, depth,XXX(I,1),YYY(I,1),ZZZ(i,1), slope,truetop,channel,plain)
                         if ( EPP(I,t) .gt. 0.01) then
-                                if( channel) then
                                        ux= U_G1(I,t)
                                        uy= W_G1(I,t)
 
                                        U = (/ ux, uy /)
-                                       dx = 1.0
+                                       dx = 0
+                                       ycomp=amprat*lambda*sin(2*pi*(XXX(I,1)/lambda))
                                        dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
                                        mag = sqrt(dy**2 + dx**2)
-                                       N1=(/ dx, dy /)
-                                       vel1=dot_product(U,N1)/mag
-                                       vel2=vel1 !(sqrt(ux**2 + uy**2))
+                                       NC=(/ dx/mag, dy/mag /)
+                                       N1=(/ dy/mag, -dx/mag /)
+                                       N2=(/ -dy/mag, dx/mag /)
+
+                                       pvel1= abs(dot_product(U,N1))
+                                       pvel2 = abs(dot_product(U,N2))
+                                       perpvel = max(vel1,vel2)
+
+                                       vel1=dot_product(U,NC)
 
                                        call density(I,t,rhoC,mass)
-                                       massalong=mass*vel2**2+massalong
-                                       massc=mass*(sqrt(ux**2 + uy**2))**2+massc
-                                end if
-                       end if
+                                       if (channel) then 
+                                                massalong=mass*vel1**2+massalong
+                                                massc=mass*((ux**2 + uy**2))+massc
+                                                momentumout=mass*(perpvel**2)+momentumout 
+                                                mo1=mo1+mass*(pvel1**2)
+                                                mo2=mo2+mass*(pvel2**2)
+
+                                       end if   
+                                       
+                                       if (plain) then 
+                                                moutperp=mass*perpvel**2+moutperp
+                                                massout=mass*vel1**2+massout
+                                                massc2=mass*(sqrt(ux**2 + uy**2))**2+massc2
+                                     
+                                        end if 
+                        end if 
                 end do
                 end do 
                 end do
-                write(*,*) rc, yc, zc, I, ux, uy, U, dx, dy, mag, vel1, vel2, mass 
-                write(*,*) t, massalong/massc
+                write(7488,format5vare) t, massalong/massc, momentumout/massc, mo1/massc, mo2/massc, massout/massc2
+                write(*,*) massalong/massc+momentumout/massc
+                write(*,*) (mo1+mo2+massalong)/massc
+
         end do
 
 end subroutine
