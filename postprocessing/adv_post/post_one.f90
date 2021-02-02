@@ -24,7 +24,7 @@ character(10) :: time
 character(5)  :: zone
 integer,dimension(8) :: values
 
-logical:: expose, ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc, e1e2
+logical:: expose, straights, ecoef,EPPdx8, slices, topo, fd, rigrad, ent, massalloc, e1e2
 logical:: along, countspill, massxxx,  super,UGdx8, spill, TGdx8, xstream, ave, energy, tau
 double precision, allocatable:: isosurface(:,:,:)
 double precision, dimension(:):: current(4)
@@ -60,6 +60,7 @@ ave=.FALSE.
 energy=.FALSE.
 tau=.FALSE.
 countspill=.FALSE.
+straights=.FALSE.
 
 allocate(isosurface(1200,4,15))
 RMAX=404
@@ -169,7 +170,7 @@ if (countspill) call countspills
 if (e1e2) call e1vse2
 if (expose) call exposure 
 if (along) call alongchannel
-
+if (straights) call SLICES_STRAIGHT
 write(*,*) "volume", Volume_Unit
 write(*,*) "rho p", 1950
 

@@ -102,6 +102,33 @@ contains
 
         end subroutine
 
+        SUBROUTINE SLICES_STRAIGHT
+        use maketopo
+        implicit none
+        double precision:: ZLOC, XLOC
+        print*, "slices"
+        XLOC=501
+        call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
+        ZLOC=450  ! mid line
+        print*, XLOC, ZLOC
+        CALL SLICE(width, depth, lambda, XLOC, ZLOC, 'head',  10301)
+        print*, XLOC, ZLOC
+        XLOC=1002
+        ZLOC=450
+        call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
+        print*, XLOC, ZLOC
+
+        call slice(width, depth, lambda, XLOC, ZLOC, 'body', 10302)
+
+        XLOC=252
+        call edges(width, lambda, depth, XLOC, slope, edge1, edge2, bottom, top)
+        ZLOC=450
+        print*, XLOC, ZLOC
+        call slice(width, depth, lambda, XLOC, ZLOC, 'tail', 10303)
+
+
+        end subroutine
+
 
 SUBROUTINE countspills
 implicit none

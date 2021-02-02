@@ -824,12 +824,13 @@ module massdist
 
 
        subroutine overspill
-        double precision:: mass
-
+        double precision:: mass, top, edge1, edge2
+        double precision:: avgepp1, avgepp2
+        logical:: inchannel, plain
           filename= 'overspill_avg.txt'
           description="Average values in overspilled current"
-          routine= "massdist/ovespill"
-          datatype=" t   T_G   U_G   V_G   W_G   U_S1   DPU "
+          routine= "massdist/overspill"
+          datatype=" t EPP Rho  T_G   U_G   V_G   W_G   U_S1   DPU "
           call headerf(7487, filename, simlabel,routine,DESCRIPTION,datatype)
 
 
@@ -839,6 +840,10 @@ module massdist
                 sum_1 = 0
                 sum_2 = 0
                 sum_3 = 0
+                avgepp1=0
+                avgepp2=0
+                avgrho1=0
+                avgrho2=0
                 avgt = 0
                 avgt2 = 0
                 avgt3 = 0
@@ -859,51 +864,49 @@ module massdist
                 avgdpu2=0
 
 
-            DO I=1,length1
-               call edges(width, lambda, depth, XXX(I,1), slope, edge1,edge2, bottom, top)
-                if (YYY(I,1) .gt. top) then
+            DO rc=3,RMAX-3
+                do yc=3,YMAX-3
+                do zc=3,ZMAX-3
+
+                call funijk(rc,yc,zc, I)
+                call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1),ZZZ(I,1),slope,top,inchannel, plain)
+                if (YYY(I,1) .gt. top .and. plain) then
 
                  call density(I,t, rho_c, mass)
-                        if( rho_c < rho_dry) then
 
-                                IF (EPP(I,t) .Gt. min_dense .and.EPP(I,t) .lt. max_dilute) THEN
+                        IF (EPP(I,t) .Gt. min_dense .and.EPP(I,t) .lt. max_dilute) THEN
+                              if ( rho_c > rho_dry) then 
                                sum_1 = sum_1 +1
+                               avgepp1=EPP(I,t)+avgepp1
+                               avgrho1=rho_c+avgrho1
                                avgt = T_G1(I,t) + avgt
                                avgu = U_G1(I,t) + avgu
                                avgv = U_G1(I,t) + avgv
                                avgw = V_G1(I,t) + avgw
                                avgus = U_S1(I,t) + avgus
                                avgdpu = DPU(I,t) + avgdpu
-                        END IF
-
-                        IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt.min_dilute) THEN
-                               sum_2 = sum_2 +1
+                              else
+                                sum_2 = sum_2 +1
+                                avgepp2=EPP(I,t)+avgepp2
+                               avgrho2=rho_c+avgrho2
                                avgt2 = T_G1(I,t) + avgt2
                                avgu2 = U_G1(I,t) + avgu2
                                avgv2 = V_G1(I,t) + avgv2
                                avgw2 = W_G1(I,t) + avgw2
                                avgus2 = U_S1(I,t) + avgus2
-                               avgdpu2 = dpu(I,t) + avgdpu2
+                               avgdpu2 = dpu(I,t) + avgdpu2 
 
+
+
+                             end if 
                         END IF
-
-                        IF (EPP(I,t) .Gt. max_dense .and. EPP(I,t) .lt.min_dilute) THEN
-                               sum_3 = sum_3 +1
-                               avgt3 = T_G1(I,t) + avgt3
-                               avgu3 = U_G1(I,t) + avgu3
-                               avgv3 = V_G1(I,t) + avgv3
-                               avgw3 = W_G1(I,t) + avgw3
-                               avgus3 = U_S1(I,t) + avgus3
-                               avgdpu3 = dpu(I,t) + avgdpu3
-                               write(*,*) sum_3
-                        END IF
-
-                        end if
-                    end if
+                   end if
                 END DO
+                end do 
+                end do 
 
                      print*, "writing average"
-                     WRITE(7487, formatavgx2) t, avgt/sum_1, avgu/sum_1,avgv/sum_1, avgw/sum_1, avgdpu/sum_1, avgt2/sum_2, avgu2/sum_2,avgv2/sum_2, avgw2/sum_2, avgdpu2/sum_2
+                     WRITE(7487, formatavgx2) t, avgrho1/sum1, avgepp1/sum1, avgt/sum_1, avgu/sum_1,avgv/sum_1, avgw/sum_1, avgdpu/sum_1, avgrho2/sum2, avgepp2/sum2, avgt2/sum_2, avgu2/sum_2,avgv2/sum_2, avgw2/sum_2, avgdpu2/sum_2
                 end do
         end subroutine
 
@@ -990,17 +993,18 @@ end subroutine
 
 subroutine alongchannel
 
-        double precision, dimension(2)::N1, N2, U, NC 
-        double precision:: dy, dx, ycomp, mag, ux, uy, vel1, vel2, mass, rhoC, pvel1
+        double precision, dimension(3)::N1, N2, U, NC, NP
+        double precision, dimension(2)::N12, N22, U2, NC2, NP2 
+        double precision:: dy, dx, dz, uz, ycomp, mag, mag2, ux, uy, vel1, vel2, mass, rhoC, pvel1
         double precision:: pvel2, pervel, moutperp, mo1, mo2
         double precision::truetop, massalong, massc, massc2, massout
-        double precision:: momentumout
+        double precision:: momentumout, mupi, mx, my, mz
         logical:: channel, plain
 
           filename= 'momentum_avg.txt'
           description="Fraction of momentum Along Channel, Along Channel Outside, Going out of the channel"
           routine= "massdist/alongchannel"
-          datatype=" t   Alongchannel, Along Channel Outside, Out of the channel  "
+          datatype=" t   Alongchannel, PerpChannel, Perp1, Perp2,  UP, OutsideChannel "
           call headerf(7488, filename, simlabel,routine,DESCRIPTION,datatype)
 
         do t =2,timesteps
@@ -1012,6 +1016,10 @@ subroutine alongchannel
                 moutperp=0 
                 mo1=0
                 mo2=0
+                mup=0
+                mz=0
+                mx=0
+                my=0
 
                 do rc=3,RMAX-3
                 do yc=3,YMAX-3
@@ -1021,31 +1029,46 @@ subroutine alongchannel
                         call edgesdose(width, lambda, depth,XXX(I,1),YYY(I,1),ZZZ(i,1), slope,truetop,channel,plain)
                         if ( EPP(I,t) .gt. 0.01) then
                                        ux= U_G1(I,t)
-                                       uy= W_G1(I,t)
+                                       uz= W_G1(I,t)
+                                       uy=V_G1(I,t)
 
-                                       U = (/ ux, uy /)
-                                       dx = 0
-                                       ycomp=amprat*lambda*sin(2*pi*(XXX(I,1)/lambda))
-                                       dy = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
-                                       mag = sqrt(dy**2 + dx**2)
-                                       NC=(/ dx/mag, dy/mag /)
-                                       N1=(/ dy/mag, -dx/mag /)
-                                       N2=(/ -dy/mag, dx/mag /)
+                                       U = (/ ux, uz, uy /)
 
-                                       pvel1= abs(dot_product(U,N1))
-                                       pvel2 = abs(dot_product(U,N2))
-                                       perpvel = max(vel1,vel2)
+                                       U2=(/ ux, uz/)
+                                       dx = 1!-1*slope
+                                       dz = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
+                                       dy =-1 
+                                       if (lambda < 1) dz= 1
+                                       mag = sqrt(dx**2 + dz**2 +dy**2)
+                                       
+                                       mag2=sqrt(dx**2 + dz**2)
+                                       NC=(/ dx/mag, dz/mag, dy/mag /)
+                                       NC2=(/dx/mag2, dz/mag2/)
+                                       N1=(/ dz/mag, -dx/mag, dy/mag /)
+                                       N12=(/ dz/mag2, -dx/mag2/)
+                                       N2=(/ -dz/mag, dx/mag, dy/mag /)
+                                       N22=(/-dz/mag2, dx/mag2/)
 
-                                       vel1=dot_product(U,NC)
+                                       NP=(/ dx, dz, dble(0.0) /)
+                                       NP2=(/dx, dz/)                                
+
+                                       pvel1= abs(dot_product(U2,N12))
+                                       pvel2 = abs(dot_product(U2,N22))
+                                       perpvel = max(pvel1,pvel2)
+        
+                                       vel1=dot_product(U2,NC2)
 
                                        call density(I,t,rhoC,mass)
                                        if (channel) then 
                                                 massalong=mass*vel1**2+massalong
-                                                massc=mass*((ux**2 + uy**2))+massc
+                                                massc=mass*((ux**2 +uz**2+ uy**2))+massc
                                                 momentumout=mass*(perpvel**2)+momentumout 
                                                 mo1=mo1+mass*(pvel1**2)
                                                 mo2=mo2+mass*(pvel2**2)
-
+                                                mup=mass*(dot_product(U,NP))**2+mup
+                                                mx=mx+mass*ux**2
+                                                my=my+mass*uy**2
+                                                mz=mz+mass*uz**2                                        
                                        end if   
                                        
                                        if (plain) then 
@@ -1058,10 +1081,13 @@ subroutine alongchannel
                 end do
                 end do 
                 end do
-                write(7488,format5vare) t, massalong/massc, momentumout/massc, mo1/massc, mo2/massc, massout/massc2
-                write(*,*) massalong/massc+momentumout/massc
-                write(*,*) (mo1+mo2+massalong)/massc
-
+                write(7488,format6vare) t, massalong/massc, momentumout/massc, mo1/massc, mo2/massc, mup/massc2, massout/massc2
+                !write(*,*) massalong/massc+momentumout/massc+mup/massc2
+                write(*,*) (mx+my+mz)/massc
+                write(*,*) (massalong+momentumout+mup)/massc
+                write(*,*) (massalong+momentumout)/(mx+my)
+                write(*,*) "                                       "
+               
         end do
 
 end subroutine
