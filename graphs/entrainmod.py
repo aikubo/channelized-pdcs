@@ -18,7 +18,7 @@ def entrain(labels, data):
         vol=data[sim]
         dv=[]
         dv.append(0)
-        for i in range(1,8):
+        for i in range(1,7):
             ent=vol[i]-vol[i-1]
             dv.append(ent)
 

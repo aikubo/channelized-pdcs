@@ -236,11 +236,17 @@ def plotallcol( fig, axes, labels, fid, df1, df2, df3, df4, df5):
     horizplot(df2, loc, labels)
     axes[1].set_xlabel('Velocity (m/s)',fontsize=fonts)
     loc.set_ylim([0,35])
-    loc.set_xlim([-7,30])
+    loc.set_xlim([-7,35])
+    
     loc.spines['right'].set_color('none')
     loc.spines['top'].set_color('none')
     loc.spines['left'].set_position(('outward', 5))
     loc.set_xticks([0,10, 20,30])
+    
+    if "S" in labels:
+        loc.set_xlim([-7,55])
+        loc.set_xticks([0,10, 20,30, 40, 50])
+        
     loc.xaxis.set_minor_locator(MultipleLocator(2))
     loc.tick_params(which='both')
 

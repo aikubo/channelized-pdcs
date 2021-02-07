@@ -11,6 +11,22 @@ def openmine(labels, path2file, fid, cols, out, colspec='infer', width='infer'):
         temp_1.columns=cols
         temp_all[sim]=temp_1[out]
     return temp_all
+
+def exposure(labels,path):
+    cols=['Ao100', 'Ao200', 'Ao500']
+    fid='_exposure.txt'
+    Ao100=openmine(labels,path, fid, cols, cols[0])
+    Ao200=openmine(labels,path, fid, cols, cols[1])
+    Ao500=openmine(labels,path, fid, cols, cols[2])
+    
+    fid='_exposure_outside.txt'
+    OAo100=openmine(labels,path, fid, cols, cols[0])
+    OAo200=openmine(labels,path, fid, cols, cols[1])
+    OAo500=openmine(labels,path, fid, cols, cols[2])
+    
+    
+    return Ao100, Ao200, Ao500, OAo100, OAo200, OAo500
+
 def e1e2(labels, path):
     cols=['t', 'EP1', 'EP2', 'V1', 'V2', 'Ri1', 'Ri2', 'DPU1', 'DPU2', 'T1', 'T2', 'M1', 'M2']
     fid='_e2vse1.txt'
@@ -44,7 +60,7 @@ perpx=['Perpx']
 
 def openspillavg(labels, path):
     fid='_overspill_avg.txt'
-    cols=['time', 'EP_P', 'Rho', 'T_G','U_G','V_G','W_G','DPU',  'bEP_P', 'bRho', 'bT_G','bU_G','bV_G','bW_G','bDPU' ]
+    cols=['time',  'Rho', 'EP_P', 'T_G','U_G','V_G','W_G','DPU',  'bRho', 'bEP_P', 'bT_G','bU_G','bV_G','bW_G','bDPU' ]
     colspec= [[1,4], [10,26], [33, 48], [55,70], [75,92], [100,114], [119,135],
               [140, 155], [160, 181], [187,195], [208,221], [231, 247], [253,265], [275,289], [293,305]]
     spillTG=openmine(labels, path, fid, cols, 'T_G', colspec)-273
@@ -113,6 +129,18 @@ def openmassdist(labels, path):
     areaout=openmine(labels, path, fid, cols, "AreaOut", colspec)
 
     return tot, avulsed, buoyant, massout, area, areaout
+
+
+def area_values(labels,path):
+    fid='_massinchannel.txt'
+    # t Total Mass (m^3) TotalOutOfChannel Dense InChannel GT1ScaleH BuoyantOut DenseOut
+    cols=['time', 'Total Mass', "Mass outside", "Dense", "InChannel", "ScaleH", "Buoyant", "Avulsed", "Areat", "Carea", "Area", "AreaOut"]
+    colspec=[[1,6], [9,30], [37,55], [68,79], [93,105], [118, 130], [143,157], [168,180 ], [185,205], [212,230], [242,255], [267,279] ]
+    totalarea=openmine(labels, path, fid, cols, "Areat", colspec)
+    
+    totaloutside= totalarea-openmine(labels, path, fid, cols, "Carea", colspec)
+    return totalarea, totaloutside
+
 
 def openent(labels,path):
     fid='_entrainment.txt'

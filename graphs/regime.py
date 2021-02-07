@@ -24,7 +24,15 @@ rcParams['ps.fonttype'] = 42
 ## LAPTOP
 path = "/home/akh/myprojects/channelized-pdcs/graphs/processed/"
 os.chdir('/home/akh/myprojects/channelized-pdcs/graphs/')
-
+alllabels = [
+    'AVX4', 'AVZ4', 'AVY4', 'AWX4', 'AWZ4', 'AWY4', 
+    'BVX4', 'BVZ4', 'BVY4', 'BWY4', 'BWX4', 'BWZ4', 
+    'CVX4', 'CVZ4', 'CWY4', 'CVY4', 'CWX4', 'CWZ4',
+    'DVX4', 'DVY4', 'DVZ4', 'DWX4', 'DWY4', 'DWZ4',
+    'AVX7', 'AVZ7', 'AVY7', 'AWY7', 'AWX7', 'AWZ7',
+    'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
+    'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
+    'DVX7', 'DVY7', 'DVZ7', 'DWY7', 'DWZ7', 'DWX7']
 #import cm_xml_to_matplotlib as cm
 
 straight = [
@@ -33,7 +41,7 @@ straight = [
     'SW4',
     'SV7',
 ]
-v
+
 
 Schan= ['SV4', 'SV7'] #['SV4', 'SW4', 'SW7', 'SV7']
 
@@ -85,6 +93,7 @@ frontend=[]
 bulkent=[]
 totalmass=[]
 out=[]
+bout=[]
 
 
 for sim in alllabels:
@@ -95,6 +104,7 @@ for sim in alllabels:
     totalmass.append(y)
     avulsed_kg.append(x * y)
     out.append(massout[sim].max())
+    bout.append(buoyant[sim].max())
     
 def justmax(data):
     labels=data.columns
@@ -200,7 +210,7 @@ r_sq5=[]
 def rforoverk(x,y, k):
     x=np.array(x)
     y=np.array(y)
-    mask=[x > k]
+    mask=np.array([x > k])
     correlation_matrix = np.corrcoef(x[mask], y[mask])
     correlation_xy = correlation_matrix[0,1]
     r2=(correlation_xy**2)
@@ -234,53 +244,58 @@ size=0.5*((np.array(vol))/10000)**2
 kdist_norm=kdist_norm
 #wave='k'
 
-areas_norm=np.array(aout)/np.array(inletrat)
-scat = plotandR(kdist_norm, areas_norm, ax[0][0], 'k', size)
-ax[0][0].set_xlabel('Normalized Curvature', fontsize=8)
-ax[0][0].set_ylabel('Area Innudated', fontsize=8)
+# areas_norm=np.array(aout)/np.array(inletrat)
+# scat = plotandR(kdist_norm, areas_norm, ax[0][0], 'k', size)
+# ax[0][0].set_xlabel('Normalized Curvature', fontsize=8)
+# ax[0][0].set_ylabel('Area Innudated', fontsize=8)
 
 
 
-## Front location vs meander width
-scat = plotandR(kdist_norm, slen_norm, ax[0][1], 'k', size)
-ax[0][1].set_xlabel('Normalized Curvature', fontsize=8)
-ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
+# ## Front location vs meander width
+# scat = plotandR(kdist_norm, slen_norm, ax[0][1], 'k', size)
+# ax[0][1].set_xlabel('Normalized Curvature', fontsize=8)
+# ax[0][1].set_ylabel('Distance Travelled', fontsize=8)
 
-kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
-#leg=ax[0][1].legend(*scat.legend_elements(**kw), )
-#leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
-# ax[0][1].add_artist(leg)
-# cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
-# cbar.ax.tick_params(labelsize=8)
+# kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
+# #leg=ax[0][1].legend(*scat.legend_elements(**kw), )
+# #leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
+# # ax[0][1].add_artist(leg)
+# # cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
+# # cbar.ax.tick_params(labelsize=8)
 
-# ### mass avulsed vs curvature metric
-# # mass = mass avuled/total mass *inlet/wave
-# # curvature = k*meander distance
+# # ### mass avulsed vs curvature metric
+# # # mass = mass avuled/total mass *inlet/wave
+# # # curvature = k*meander distance
 
 
-scat=plotandR(kdist_norm, mass_norm,  ax[1][0], 'k', size)
-ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
-ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
+# scat=plotandR(kdist_norm, mass_norm,  ax[1][0], 'k', size)
+# ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
+# ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
                     
                     
 
-# interestingly area innudated does not corelate with entrainment 
-# but mass overspilled does
+# # interestingly area innudated does not corelate with entrainment 
+# # but mass overspilled does
 
-scat=plotandR(kdist_norm, velz, ax[1][1],'k', size)
-ax[1][1].set_ylabel('Cross Stream Velocity (m/s)', fontsize=8)
-ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
+# scat=plotandR(kdist_norm, velz, ax[1][1],'k', size)
+# ax[1][1].set_ylabel('Cross Stream Velocity (m/s)', fontsize=8)
+# ax[1][1].set_xlabel('Normalized Curvature', fontsize=8)
 
-# scat=plotandR(np.array(vol)/(np.array(width)*1200*np.array(depth)),  dpumax, ax[1][1],'k', size)
-# ax[1][1].set_xlabel('Carrying Capacity', fontsize=8)
-# ax[1][1].set_ylabel('Dynamic pressure', fontsize=8)
-# ax[1][1].set_xlim([0.002, 0.008])
+# # scat=plotandR(np.array(vol)/(np.array(width)*1200*np.array(depth)),  dpumax, ax[1][1],'k', size)
+# # ax[1][1].set_xlabel('Carrying Capacity', fontsize=8)
+# # ax[1][1].set_ylabel('Dynamic pressure', fontsize=8)
+# # ax[1][1].set_xlim([0.002, 0.008])
 
-plt.tight_layout()
+# plt.tight_layout()
 
 
 
-print(r_squared)
+# print(r_squared)
+
+
+fig2, ax2=plt.subplots()
+ax2.scatter(kdist_norm, Z, c='k', s=size)
+ax2.scatter(kdist_norm, bout, c='k', s=size)
 
 #savefigure("regimeNOV")
 

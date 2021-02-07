@@ -44,7 +44,8 @@ alllabels = [
     'AVX7', 'AVZ7', 'AVY7', 'AWY7', 'AWX7', 'AWZ7',
     'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
     'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
-    'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7']
+    'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7',
+    'SW7', 'SV4','SW4','SV7']
 
 Schan= ['SW7', 'SV4','SW4','SV7', 'uncon'] #['SV4', 'SW4', 'SW7', 'SV7']
 
@@ -120,7 +121,7 @@ h3=(UG**2)*(1/drho)/(2*g)
 g_star=g*drho
 froude=UG/(np.sqrt(g_star*np.array(inlet)))
 x=np.array(amp)/np.array(width)
-y=(se-depth) #/depth
+y=(se)/depth
 mass2=(50*np.array(mass))**2
 
 
@@ -128,18 +129,20 @@ rcParams['pdf.fonttype'] = 42
 rcParams['ps.fonttype'] = 42
 plt.style.use("seaborn-darkgrid")
 size=0.5*((np.array(vol))/10000)**2
-fig,ax=plt.subplots(1,3)
+fig,ax=plt.subplots(1,2)
 
 
-scat=ax[0].scatter(x, y, s=size, c=mass, cmap=matplotlib.cm.RdBu_r)
+scat=ax[0].scatter(x, y, s=size, c='k')
 kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
-leg=ax[1].legend(*scat.legend_elements(**kw), )
+leg=ax[0].legend(*scat.legend_elements(**kw), )
 leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
 ax[0].set_ylabel('Normalized Splash Height')
 ax[0].set_xlabel('Normalized Curvature')
 
-ax[1].scatter(be_max/(depth*np.array(width)*3),y, s=size,  c=mass, cmap=matplotlib.cm.RdBu_r)
-ax[1].set_xlabel('Normalized Entrainment')
+# ax[1].scatter(be_max/(depth*np.array(width)*3),y, s=size, cmap=matplotlib.cm.RdBu_r)
+# ax[2].scatter(de_max/(depth*np.array(width)*3),y, s=size, cmap=matplotlib.cm.RdBu_r)
+
+# ax[1].set_xlabel('Normalized Entrainment')
 correlation_matrix = np.corrcoef(x, y)
 correlation_xy = correlation_matrix[0,1]
 print("R", correlation_xy**2)
@@ -148,15 +151,32 @@ correlation_matrix = np.corrcoef(be_max/(depth*np.array(width)*1200) , y)
 correlation_xy = correlation_matrix[0,1]
 print("R", correlation_xy**2)
 
-
-ax[2].scatter(eppspill,y, s=size, c=mass, cmap=matplotlib.cm.RdBu_r)
-
-ax[2].set_xlabel('Spill Volume Fraction ')
-correlation_matrix = np.corrcoef(eppspill, y)
-correlation_xy = correlation_matrix[0,1]
-print("R", correlation_xy**2)
-
+ax[1].scatter(eppspill, y, s=size, c='k') #s=200*np.array(mout*1000)
+ax[1].set_xlabel('Average Volume Fraction Particles in Overspill')
+#
 plt.tight_layout()
+savefigure('superel')
+
+# fig2,ax2=plt.subplots(2)
+# ax2[0].scatter(x, be_max/(depth*np.array(width)*3), s=size, c='b')
+# ax2[0].set_ylabel('Normalized Bulk Entrainment')
+# kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
+# leg=ax2[0].legend(*scat.legend_elements(**kw), )
+# leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
+
+# ax2[1].scatter(x, de_max/(depth*np.array(width)*3), s=size, c='orange')
+# ax2[1].set_ylabel('Normalized Dense Isosurface Entrainment')
+# ax2[1].set_xlabel('Normalized Curvature')
+
+# savefigure("entrainment2")
+# ax[2].scatter(x, eppspill, s=size, cmap=matplotlib.cm.RdBu_r)
+
+# ax[2].set_xlabel('Average Overspill Volume Fraction ')
+# correlation_matrix = np.corrcoef(eppspill, y)
+# correlation_xy = correlation_matrix[0,1]
+# print("R", correlation_xy**2)
+
+# plt.tight_layout()
     
 # fig,ax=plt.subplots()
 # ax.scatter(mass,h1, c='b')

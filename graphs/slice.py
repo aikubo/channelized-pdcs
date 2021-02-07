@@ -71,6 +71,7 @@ def openslicet(path2file, labels, twant, loc):
         TG.append(slicet['TG'])
         DPU.append(slicet['DPU'])
         Ri.append(slicet['Ri'])
+        print(UG)
 
         del slicet
     slice_UG=pd.concat(UG, axis=1, ignore_index=True)

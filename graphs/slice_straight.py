@@ -27,20 +27,16 @@ os.chdir("/home/akh/myprojects/channelized-pdcs/graphs/")
 #alllabels.sort()
 labels= [  'SV7' ] 
 def openslicet(path2file, labels, twant, loc):
-        
-    if loc in "in":
-        slicefid='_slice_middle.txt'
-    elif loc in "half" :
-        slicefid='_slice_halfl.txt'
-        labels = [k for k in labels if "S" not in k]
-    elif loc in "onel" :
-        slicefid='_slice_onel.txt'
-        labels = [k for k in labels if "S" not in k]
-    elif loc in "quart" :
-        slicefid='_slice_3quarter_100m.txt'
-        labels = [k for k in labels if "S" not in k]
-    print(labels)
-    
+    print(labels, loc)
+    if loc in "body":
+        slicefid='_slice_body.txt'
+    elif loc in "head" :
+        slicefid='_slice_head.txt'
+
+    elif loc in "tail" :
+        slicefid='_slice_tail.txt'
+
+
     slice_EPP=pd.DataFrame()
     slice_UG=pd.DataFrame()
     slice_TG=pd.DataFrame()
@@ -71,6 +67,7 @@ def openslicet(path2file, labels, twant, loc):
         TG.append(slicet['TG'])
         DPU.append(slicet['DPU'])
         Ri.append(slicet['Ri'])
+        print(UG)
 
         del slicet
     slice_UG=pd.concat(UG, axis=1, ignore_index=True)
@@ -169,7 +166,9 @@ def opensliceavg(path2file, labels, loc):
 # sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= opensliceavg(path, labels, 'half')
 # sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= opensliceavg(path, labels, 'quart')
 
-slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(path, labels, 8,  'in')
+slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(path, labels, 5,  'tail')
+sliceh_UG, sliceh_EPP, sliceh_DPU, sliceh_TG, sliceh_Ri= openslicet(path, labels, 7,  'head')
+sliceb_UG, sliceb_EPP, sliceb_DPU, sliceb_TG, sliceb_Ri= openslicet(path, labels, 7,  'body')
 #sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(path, labels, 8, 'one')
 #sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= openslicet(path, labels, 8, 'half')
 #sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= openslicet(path, labels, 8, 'quart')
@@ -198,12 +197,15 @@ fid="col_straight"
 #fid = 'col_in_comparewave'
 ###GREEEN
 plotallcol(fig, axes, labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
+plotallcol(fig, axes, labels, fid, sliceb_EPP, sliceb_UG, sliceb_DPU, sliceb_Ri, sliceb_TG)
+plotallcol(fig, axes, labels, fid, sliceh_EPP, sliceh_UG, sliceh_DPU, sliceh_Ri, sliceh_TG)
 #plt.draw()
 #plt.pause(20)
 #plt.savefig('slicesPAPERALL_AVERAGE.eps', dpi=600)
-
+axes[1].set_xlim([-7, 65])
+axes[1].set_xticks([0,10, 20,30, 40, 50, 60])
 for i in range(4):
     axes[i].set_ylim([0,35])
 plt.tight_layout()
 
-plt.savefig('SLICES_straight.eps', dpi=300)
+plt.savefig('JANSLICES_straight.eps', dpi=300)
