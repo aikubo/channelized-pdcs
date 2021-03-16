@@ -130,6 +130,8 @@ rcParams['ps.fonttype'] = 42
 plt.style.use("seaborn-darkgrid")
 size=0.5*((np.array(vol))/10000)**2
 fig,ax=plt.subplots(1,2)
+fw,fl=[10/2.54, 7/2.54]
+fig.set_size_inches(fw,fl)
 
 
 scat=ax[0].scatter(x, y, s=size, c='k')
@@ -152,10 +154,10 @@ correlation_xy = correlation_matrix[0,1]
 print("R", correlation_xy**2)
 
 ax[1].scatter(eppspill, y, s=size, c='k') #s=200*np.array(mout*1000)
-ax[1].set_xlabel('Average Volume Fraction Particles in Overspill')
+#ax[1].set_xlabel('Average Volume Fraction Particles in Overspill')
 #
 plt.tight_layout()
-savefigure('superel')
+fig.savefig('superel.eps', dpi=600)
 
 # fig2,ax2=plt.subplots(2)
 # ax2[0].scatter(x, be_max/(depth*np.array(width)*3), s=size, c='b')

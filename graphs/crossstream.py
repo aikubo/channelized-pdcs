@@ -126,5 +126,5 @@ leg=plt.legend((scat1,scat2,scat3),
 # kw=dict(prop="sizes", num=12, func= lambda s: (5-(np.sqrt(s)/3)))
 # leg=ax2.legend(*scat.legend_elements(**kw), )
 leg.set_title('Volume Fraction Particles (-log)', prop={'size':8})
-savefigure('massfraction')
+fig2.savefig('massfraction.eps', dpi=600)
 #ax2.legend('Overspilled', 'Buoyant Plume', 'Reflected')

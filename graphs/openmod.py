@@ -12,6 +12,18 @@ def openmine(labels, path2file, fid, cols, out, colspec='infer', width='infer'):
         temp_all[sim]=temp_1[out]
     return temp_all
 
+def openmomentum(labels,path):
+    cols=['t', 'InChannel', 'OutChannel', 'InAlong', 'InPerp', 'OutAlong', 'OutPerp']
+    fid='_momentum_avg.txt'
+    InC=openmine(labels,path,fid,cols,cols[1])
+    OC=openmine(labels,path,fid,cols,cols[2])
+    InCAlong=openmine(labels,path,fid,cols,cols[3])
+    InCPerp=openmine(labels,path,fid,cols,cols[4])
+    OCAlong=openmine(labels,path,fid,cols,cols[5])
+    OCPerp=openmine(labels,path,fid,cols,cols[6])
+    
+    return InC, OC, InCAlong, InCPerp, OCAlong, OCPerp
+
 def exposure(labels,path):
     cols=['Ao100', 'Ao200', 'Ao500']
     fid='_exposure.txt'

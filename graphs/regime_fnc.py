@@ -71,8 +71,8 @@ def paramlists(labels, Xval, Yval):
     X = []
     for sim in labels:
         param = labelparam(sim)
-        Y.append(param.get_value(0, Yval))
-        X.append(param.get_value(0, Xval))
+        Y.append(param.at[0, Yval])
+        X.append(param.at[0, Xval])
     return X, Y
 
 
