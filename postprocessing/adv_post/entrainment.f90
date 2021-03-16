@@ -141,7 +141,7 @@ module entrainment
                         avg10=0
                         avgdense=0
                          do rc=l1,l2
-                           do zc=r1,r2
+                           do zc=3, RMAX-3
                                 do yc= 20,YMAX-4
                                  call funijk( rc, yc, zc, I)
                                  !write(*,*) "Istart", I  
@@ -164,7 +164,7 @@ module entrainment
                                         
                                
 
-                                   if ( EPP(I,t) .lt. 0.51 .and. EPP(I,t) .gt. 0.01) then
+                                   if ( EPP(I,t) .le. 0.51 .and. EPP(I,t) .gt. 0.01) then
                                                 avgdense=avgdense+YYY(I,1)-top+3
                                                 sum2=sum2+1
                                   !      write(*,*) "Y", YYY(I,1) !-top+3

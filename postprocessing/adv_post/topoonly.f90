@@ -16,13 +16,13 @@ use sinplane
 implicit none
 integer:: tsinplane 
 
-tsinplane=3
+tsinplane=4
 RMAX=404
 YMAX=154
 ZMAX=302
 length1=RMAX*YMAX*ZMAX
-width=201
-lambda=1200
+width=300
+lambda=300
 timesteps=8
 tstart=3
 tstop=timesteps
@@ -36,7 +36,7 @@ call openbin(100, 'EP_G', EP_G1)
 !call openbin(400, 'V_G', V_G1)
 !call openbin(500, 'W_G', W_G1)
 call  logvolfrc(EP_G1, EPP)
-call handletopo('l1200_A15_W201',dble(3.0), XXX, YYY, ZZZ)
+call handletopo('l300_A15_W300',dble(3.0), XXX, YYY, ZZZ)
 
 !call writedxtopo
 

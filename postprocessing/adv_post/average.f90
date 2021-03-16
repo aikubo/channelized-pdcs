@@ -58,6 +58,8 @@ avgEP2=0
 avgEP3=0
 
 do I= 2, length1
+
+        ! whole current, 0.001 to 6.5
         IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. max_dilute) THEN
                sum_1 = sum_1 +1
                avgt = T_G1(I,t) + avgt
@@ -73,6 +75,7 @@ do I= 2, length1
 
         END IF
 
+        ! Dense, 0.001 to 0.51
         IF (EPP(I,t) .Gt. min_dense .and. EPP(I,t) .lt. max_dense) THEN
                sum_2 = sum_2 +1
                avgt2 = T_G1(I,t) + avgt2
@@ -89,6 +92,7 @@ do I= 2, length1
 
         END IF
 
+        ! medium, 0.51 to 2
         IF (EPP(I,t) .Gt. max_dense .and. EPP(I,t) .lt. min_dilute)  THEN
                sum_3 = sum_3 +1
                avgt3 = T_G1(I,t) + avgt3
@@ -106,9 +110,15 @@ do I= 2, length1
 END DO
 
      print*, "writing average"
+
+     ! bulk 
      WRITE(887, formatavg) t, avgEP/sum_1, avgr/sum_1, avgt/sum_1, avgu/sum_1, avgv/sum_1, avgw/sum_1, avgus/sum_1,  avgdpu/sum_1
-     Write (888, formatavg) t, avgEP3/sum_3, avgr3/sum_3, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
-     write(889, formatavg) t, avgEP2/sum_2, avgr2/sum_2, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
+     
+     ! med 
+      Write (888, formatavg) t, avgEP3/sum_3, avgr3/sum_3, avgt3/sum_3, avgu3/sum_3, avgv3/sum_3,avgw3/sum_3, avgus3/sum_3, avgdpu2/sum_2
+     
+     ! dense
+       write(889, formatavg) t, avgEP2/sum_2, avgr2/sum_2, avgt2/sum_2, avgu2/sum_2, avgv2/sum_2, avgw2/sum_2, avgus2/sum_2, avgdpu3/sum_3
 
 END DO
 RETURN

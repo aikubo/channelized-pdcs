@@ -906,7 +906,7 @@ module massdist
                 end do 
 
                      print*, "writing average"
-                     WRITE(7487, formatavgx2) t, avgrho1/sum1, avgepp1/sum1, avgt/sum_1, avgu/sum_1,avgv/sum_1, avgw/sum_1, avgdpu/sum_1, avgrho2/sum2, avgepp2/sum2, avgt2/sum_2, avgu2/sum_2,avgv2/sum_2, avgw2/sum_2, avgdpu2/sum_2
+                     WRITE(7487, formatavgx2) t, avgrho1/sum_1, avgepp1/sum_1, avgt/sum_1, avgu/sum_1,avgv/sum_1, avgw/sum_1, avgdpu/sum_1, avgrho2/sum_2, avgepp2/sum_2, avgt2/sum_2, avgu2/sum_2,avgv2/sum_2, avgw2/sum_2, avgdpu2/sum_2
                 end do
         end subroutine
 
@@ -994,17 +994,18 @@ end subroutine
 subroutine alongchannel
 
         double precision, dimension(3)::N1, N2, U, NC, NP
-        double precision, dimension(2)::N12, N22, U2, NC2, NP2 
+        double precision, dimension(2)::N12, N22, U2, NC2, NP2, VOUT, VPERP, VALONG 
+        double precision:: thetaOUT, thetaAlong
         double precision:: dy, dx, dz, uz, ycomp, mag, mag2, ux, uy, vel1, vel2, mass, rhoC, pvel1
         double precision:: pvel2, pervel, moutperp, mo1, mo2
-        double precision::truetop, massalong, massc, massc2, massout
-        double precision:: momentumout, mupi, mx, my, mz
+        double precision::truetop, massalong, massc, massc2, massout, momtot
+        double precision:: momentumout, mup, mx, my, mz
         logical:: channel, plain
 
           filename= 'momentum_avg.txt'
-          description="Fraction of momentum Along Channel, Along Channel Outside, Going out of the channel"
+          description="Fraction of momentum distributed across the domain"
           routine= "massdist/alongchannel"
-          datatype=" t   Alongchannel, PerpChannel, Perp1, Perp2,  UP, OutsideChannel "
+          datatype=" t   In channel, OutsideChannel, InAlong, InPerp, OutAlong, OutPerp"
           call headerf(7488, filename, simlabel,routine,DESCRIPTION,datatype)
 
         do t =2,timesteps
@@ -1020,6 +1021,7 @@ subroutine alongchannel
                 mz=0
                 mx=0
                 my=0
+                momtot=0
 
                 do rc=3,RMAX-3
                 do yc=3,YMAX-3
@@ -1027,17 +1029,21 @@ subroutine alongchannel
 
                         call funijk(rc, yc, zc, I)
                         call edgesdose(width, lambda, depth,XXX(I,1),YYY(I,1),ZZZ(i,1), slope,truetop,channel,plain)
+                        ux=0
+                        uz=0 
+                        uy=0
                         if ( EPP(I,t) .gt. 0.01) then
-                                       ux= U_G1(I,t)
-                                       uz= W_G1(I,t)
+                                       ux=U_G1(I,t)
+                                       uz=W_G1(I,t)
                                        uy=V_G1(I,t)
 
                                        U = (/ ux, uz, uy /)
 
                                        U2=(/ ux, uz/)
                                        dx = 1!-1*slope
-                                       dz = 2*pi*amprat*cos(2*pi*(XXX(I,1)/lambda))
-                                       dy =-1 
+                                        !z = amprat*lambda*sin(2*pi*x/lambda) 
+                                       dz = 2*pi*amprat**cos(2*pi*(XXX(I,1)/lambda))
+                                       dy =-1 !-1*slope
                                        if (lambda < 1) dz= 1
                                        mag = sqrt(dx**2 + dz**2 +dy**2)
                                        
@@ -1045,27 +1051,39 @@ subroutine alongchannel
                                        NC=(/ dx/mag, dz/mag, dy/mag /)
                                        NC2=(/dx/mag2, dz/mag2/)
                                        N1=(/ dz/mag, -dx/mag, dy/mag /)
-                                       N12=(/ dz/mag2, -dx/mag2/)
+                                       N12=(/-dz/mag2, dx/mag2/)
                                        N2=(/ -dz/mag, dx/mag, dy/mag /)
                                        N22=(/-dz/mag2, dx/mag2/)
 
                                        NP=(/ dx, dz, dble(0.0) /)
                                        NP2=(/dx, dz/)                                
-
+                                        if ( abs(dot_product(NC2, N12)) .gt. dble(0)) write(*,*) I, "not equal zero line 1058"
+                                       
                                        pvel1= abs(dot_product(U2,N12))
                                        pvel2 = abs(dot_product(U2,N22))
                                        perpvel = max(pvel1,pvel2)
-        
                                        vel1=dot_product(U2,NC2)
 
-                                       call density(I,t,rhoC,mass)
+
+                                       thetaout=atan2(N12(2),N12(1))
+                                       thetaAlong=atan2(NC2(2),NC2(1))
+
+                                       VOUT=(/pvel1*cos(thetaout), pvel1*sin(thetaout)/)
+                                       VALONG=(/vel1*cos(thetaAlong),vel1*sin(thetaAlong)/)
+
+                                      IF ( abs(DOT_PRODUCT(VOut, Valong)) .gt. dble(0.000001)) write(*,*) I, "not equal zero line 1073"
+                                      IF ( abs(DOT_PRODUCT(VOut, NC2)) .gt. dble(0.000001)) write(*,*) I, "not equal zero line 1074"
+                                      IF ( abs(DOT_PRODUCT(Valong, N12)) .gt. dble(0.000001)) write(*,*) I, "not equal zero line 1075"
+
+
+
+                                         call density(I,t,rhoC,mass)
                                        if (channel) then 
                                                 massalong=mass*vel1**2+massalong
                                                 massc=mass*((ux**2 +uz**2+ uy**2))+massc
                                                 momentumout=mass*(perpvel**2)+momentumout 
                                                 mo1=mo1+mass*(pvel1**2)
                                                 mo2=mo2+mass*(pvel2**2)
-                                                mup=mass*(dot_product(U,NP))**2+mup
                                                 mx=mx+mass*ux**2
                                                 my=my+mass*uy**2
                                                 mz=mz+mass*uz**2                                        
@@ -1074,16 +1092,19 @@ subroutine alongchannel
                                        if (plain) then 
                                                 moutperp=mass*perpvel**2+moutperp
                                                 massout=mass*vel1**2+massout
-                                                massc2=mass*(sqrt(ux**2 + uy**2))**2+massc2
+                                                massc2=mass*(ux**2 + uy**2+uz**2)+massc2
                                      
                                         end if 
                         end if 
+
+                        mup=mass*(uy**2)+mup
+                        momtot=momtot+mass*((ux**2 +uz**2+ uy**2))
                 end do
                 end do 
                 end do
-                write(7488,format6vare) t, massalong/massc, momentumout/massc, mo1/massc, mo2/massc, mup/massc2, massout/massc2
+                write(7488,format6vare) t, massc/momtot, massc2/momtot, massalong/momtot, momentumout/momtot,  massout/momtot, moutperp/momtot
                 !write(*,*) massalong/massc+momentumout/massc+mup/massc2
-                write(*,*) (mx+my+mz)/massc
+                write(*,*) (mx+my+mz)/massc !=1 
                 write(*,*) (massalong+momentumout+mup)/massc
                 write(*,*) (massalong+momentumout)/(mx+my)
                 write(*,*) "                                       "
