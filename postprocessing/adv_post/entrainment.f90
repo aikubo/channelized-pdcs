@@ -107,104 +107,67 @@ module entrainment
             subroutine superelevation 
 
                 implicit none 
-                double precision:: setop, sefromcenter, flow, superel, centerh, height, truetop, XLOC, YLOC, ZLOC
-                double precision:: se_t, top, dense_superel, superel10, sum1, sum2, avgdense, avg10 
+                double precision:: setop, superel, height, truetop, XLOC, YLOC, ZLOC
+                double precision:: superel10
                 logical:: inchannel, plain
-                integer:: l1, l2, r1, r2, yi, centerline, I3, spillcount
+                integer:: l1, l2, r1, r2
 
                 routine="=entrainment/superelevation"
                 description=" CALCULATE superelevation over time in the .25l to .75l region"
-                datatype=" t  max denseiso max.10iso avgdenseiso avg.10iso"
+                datatype=" t  height from bottom height from top"
                 filename='super.txt'
                 call headerf(437, filename, simlabel, routine, DESCRIPTION,datatype)
 
 
                 l1= int( lambda*.25/3.0)
                 l2=int(lambda*.75/3.0)
-                r1=int((450-width/2-amprat*lambda)/3)
-                r2=int((450+width/2+amprat*lambda)/3)
+                r1=450-width/2-amprat*lambda
+                r2=450+width/2+amprat*lambda
 
                 if (lambda .lt. 1) then 
                         l1=100
                         l2=150
-                        r1=int((450-width/2-15)/3)
-                        r2=int((450+width/2+15)/3)
+                        r1=int((450-width/2+15)/3)
+                        r2=int((450+width/2-15)/3)
                 end if
 
-                write(*,*) l1, l2, r1, r2
                 do t=2,timesteps 
-                spillcount=0
-                        dense_superel=0
+                        superel=0
                         superel10=0
-                        sum1=0
-                        sum2=0  
-                        avg10=0
-                        avgdense=0
                          do rc=l1,l2
-                           do zc=3, RMAX-3
+                           do zc=3,zmax-3
                                 do yc= 20,YMAX-4
-                                 call funijk( rc, yc, zc, I)
-                                 !write(*,*) "Istart", I  
-                             call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),slope,top,inchannel, plain)
-
-                                if ( EPP(I,t) .lt. 1 .and. EPP(I,t) .gt. 0.01) then
-                                        if (inchannel) then 
-                                                avg10=avg10+YYY(I,1)-top+3 
-                                                sum1=sum1+1 
-                                  !      write(*,*) "Y", YYY(I,1) !-top+3
-                                  !      write(*,*) "top", top
-                                  !      write(*,*), "I", I 
-                                        end if  
-                                   if ( (YYY(I,1)-top+3) .gt. superel10) then
-                                        XLOC=rc
-                                        YLOC=yc
-                                        ZLOC=zc
-                                        superel10 =YYY(I,1)-top+3
+                                 call funijk( rc, yc, zc, I) 
+                                  call edgesdose(width, lambda, depth, XXX(I,1), YYY(I,1), ZZZ(I,1),slope,truetop,inchannel, plain)
+                                
+                                   if ( EPP(I,t) .le. 1 .and. EPP(I,t) .gt. 0.01) then
+                                        if ( (YYY(I,1)-truetop+3) .gt. superel) then
+                                        superel10=YYY(I,1)-truetop+3
+                                        end if 
+      
                                    end if 
-                                        
-                               
-
-                                   if ( EPP(I,t) .le. 0.51 .and. EPP(I,t) .gt. 0.01) then
-                                                avgdense=avgdense+YYY(I,1)-top+3
-                                                sum2=sum2+1
-                                  !      write(*,*) "Y", YYY(I,1) !-top+3
-                                  !      write(*,*) "top", top
-                                  !      write(*,*), "I", I  
-                                   if ( (YYY(I,1)-top+3) .gt. dense_superel)  then 
+                                   if ( EPP(I,t) .le. 0.52 .and. EPP(I,t) .gt. 0.01) then 
+                                   if ( (YYY(I,1)-truetop+3) .gt. superel)  then 
                                         XLOC=rc
                                         YLOC=yc
                                         ZLOC=zc
-                                        dense_superel=YYY(I,1)-top+3
+                                        superel=YYY(I,1)-truetop+3
                                         setop=truetop
-                                        !write(*,*) I, YYY(I,1), superel, truetop 
-                                  ! find the centerline value 
-                                       ! yi=int(truetop/3)
-                                       ! centerline=int( (edge1+width/2)/3)
-                                       ! flow=0.38
-                                       ! do while ( flow .lt. .51 .and. yi .lt. YMAX) 
-                                       !         call funijk(rc,yi,centerline,I3)
-                                       !         centerh=(YYY(I3,1) -truetop)
-                                       !         flow=EPP(I3,t)
-                                       !         yi=yi+1
-                                       ! end do 
-                                       ! sefromcenter=superel-centerh                                                    
-                                        
-                                    
+
+
+
+
                                    end if 
                                   end if 
-                                end if 
-
 
                                 end do 
                            end do 
                         end do 
                         call funijk(int(XLOC), int(YLOC), int(ZLOC), I)
-                        print*, "superelevation at ",t, dense_superel, superel10  
-                       write(437,format5var) t, dense_superel, superel10, avgdense/sum2, avg10/sum1                                        
+                        print*, "superelevation at ",t, superel, XLOC, YLOC, ZLOC, height, setop, EPP(I,t)
+                       write(437,format3var) t, superel, superel10                                        
                 end do
-                
-                
-                
+
 
             end subroutine 
 

@@ -60,8 +60,8 @@ echo "1"
 
 #now make a copy of single write dx script
 
-cp ~/myprojects/7_INFLOW/BVY7/kubo_lobecleft.net ./temp2.net
-cp ~/myprojects/7_INFLOW/BVY7/kubo_lobecleft.cfg ./kubo_pretty_script.cfg
+cp ~/myprojects/7_INFLOW/SV7/lobecleft_top.net ./temp2.net
+cp ~/myprojects/7_INFLOW/SV7/lobecleft_top.cfg ./kubo_pretty_script.cfg
 
 
 echo "2"
@@ -74,6 +74,25 @@ sed -i "s#iso_9#${name1}#g" kubo_pretty_script.net
 echo "3"
 
 dx -nodisplay -execonly -script kubo_pretty_script.net
+
+
+
+cp ~/myprojects/7_INFLOW/SV7/lobecleft_right.net ./temp2.net
+cp ~/myprojects/7_INFLOW/SV7/lobecleft_right.cfg ./kubo_pretty_script.cfg
+
+name1+='RIGHT'
+
+echo "2"
+#replace the integer 9988 with actual timestep in script. run script.
+#cat temp2.net | sed "s/iso_9/$name1/"  > kubo_script_temp.net
+cat temp2.net | sed "s/testC.general/testC2temp.general/" > kubo_pretty_script.net
+sed -i "s#iso_9#${name1}#g" kubo_pretty_script.net
+#cat temp2.cfg | sed s/9988/$i/ > PlumeEP.cfg
+
+echo "3"
+
+dx -nodisplay -execonly -script kubo_pretty_script.net
+
 done
 echo "4"
 currentdate=$(date +”%m/%d/%Y”)

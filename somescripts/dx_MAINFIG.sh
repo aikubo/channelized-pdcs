@@ -11,8 +11,8 @@ here=${PWD}
 name=${PWD##*/} 
 echo $name
 
-cp ~/myprojects/channelized-pdcs/opendx/kubo* $here
-cp ~/myprojects/channelized-pdcs/opendx/*.general $here
+cp ~/myprojects/7_INFLOW/BVY7/kubo* $here
+cp ~/myprojects/7_INFLOW/BVY7/*general $here
 #cp ~/myprojects/graphics/*.cfg $1
 
 
