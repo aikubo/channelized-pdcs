@@ -16,7 +16,7 @@ use sinplane
 implicit none
 integer:: tsinplane 
 
-tsinplane=2
+tsinplane=5
 RMAX=404
 YMAX=154
 ZMAX=302
@@ -38,7 +38,7 @@ call openbin(100, 'EP_G', EP_G1)
 call  logvolfrc(EP_G1, EPP)
 call handletopo('l1200_A15_W201',dble(3.0), XXX, YYY, ZZZ)
 
-!call writedxtopo
+if (tsinplane .eq. 1) call writedxtopo
 
 call sinuousplane(tsinplane)
 

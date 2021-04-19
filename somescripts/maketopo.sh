@@ -93,10 +93,12 @@ cp post.exe $here
 cp post.f90 $here
 cd $here 
 
-echo "submit to run"
-sbatch postsub.sh
-echo "running"
+echo "run here"
+#sbatch postsub.sh
+#echo "running"
 
-echo done!
+
+
+
 
 

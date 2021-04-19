@@ -44,9 +44,10 @@ use parampost
         !! end create spatial deltas!!
 write(*,*) "entering loop"
 I=1
-DO zc=1,ZMAX
-     DO rc=1,RMAX
-          DO yc=1,YMAX
+DO zc=3,ZMAX-3
+     DO rc=3,RMAX-3
+          DO yc=3,YMAX-3
+                call funijk(rc, yc,zc, I)
                 XLOC=rc*DX(1)
                 centerline = lambda*amprat*sind((360*XLOC)/lambda)+centercut
                 sinplane(I)= (centerline-zc*(3.0))
@@ -60,7 +61,7 @@ DO zc=1,ZMAX
                 if (sinplane(I) .gt. 0) then 
                          isocut(I)=EPP(I,tout)
                          isocut2(I)=0
-                        if (EPP(I,8) .le. dble(0.0000000010)) then 
+                        if (EPP(I,8) .le. dble(0.000000000000010)) then 
                                 isocut(I)=dble(14)
                         end if 
                 else   
@@ -76,24 +77,31 @@ DO zc=1,ZMAX
 
                 
 
-                I=I+1
+               
           end do 
      end do 
 
 end do 
 write(*,*) "writing "
 
-if (tout .eq. 1) then
-        open(8888, file='sinplane')
-end if 
-        open(8889, file="isocut")
-        open(8890, file="mapcut")
-        open(8891, file="edge2iso")
+open(8888, file='sinplane')
+write(*,*) "open sinplane"
+
+
+ 
+open(8889, file="isocut")
+write(*,*) "open isocut"
+
+open(8890, file="mapcut")
+write(*,*) "open mapcut"
+
+open(8891, file="edge2iso")
+write(*,*) "open edge2iso"
+
       do I=1,length1
 
-        if (tout .eq. 1) then  
          write(8888,format4var) sinplane(I), XXX(I,1),YYY(I,1),ZZZ(I,1)
-        end if 
+        
 
          write(8889,format4var) isocut(I), XXX(I,1),YYY(I,1),ZZZ(I,1)
          write(8890,format4var) isocut2(I), XXX(I,1),YYY(I,1),ZZZ(I,1)

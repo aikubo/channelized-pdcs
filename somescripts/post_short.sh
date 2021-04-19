@@ -68,15 +68,15 @@ sed -i.bak "s|.*amprat=.*|amprat=$amp|" post_one_temp.f90
 sed -i.bak "s|.*call handletopo(.*|call handletopo('$topo',dxi, XXX, YYY, ZZZ)|" post_one_temp.f90
 #sed -i.bak "14s|^.*$|timesteps=$timestep|" post.f90
 
-$subroutine1=ave
+subroutine1=ave
 sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one_temp.f90
-$subroutine1=massalloc
+subroutine1=massalloc
 sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one_temp.f90
-$subroutine1=super
+subroutine1=super
 sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one_temp.f90
-$subroutine1=spill
+subroutine1=spill
 sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one_temp.f90
-$subroutine1=along
+subroutine1=along
 sed -i.bak "s|$subroutine1=.*|$subroutine1=.TRUE.|" post_one_temp.f90
 
 echo start compliling 

@@ -113,8 +113,8 @@ module entrainment
                 integer:: l1, l2, r1, r2
 
                 routine="=entrainment/superelevation"
-                description=" CALCULATE superelevation over time in the .25l to .75l region"
-                datatype=" t  height from bottom height from top"
+                description=" CALCULATE superelevation over time in the .25l to .75l region, measured from the bottom"
+                datatype=" t .3 iso .1 iso "
                 filename='super.txt'
                 call headerf(437, filename, simlabel, routine, DESCRIPTION,datatype)
 

@@ -20,7 +20,7 @@ STR="0"
 echo $STR
 echo "The value is " $STR
 
-for i in `seq 2 5`
+for i in `seq 5 5`
 do
 
    if [ $i -lt 10 ]
@@ -45,8 +45,9 @@ sed -i.bak "s|.*tsinplane=.*|tsinplane=$i|" topoonly.f90
 cd $here 
 
 maketopo.sh 
+./post.exe 
 
-sleep 7m 
+sleep 10m 
 
 name1="$name$var"
 
@@ -64,8 +65,8 @@ echo "1"
 
 #now make a copy of single write dx script
 
-cp ~/myprojects/7_INFLOW/BVY7/kubo_pretty_may.net ./temp2.net
-cp ~/myprojects/7_INFLOW/BVY7/kubo_pretty_may.cfg ./kubo_pretty_script.cfg
+cp ~/myprojects/channelized-pdcs/opendx/kubo_pretty_may.net ./temp2.net
+cp ~/myprojects/channelized-pdcs/opendx/kubo_pretty_may.cfg ./kubo_pretty_script.cfg
 
 
 echo "2"
