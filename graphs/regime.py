@@ -191,7 +191,7 @@ for i in alllabels:
 slen=sinlength(alllabels,frontend)
 
 
-kdist_norm= np.array(amp)/np.array(width)
+kdist_norm=np.array(amp)/np.array(width)
 
 mass_norm=Z/np.array(inlet)*np.array(wave) #[float(x) * (float(z)/float(y) ) for x, y, z in zip(Z, width, inlet)]
 
@@ -200,7 +200,7 @@ slen_norm=[float(x) / float(y) for x, y in zip(slen, lg)]
 ugnorm=[float(x)/10 for x in UGmax]
 
 rcParams['font.sans-serif'] = ['Helvetica']
-fig, ax =plt.subplots(2,2)
+fig, ax =plt.subplots(1,3)
 
 # full page 190X230mm 
 # 1/4 page 95mm x 115m 
@@ -231,8 +231,8 @@ def plotandR(x,y, loc, col, size):
     correlation_matrix = np.corrcoef(x, y)
     correlation_xy = correlation_matrix[0,1]
     r_squared.append(correlation_xy**2)
-    r2=rforoverk(x,y,5)
-    r_sq5.append(r2)
+    #r2=rforoverk(x,y,.05)
+    #r_sq5.append(r)
     
     return scat
 
@@ -289,6 +289,44 @@ kdist_norm=kdist_norm
 # plt.tight_layout()
 
 
+areas_norm=np.array(aout)/np.array(inletrat)
+scat = plotandR(kdist_norm, areas_norm, ax[0], 'k', size)
+ax[0].set_xlabel('Normalized Curvature', fontsize=8)
+ax[0].set_ylabel('Area Innudated', fontsize=8)
+
+
+
+## Front location vs meander width
+scat = plotandR(kdist_norm, slen_norm, ax[1], 'k', size)
+ax[1].set_xlabel('Normalized Curvature', fontsize=8)
+ax[1].set_ylabel('Distance Travelled', fontsize=8)
+
+kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
+#leg=ax[0][1].legend(*scat.legend_elements(**kw), )
+#leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
+# ax[0][1].add_artist(leg)
+# cbar=fig.colorbar(scat, ticks=[300,600,900,1200], ax=ax[0][1])
+# cbar.ax.tick_params(labelsize=8)
+
+# ### mass avulsed vs curvature metric
+# # mass = mass avuled/total mass *inlet/wave
+# # curvature = k*meander distance
+
+
+# scat=plotandR(kdist_norm, mass_norm,  ax[1][0], 'k', size)
+# ax[1][0].set_ylabel('Mass Overspilled', fontsize=8)
+# ax[1][0].set_xlabel('Normalized Curvature', fontsize=8)
+                    
+                    
+
+# interestingly area innudated does not corelate with entrainment 
+# but mass overspilled does
+
+scat=plotandR(kdist_norm, velz, ax[2],'k', size)
+ax[2].set_ylabel('Cross Stream Velocity (m/s)', fontsize=8)
+ax[2].set_xlabel('Normalized Curvature', fontsize=8)
+
+fig.savefig("regime3.eps", dpi=600)
 
 # print(r_squared)
 

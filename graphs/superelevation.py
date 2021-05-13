@@ -45,7 +45,7 @@ alllabels = [
     'BVX7', 'BVY7', 'BVZ7', 'BWX7', 'BWY7', 'BWZ7',
     'CVX7', 'CVY7', 'CWX7', 'CVZ7', 'CWZ7', 'CWY7',
     'DVX7', 'DVY7', 'DVY7', 'DWY7', 'DWZ7', 'DWX7',
-    'SW7', 'SV4','SW4','SV7']
+    ]
 
 Schan= ['SW7', 'SV4','SW4','SV7', 'uncon'] #['SV4', 'SW4', 'SW7', 'SV7']
 
@@ -69,9 +69,12 @@ inlet, inletrat = paramlists(alllabels, 'Inlet', 'Inletrat')
 be_max, de_max=maxentrainment(alllabels, path)
 tot, avulsed, buoyant, massout, area, areaout= openmassdist(alllabels, path)
 avgTG, avgUG, avgdpu, avgWG, avgEPP, avgrho=opendenseaverage(alllabels, path)
-cols=['t', 's1', 's2']
+
+cols=['t', 's05', 's15']
 fid='_super.txt'
-superel=openmine(alllabels, path, fid, cols, 's1')
+superel_dense=openmine(alllabels, path, fid, cols, 's05')
+superel2=openmine(alllabels, path, fid, cols, 's15')
+
 
 spillEPP, spillRho, spillTG, spillUG, spilldpu=openspillavg(alllabels, path)
 avgdpu=avgdpu.drop(avgdpu.index[0])
@@ -82,7 +85,8 @@ mass=[]
 mout=[]
 aream=[]
 rhoc=[]
-se=[]
+se1=[]
+se2=[]
 UGse=[]
 WGmax=[]
 eppspill=[]
@@ -93,15 +97,16 @@ for sim in alllabels:
      mass.append(avulsed[sim].max())
      mout.append(massout[sim].max())
      aream.append(areaout[sim].max())
-     se.append(superel[sim].max())
-     eppspill.append(spillEPP[sim].iloc[1:8].mean())
-     r=superel[sim].idxmax(axis="columns")
+     se1.append(superel_dense[sim].max())
+     se2.append(superel2[sim].max())
+     eppspill.append(spillRho[sim].iloc[1:8].mean())
+     r=superel2[sim].idxmax(axis="columns")
      rhoc.append(avgrho[sim].iloc[r])
      UGse.append(avgUG[sim].iloc[r])
      
      
 dpuMax=np.array(dpuMax)
-UG=np.array(UGse)
+UG=np.array(UGmax)
 rhoc=np.array(rhoc)
 kapa, dist = curvat(alllabels)
 a=1
@@ -117,16 +122,17 @@ drho=(rhoc-rhoa)/rhoc
 #centrifugal component 
 h2=(a)*(b)*(UG**2)/(2*(1/np.array(kapa))*(drho)*g)
 #runup contribution
-h3=(UG**2)*(1/drho)/(2*g)
+h3=(np.array(UGmax)**2)*(1/drho)/(2*g)
 g_star=g*drho
-froude=UG/(np.sqrt(g_star*np.array(inlet)))
+froude=UG/(np.sqrt(g_star*np.array(depth)))
 x=np.array(amp)/np.array(width)
-y=(se)/depth
+y=(se2)/depth
 mass2=(50*np.array(mass))**2
 
 
 rcParams['pdf.fonttype'] = 42
 rcParams['ps.fonttype'] = 42
+
 plt.style.use("seaborn-darkgrid")
 size=0.5*((np.array(vol))/10000)**2
 fig,ax=plt.subplots(1,2)
@@ -134,49 +140,73 @@ fw,fl=[10/2.54, 7/2.54]
 fig.set_size_inches(fw,fl)
 
 
-scat=ax[0].scatter(x, y, s=size, c='k')
+scat=ax[0].scatter(x, np.array(se1)/depth, s=size, c='red')
+scat=ax[0].scatter(x, np.array(se2)/depth, s=size, c='orange')
 kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
 leg=ax[0].legend(*scat.legend_elements(**kw), )
 leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
 ax[0].set_ylabel('Normalized Splash Height')
 ax[0].set_xlabel('Normalized Curvature')
 
-# ax[1].scatter(be_max/(depth*np.array(width)*3),y, s=size, cmap=matplotlib.cm.RdBu_r)
-# ax[2].scatter(de_max/(depth*np.array(width)*3),y, s=size, cmap=matplotlib.cm.RdBu_r)
+ax[1].scatter(eppspill, y, s=size, c='k') #s=200*np.array(mout*1000
+ax[1].set_xlabel('Average Density in Spill (kg m^{-3})')
+ax[1].set_ylabel('Normalized Splash Height')
+
+
+fig,ax=plt.subplots(2)
+ax[0].scatter(be_max/(depth*np.array(width)*3),y, s=size, c="blue", edgecolor='black')
+ax[1].scatter(de_max/(depth*np.array(width)*3),y, s=size, c="orange", edgecolor='black')
+fig.savefig('entrainment_super.eps', dpi=600)
 
 # ax[1].set_xlabel('Normalized Entrainment')
 correlation_matrix = np.corrcoef(x, y)
 correlation_xy = correlation_matrix[0,1]
 print("R", correlation_xy**2)
 
-correlation_matrix = np.corrcoef(be_max/(depth*np.array(width)*1200) , y)
+correlation_matrix = np.corrcoef(eppspill , y)
 correlation_xy = correlation_matrix[0,1]
 print("R", correlation_xy**2)
 
-ax[1].scatter(eppspill, y, s=size, c='k') #s=200*np.array(mout*1000)
+
 #ax[1].set_xlabel('Average Volume Fraction Particles in Overspill')
 #
-plt.tight_layout()
-fig.savefig('superel.eps', dpi=600)
+# plt.tight_layout()
+# #fig.savefig('superel.eps', dpi=600)
 
-# fig2,ax2=plt.subplots(2)
-# ax2[0].scatter(x, be_max/(depth*np.array(width)*3), s=size, c='b')
-# ax2[0].set_ylabel('Normalized Bulk Entrainment')
-# kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
-# leg=ax2[0].legend(*scat.legend_elements(**kw), )
-# leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
+# fig2,ax2=plt.subplots(3)
+# ax2[0].scatter(x, se1/h2, s=size, c='k')
+# #ax2[0].plot(h2, h2, c='r')
+# ax2[0].set_ylabel('Centrifugal Contribution')
 
-# ax2[1].scatter(x, de_max/(depth*np.array(width)*3), s=size, c='orange')
-# ax2[1].set_ylabel('Normalized Dense Isosurface Entrainment')
-# ax2[1].set_xlabel('Normalized Curvature')
 
-# savefigure("entrainment2")
-# ax[2].scatter(x, eppspill, s=size, cmap=matplotlib.cm.RdBu_r)
+# ax2[1].scatter(x, se1/h3, s=size, c='k')
+# #ax2[1].plot(y, h3, c='r')
+# ax2[1].set_ylabel('Runup Contribution')
 
-# ax[2].set_xlabel('Average Overspill Volume Fraction ')
-# correlation_matrix = np.corrcoef(eppspill, y)
-# correlation_xy = correlation_matrix[0,1]
-# print("R", correlation_xy**2)
+
+# ax2[2].scatter(x, se1/(h3+h2), s=size, c='k')
+# #ax2[1].plot(y, h3, c='r')
+# ax2[2].set_ylabel('Both Contributions')
+
+# ax2[2].set_xlabel('Normalized Curvature')
+
+# fig2.savefig('Contributions.eps', dpi=600)
+
+kw=dict(prop="sizes", num=4, func= lambda s: 2*(np.sqrt(s)))
+leg=ax2[0].legend(*scat.legend_elements(**kw), )
+leg.set_title('Volume Flux ( $10^4  m^3/s$)', prop={'size':8})
+
+ax2[1].scatter(x, de_max/(depth*np.array(width)*3), s=size, c='orange')
+ax2[1].set_ylabel('Normalized Dense Isosurface Entrainment')
+ax2[1].set_xlabel('Normalized Curvature')
+
+savefigure("entrainment2")
+ax[2].scatter(x, eppspill, s=size, cmap=matplotlib.cm.RdBu_r)
+
+ax[2].set_xlabel('Average Overspill Volume Fraction ')
+correlation_matrix = np.corrcoef(eppspill, y)
+correlation_xy = correlation_matrix[0,1]
+print("R", correlation_xy**2)
 
 # plt.tight_layout()
     

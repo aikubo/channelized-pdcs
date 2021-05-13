@@ -247,10 +247,10 @@ def plotandR(x,y, loc, col, size):
 dh=deltah(alllabels, frontend)
 
 
-columns=['Width (m)', 'Depth (m)', 'Wavelength (m)', 'Amplitude (m)', 'H0 (m)', 
+columns=[ 'Width (m)', 'Depth (m)', 'Wavelength (m)', 'Amplitude (m)', 'H0 (m)', 'Volume Erupted (m^3)', 
              'Distance Traveled (m)', 'Mass Fraction in Channel',
              'Mass Overspilled', 'Area Fraction Innundated','Area Out of Channel', 
-             'Max Depth Averaged Downstream Velocity (m/s)', 'Bulk Entrainment (m^3)', 'dH', 'Volume (m^3)']
+             'Max Depth Averaged Downstream Velocity (m/s)', 'Bulk Entrainment (m^3)', 'dH (m)']
 
 """
 0 'Width', 
@@ -258,14 +258,15 @@ columns=['Width (m)', 'Depth (m)', 'Wavelength (m)', 'Amplitude (m)', 'H0 (m)',
 2 'Wavelength',
 3 'Amplitude', 
 4 'H0', 
-5 'Distance Traveled ', 
-6 'Mass Fraction in Channel',
-7 "Mass Overspilled", 
-8 'Area Fraction Innundated', 
-9 'Area out of Channel Innundated'
-10 "Max Depth Averaged Downstream Velocity"
-11 "Bulk Entrainment"
-12 "dH"
+5 'Volume erupted'
+6 'Distance Traveled ', 
+7 'Mass Fraction in Channel',
+8 "Mass Overspilled", 
+9 'Area Fraction Innundated', 
+10 'Area out of Channel Innundated'
+11 "Max Depth Averaged Downstream Velocity"
+12 "Bulk Entrainment"
+13 "dH"
 """
 
 sup=np.empty( (len(alllabels), len(columns)))
@@ -275,14 +276,14 @@ for i in range(len(alllabels)):
     sup[i][2]=wave[i]
     sup[i][3]=amp[i]
     sup[i][4]=inlet[i]
-    sup[i][5]=slen[i]
-    sup[i][6]=1-mout[i]
-    sup[i][7]=Z[i]
-    sup[i][8]=areas[i]
-    sup[i][9]=aout[i]
-    sup[i][10]=UGmax[i]
-    sup[i][11]=bulkent[i]
-    sup[i][12]=dh[i]
-    sup[i][13]=vol[i]*15
+    sup[i][5]=vol[i]*15
+    sup[i][6]=slen[i]
+    sup[i][7]=1-mout[i]
+    sup[i][8]=Z[i]
+    sup[i][9]=areas[i]
+    sup[i][10]=aout[i]
+    sup[i][11]=UGmax[i]
+    sup[i][12]=bulkent[i]
+    sup[i][13]=dh[i]
 supcsv=pd.DataFrame(sup,  index=alllabels, columns=columns)
 supcsv.to_csv("/home/akh/myprojects/channelized-pdcs/graphs/supcsv.csv")

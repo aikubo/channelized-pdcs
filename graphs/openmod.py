@@ -13,14 +13,16 @@ def openmine(labels, path2file, fid, cols, out, colspec='infer', width='infer'):
     return temp_all
 
 def openmomentum(labels,path):
+    #t, massc/momtot, massc2/momtot, massalong/momtot, momentumout/momtot,  massout/momtot, moutperp/momtot
+
     cols=['t', 'InChannel', 'OutChannel', 'InAlong', 'InPerp', 'OutAlong', 'OutPerp']
     fid='_momentum_avg.txt'
     InC=openmine(labels,path,fid,cols,cols[1])
     OC=openmine(labels,path,fid,cols,cols[2])
-    InCAlong=openmine(labels,path,fid,cols,cols[3])
-    InCPerp=openmine(labels,path,fid,cols,cols[4])
-    OCAlong=openmine(labels,path,fid,cols,cols[5])
-    OCPerp=openmine(labels,path,fid,cols,cols[6])
+    InCAlong=openmine(labels,path,fid,cols,'InAlong')
+    InCPerp=openmine(labels,path,fid,cols,'InPerp')
+    OCAlong=openmine(labels,path,fid,cols,'OutAlong')
+    OCPerp=openmine(labels,path,fid,cols,'OutPerp')
     
     return InC, OC, InCAlong, InCPerp, OCAlong, OCPerp
 

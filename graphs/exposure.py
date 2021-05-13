@@ -27,6 +27,10 @@ from pltfunc import *
 from curv import curvat
 from normalize import labelparam
 from matplotlib import rcParams, colors
+from matplotlib import rcParams
+
+rcParams['pdf.fonttype'] = 42
+rcParams['ps.fonttype'] = 42
 
 ## MAC
 #path= "/Users/akubo/myprojects/channelized-pdcs/graphs/processed/"
@@ -91,23 +95,23 @@ inlet, inletrat = paramlists(alllabels, 'Inlet', 'Inletrat')
 # ax[1].set_xlabel('Normalized Curvature')
 # ax[1].set_ylabel('Fraction of Area Innundated')
 
-cmap=colors.ListedColormap(['yellow', 'red'])
+cmap=colors.ListedColormap(['orange', 'red'])
 
-fig2,ax2=plt.subplots(2)
+fig2,ax2=plt.subplots()
 x= np.array(amp)/np.array(width)
 #ax2[0].scatter(x, Ao100.iloc[1,:]/(Ta), c=inletrat, marker='o', cmap=cmap)
-ax2[0].scatter(x, Ao200.iloc[1,:]/(Ta), c=inletrat, marker='^', cmap=cmap)
-ax2[0].scatter(x, Ao500.iloc[1,:]/(Ta), c=inletrat, marker='x', cmap=cmap)
-ax2[0].set_ylabel('Fraction of Area Innundated')
+# ax2[0].scatter(x, Ao200.iloc[1,:]/(Ta), c=inletrat, marker='^', cmap=cmap)
+# ax2[0].scatter(x, Ao500.iloc[1,:]/(Ta), c=inletrat, marker='x', cmap=cmap)
+# ax2[0].set_ylabel('Fraction of Area Innundated')
 
 
 #ax2[1].scatter(x, OAo100.iloc[1,:]/(TaO), c='yellow', marker='o')
-ax2[1].scatter(x, OAo200.iloc[1,:]/(TaO), c=inletrat, marker='^', cmap=cmap)
-ax2[1].scatter(x, OAo500.iloc[1,:]/(TaO), c=inletrat, marker='x', cmap=cmap)
-ax2[1].set_xlabel('Normalized Curvature')
-ax2[1].set_ylabel('Fraction of Area Innundated')
+ax2.scatter(x, OAo200.iloc[1,:]/(TaO), c=inletrat, marker='^', cmap=cmap)
+ax2.scatter(x, OAo500.iloc[1,:]/(TaO), c=inletrat, marker='x', cmap=cmap)
+ax2.set_xlabel('Normalized Curvature')
+ax2.set_ylabel('Fraction of Area Innundated')
 
-
+fig2.savefig("exposure.eps", dpi=600)
 # fig3,ax3=plt.subplots(2)
 # x= np.array(amp)/np.array(width)*np.array(inletrat)
 # ax3[0].scatter(x, Ao100.iloc[2,:]/(Ta), c='yellow', marker='o')

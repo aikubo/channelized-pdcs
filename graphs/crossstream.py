@@ -112,7 +112,7 @@ bout=np.array(bout)/np.array(inlet)*np.array(wave)
 vdom_s=np.array(vdom_s)/np.array(inlet)*np.array(wave)
 
 fig2, ax2=plt.subplots()
-scat1=ax2.scatter(kdist_norm, b, c='orange', s=2*(1.5*(6-sepp))**2)
+scat1=ax2.scatter(kdist_norm, b, c='orange', s=2*(1.5*(6-sepp))**2, )
 scat2=ax2.scatter(kdist_norm, bout, c='g', s=2*(1.5*(6-bep))**2)
 scat3=ax2.scatter(kdist_norm, vdom_s, c='b', s=2*(1.5*(6-ms))**2)
 ax2.set_xlabel('Normalized Curvature')
