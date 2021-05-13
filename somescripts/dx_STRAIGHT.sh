@@ -20,7 +20,7 @@ STR="0"
 echo $STR
 echo "The value is " $STR
 
-for i in `seq 7 8`
+for i in `seq 1 8`
 do
 
    if [ $i -lt 10 ]
