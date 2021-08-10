@@ -51,6 +51,7 @@ size=0.5*((np.array(vol))/10000)**2
 #InC, OC, InCAlong, InCPerp, OCAlong, OCPerp
 InC, OC, InCAlong, InCPerp, OCAlong, OCPerp=openmomentum(alllabels, path)
 tot, avulsed, buoyant, massout, area, areaout= openmassdist(alllabels, path)
+#%t, massc/momtot, massc2/momtot, massalong/momtot, momentumout/momtot,  massout/momtot, moutperp/momtot
 
 fig,ax=plt.subplots(2)
 

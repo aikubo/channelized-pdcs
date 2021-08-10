@@ -46,13 +46,16 @@ def openslicet(path2file, labels, twant, loc):
     slice_TG=pd.DataFrame()
     slice_Ri=pd.DataFrame()
     slice_DPU=pd.DataFrame()
-
+    slice_PG=pd.DataFrame()
+    slice_Mc=pd.DataFrame()
 
     UG=[]
     EPP=[]
     TG=[]
     Ri=[]
     DPU=[]
+    PG=[]
+    Mc=[]
 
     for sim in labels:
         print(sim)
@@ -60,8 +63,8 @@ def openslicet(path2file, labels, twant, loc):
         fid=path2file+sim
         loc=fid + slicefid
         slice_temp=pd.read_table(loc, header=None, sep= '\s+', skiprows=9)
-        slice_temp.columns = ['time', 'YYY',  'EPP', 'UG', 'DPU', 'TG', 'Ri', 'TAU' ]
-        col = ['UG', 'DPU', 'TG', 'Ri' ]
+        slice_temp.columns = ['time', 'YYY',  'EPP', 'UG', 'DPU', 'TG', 'Ri', 'WG', 'PG', 'CurrentWeight']
+        col = ['UG', 'DPU', 'TG', 'Ri', 'PG', 'CurrentWeight' ]
         for i in col:
             slicet=slice_temp[slice_temp['time']== twant]
         slicet.reset_index(drop=True, inplace=True)
@@ -71,6 +74,9 @@ def openslicet(path2file, labels, twant, loc):
         TG.append(slicet['TG'])
         DPU.append(slicet['DPU'])
         Ri.append(slicet['Ri'])
+        PG.append(slicet['PG'])
+        Mc.append(slicet['CurrentWeight'])
+        
         print(UG)
 
         del slicet
@@ -79,14 +85,19 @@ def openslicet(path2file, labels, twant, loc):
     slice_TG=pd.concat(TG, axis=1, ignore_index=True)
     slice_DPU=pd.concat(DPU, axis=1, ignore_index=True)
     slice_Ri=pd.concat(Ri, axis=1, ignore_index=True)
+    slice_PG=pd.concat(PG, axis=1, ignore_index=True)
+    slice_Mc=pd.concat(Mc, axis=1, ignore_index=True)
 
     slice_UG.columns=labels
     slice_TG.columns=labels
     slice_EPP.columns=labels
     slice_DPU.columns=labels
     slice_Ri.columns=labels
+    slice_Mc.columns=labels
+    slice_PG.columns=labels
 
-    return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
+
+    return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri, slice_PG, slice_Mc
 
 def opensliceavg(path2file, labels, loc):
     if loc in "in":
@@ -165,40 +176,60 @@ def opensliceavg(path2file, labels, loc):
 
     return slice_UG, slice_EPP, slice_DPU, slice_TG, slice_Ri
 
+def PorePressureSupported(dfMc, dfPG):
+    print("pore pressure")
+    slice_PorePressure=pd.DataFrame()
+    
+    for c in dfMc.columns: 
+        y=len(dfMc[c])
+        ys=np.arange(1,y)
+        print(y)
+        intmass=np.empty((y))
+        
+        for i in range(y):
+            intmass[i]=np.sum(dfMc.iloc[i:])*9.81/(dfPG[c].iloc[i]*9)
+        print(intmass)
+        m=pd.DataFrame({"BVY7": pd.Series(intmass)})
+        print(m)
+    #     slice_PorePressure=pd.concat(m, axis=1, ignore_index=True)
+    # slice_PorePressure.columns=dfMc.columns 
+    
+    return m
+
 # slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= opensliceavg(path, labels,  'in')
 # sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= opensliceavg(path, labels, 'one')
 # sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= opensliceavg(path, labels, 'half')
 # sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= opensliceavg(path, labels, 'quart')
 
-slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri= openslicet(path, labels, 8,  'in')
-sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri= openslicet(path, labels, 8, 'one')
-sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri= openslicet(path, labels, 8, 'half')
-sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri= openslicet(path, labels, 8, 'quart')
+slicein_UG, slicein_EPP, slicein_DPU, slicein_TG, slicein_Ri, slicein_PG, slicein_Mc= openslicet(path, labels, 8,  'in')
+sliceout_UG, sliceout_EPP, sliceout_DPU, sliceout_TG, sliceout_Ri, sliceout_PG, sliceout_Mc= openslicet(path, labels, 8, 'one')
+sliceouth_UG, sliceouth_EPP, sliceouth_DPU, sliceouth_TG, sliceouth_Ri, sliceouth_PG, sliceouth_Mc= openslicet(path, labels, 8, 'half')
+sliceoutq_UG, sliceoutq_EPP, sliceoutq_DPU, sliceoutq_TG, sliceoutq_Ri, sliceoutq_PG, sliceoutq_Mc= openslicet(path, labels, 8, 'quart')
 
-fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
-fig.set_size_inches(cm2inch(19*3/4, 11.5*2/3))
-
-
-fid="col_all_paper"
-# fid = 'col_onel_comparewave'
-#plotallcol(fig, axes, labels, fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
-# blue one l
-
-#fid = 'col_half_comparewave'
-## BLUE
-plotallcol(fig, axes, labels, fid, sliceouth_EPP, sliceouth_UG, sliceouth_DPU, sliceouth_Ri, sliceouth_TG)
+# fig, axes= plt.subplots(1,4, sharey=True, sharex=False)
+# fig.set_size_inches(cm2inch(19*3/4, 11.5*2/3))
 
 
+# fid="col_all_paper"
+# # fid = 'col_onel_comparewave'
+# #plotallcol(fig, axes, labels, fid, sliceout_EPP, sliceout_UG, sliceout_DPU, sliceout_Ri, sliceout_TG)
+# # blue one l
+
+# #fid = 'col_half_comparewave'
+# ## BLUE
+# plotallcol(fig, axes, labels, fid, sliceouth_EPP, sliceouth_UG, sliceouth_DPU, sliceouth_Ri, sliceouth_TG)
 
 
-#fid = 'col_quart_comparewave'
-## orange
-plotallcol(fig, axes, labels, fid, sliceoutq_EPP, sliceoutq_UG, sliceoutq_DPU, sliceoutq_Ri, sliceoutq_TG)
 
-#plt.pause(15)
-#fid = 'col_in_comparewave'
-###GREEEN
-plotallcol(fig, axes, labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
+
+# #fid = 'col_quart_comparewave'
+# ## orange
+# plotallcol(fig, axes, labels, fid, sliceoutq_EPP, sliceoutq_UG, sliceoutq_DPU, sliceoutq_Ri, sliceoutq_TG)
+
+# #plt.pause(15)
+# #fid = 'col_in_comparewave'
+# ###GREEEN
+# plotallcol(fig, axes, labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein_Ri, slicein_TG)
 #plt.draw()
 #plt.pause(20)
 #plt.savefig('slicesPAPERALL_AVERAGE.eps', dpi=600)
@@ -206,4 +237,17 @@ plotallcol(fig, axes, labels, fid, slicein_EPP, slicein_UG, slicein_DPU, slicein
 
 plt.tight_layout()
 
-plt.savefig('SLICES_JULY_t7_smaller.eps', dpi=300)
+fig,ax=plt.subplots()
+support=PorePressureSupported(slicein_Mc, slicein_PG)
+horizplot(support, ax, ['BVY7'])
+support=PorePressureSupported(sliceout_Mc, sliceout_PG)
+horizplot(support, ax, ['BVY7'])
+support=PorePressureSupported(sliceouth_Mc, sliceouth_PG)
+horizplot(support, ax, ['BVY7'])
+support=PorePressureSupported(sliceoutq_Mc, sliceoutq_PG)
+horizplot(support, ax, ['BVY7'])
+ax.set_ylim([0,35])
+
+ax.legend(["Inside", "Out", "OHalf", "OQuarter"])
+ax.set_rasterized(True)
+plt.savefig('SLICES_POREPRESSURE.pdf',  dpi=600)
